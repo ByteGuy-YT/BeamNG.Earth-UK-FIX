@@ -1,0 +1,144 @@
+[
+  {
+    "name": "giltbrook",
+    "lat": 53.0017,
+    "lon": -1.283,
+    "ok": true,
+    "tiles": [
+      {
+        "tile": [
+          0,
+          0
+        ],
+        "chunks": 1754,
+        "walls": 1,
+        "road_vertices": 68026,
+        "deck_vertices": 586,
+        "deck_max_profile_error": 0.0,
+        "engine_meshes": 4,
+        "max_engine_vertices": 60000
+      },
+      {
+        "tile": [
+          -1,
+          0
+        ],
+        "chunks": 350,
+        "walls": 0,
+        "road_vertices": 26335,
+        "deck_vertices": 0,
+        "deck_max_profile_error": 0.0,
+        "engine_meshes": 1,
+        "max_engine_vertices": 26335
+      },
+      {
+        "tile": [
+          0,
+          -1
+        ],
+        "chunks": 354,
+        "walls": 0,
+        "road_vertices": 43590,
+        "deck_vertices": 32348,
+        "deck_max_profile_error": 0.020514341851651352,
+        "engine_meshes": 2,
+        "max_engine_vertices": 43590
+      },
+      {
+        "tile": [
+          1,
+          0
+        ],
+        "chunks": 260,
+        "walls": 0,
+        "road_vertices": 28474,
+        "deck_vertices": 11154,
+        "deck_max_profile_error": 0.0,
+        "engine_meshes": 2,
+        "max_engine_vertices": 28474
+      }
+    ],
+    "connected_junctions": 0,
+    "max_junction_step": 0.0,
+    "checked_seams": 0,
+    "max_seam_gap": 0.0,
+    "max_deck_grade": 0.02560751111376816,
+    "checked_road_clearances": 0,
+    "min_clearance_margin": 0.0,
+    "tunnel_parts": 1,
+    "max_tunnel_join_step": 0.0,
+    "covered_tunnel_m": 0.0,
+    "seconds": 26.525954999990063
+  },
+  {
+    "name": "j26",
+    "lat": 52.9994,
+    "lon": -1.231,
+    "ok": true,
+    "tiles": [
+      {
+        "tile": [
+          0,
+          0
+        ],
+        "chunks": 125,
+        "walls": 0,
+        "road_vertices": 11069,
+        "deck_vertices": 8855,
+        "deck_max_profile_error": 0.0003036365630890714,
+        "engine_meshes": 2,
+        "max_engine_vertices": 11069
+      },
+      {
+        "tile": [
+          -1,
+          0
+        ],
+        "chunks": 320,
+        "walls": 0,
+        "road_vertices": 43978,
+        "deck_vertices": 30457,
+        "deck_max_profile_error": 0.017168988800861484,
+        "engine_meshes": 2,
+        "max_engine_vertices": 43978
+      },
+      {
+        "tile": [
+          0,
+          -1
+        ],
+        "chunks": 241,
+        "walls": 0,
+        "road_vertices": 28719,
+        "deck_vertices": 24235,
+        "deck_max_profile_error": 0.0003280509167495893,
+        "engine_meshes": 2,
+        "max_engine_vertices": 28719
+      },
+      {
+        "tile": [
+          1,
+          0
+        ],
+        "chunks": 0,
+        "walls": 0,
+        "road_vertices": 0,
+        "deck_vertices": 0,
+        "deck_max_profile_error": 0.0,
+        "engine_meshes": 0,
+        "max_engine_vertices": 0
+      }
+    ],
+    "connected_junctions": 0,
+    "max_junction_step": 0.0,
+    "checked_seams": 1,
+    "max_seam_gap": 0.0,
+    "max_deck_grade": 0.04283256394577177,
+    "checked_road_clearances": 0,
+    "min_clearance_margin": 0.0,
+    "tunnel_parts": 9,
+    "max_tunnel_join_step": 0.0,
+    "covered_tunnel_m": 0.0,
+    "seconds": 64.78723290000926
+  }
+]

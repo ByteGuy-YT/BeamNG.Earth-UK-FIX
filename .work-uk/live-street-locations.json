@@ -1,0 +1,1068 @@
+[
+  {
+    "name": "vauxhall walk",
+    "coords": [
+      [
+        -0.1200491,
+        51.4900502
+      ],
+      [
+        -0.1202809,
+        51.4896933
+      ],
+      [
+        -0.1203838,
+        51.4895197
+      ]
+    ],
+    "spec": "Spec(width=4.0, kind='paved', urban=False, cls='residential', oneway=True, walk=1.5, dir=1, kmh=32.1868782043457, gap=np.float64(63.4551883479704), median=None, profile=Profile(region='England', width=4.0, drive=4.0, forward=1, backward=0, left_space=0.0, right_space=0.0, walk_left=1.5, walk_right=1.5, parking_left=0.0, parking_right=0.0, lane_widths=(4.0,), lane_markings=True, shared=False, junction='', source='class-estimate', lane_source='class-estimate', walk_source='osm', diagnostics=(), speed_mph=20.0, control='', centre_width=0.0, controls=('', ''), crossings=(), mini_ends=(False, False), control_setbacks=(0.0, 0.0), national_speed=False, highway='residential', explicit_two_way=False), lanes=None, edges=(0.0, 0.0))"
+  },
+  {
+    "name": "vauxhall walk",
+    "coords": [
+      [
+        -0.1207583,
+        51.4882469
+      ],
+      [
+        -0.1207764,
+        51.4881833
+      ]
+    ],
+    "spec": "Spec(width=3.0, kind='paved', urban=False, cls='service', oneway=False, walk=1.2, dir=0, kmh=32.1868782043457, gap=np.float64(7.190257275571941), median=None, profile=Profile(region='England', width=3.0, drive=3.0, forward=1, backward=1, left_space=0.0, right_space=0.0, walk_left=1.2, walk_right=1.2, parking_left=0.0, parking_right=0.0, lane_widths=(), lane_markings=False, shared=True, junction='', source='class-estimate', lane_source='class-estimate', walk_source='osm', diagnostics=(), speed_mph=20.0, control='', centre_width=0.0, controls=('', ''), crossings=(), mini_ends=(False, False), control_setbacks=(0.0, 0.0), national_speed=False, highway='service', explicit_two_way=False), lanes=None, edges=(0.0, 0.0))"
+  },
+  {
+    "name": "vauxhall walk",
+    "coords": [
+      [
+        -0.1203838,
+        51.4895197
+      ],
+      [
+        -0.1204072,
+        51.4894642
+      ],
+      [
+        -0.120521,
+        51.489193
+      ],
+      [
+        -0.1205434,
+        51.4891331
+      ],
+      [
+        -0.1205871,
+        51.4890155
+      ],
+      [
+        -0.12062219980729613,
+        51.488936500433724
+      ]
+    ],
+    "spec": "Spec(width=4.0, kind='paved', urban=False, cls='residential', oneway=True, walk=1.5, dir=1, kmh=32.1868782043457, gap=np.float64(22.33305288912491), median=None, profile=Profile(region='England', width=4.0, drive=4.0, forward=1, backward=0, left_space=0.0, right_space=0.0, walk_left=1.5, walk_right=1.5, parking_left=0.0, parking_right=0.0, lane_widths=(4.0,), lane_markings=True, shared=False, junction='', source='class-estimate', lane_source='class-estimate', walk_source='osm', diagnostics=(), speed_mph=20.0, control='', centre_width=0.0, controls=('', ''), crossings=(), mini_ends=(False, False), control_setbacks=(0.0, 0.0), national_speed=False, highway='residential', explicit_two_way=False), lanes=None, edges=(0.0, 0.0))"
+  },
+  {
+    "name": "vauxhall walk",
+    "coords": [
+      [
+        -0.12062219980729613,
+        51.488936500433724
+      ],
+      [
+        -0.1206222,
+        51.4889365
+      ],
+      [
+        -0.1206221,
+        51.488886
+      ],
+      [
+        -0.1206623,
+        51.4887635
+      ],
+      [
+        -0.1206804998406165,
+        51.488729700296
+      ]
+    ],
+    "spec": "Spec(width=4.0, kind='paved', urban=False, cls='residential', oneway=True, walk=1.5, dir=1, kmh=32.1868782043457, gap=np.float64(11.754313050448742), median=None, profile=Profile(region='England', width=4.0, drive=4.0, forward=1, backward=0, left_space=0.0, right_space=0.0, walk_left=1.5, walk_right=0.0, parking_left=0.0, parking_right=0.0, lane_widths=(4.0,), lane_markings=True, shared=False, junction='', source='class-estimate', lane_source='class-estimate', walk_source='osm', diagnostics=(), speed_mph=20.0, control='', centre_width=0.0, controls=('', ''), crossings=(), mini_ends=(False, False), control_setbacks=(0.0, 0.0), national_speed=False, highway='residential', explicit_two_way=False), lanes=None, edges=(0.0, 0.0))"
+  },
+  {
+    "name": "vauxhall walk",
+    "coords": [
+      [
+        -0.1206804998406165,
+        51.488729700296
+      ],
+      [
+        -0.1206805,
+        51.4887297
+      ],
+      [
+        -0.1206894,
+        51.4886943
+      ],
+      [
+        -0.12068940000588231,
+        51.488694299976736
+      ]
+    ],
+    "spec": "Spec(width=4.0, kind='paved', urban=False, cls='residential', oneway=True, walk=1.5, dir=1, kmh=32.1868782043457, gap=np.float64(1.9943802521568974), median=None, profile=Profile(region='England', width=4.0, drive=4.0, forward=1, backward=0, left_space=0.0, right_space=0.0, walk_left=1.5, walk_right=1.5, parking_left=0.0, parking_right=0.0, lane_widths=(4.0,), lane_markings=True, shared=False, junction='', source='class-estimate', lane_source='class-estimate', walk_source='osm', diagnostics=(), speed_mph=20.0, control='', centre_width=0.0, controls=('', ''), crossings=(), mini_ends=(False, False), control_setbacks=(0.0, 0.0), national_speed=False, highway='residential', explicit_two_way=False), lanes=None, edges=(0.0, 0.0))"
+  },
+  {
+    "name": "vauxhall walk",
+    "coords": [
+      [
+        -0.12068940000588231,
+        51.488694299976736
+      ],
+      [
+        -0.1206938,
+        51.4886769
+      ],
+      [
+        -0.120702,
+        51.4886222
+      ]
+    ],
+    "spec": "Spec(width=4.0, kind='cobble', urban=False, cls='residential', oneway=True, walk=1.5, dir=1, kmh=32.1868782043457, gap=np.float64(4.038251823843974), median=None, profile=Profile(region='England', width=4.0, drive=4.0, forward=1, backward=0, left_space=0.0, right_space=0.0, walk_left=1.5, walk_right=1.5, parking_left=0.0, parking_right=0.0, lane_widths=(4.0,), lane_markings=True, shared=False, junction='', source='class-estimate', lane_source='class-estimate', walk_source='osm', diagnostics=(), speed_mph=20.0, control='', centre_width=0.0, controls=('', ''), crossings=(), mini_ends=(False, False), control_setbacks=(0.0, 0.0), national_speed=False, highway='residential', explicit_two_way=False), lanes=None, edges=(0.0, 0.0))"
+  },
+  {
+    "name": "vauxhall walk",
+    "coords": [
+      [
+        -0.1207764,
+        51.4881833
+      ],
+      [
+        -0.1208062,
+        51.4880989
+      ],
+      [
+        -0.1208167,
+        51.4880587
+      ],
+      [
+        -0.1208428,
+        51.4879427
+      ]
+    ],
+    "spec": "Spec(width=3.0, kind='cobble', urban=False, cls='service', oneway=False, walk=0.0, dir=0, kmh=32.1868782043457, gap=np.float64(9.064299513019588), median=None, profile=Profile(region='England', width=3.0, drive=3.0, forward=1, backward=1, left_space=0.0, right_space=0.0, walk_left=0.0, walk_right=0.0, parking_left=0.0, parking_right=0.0, lane_widths=(), lane_markings=False, shared=True, junction='', source='class-estimate', lane_source='class-estimate', walk_source='urban-estimate', diagnostics=(), speed_mph=20.0, control='', centre_width=0.0, controls=('', ''), crossings=(), mini_ends=(False, False), control_setbacks=(0.0, 0.0), national_speed=False, highway='service', explicit_two_way=False), lanes=None, edges=(0.0, 0.0))"
+  },
+  {
+    "name": "vauxhall walk",
+    "coords": [
+      [
+        -0.1207049,
+        51.4886004
+      ],
+      [
+        -0.1206966,
+        51.4885541
+      ],
+      [
+        -0.1206956,
+        51.4885485
+      ],
+      [
+        -0.1206926,
+        51.4885336
+      ],
+      [
+        -0.120728,
+        51.4883683
+      ],
+      [
+        -0.1207373,
+        51.4883231
+      ],
+      [
+        -0.1207533,
+        51.4882629
+      ],
+      [
+        -0.1207583,
+        51.4882469
+      ]
+    ],
+    "spec": "Spec(width=3.0, kind='paved', urban=False, cls='service', oneway=False, walk=1.2, dir=0, kmh=32.1868782043457, gap=np.float64(9.932255444580566), median=None, profile=Profile(region='England', width=3.0, drive=3.0, forward=1, backward=1, left_space=0.0, right_space=0.0, walk_left=1.2, walk_right=1.2, parking_left=0.0, parking_right=0.0, lane_widths=(), lane_markings=False, shared=True, junction='', source='class-estimate', lane_source='class-estimate', walk_source='osm', diagnostics=(), speed_mph=20.0, control='', centre_width=0.0, controls=('', ''), crossings=(), mini_ends=(False, False), control_setbacks=(0.0, 0.0), national_speed=False, highway='service', explicit_two_way=False), lanes=None, edges=(0.0, 0.0))"
+  },
+  {
+    "name": "vauxhall walk",
+    "coords": [
+      [
+        -0.1188106,
+        51.4917083
+      ],
+      [
+        -0.1188263,
+        51.4916844
+      ],
+      [
+        -0.1188263001677379,
+        51.4916843998509
+      ]
+    ],
+    "spec": "Spec(width=4.900000095367432, kind='paved', urban=False, cls='residential', oneway=True, walk=1.5, dir=1, kmh=32.1868782043457, gap=np.float64(2.8745037098619886), median=None, profile=Profile(region='England', width=4.900000095367432, drive=4.900000095367432, forward=2, backward=0, left_space=0.0, right_space=0.0, walk_left=1.5, walk_right=1.5, parking_left=0.0, parking_right=0.0, lane_widths=(2.450000047683716, 2.450000047683716), lane_markings=True, shared=False, junction='', source='overture-width', lane_source='width-estimate', walk_source='osm', diagnostics=(), speed_mph=20.0, control='', centre_width=0.0, controls=('', ''), crossings=(), mini_ends=(False, False), control_setbacks=(0.0, 0.0), national_speed=False, highway='residential', explicit_two_way=False), lanes=None, edges=(0.0, 0.0))"
+  },
+  {
+    "name": "vauxhall walk",
+    "coords": [
+      [
+        -0.1188263001677379,
+        51.4916843998509
+      ],
+      [
+        -0.1188443,
+        51.4916684
+      ],
+      [
+        -0.11892979946135353,
+        51.491580000556915
+      ]
+    ],
+    "spec": "Spec(width=4.9, kind='paved', urban=False, cls='residential', oneway=True, walk=1.5, dir=1, kmh=32.1868782043457, gap=np.float64(6.83089530434042), median=None, profile=Profile(region='England', width=4.9, drive=4.9, forward=2, backward=0, left_space=0.0, right_space=0.0, walk_left=1.5, walk_right=1.5, parking_left=0.0, parking_right=0.0, lane_widths=(2.45, 2.45), lane_markings=True, shared=False, junction='', source='osm-width', lane_source='width-estimate', walk_source='osm', diagnostics=(), speed_mph=20.0, control='', centre_width=0.0, controls=('give_way', ''), crossings=(), mini_ends=(False, False), control_setbacks=(0.0, 0.0), national_speed=False, highway='residential', explicit_two_way=False), lanes=None, edges=(0.0, 0.0))"
+  },
+  {
+    "name": "vauxhall walk",
+    "coords": [
+      [
+        -0.1192821997570447,
+        51.491164600253775
+      ],
+      [
+        -0.1192822,
+        51.4911646
+      ],
+      [
+        -0.11927067178508699,
+        51.49108744330447
+      ]
+    ],
+    "spec": "Spec(width=4.0, kind='paved', urban=False, cls='residential', oneway=True, walk=1.5, dir=1, kmh=32.1868782043457, gap=np.float64(8.626203480660791), median=None, profile=Profile(region='England', width=4.0, drive=4.0, forward=1, backward=0, left_space=0.0, right_space=0.0, walk_left=1.5, walk_right=1.5, parking_left=0.0, parking_right=0.0, lane_widths=(4.0,), lane_markings=True, shared=False, junction='', source='class-estimate', lane_source='class-estimate', walk_source='osm', diagnostics=(), speed_mph=20.0, control='', centre_width=0.0, controls=('', ''), crossings=(), mini_ends=(False, False), control_setbacks=(0.0, 0.0), national_speed=False, highway='residential', explicit_two_way=False), lanes=None, edges=(0.0, 0.0))"
+  },
+  {
+    "name": "vauxhall walk",
+    "coords": [
+      [
+        -0.11927067178508699,
+        51.49108744330447
+      ],
+      [
+        -0.1192682,
+        51.4910709
+      ],
+      [
+        -0.1195207,
+        51.4908382
+      ],
+      [
+        -0.1196983,
+        51.4905461
+      ],
+      [
+        -0.11971469961420518,
+        51.49051420075042
+      ]
+    ],
+    "spec": "Spec(width=4.0, kind='paved', urban=False, cls='residential', oneway=True, walk=1.5, dir=1, kmh=32.1868782043457, gap=np.float64(35.80440939200537), median=None, profile=Profile(region='England', width=4.0, drive=4.0, forward=1, backward=0, left_space=0.0, right_space=0.0, walk_left=1.5, walk_right=1.5, parking_left=0.0, parking_right=0.0, lane_widths=(4.0,), lane_markings=True, shared=False, junction='', source='class-estimate', lane_source='class-estimate', walk_source='osm', diagnostics=(), speed_mph=20.0, control='', centre_width=0.0, controls=('', 'give_way'), crossings=(), mini_ends=(False, False), control_setbacks=(0.0, 0.0), national_speed=False, highway='residential', explicit_two_way=False), lanes=None, edges=(0.0, 0.0))"
+  },
+  {
+    "name": "vauxhall walk",
+    "coords": [
+      [
+        -0.11971469961420518,
+        51.49051420075042
+      ],
+      [
+        -0.1197147,
+        51.4905142
+      ],
+      [
+        -0.1197494,
+        51.4904762
+      ],
+      [
+        -0.1197861,
+        51.4904263
+      ],
+      [
+        -0.1200491,
+        51.4900502
+      ]
+    ],
+    "spec": "Spec(width=4.0, kind='paved', urban=False, cls='residential', oneway=True, walk=1.5, dir=1, kmh=32.1868782043457, gap=np.float64(18.87989366177233), median=None, profile=Profile(region='England', width=4.0, drive=4.0, forward=1, backward=0, left_space=0.0, right_space=0.0, walk_left=1.5, walk_right=1.5, parking_left=0.0, parking_right=0.0, lane_widths=(4.0,), lane_markings=True, shared=False, junction='', source='class-estimate', lane_source='class-estimate', walk_source='osm', diagnostics=(), speed_mph=20.0, control='', centre_width=0.0, controls=('', ''), crossings=(0.08591498230439183,), mini_ends=(False, False), control_setbacks=(0.0, 0.0), national_speed=False, highway='residential', explicit_two_way=False), lanes=None, edges=(0.0, 0.0))"
+  },
+  {
+    "name": "vauxhall walk",
+    "coords": [
+      [
+        -0.11892979946135353,
+        51.491580000556915
+      ],
+      [
+        -0.1189298,
+        51.49158
+      ],
+      [
+        -0.1189709,
+        51.4915373
+      ],
+      [
+        -0.1190902,
+        51.4914077
+      ],
+      [
+        -0.1192373,
+        51.4912115
+      ],
+      [
+        -0.1192821997570447,
+        51.491164600253775
+      ]
+    ],
+    "spec": "Spec(width=4.900000095367432, kind='paved', urban=False, cls='residential', oneway=True, walk=1.5, dir=1, kmh=32.1868782043457, gap=np.float64(17.45065053628996), median=None, profile=Profile(region='England', width=4.900000095367432, drive=4.900000095367432, forward=2, backward=0, left_space=0.0, right_space=0.0, walk_left=1.5, walk_right=1.5, parking_left=0.0, parking_right=0.0, lane_widths=(2.450000047683716, 2.450000047683716), lane_markings=True, shared=False, junction='', source='overture-width', lane_source='width-estimate', walk_source='osm', diagnostics=(), speed_mph=20.0, control='', centre_width=0.0, controls=('', ''), crossings=(), mini_ends=(False, False), control_setbacks=(0.0, 0.0), national_speed=False, highway='residential', explicit_two_way=False), lanes=None, edges=(0.0, 0.0))"
+  },
+  {
+    "name": "nottingham road",
+    "coords": [
+      [
+        -1.2533727,
+        52.9965624
+      ],
+      [
+        -1.2531937,
+        52.9965118
+      ],
+      [
+        -1.253014,
+        52.9964486
+      ],
+      [
+        -1.252911,
+        52.9964015
+      ],
+      [
+        -1.2528752,
+        52.9963867
+      ],
+      [
+        -1.2527331,
+        52.9963113
+      ],
+      [
+        -1.2526538,
+        52.9962733
+      ],
+      [
+        -1.2520359,
+        52.9959667
+      ],
+      [
+        -1.2517572,
+        52.9958399
+      ],
+      [
+        -1.2513778,
+        52.9956837
+      ],
+      [
+        -1.2510704,
+        52.9955706
+      ],
+      [
+        -1.2507591,
+        52.9954677
+      ],
+      [
+        -1.2504682,
+        52.9953755
+      ]
+    ],
+    "spec": "Spec(width=5.5, kind='paved', urban=False, cls='tertiary', oneway=False, walk=0.0, dir=0, kmh=None, gap=np.float64(59.019098649451145), median=None, profile=Profile(region='England', width=5.5, drive=5.5, forward=1, backward=1, left_space=0.0, right_space=0.0, walk_left=0.0, walk_right=0.0, parking_left=0.0, parking_right=0.0, lane_widths=(2.75, 2.75), lane_markings=True, shared=False, junction='', source='lane-estimate', lane_source='osm-lanes', walk_source='urban-estimate', diagnostics=(), speed_mph=30.0, control='', centre_width=0.0, controls=('', ''), crossings=(), mini_ends=(False, False), control_setbacks=(0.0, 0.0), national_speed=False, highway='tertiary', explicit_two_way=False), lanes=None, edges=(0.0, 0.0))"
+  },
+  {
+    "name": "nottingham road",
+    "coords": [
+      [
+        -1.2479669,
+        52.99429
+      ],
+      [
+        -1.2476025,
+        52.9941718
+      ],
+      [
+        -1.2473908,
+        52.994135
+      ],
+      [
+        -1.2472057,
+        52.9941148
+      ]
+    ],
+    "spec": "Spec(width=5.5, kind='paved', urban=False, cls='tertiary', oneway=False, walk=0.0, dir=0, kmh=None, gap=np.float64(55.10434890191436), median=None, profile=Profile(region='England', width=5.5, drive=5.5, forward=1, backward=1, left_space=0.0, right_space=0.0, walk_left=0.0, walk_right=0.0, parking_left=0.0, parking_right=0.0, lane_widths=(2.75, 2.75), lane_markings=True, shared=False, junction='', source='lane-estimate', lane_source='osm-lanes', walk_source='urban-estimate', diagnostics=(), speed_mph=30.0, control='', centre_width=0.0, controls=('', ''), crossings=(), mini_ends=(False, False), control_setbacks=(0.0, 0.0), national_speed=False, highway='tertiary', explicit_two_way=False), lanes=None, edges=(0.0, 0.0))"
+  },
+  {
+    "name": "nottingham road",
+    "coords": [
+      [
+        -1.2504682,
+        52.9953755
+      ],
+      [
+        -1.2502857,
+        52.9953217
+      ],
+      [
+        -1.2497688,
+        52.9951904
+      ],
+      [
+        -1.2495008,
+        52.9951031
+      ],
+      [
+        -1.2493587,
+        52.9950386
+      ],
+      [
+        -1.2491254,
+        52.9948991
+      ],
+      [
+        -1.2488204,
+        52.9947343
+      ],
+      [
+        -1.2487784,
+        52.994706
+      ],
+      [
+        -1.2485255,
+        52.9945614
+      ],
+      [
+        -1.2484142,
+        52.9944978
+      ]
+    ],
+    "spec": "Spec(width=5.5, kind='paved', urban=False, cls='tertiary', oneway=False, walk=0.0, dir=0, kmh=None, gap=np.float64(42.73083804227503), median=None, profile=Profile(region='England', width=5.5, drive=5.5, forward=1, backward=1, left_space=0.0, right_space=0.0, walk_left=0.0, walk_right=0.0, parking_left=0.0, parking_right=0.0, lane_widths=(2.75, 2.75), lane_markings=True, shared=False, junction='', source='lane-estimate', lane_source='osm-lanes', walk_source='urban-estimate', diagnostics=(), speed_mph=30.0, control='', centre_width=0.0, controls=('', ''), crossings=(), mini_ends=(False, False), control_setbacks=(0.0, 0.0), national_speed=False, highway='tertiary', explicit_two_way=False), lanes=None, edges=(0.0, 0.0))"
+  },
+  {
+    "name": "nottingham road",
+    "coords": [
+      [
+        -1.2290155,
+        52.9944971
+      ],
+      [
+        -1.2293376,
+        52.9947253
+      ],
+      [
+        -1.2293681,
+        52.9947409
+      ],
+      [
+        -1.229453,
+        52.9947842
+      ],
+      [
+        -1.2295466,
+        52.9948195
+      ],
+      [
+        -1.2297416,
+        52.9948716
+      ],
+      [
+        -1.2301025,
+        52.9949375
+      ],
+      [
+        -1.2303182,
+        52.9949807
+      ],
+      [
+        -1.2304761,
+        52.9950123
+      ],
+      [
+        -1.2308309,
+        52.9950848
+      ],
+      [
+        -1.231126,
+        52.9951621
+      ],
+      [
+        -1.2313628,
+        52.9952197
+      ],
+      [
+        -1.2313628019863043,
+        52.9952197004595
+      ]
+    ],
+    "spec": "Spec(width=6.0, kind='paved', urban=False, cls='secondary', oneway=False, walk=0.0, dir=0, kmh=48.28031921386719, gap=np.float64(60.199616757162296), median=None, profile=Profile(region='England', width=6.0, drive=6.0, forward=1, backward=1, left_space=0.0, right_space=0.0, walk_left=0.0, walk_right=0.0, parking_left=0.0, parking_right=0.0, lane_widths=(3.0, 3.0), lane_markings=True, shared=False, junction='', source='class-estimate', lane_source='class-estimate', walk_source='urban-estimate', diagnostics=(), speed_mph=30.0, control='', centre_width=0.0, controls=('', ''), crossings=(), mini_ends=(False, False), control_setbacks=(0.0, 0.0), national_speed=False, highway='secondary', explicit_two_way=False), lanes=None, edges=(0.0, 0.0))"
+  },
+  {
+    "name": "nottingham road",
+    "coords": [
+      [
+        -1.2313628019863043,
+        52.9952197004595
+      ],
+      [
+        -1.2315945,
+        52.9952733
+      ],
+      [
+        -1.2318066,
+        52.9953289
+      ],
+      [
+        -1.2319352,
+        52.9953645
+      ],
+      [
+        -1.23205,
+        52.9953874
+      ],
+      [
+        -1.2320716,
+        52.995391
+      ],
+      [
+        -1.2321532,
+        52.9954047
+      ],
+      [
+        -1.2322645,
+        52.9954116
+      ],
+      [
+        -1.2322645020468443,
+        52.99541159995507
+      ]
+    ],
+    "spec": "Spec(width=6.0, kind='paved', urban=False, cls='secondary', oneway=False, walk=0.0, dir=0, kmh=48.28031921386719, gap=np.float64(32.19674982997664), median=None, profile=Profile(region='England', width=6.0, drive=6.0, forward=1, backward=1, left_space=0.0, right_space=0.0, walk_left=0.0, walk_right=0.0, parking_left=0.0, parking_right=0.0, lane_widths=(3.0, 3.0), lane_markings=True, shared=False, junction='', source='class-estimate', lane_source='class-estimate', walk_source='urban-estimate', diagnostics=(), speed_mph=30.0, control='', centre_width=0.0, controls=('', ''), crossings=(), mini_ends=(False, False), control_setbacks=(0.0, 0.0), national_speed=False, highway='secondary', explicit_two_way=False), lanes=None, edges=(0.0, 0.0))"
+  },
+  {
+    "name": "nottingham road",
+    "coords": [
+      [
+        -1.2322645020468443,
+        52.99541159995507
+      ],
+      [
+        -1.2323465,
+        52.9954098
+      ],
+      [
+        -1.2324788,
+        52.9954035
+      ],
+      [
+        -1.2325757,
+        52.995398
+      ],
+      [
+        -1.2326709,
+        52.9953869
+      ],
+      [
+        -1.232834,
+        52.9953634
+      ],
+      [
+        -1.233003,
+        52.9953354
+      ],
+      [
+        -1.2332676,
+        52.9952884
+      ],
+      [
+        -1.2335154,
+        52.9952334
+      ]
+    ],
+    "spec": "Spec(width=9.0, kind='paved', urban=False, cls='secondary', oneway=False, walk=0.0, dir=0, kmh=48.28031921386719, gap=np.float64(28.85638609467536), median=None, profile=Profile(region='England', width=9.0, drive=9.0, forward=2, backward=1, left_space=0.0, right_space=0.0, walk_left=0.0, walk_right=0.0, parking_left=0.0, parking_right=0.0, lane_widths=(3.0, 3.0, 3.0), lane_markings=True, shared=False, junction='', source='lane-estimate', lane_source='osm-lanes', walk_source='urban-estimate', diagnostics=(), speed_mph=30.0, control='', centre_width=0.0, controls=('', 'traffic_signals'), crossings=(), mini_ends=(False, False), control_setbacks=(0.0, 0.0), national_speed=False, highway='secondary', explicit_two_way=True), lanes=None, edges=(0.0, 0.0))"
+  },
+  {
+    "name": "nottingham road",
+    "coords": [
+      [
+        -1.2484142,
+        52.9944978
+      ],
+      [
+        -1.248221,
+        52.9944014
+      ],
+      [
+        -1.2479669,
+        52.99429
+      ]
+    ],
+    "spec": "Spec(width=5.5, kind='paved', urban=False, cls='tertiary', oneway=False, walk=0.0, dir=0, kmh=None, gap=np.float64(37.877551831004666), median=None, profile=Profile(region='England', width=5.5, drive=5.5, forward=1, backward=1, left_space=0.0, right_space=0.0, walk_left=0.0, walk_right=0.0, parking_left=0.0, parking_right=0.0, lane_widths=(2.75, 2.75), lane_markings=True, shared=False, junction='', source='lane-estimate', lane_source='osm-lanes', walk_source='urban-estimate', diagnostics=(), speed_mph=30.0, control='', centre_width=0.0, controls=('', ''), crossings=(), mini_ends=(False, False), control_setbacks=(0.0, 0.0), national_speed=False, highway='tertiary', explicit_two_way=False), lanes=None, edges=(0.0, 0.0))"
+  },
+  {
+    "name": "nottingham road",
+    "coords": [
+      [
+        -1.2223838,
+        52.9899349
+      ],
+      [
+        -1.2224786,
+        52.9899626
+      ],
+      [
+        -1.2225649,
+        52.9899829
+      ],
+      [
+        -1.222653,
+        52.9899967
+      ],
+      [
+        -1.2228474,
+        52.9900216
+      ]
+    ],
+    "spec": "Spec(width=2.75, kind='paved', urban=False, cls='tertiary', oneway=True, walk=0.0, dir=1, kmh=48.28031921386719, gap=np.float64(10.896206357609408), median=None, profile=Profile(region='England', width=2.75, drive=2.75, forward=1, backward=0, left_space=0.0, right_space=0.0, walk_left=0.0, walk_right=0.0, parking_left=0.0, parking_right=0.0, lane_widths=(2.75,), lane_markings=True, shared=False, junction='', source='lane-estimate', lane_source='osm-lanes', walk_source='urban-estimate', diagnostics=(), speed_mph=30.0, control='', centre_width=0.0, controls=('', 'give_way'), crossings=(), mini_ends=(False, False), control_setbacks=(0.0, 13.318305547634862), national_speed=False, highway='tertiary', explicit_two_way=False), lanes=None, edges=(0.0, 0.0))"
+  },
+  {
+    "name": "nottingham road",
+    "coords": [
+      [
+        -1.2245459,
+        52.9914694
+      ],
+      [
+        -1.2244467,
+        52.9914078
+      ],
+      [
+        -1.2242005,
+        52.9912396
+      ],
+      [
+        -1.224093,
+        52.9911503
+      ]
+    ],
+    "spec": "Spec(width=9.0, kind='paved', urban=False, cls='secondary', oneway=True, walk=0.0, dir=1, kmh=48.28031921386719, gap=np.float64(23.390726720188), median=7.683429980929098, profile=Profile(region='England', width=9.0, drive=9.0, forward=3, backward=0, left_space=0.0, right_space=0.0, walk_left=0.0, walk_right=0.0, parking_left=0.0, parking_right=0.0, lane_widths=(3.0, 3.0, 3.0), lane_markings=True, shared=False, junction='', source='lane-estimate', lane_source='osm-lanes', walk_source='urban-estimate', diagnostics=(), speed_mph=30.0, control='', centre_width=0.0, controls=('', ''), crossings=(), mini_ends=(False, False), control_setbacks=(0.0, 0.0), national_speed=False, highway='secondary', explicit_two_way=False), lanes=None, edges=(0.0, 0.0))"
+  },
+  {
+    "name": "nottingham road",
+    "coords": [
+      [
+        -1.2223838,
+        52.9899349
+      ],
+      [
+        -1.2221407,
+        52.9897733
+      ],
+      [
+        -1.222013,
+        52.9897096
+      ],
+      [
+        -1.22191,
+        52.9896457
+      ]
+    ],
+    "spec": "Spec(width=5.5, kind='paved', urban=False, cls='tertiary', oneway=False, walk=0.0, dir=0, kmh=48.28031921386719, gap=np.float64(45.293819382664516), median=None, profile=Profile(region='England', width=5.5, drive=5.5, forward=1, backward=1, left_space=0.0, right_space=0.0, walk_left=0.0, walk_right=0.0, parking_left=0.0, parking_right=0.0, lane_widths=(2.75, 2.75), lane_markings=True, shared=False, junction='', source='lane-estimate', lane_source='osm-lanes', walk_source='urban-estimate', diagnostics=(), speed_mph=30.0, control='', centre_width=0.0, controls=('', ''), crossings=(), mini_ends=(False, True), control_setbacks=(0.0, 0.0), national_speed=False, highway='tertiary', explicit_two_way=False), lanes=None, edges=(0.0, 0.0))"
+  },
+  {
+    "name": "nottingham road",
+    "coords": [
+      [
+        -1.2212268,
+        52.9897268
+      ],
+      [
+        -1.2211038,
+        52.9897211
+      ],
+      [
+        -1.2209775,
+        52.9896959
+      ],
+      [
+        -1.2208375,
+        52.9896494
+      ],
+      [
+        -1.220722,
+        52.9895861
+      ],
+      [
+        -1.2205563,
+        52.9894854
+      ],
+      [
+        -1.2201296,
+        52.9892356
+      ]
+    ],
+    "spec": "Spec(width=5.5, kind='paved', urban=False, cls='tertiary', oneway=False, walk=0.0, dir=0, kmh=48.28031921386719, gap=np.float64(47.01397067926828), median=None, profile=Profile(region='England', width=5.5, drive=5.5, forward=1, backward=1, left_space=0.0, right_space=0.0, walk_left=0.0, walk_right=0.0, parking_left=0.0, parking_right=0.0, lane_widths=(2.75, 2.75), lane_markings=True, shared=False, junction='', source='class-estimate', lane_source='class-estimate', walk_source='urban-estimate', diagnostics=(), speed_mph=30.0, control='', centre_width=0.0, controls=('', ''), crossings=(), mini_ends=(False, False), control_setbacks=(0.0, 0.0), national_speed=False, highway='tertiary', explicit_two_way=False), lanes=None, edges=(0.0, 0.0))"
+  },
+  {
+    "name": "nottingham road",
+    "coords": [
+      [
+        -1.2244767,
+        52.990619
+      ],
+      [
+        -1.2243945,
+        52.9907645
+      ],
+      [
+        -1.2243549,
+        52.9908656
+      ],
+      [
+        -1.2243211,
+        52.9909884
+      ],
+      [
+        -1.2243177,
+        52.9910776
+      ]
+    ],
+    "spec": "Spec(width=6.0, kind='paved', urban=False, cls='secondary', oneway=True, walk=0.0, dir=1, kmh=48.28031921386719, gap=np.float64(52.459862031971824), median=None, profile=Profile(region='England', width=6.0, drive=6.0, forward=2, backward=0, left_space=0.0, right_space=0.0, walk_left=0.0, walk_right=0.0, parking_left=0.0, parking_right=0.0, lane_widths=(3.0, 3.0), lane_markings=True, shared=False, junction='', source='lane-estimate', lane_source='osm-lanes', walk_source='urban-estimate', diagnostics=(), speed_mph=30.0, control='', centre_width=0.0, controls=('', ''), crossings=(), mini_ends=(False, False), control_setbacks=(0.0, 0.0), national_speed=False, highway='secondary', explicit_two_way=False), lanes=None, edges=(0.0, 0.0))"
+  },
+  {
+    "name": "nottingham road",
+    "coords": [
+      [
+        -1.2224478,
+        52.9901707
+      ],
+      [
+        -1.2224252,
+        52.9900407
+      ],
+      [
+        -1.2223838,
+        52.9899349
+      ]
+    ],
+    "spec": "Spec(width=2.75, kind='paved', urban=False, cls='tertiary', oneway=True, walk=0.0, dir=1, kmh=48.28031921386719, gap=np.float64(13.325296947891697), median=None, profile=Profile(region='England', width=2.75, drive=2.75, forward=1, backward=0, left_space=0.0, right_space=0.0, walk_left=0.0, walk_right=0.0, parking_left=0.0, parking_right=0.0, lane_widths=(2.75,), lane_markings=True, shared=False, junction='', source='lane-estimate', lane_source='osm-lanes', walk_source='urban-estimate', diagnostics=(), speed_mph=30.0, control='', centre_width=0.0, controls=('', ''), crossings=(), mini_ends=(False, False), control_setbacks=(0.0, 0.0), national_speed=False, highway='tertiary', explicit_two_way=False), lanes=None, edges=(0.0, 0.0))"
+  },
+  {
+    "name": "nottingham road",
+    "coords": [
+      [
+        -1.2201296,
+        52.9892356
+      ],
+      [
+        -1.2199878,
+        52.9891636
+      ],
+      [
+        -1.2197737,
+        52.9890736
+      ],
+      [
+        -1.2194254,
+        52.9889549
+      ],
+      [
+        -1.2191517,
+        52.9888612
+      ],
+      [
+        -1.2188384,
+        52.9887632
+      ],
+      [
+        -1.218428,
+        52.9886517
+      ],
+      [
+        -1.2180767,
+        52.9885632
+      ],
+      [
+        -1.2176699,
+        52.9885047
+      ],
+      [
+        -1.2176452,
+        52.9885019
+      ],
+      [
+        -1.2172839,
+        52.9884617
+      ]
+    ],
+    "spec": "Spec(width=5.5, kind='paved', urban=False, cls='tertiary', oneway=False, walk=0.0, dir=0, kmh=48.28031921386719, gap=np.float64(105.7669660367541), median=None, profile=Profile(region='England', width=5.5, drive=5.5, forward=1, backward=1, left_space=0.0, right_space=0.0, walk_left=0.0, walk_right=0.0, parking_left=0.0, parking_right=0.0, lane_widths=(2.75, 2.75), lane_markings=True, shared=False, junction='', source='class-estimate', lane_source='class-estimate', walk_source='urban-estimate', diagnostics=(), speed_mph=30.0, control='', centre_width=0.0, controls=('', ''), crossings=(), mini_ends=(False, False), control_setbacks=(0.0, 0.0), national_speed=False, highway='tertiary', explicit_two_way=False), lanes=None, edges=(0.0, 0.0))"
+  },
+  {
+    "name": "nottingham road",
+    "coords": [
+      [
+        -1.2192561,
+        52.9886597
+      ],
+      [
+        -1.2187847,
+        52.9885288
+      ],
+      [
+        -1.2184623,
+        52.9884494
+      ],
+      [
+        -1.2180935,
+        52.9884156
+      ],
+      [
+        -1.2179542,
+        52.9884097
+      ],
+      [
+        -1.2177417,
+        52.9884391
+      ],
+      [
+        -1.2176452,
+        52.9885019
+      ]
+    ],
+    "spec": "Spec(width=3.0, kind='paved', urban=False, cls='service', oneway=False, walk=0.0, dir=0, kmh=None, gap=np.float64(116.62174182116081), median=None, profile=Profile(region='England', width=3.0, drive=3.0, forward=1, backward=1, left_space=0.0, right_space=0.0, walk_left=0.0, walk_right=0.0, parking_left=0.0, parking_right=0.0, lane_widths=(), lane_markings=False, shared=True, junction='', source='class-estimate', lane_source='class-estimate', walk_source='urban-estimate', diagnostics=(), speed_mph=None, control='', centre_width=0.0, controls=('', ''), crossings=(), mini_ends=(False, False), control_setbacks=(0.0, 0.0), national_speed=False, highway='service', explicit_two_way=False), lanes=None, edges=(0.0, 0.0))"
+  },
+  {
+    "name": "nottingham road",
+    "coords": [
+      [
+        -1.2243177,
+        52.9910776
+      ],
+      [
+        -1.2243267,
+        52.991109
+      ],
+      [
+        -1.2243433,
+        52.99116
+      ],
+      [
+        -1.2244,
+        52.9912605
+      ],
+      [
+        -1.2245459,
+        52.9914694
+      ]
+    ],
+    "spec": "Spec(width=6.0, kind='paved', urban=False, cls='secondary', oneway=True, walk=0.0, dir=1, kmh=48.28031921386719, gap=np.float64(46.373766648565905), median=6.395776143056535, profile=Profile(region='England', width=6.0, drive=6.0, forward=2, backward=0, left_space=0.0, right_space=0.0, walk_left=0.0, walk_right=0.0, parking_left=0.0, parking_right=0.0, lane_widths=(3.0, 3.0), lane_markings=True, shared=False, junction='', source='lane-estimate', lane_source='osm-lanes', walk_source='urban-estimate', diagnostics=(), speed_mph=30.0, control='', centre_width=0.0, controls=('', ''), crossings=(), mini_ends=(False, False), control_setbacks=(0.0, 0.0), national_speed=False, highway='secondary', explicit_two_way=False), lanes=None, edges=(0.0, 0.0))"
+  },
+  {
+    "name": "nottingham road",
+    "coords": [
+      [
+        -1.224093,
+        52.9911503
+      ],
+      [
+        -1.2238934,
+        52.9910146
+      ],
+      [
+        -1.2238076,
+        52.9909718
+      ],
+      [
+        -1.2235055,
+        52.9908518
+      ]
+    ],
+    "spec": "Spec(width=9.0, kind='paved', urban=False, cls='secondary', oneway=True, walk=0.0, dir=1, kmh=48.28031921386719, gap=np.float64(51.896502888806864), median=20.09656772279196, profile=Profile(region='England', width=9.0, drive=9.0, forward=3, backward=0, left_space=0.0, right_space=0.0, walk_left=0.0, walk_right=0.0, parking_left=0.0, parking_right=0.0, lane_widths=(3.0, 3.0, 3.0), lane_markings=True, shared=False, junction='', source='lane-estimate', lane_source='osm-lanes', walk_source='urban-estimate', diagnostics=(), speed_mph=30.0, control='', centre_width=0.0, controls=('', 'traffic_signals'), crossings=(), mini_ends=(False, False), control_setbacks=(0.0, 24.25347061109556), national_speed=False, highway='secondary', explicit_two_way=False), lanes=None, edges=(0.0, 0.0))"
+  },
+  {
+    "name": "nottingham road",
+    "coords": [
+      [
+        -1.22191,
+        52.9896457
+      ],
+      [
+        -1.2217636,
+        52.989647
+      ],
+      [
+        -1.2216483,
+        52.989656
+      ],
+      [
+        -1.2215274,
+        52.9896821
+      ],
+      [
+        -1.2213926,
+        52.9897075
+      ],
+      [
+        -1.2213125,
+        52.9897204
+      ],
+      [
+        -1.2212268,
+        52.9897268
+      ]
+    ],
+    "spec": "Spec(width=5.5, kind='paved', urban=False, cls='tertiary', oneway=False, walk=0.0, dir=0, kmh=48.28031921386719, gap=np.float64(47.01730565020847), median=None, profile=Profile(region='England', width=5.5, drive=5.5, forward=1, backward=1, left_space=0.0, right_space=0.0, walk_left=0.0, walk_right=0.0, parking_left=0.0, parking_right=0.0, lane_widths=(2.75, 2.75), lane_markings=True, shared=False, junction='', source='class-estimate', lane_source='class-estimate', walk_source='urban-estimate', diagnostics=(), speed_mph=30.0, control='', centre_width=0.0, controls=('', ''), crossings=(), mini_ends=(True, False), control_setbacks=(0.0, 0.0), national_speed=False, highway='tertiary', explicit_two_way=False), lanes=None, edges=(0.0, 0.0))"
+  },
+  {
+    "name": "nottingham road",
+    "coords": [
+      [
+        -1.2172839,
+        52.9884617
+      ],
+      [
+        -1.2165565,
+        52.9883981
+      ],
+      [
+        -1.2158568,
+        52.9883316
+      ],
+      [
+        -1.21495,
+        52.9882419
+      ],
+      [
+        -1.2144558,
+        52.9881867
+      ],
+      [
+        -1.2141307,
+        52.9881369
+      ],
+      [
+        -1.2137499,
+        52.988084
+      ]
+    ],
+    "spec": "Spec(width=5.5, kind='paved', urban=False, cls='tertiary', oneway=False, walk=0.0, dir=0, kmh=48.28031921386719, gap=np.float64(120.32883909863192), median=None, profile=Profile(region='England', width=5.5, drive=5.5, forward=1, backward=1, left_space=0.0, right_space=0.0, walk_left=0.0, walk_right=0.0, parking_left=0.0, parking_right=0.0, lane_widths=(2.75, 2.75), lane_markings=True, shared=False, junction='', source='class-estimate', lane_source='class-estimate', walk_source='urban-estimate', diagnostics=(), speed_mph=30.0, control='', centre_width=0.0, controls=('', ''), crossings=(), mini_ends=(False, False), control_setbacks=(0.0, 0.0), national_speed=False, highway='tertiary', explicit_two_way=False), lanes=None, edges=(0.0, 0.0))"
+  },
+  {
+    "name": "nottingham road",
+    "coords": [
+      [
+        -1.221825,
+        52.9901483
+      ],
+      [
+        -1.2217445,
+        52.990128
+      ],
+      [
+        -1.2216444,
+        52.9900762
+      ],
+      [
+        -1.2213625,
+        52.9899269
+      ],
+      [
+        -1.2212739,
+        52.9898627
+      ],
+      [
+        -1.2212405,
+        52.989816
+      ],
+      [
+        -1.2212268,
+        52.9897268
+      ]
+    ],
+    "spec": "Spec(width=5.3, kind='paved', urban=False, cls='residential', oneway=False, walk=0.0, dir=0, kmh=48.28031921386719, gap=np.float64(64.77774286868873), median=None, profile=Profile(region='England', width=5.3, drive=5.3, forward=1, backward=1, left_space=0.0, right_space=0.0, walk_left=0.0, walk_right=0.0, parking_left=0.0, parking_right=0.0, lane_widths=(2.65, 2.65), lane_markings=False, shared=False, junction='', source='class-estimate', lane_source='class-estimate', walk_source='urban-estimate', diagnostics=(), speed_mph=30.0, control='', centre_width=0.0, controls=('', ''), crossings=(), mini_ends=(False, False), control_setbacks=(0.0, 0.0), national_speed=False, highway='residential', explicit_two_way=False), lanes=None, edges=(0.0, 0.0))"
+  },
+  {
+    "name": "nottingham road",
+    "coords": [
+      [
+        -1.2245459,
+        52.9914694
+      ],
+      [
+        -1.2249931,
+        52.9918066
+      ],
+      [
+        -1.2254839,
+        52.9921812
+      ],
+      [
+        -1.2263194,
+        52.9928039
+      ],
+      [
+        -1.226464,
+        52.9928988
+      ],
+      [
+        -1.226739,
+        52.9930879
+      ],
+      [
+        -1.2272007,
+        52.9933453
+      ],
+      [
+        -1.2275481,
+        52.9935383
+      ],
+      [
+        -1.2277602,
+        52.9936577
+      ],
+      [
+        -1.227971,
+        52.9937759
+      ],
+      [
+        -1.228151,
+        52.9938799
+      ],
+      [
+        -1.2282373,
+        52.9939301
+      ],
+      [
+        -1.2284828,
+        52.9941057
+      ],
+      [
+        -1.2285007,
+        52.9941191
+      ],
+      [
+        -1.2286537,
+        52.9942333
+      ],
+      [
+        -1.2287987,
+        52.9943435
+      ],
+      [
+        -1.2290155,
+        52.9944971
+      ]
+    ],
+    "spec": "Spec(width=6.0, kind='paved', urban=False, cls='secondary', oneway=False, walk=0.0, dir=0, kmh=48.28031921386719, gap=np.float64(112.95076716793076), median=None, profile=Profile(region='England', width=6.0, drive=6.0, forward=1, backward=1, left_space=0.0, right_space=0.0, walk_left=0.0, walk_right=0.0, parking_left=0.0, parking_right=0.0, lane_widths=(3.0, 3.0), lane_markings=True, shared=False, junction='', source='class-estimate', lane_source='class-estimate', walk_source='urban-estimate', diagnostics=(), speed_mph=30.0, control='', centre_width=0.0, controls=('', ''), crossings=(), mini_ends=(False, False), control_setbacks=(0.0, 0.0), national_speed=False, highway='secondary', explicit_two_way=False), lanes=None, edges=(0.0, 0.0))"
+  }
+]

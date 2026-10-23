@@ -1,0 +1,161 @@
+[
+  {
+    "name": "london",
+    "lat": 51.4927,
+    "lon": -0.1204,
+    "ok": true,
+    "tiles": [
+      {
+        "tile": [
+          0,
+          0
+        ],
+        "chunks": 244,
+        "walls": 0,
+        "road_vertices": 8660,
+        "deck_vertices": 0,
+        "deck_max_profile_error": 0.0
+      },
+      {
+        "tile": [
+          -1,
+          0
+        ],
+        "chunks": 256,
+        "walls": 6,
+        "road_vertices": 5784,
+        "deck_vertices": 4856,
+        "deck_max_profile_error": 0.013606329106676363
+      },
+      {
+        "tile": [
+          0,
+          -1
+        ],
+        "chunks": 296,
+        "walls": 1,
+        "road_vertices": 11295,
+        "deck_vertices": 0,
+        "deck_max_profile_error": 0.0
+      },
+      {
+        "tile": [
+          1,
+          0
+        ],
+        "chunks": 210,
+        "walls": 0,
+        "road_vertices": 7996,
+        "deck_vertices": 0,
+        "deck_max_profile_error": 0.0
+      }
+    ],
+    "seconds": 78.26815820000047
+  },
+  {
+    "name": "giltbrook",
+    "lat": 53.0017,
+    "lon": -1.283,
+    "ok": true,
+    "tiles": [
+      {
+        "tile": [
+          0,
+          0
+        ],
+        "chunks": 347,
+        "walls": 1,
+        "road_vertices": 13134,
+        "deck_vertices": 0,
+        "deck_max_profile_error": 0.0
+      },
+      {
+        "tile": [
+          -1,
+          0
+        ],
+        "chunks": 141,
+        "walls": 0,
+        "road_vertices": 6330,
+        "deck_vertices": 0,
+        "deck_max_profile_error": 0.0
+      },
+      {
+        "tile": [
+          0,
+          -1
+        ],
+        "chunks": 232,
+        "walls": 0,
+        "road_vertices": 10072,
+        "deck_vertices": 5952,
+        "deck_max_profile_error": 0.02259063844238085
+      },
+      {
+        "tile": [
+          1,
+          0
+        ],
+        "chunks": 205,
+        "walls": 0,
+        "road_vertices": 6840,
+        "deck_vertices": 0,
+        "deck_max_profile_error": 0.0
+      }
+    ],
+    "seconds": 25.08594290000474
+  },
+  {
+    "name": "j26",
+    "lat": 53.0025,
+    "lon": -1.245,
+    "ok": true,
+    "tiles": [
+      {
+        "tile": [
+          0,
+          0
+        ],
+        "chunks": 0,
+        "walls": 0,
+        "road_vertices": 0,
+        "deck_vertices": 0,
+        "deck_max_profile_error": 0.0
+      },
+      {
+        "tile": [
+          -1,
+          0
+        ],
+        "chunks": 71,
+        "walls": 2,
+        "road_vertices": 4036,
+        "deck_vertices": 0,
+        "deck_max_profile_error": 0.0
+      },
+      {
+        "tile": [
+          0,
+          -1
+        ],
+        "chunks": 71,
+        "walls": 0,
+        "road_vertices": 2442,
+        "deck_vertices": 0,
+        "deck_max_profile_error": 0.0
+      },
+      {
+        "tile": [
+          1,
+          0
+        ],
+        "chunks": 1,
+        "walls": 0,
+        "road_vertices": 496,
+        "deck_vertices": 0,
+        "deck_max_profile_error": 0.0
+      }
+    ],
+    "seconds": 27.052354300001753
+  }
+]

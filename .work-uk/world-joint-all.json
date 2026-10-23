@@ -1,0 +1,257 @@
+[
+  {
+    "name": "london",
+    "lat": 51.4927,
+    "lon": -0.1204,
+    "ok": true,
+    "tiles": [
+      {
+        "tile": [
+          0,
+          0
+        ],
+        "chunks": 248,
+        "walls": 1,
+        "road_vertices": 34559,
+        "deck_vertices": 0,
+        "deck_max_profile_error": 0.0,
+        "engine_meshes": 2,
+        "max_engine_vertices": 34559
+      },
+      {
+        "tile": [
+          -1,
+          0
+        ],
+        "chunks": 256,
+        "walls": 12,
+        "road_vertices": 19197,
+        "deck_vertices": 4894,
+        "deck_max_profile_error": 0.021926663806088875,
+        "engine_meshes": 3,
+        "max_engine_vertices": 19197
+      },
+      {
+        "tile": [
+          0,
+          -1
+        ],
+        "chunks": 296,
+        "walls": 1,
+        "road_vertices": 42743,
+        "deck_vertices": 0,
+        "deck_max_profile_error": 0.0,
+        "engine_meshes": 2,
+        "max_engine_vertices": 42743
+      },
+      {
+        "tile": [
+          1,
+          0
+        ],
+        "chunks": 211,
+        "walls": 0,
+        "road_vertices": 31871,
+        "deck_vertices": 0,
+        "deck_max_profile_error": 0.0,
+        "engine_meshes": 1,
+        "max_engine_vertices": 31871
+      }
+    ],
+    "connected_junctions": 34,
+    "max_junction_step": 0.0,
+    "checked_seams": 0,
+    "max_seam_gap": 0.0,
+    "max_deck_grade": 0.08000000000000093,
+    "checked_road_clearances": 5,
+    "min_clearance_margin": 0.6702605172517639,
+    "tunnel_parts": 126,
+    "max_tunnel_join_step": 0.00020210462315617406,
+    "covered_tunnel_m": 0.0,
+    "seconds": 97.73538149999513
+  },
+  {
+    "name": "giltbrook",
+    "lat": 53.0017,
+    "lon": -1.283,
+    "ok": true,
+    "tiles": [
+      {
+        "tile": [
+          0,
+          0
+        ],
+        "chunks": 347,
+        "walls": 1,
+        "road_vertices": 51940,
+        "deck_vertices": 0,
+        "deck_max_profile_error": 0.0,
+        "engine_meshes": 2,
+        "max_engine_vertices": 51940
+      },
+      {
+        "tile": [
+          -1,
+          0
+        ],
+        "chunks": 141,
+        "walls": 0,
+        "road_vertices": 24653,
+        "deck_vertices": 0,
+        "deck_max_profile_error": 0.0,
+        "engine_meshes": 1,
+        "max_engine_vertices": 24653
+      },
+      {
+        "tile": [
+          0,
+          -1
+        ],
+        "chunks": 232,
+        "walls": 0,
+        "road_vertices": 35770,
+        "deck_vertices": 5984,
+        "deck_max_profile_error": 0.020625832076078154,
+        "engine_meshes": 2,
+        "max_engine_vertices": 35770
+      },
+      {
+        "tile": [
+          1,
+          0
+        ],
+        "chunks": 205,
+        "walls": 0,
+        "road_vertices": 25850,
+        "deck_vertices": 0,
+        "deck_max_profile_error": 0.0,
+        "engine_meshes": 1,
+        "max_engine_vertices": 25850
+      }
+    ],
+    "connected_junctions": 0,
+    "max_junction_step": 0.0,
+    "checked_seams": 0,
+    "max_seam_gap": 0.0,
+    "max_deck_grade": 0.024670789706734392,
+    "checked_road_clearances": 0,
+    "min_clearance_margin": 0.0,
+    "tunnel_parts": 1,
+    "max_tunnel_join_step": 0.0,
+    "covered_tunnel_m": 0.0,
+    "seconds": 14.132631300002686
+  },
+  {
+    "name": "j26",
+    "lat": 52.9994,
+    "lon": -1.231,
+    "ok": true,
+    "tiles": [
+      {
+        "tile": [
+          0,
+          0
+        ],
+        "chunks": 124,
+        "walls": 0,
+        "road_vertices": 9238,
+        "deck_vertices": 560,
+        "deck_max_profile_error": 0.0003039172128183054,
+        "engine_meshes": 2,
+        "max_engine_vertices": 9238
+      },
+      {
+        "tile": [
+          -1,
+          0
+        ],
+        "chunks": 307,
+        "walls": 0,
+        "road_vertices": 34946,
+        "deck_vertices": 650,
+        "deck_max_profile_error": 0.010752981520511184,
+        "engine_meshes": 2,
+        "max_engine_vertices": 34945
+      },
+      {
+        "tile": [
+          0,
+          -1
+        ],
+        "chunks": 239,
+        "walls": 0,
+        "road_vertices": 19301,
+        "deck_vertices": 784,
+        "deck_max_profile_error": 0.00032773829744314753,
+        "engine_meshes": 2,
+        "max_engine_vertices": 19301
+      },
+      {
+        "tile": [
+          1,
+          0
+        ],
+        "chunks": 0,
+        "walls": 0,
+        "road_vertices": 0,
+        "deck_vertices": 0,
+        "deck_max_profile_error": 0.0,
+        "engine_meshes": 0,
+        "max_engine_vertices": 0
+      }
+    ],
+    "connected_junctions": 0,
+    "max_junction_step": 0.0,
+    "checked_seams": 1,
+    "max_seam_gap": 0.0,
+    "max_deck_grade": 0.010666350871889226,
+    "checked_road_clearances": 0,
+    "min_clearance_margin": 0.0,
+    "tunnel_parts": 9,
+    "max_tunnel_join_step": 0.0,
+    "covered_tunnel_m": 0.0,
+    "seconds": 15.29580399999395
+  },
+  {
+    "name": "boston_zakim",
+    "ok": false,
+    "error": "Bridge clearance deficit: 4.139 m",
+    "trace": "Traceback (most recent call last):\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\tools\\validate_world_geometry.py\", line 106, in <module>\n    assert min(clearance_samples,default=0.)>-.03,f'Bridge clearance deficit: {-min(clearance_samples):.3f} m'\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: Bridge clearance deficit: 4.139 m\n",
+    "seconds": 25.64818249999371
+  },
+  {
+    "name": "boston_i93",
+    "ok": false,
+    "error": "DEM tile 15/9915/12134: Mapterhorn: offline: https://tiles.mapterhorn.com/15/9915/12134.webp; AWS: offline: https://s3.amazonaws.com/elevation-tiles-prod/terrarium/15/9915/12134.png",
+    "trace": "Traceback (most recent call last):\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\tools\\validate_world_geometry.py\", line 57, in <module>\n    walks=[];walls=[];ctx=[];chunks=roads.build_tile(fr,tx,ty,fs,elev,walks=walks,bridges=bp,tunnels=tp,walls=walls,deck_context=ctx)\n                                    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\roads.py\", line 3332, in build_tile\n    h = np.asarray(elev(lat, lon), np.float64)\n                   ~~~~^^^^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\tools\\validate_world_geometry.py\", line 51, in <lambda>\n    elev=lambda la,lo:gr.apply(la,lo,structure_raw(la,lo),.04)\n                      ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\grading.py\", line 715, in apply\n    plans = self.plans(lat, lon, roads_only)\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\grading.py\", line 694, in plans\n    for fid_part, p in self._cell_plans(key):\n                       ~~~~~~~~~~~~~~~~^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\grading.py\", line 265, in _cell_plans\n    return self._plan_cell(key)\n           ~~~~~~~~~~~~~~~^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\grading.py\", line 285, in _plan_cell\n    self._global_approaches(key,feats,plans)\n    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\grading.py\", line 309, in _global_approaches\n    bp.parts([feats],(-np.inf,-np.inf,np.inf,np.inf))\n    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\roads.py\", line 2417, in parts\n    zs = self._solve(comp, pool, ground)\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\roads.py\", line 2373, in _solve\n    road_z = self._ground(np.array([c[2] for c in cr])) if cr else []\n             ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\roads.py\", line 2280, in _ground\n    return self.frame.geodetic_to_enu(la, lo, np.asarray(self.elev(la, lo), np.float64))[2]\n                                                         ~~~~~~~~~^^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\grading.py\", line 215, in _base_height\n    for fid,p in self._base_cell(key):\n                 ~~~~~~~~~~~~~~~^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\grading.py\", line 232, in _base_cell\n    for fid,part,p in zip(ids,parts,plan_roads(self.frame,parts,self.elev)):\n                                    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\grading.py\", line 146, in plan_roads\n    zall = np.asarray(elev(la, lo), np.float64)\n                      ~~~~^^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\tools\\validate_world_geometry.py\", line 44, in <lambda>\n    raw=lambda la,lo:dd.sample(la,lo,15)\n                     ~~~~~~~~~^^^^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\dem.py\", line 458, in sample\n    got = self.tiles(keys.values(), progress)\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\dem.py\", line 389, in tiles\n    out[k] = fut.result()\n             ~~~~~~~~~~^^\n  File \"C:\\Users\\topge\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\concurrent\\futures\\_base.py\", line 454, in result\n    return self.__get_result()\n           ~~~~~~~~~~~~~~~~~^^\n  File \"C:\\Users\\topge\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\concurrent\\futures\\_base.py\", line 396, in __get_result\n    raise self._exception\n  File \"C:\\Users\\topge\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\concurrent\\futures\\thread.py\", line 86, in run\n    result = ctx.run(self.task)\n  File \"C:\\Users\\topge\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\concurrent\\futures\\thread.py\", line 73, in run\n    return fn(*args, **kwargs)\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\dem.py\", line 246, in _load_tile\n    raise DemUnavailable(f\"DEM tile {z}/{x}/{y}: Mapterhorn: {e}; AWS: {e2}\") from None\ndem.DemUnavailable: DEM tile 15/9915/12134: Mapterhorn: offline: https://tiles.mapterhorn.com/15/9915/12134.webp; AWS: offline: https://s3.amazonaws.com/elevation-tiles-prod/terrarium/15/9915/12134.png\n",
+    "seconds": 0.5446695999999065
+  },
+  {
+    "name": "stelvio",
+    "ok": false,
+    "error": "DEM tile 15/17329/11576: Mapterhorn: offline: https://tiles.mapterhorn.com/15/17329/11576.webp; AWS: offline: https://s3.amazonaws.com/elevation-tiles-prod/terrarium/15/17329/11576.png",
+    "trace": "Traceback (most recent call last):\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\tools\\validate_world_geometry.py\", line 57, in <module>\n    walks=[];walls=[];ctx=[];chunks=roads.build_tile(fr,tx,ty,fs,elev,walks=walks,bridges=bp,tunnels=tp,walls=walls,deck_context=ctx)\n                                    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\roads.py\", line 3332, in build_tile\n    h = np.asarray(elev(lat, lon), np.float64)\n                   ~~~~^^^^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\tools\\validate_world_geometry.py\", line 51, in <lambda>\n    elev=lambda la,lo:gr.apply(la,lo,structure_raw(la,lo),.04)\n                      ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\grading.py\", line 715, in apply\n    plans = self.plans(lat, lon, roads_only)\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\grading.py\", line 694, in plans\n    for fid_part, p in self._cell_plans(key):\n                       ~~~~~~~~~~~~~~~~^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\grading.py\", line 265, in _cell_plans\n    return self._plan_cell(key)\n           ~~~~~~~~~~~~~~~^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\grading.py\", line 285, in _plan_cell\n    self._global_approaches(key,feats,plans)\n    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\grading.py\", line 309, in _global_approaches\n    bp.parts([feats],(-np.inf,-np.inf,np.inf,np.inf))\n    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\roads.py\", line 2417, in parts\n    zs = self._solve(comp, pool, ground)\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\roads.py\", line 2373, in _solve\n    road_z = self._ground(np.array([c[2] for c in cr])) if cr else []\n             ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\roads.py\", line 2280, in _ground\n    return self.frame.geodetic_to_enu(la, lo, np.asarray(self.elev(la, lo), np.float64))[2]\n                                                         ~~~~~~~~~^^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\grading.py\", line 215, in _base_height\n    for fid,p in self._base_cell(key):\n                 ~~~~~~~~~~~~~~~^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\grading.py\", line 232, in _base_cell\n    for fid,part,p in zip(ids,parts,plan_roads(self.frame,parts,self.elev)):\n                                    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\grading.py\", line 146, in plan_roads\n    zall = np.asarray(elev(la, lo), np.float64)\n                      ~~~~^^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\tools\\validate_world_geometry.py\", line 44, in <lambda>\n    raw=lambda la,lo:dd.sample(la,lo,15)\n                     ~~~~~~~~~^^^^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\dem.py\", line 458, in sample\n    got = self.tiles(keys.values(), progress)\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\dem.py\", line 389, in tiles\n    out[k] = fut.result()\n             ~~~~~~~~~~^^\n  File \"C:\\Users\\topge\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\concurrent\\futures\\_base.py\", line 454, in result\n    return self.__get_result()\n           ~~~~~~~~~~~~~~~~~^^\n  File \"C:\\Users\\topge\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\concurrent\\futures\\_base.py\", line 396, in __get_result\n    raise self._exception\n  File \"C:\\Users\\topge\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\concurrent\\futures\\thread.py\", line 86, in run\n    result = ctx.run(self.task)\n  File \"C:\\Users\\topge\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\concurrent\\futures\\thread.py\", line 73, in run\n    return fn(*args, **kwargs)\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\dem.py\", line 246, in _load_tile\n    raise DemUnavailable(f\"DEM tile {z}/{x}/{y}: Mapterhorn: {e}; AWS: {e2}\") from None\ndem.DemUnavailable: DEM tile 15/17329/11576: Mapterhorn: offline: https://tiles.mapterhorn.com/15/17329/11576.webp; AWS: offline: https://s3.amazonaws.com/elevation-tiles-prod/terrarium/15/17329/11576.png\n",
+    "seconds": 1.2579655000008643
+  },
+  {
+    "name": "sydney",
+    "ok": false,
+    "error": "DEM tile 15/30149/19657: Mapterhorn: offline: https://tiles.mapterhorn.com/15/30149/19657.webp; AWS: offline: https://s3.amazonaws.com/elevation-tiles-prod/terrarium/15/30149/19657.png",
+    "trace": "Traceback (most recent call last):\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\tools\\validate_world_geometry.py\", line 57, in <module>\n    walks=[];walls=[];ctx=[];chunks=roads.build_tile(fr,tx,ty,fs,elev,walks=walks,bridges=bp,tunnels=tp,walls=walls,deck_context=ctx)\n                                    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\roads.py\", line 3332, in build_tile\n    h = np.asarray(elev(lat, lon), np.float64)\n                   ~~~~^^^^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\tools\\validate_world_geometry.py\", line 51, in <lambda>\n    elev=lambda la,lo:gr.apply(la,lo,structure_raw(la,lo),.04)\n                      ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\grading.py\", line 715, in apply\n    plans = self.plans(lat, lon, roads_only)\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\grading.py\", line 694, in plans\n    for fid_part, p in self._cell_plans(key):\n                       ~~~~~~~~~~~~~~~~^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\grading.py\", line 265, in _cell_plans\n    return self._plan_cell(key)\n           ~~~~~~~~~~~~~~~^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\grading.py\", line 285, in _plan_cell\n    self._global_approaches(key,feats,plans)\n    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\grading.py\", line 325, in _global_approaches\n    for fid,p in self._base_cell(ck):\n                 ~~~~~~~~~~~~~~~^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\grading.py\", line 232, in _base_cell\n    for fid,part,p in zip(ids,parts,plan_roads(self.frame,parts,self.elev)):\n                                    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\grading.py\", line 146, in plan_roads\n    zall = np.asarray(elev(la, lo), np.float64)\n                      ~~~~^^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\tools\\validate_world_geometry.py\", line 44, in <lambda>\n    raw=lambda la,lo:dd.sample(la,lo,15)\n                     ~~~~~~~~~^^^^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\dem.py\", line 458, in sample\n    got = self.tiles(keys.values(), progress)\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\dem.py\", line 389, in tiles\n    out[k] = fut.result()\n             ~~~~~~~~~~^^\n  File \"C:\\Users\\topge\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\concurrent\\futures\\_base.py\", line 454, in result\n    return self.__get_result()\n           ~~~~~~~~~~~~~~~~~^^\n  File \"C:\\Users\\topge\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\concurrent\\futures\\_base.py\", line 396, in __get_result\n    raise self._exception\n  File \"C:\\Users\\topge\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\concurrent\\futures\\thread.py\", line 86, in run\n    result = ctx.run(self.task)\n  File \"C:\\Users\\topge\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\concurrent\\futures\\thread.py\", line 73, in run\n    return fn(*args, **kwargs)\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\dem.py\", line 246, in _load_tile\n    raise DemUnavailable(f\"DEM tile {z}/{x}/{y}: Mapterhorn: {e}; AWS: {e2}\") from None\ndem.DemUnavailable: DEM tile 15/30149/19657: Mapterhorn: offline: https://tiles.mapterhorn.com/15/30149/19657.webp; AWS: offline: https://s3.amazonaws.com/elevation-tiles-prod/terrarium/15/30149/19657.png\n",
+    "seconds": 5.516805299994303
+  },
+  {
+    "name": "tokyo",
+    "ok": false,
+    "error": "offline: https://overturemapswestus2.blob.core.windows.net/release/2026-09-23.1/theme=transportation/type=segment/part-00125-2ad8aa0a-a71a-5fce-b6a3-5d8f24f183f7-c000.zstd.parquet",
+    "trace": "Traceback (most recent call last):\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\tools\\validate_world_geometry.py\", line 57, in <module>\n    walks=[];walls=[];ctx=[];chunks=roads.build_tile(fr,tx,ty,fs,elev,walks=walks,bridges=bp,tunnels=tp,walls=walls,deck_context=ctx)\n                                    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\roads.py\", line 3332, in build_tile\n    h = np.asarray(elev(lat, lon), np.float64)\n                   ~~~~^^^^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\tools\\validate_world_geometry.py\", line 51, in <lambda>\n    elev=lambda la,lo:gr.apply(la,lo,structure_raw(la,lo),.04)\n                      ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\grading.py\", line 715, in apply\n    plans = self.plans(lat, lon, roads_only)\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\grading.py\", line 694, in plans\n    for fid_part, p in self._cell_plans(key):\n                       ~~~~~~~~~~~~~~~~^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\grading.py\", line 265, in _cell_plans\n    return self._plan_cell(key)\n           ~~~~~~~~~~~~~~~^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\grading.py\", line 285, in _plan_cell\n    self._global_approaches(key,feats,plans)\n    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\grading.py\", line 309, in _global_approaches\n    bp.parts([feats],(-np.inf,-np.inf,np.inf,np.inf))\n    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\roads.py\", line 2416, in parts\n    comp = self._resolve(key, pool, ground, loaded)\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\roads.py\", line 2355, in _resolve\n    self._load(key, pool, ground)\n    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\roads.py\", line 2287, in _load\n    feats = self.cell_fn(key)\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\grading.py\", line 204, in <lambda>\n    lambda k:self.md.cell(k,layers=('roads',),kind='demand').layers.get('roads'),self._base_height)\n             ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\mapdata.py\", line 382, in cell\n    raise err\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\mapdata.py\", line 378, in cell\n    results[layer] = fut.result()\n                     ~~~~~~~~~~^^\n  File \"C:\\Users\\topge\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\concurrent\\futures\\_base.py\", line 454, in result\n    return self.__get_result()\n           ~~~~~~~~~~~~~~~~~^^\n  File \"C:\\Users\\topge\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\concurrent\\futures\\_base.py\", line 396, in __get_result\n    raise self._exception\n  File \"C:\\Users\\topge\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\concurrent\\futures\\thread.py\", line 86, in run\n    result = ctx.run(self.task)\n  File \"C:\\Users\\topge\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\concurrent\\futures\\thread.py\", line 73, in run\n    return fn(*args, **kwargs)\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\mapdata.py\", line 364, in timed\n    arrays, hit = self.layer_arrays(key, layer, kind)\n                  ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\mapdata.py\", line 349, in layer_arrays\n    arrays = self._build(key, layer, kind)\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\mapdata.py\", line 316, in _build\n    feats, sources = self.overture.query(layer, key, kind)\n                     ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\overture.py\", line 295, in query\n    rows = self._plan(con, proto, paths, files, spec, bounds, kind)\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\overture.py\", line 403, in _plan\n    self._fetch(files, wanted, kind)\n    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\overture.py\", line 349, in _fetch\n    self._parallel(tasks)\n    ~~~~~~~~~~~~~~^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\overture.py\", line 328, in _parallel\n    raise err\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\overture.py\", line 324, in _parallel\n    f.result()\n    ~~~~~~~~^^\n  File \"C:\\Users\\topge\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\concurrent\\futures\\_base.py\", line 454, in result\n    return self.__get_result()\n           ~~~~~~~~~~~~~~~~~^^\n  File \"C:\\Users\\topge\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\concurrent\\futures\\_base.py\", line 396, in __get_result\n    raise self._exception\n  File \"C:\\Users\\topge\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\concurrent\\futures\\thread.py\", line 86, in run\n    result = ctx.run(self.task)\n  File \"C:\\Users\\topge\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\concurrent\\futures\\thread.py\", line 73, in run\n    return fn(*args, **kwargs)\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\overture.py\", line 347, in <lambda>\n    tasks.append(lambda r=r, a=a, b=b: r.blocks(a // rangeread.BLOCK, (b - 1) // rangeread.BLOCK + 1,\n                                       ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n                                                kind))\n                                                ^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\rangeread.py\", line 251, in blocks\n    out.update(self._fetch_run(run[0], run[-1] + 1, kind))\n               ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\rangeread.py\", line 213, in _fetch_run\n    raise err\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\rangeread.py\", line 175, in _fetch_run\n    r = self.fetcher.get(url, kind=kind, headers={\"Range\": f\"bytes={start}-{end - 1}\"})\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\netfetch.py\", line 676, in get\n    h, probe = self._admit(url, kind)\n               ~~~~~~~~~~~^^^^^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\netfetch.py\", line 650, in _admit\n    raise Offline(f\"offline: {url}\", url, host_of(url))\nnetfetch.Offline: offline: https://overturemapswestus2.blob.core.windows.net/release/2026-09-23.1/theme=transportation/type=segment/part-00125-2ad8aa0a-a71a-5fce-b6a3-5d8f24f183f7-c000.zstd.parquet\n",
+    "seconds": 2.9140196000080323
+  },
+  {
+    "name": "cape_town",
+    "ok": false,
+    "error": "DEM tile 15/18058/19667: Mapterhorn: offline: https://tiles.mapterhorn.com/15/18058/19667.webp; AWS: offline: https://s3.amazonaws.com/elevation-tiles-prod/terrarium/15/18058/19667.png",
+    "trace": "Traceback (most recent call last):\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\tools\\validate_world_geometry.py\", line 57, in <module>\n    walks=[];walls=[];ctx=[];chunks=roads.build_tile(fr,tx,ty,fs,elev,walks=walks,bridges=bp,tunnels=tp,walls=walls,deck_context=ctx)\n                                    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\roads.py\", line 3332, in build_tile\n    h = np.asarray(elev(lat, lon), np.float64)\n                   ~~~~^^^^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\tools\\validate_world_geometry.py\", line 51, in <lambda>\n    elev=lambda la,lo:gr.apply(la,lo,structure_raw(la,lo),.04)\n                      ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\grading.py\", line 715, in apply\n    plans = self.plans(lat, lon, roads_only)\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\grading.py\", line 694, in plans\n    for fid_part, p in self._cell_plans(key):\n                       ~~~~~~~~~~~~~~~~^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\grading.py\", line 265, in _cell_plans\n    return self._plan_cell(key)\n           ~~~~~~~~~~~~~~~^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\grading.py\", line 285, in _plan_cell\n    self._global_approaches(key,feats,plans)\n    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\grading.py\", line 325, in _global_approaches\n    for fid,p in self._base_cell(ck):\n                 ~~~~~~~~~~~~~~~^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\grading.py\", line 232, in _base_cell\n    for fid,part,p in zip(ids,parts,plan_roads(self.frame,parts,self.elev)):\n                                    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\grading.py\", line 146, in plan_roads\n    zall = np.asarray(elev(la, lo), np.float64)\n                      ~~~~^^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\tools\\validate_world_geometry.py\", line 44, in <lambda>\n    raw=lambda la,lo:dd.sample(la,lo,15)\n                     ~~~~~~~~~^^^^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\dem.py\", line 458, in sample\n    got = self.tiles(keys.values(), progress)\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\dem.py\", line 389, in tiles\n    out[k] = fut.result()\n             ~~~~~~~~~~^^\n  File \"C:\\Users\\topge\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\concurrent\\futures\\_base.py\", line 454, in result\n    return self.__get_result()\n           ~~~~~~~~~~~~~~~~~^^\n  File \"C:\\Users\\topge\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\concurrent\\futures\\_base.py\", line 396, in __get_result\n    raise self._exception\n  File \"C:\\Users\\topge\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\concurrent\\futures\\thread.py\", line 86, in run\n    result = ctx.run(self.task)\n  File \"C:\\Users\\topge\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\concurrent\\futures\\thread.py\", line 73, in run\n    return fn(*args, **kwargs)\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\dem.py\", line 246, in _load_tile\n    raise DemUnavailable(f\"DEM tile {z}/{x}/{y}: Mapterhorn: {e}; AWS: {e2}\") from None\ndem.DemUnavailable: DEM tile 15/18058/19667: Mapterhorn: offline: https://tiles.mapterhorn.com/15/18058/19667.webp; AWS: offline: https://s3.amazonaws.com/elevation-tiles-prod/terrarium/15/18058/19667.png\n",
+    "seconds": 7.123194299987517
+  }
+]

@@ -1,0 +1,191 @@
+[
+  {
+    "site": "Underwood",
+    "tile_ms": [
+      130.2496999996947,
+      72.38289999804692,
+      72.28380000015022,
+      72.67339999816613
+    ],
+    "props": {
+      "streetlight": 18,
+      "ukgiveway": 8
+    },
+    "signal_junctions": 0,
+    "cameras_in_graph": 0,
+    "records": 0,
+    "fuel_pump_assets": 0,
+    "buildings": 182,
+    "special": []
+  },
+  {
+    "site": "Ripley fuel",
+    "tile_ms": [
+      293.42029999679653,
+      108.58949999965262,
+      109.19180000200868,
+      110.89449999417411
+    ],
+    "props": {
+      "shrub": 53,
+      "streetlight": 3,
+      "ukgiveway": 11,
+      "ukpostbox": 1,
+      "ukspeed60": 1
+    },
+    "signal_junctions": 5,
+    "cameras_in_graph": 1,
+    "records": 9,
+    "fuel_pump_assets": 0,
+    "buildings": 50,
+    "special": [
+      [
+        "",
+        "supermarket",
+        9.0,
+        4
+      ],
+      [
+        "",
+        "fuel",
+        4.798173904418945,
+        12
+      ]
+    ]
+  },
+  {
+    "site": "Ripley school",
+    "tile_ms": [
+      81.15230000112206,
+      60.3897999972105,
+      59.863900001801085,
+      60.26160000328673
+    ],
+    "props": {
+      "streetlight": 19,
+      "ukbus_stop": 1,
+      "ukgiveway": 2,
+      "ukpostbox": 1
+    },
+    "signal_junctions": 5,
+    "cameras_in_graph": 1,
+    "records": 5,
+    "fuel_pump_assets": 0,
+    "buildings": 149,
+    "special": [
+      [
+        "school",
+        "school",
+        4.6777729988098145,
+        32
+      ],
+      [
+        "school",
+        "school",
+        2.5,
+        4
+      ]
+    ]
+  },
+  {
+    "site": "M1",
+    "tile_ms": [
+      92.47150000010151,
+      79.11500000045635,
+      79.2624000023352,
+      85.32559999730438
+    ],
+    "props": {},
+    "signal_junctions": 0,
+    "cameras_in_graph": 0,
+    "records": 1,
+    "fuel_pump_assets": 0,
+    "buildings": 0,
+    "special": []
+  },
+  {
+    "site": "Shell canopy",
+    "tile_ms": [
+      115.975000000617,
+      40.53069999645231,
+      40.355600001930725,
+      41.16280000016559
+    ],
+    "props": {
+      "shrub": 24,
+      "streetlight": 10,
+      "ukbus_stop": 2
+    },
+    "signal_junctions": 2,
+    "cameras_in_graph": 0,
+    "records": 5,
+    "fuel_pump_assets": 3,
+    "buildings": 22,
+    "special": [
+      [
+        "",
+        "fuel",
+        6.2,
+        6
+      ],
+      [
+        "",
+        "fuel",
+        2.5,
+        4
+      ],
+      [
+        "roof",
+        "fuel",
+        5.453185081481934,
+        4
+      ]
+    ]
+  },
+  {
+    "site": "Nethergreen forecourt",
+    "tile_ms": [
+      295.96350000065286,
+      143.39530000142986,
+      142.59940000192728,
+      143.32189999549882
+    ],
+    "props": {
+      "streetlight": 8,
+      "ukbus_stop": 2,
+      "ukgiveway": 4,
+      "uksignal": 8
+    },
+    "signal_junctions": 6,
+    "cameras_in_graph": 1,
+    "records": 19,
+    "fuel_pump_assets": 6,
+    "buildings": 28,
+    "special": [
+      [
+        "retail",
+        "fuel",
+        2.409334659576416,
+        4
+      ],
+      [
+        "roof",
+        "fuel",
+        3.6,
+        4
+      ],
+      [
+        "retail",
+        "supermarket",
+        7.061609268188477,
+        10
+      ],
+      [
+        "roof",
+        "fuel",
+        3.2,
+        4
+      ]
+    ]
+  }
+]

@@ -1,0 +1,293 @@
+[
+  {
+    "name": "boston_i93",
+    "lat": 42.2105,
+    "lon": -71.0,
+    "ok": true,
+    "tiles": [
+      {
+        "tile": [
+          0,
+          0
+        ],
+        "chunks": 70,
+        "walls": 6,
+        "road_vertices": 77491,
+        "deck_vertices": 0,
+        "deck_max_profile_error": 0.0,
+        "engine_meshes": 3,
+        "max_engine_vertices": 60000
+      },
+      {
+        "tile": [
+          -1,
+          0
+        ],
+        "chunks": 17,
+        "walls": 0,
+        "road_vertices": 16996,
+        "deck_vertices": 0,
+        "deck_max_profile_error": 0.0,
+        "engine_meshes": 1,
+        "max_engine_vertices": 16996
+      },
+      {
+        "tile": [
+          0,
+          -1
+        ],
+        "chunks": 83,
+        "walls": 5,
+        "road_vertices": 70164,
+        "deck_vertices": 0,
+        "deck_max_profile_error": 0.0,
+        "engine_meshes": 3,
+        "max_engine_vertices": 60000
+      },
+      {
+        "tile": [
+          1,
+          0
+        ],
+        "chunks": 148,
+        "walls": 9,
+        "road_vertices": 101410,
+        "deck_vertices": 7374,
+        "deck_max_profile_error": 0.018165441499778723,
+        "engine_meshes": 4,
+        "max_engine_vertices": 60000
+      }
+    ],
+    "connected_junctions": 5,
+    "max_junction_step": 0.0,
+    "checked_seams": 0,
+    "max_seam_gap": 0.0,
+    "max_deck_grade": 0.08000000000000113,
+    "checked_road_clearances": 31,
+    "min_clearance_margin": 0.0,
+    "tunnel_parts": 4,
+    "max_tunnel_join_step": 0.0,
+    "covered_tunnel_m": 0.0,
+    "seconds": 29.411313400007202
+  },
+  {
+    "name": "stelvio",
+    "lat": 46.528,
+    "lon": 10.455,
+    "ok": true,
+    "tiles": [
+      {
+        "tile": [
+          0,
+          0
+        ],
+        "chunks": 13,
+        "walls": 9,
+        "road_vertices": 25438,
+        "deck_vertices": 0,
+        "deck_max_profile_error": 0.0,
+        "engine_meshes": 2,
+        "max_engine_vertices": 25438
+      },
+      {
+        "tile": [
+          -1,
+          0
+        ],
+        "chunks": 38,
+        "walls": 13,
+        "road_vertices": 28692,
+        "deck_vertices": 0,
+        "deck_max_profile_error": 0.0,
+        "engine_meshes": 2,
+        "max_engine_vertices": 28692
+      },
+      {
+        "tile": [
+          0,
+          -1
+        ],
+        "chunks": 2,
+        "walls": 1,
+        "road_vertices": 1648,
+        "deck_vertices": 0,
+        "deck_max_profile_error": 0.0,
+        "engine_meshes": 2,
+        "max_engine_vertices": 1648
+      },
+      {
+        "tile": [
+          1,
+          0
+        ],
+        "chunks": 0,
+        "walls": 0,
+        "road_vertices": 0,
+        "deck_vertices": 0,
+        "deck_max_profile_error": 0.0,
+        "engine_meshes": 0,
+        "max_engine_vertices": 0
+      }
+    ],
+    "connected_junctions": 0,
+    "max_junction_step": 0.0,
+    "checked_seams": 0,
+    "max_seam_gap": 0.0,
+    "max_deck_grade": 0.08000000000014842,
+    "checked_road_clearances": 0,
+    "min_clearance_margin": 0.0,
+    "tunnel_parts": 0,
+    "max_tunnel_join_step": 0.0,
+    "covered_tunnel_m": 0.0,
+    "seconds": 5.602960999996867
+  },
+  {
+    "name": "sydney",
+    "lat": -33.8523,
+    "lon": 151.2108,
+    "ok": true,
+    "tiles": [
+      {
+        "tile": [
+          0,
+          0
+        ],
+        "chunks": 29,
+        "walls": 0,
+        "road_vertices": 11683,
+        "deck_vertices": 25180,
+        "deck_max_profile_error": 0.005518159608769224,
+        "engine_meshes": 3,
+        "max_engine_vertices": 25180
+      },
+      {
+        "tile": [
+          -1,
+          0
+        ],
+        "chunks": 11,
+        "walls": 0,
+        "road_vertices": 354,
+        "deck_vertices": 1258,
+        "deck_max_profile_error": 0.0011996202992605731,
+        "engine_meshes": 2,
+        "max_engine_vertices": 1258
+      },
+      {
+        "tile": [
+          0,
+          -1
+        ],
+        "chunks": 17,
+        "walls": 0,
+        "road_vertices": 3028,
+        "deck_vertices": 2844,
+        "deck_max_profile_error": 0.0008325854614028572,
+        "engine_meshes": 3,
+        "max_engine_vertices": 8080
+      },
+      {
+        "tile": [
+          1,
+          0
+        ],
+        "chunks": 3,
+        "walls": 2,
+        "road_vertices": 1812,
+        "deck_vertices": 0,
+        "deck_max_profile_error": 0.0,
+        "engine_meshes": 2,
+        "max_engine_vertices": 1812
+      }
+    ],
+    "connected_junctions": 34,
+    "max_junction_step": 0.0,
+    "checked_seams": 4,
+    "max_seam_gap": 0.0,
+    "max_deck_grade": 0.0800000000000027,
+    "checked_road_clearances": 46,
+    "min_clearance_margin": 0.0,
+    "tunnel_parts": 187,
+    "max_tunnel_join_step": 0.0012075662385768737,
+    "covered_tunnel_m": 14024.596917772964,
+    "seconds": 34.80789120000554
+  },
+  {
+    "name": "tokyo",
+    "ok": false,
+    "error": "Bridge clearance deficit: 9.965 m",
+    "trace": "Traceback (most recent call last):\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\tools\\validate_world_geometry.py\", line 106, in <module>\n    assert min(clearance_samples,default=0.)>-.03,f'Bridge clearance deficit: {-min(clearance_samples):.3f} m'\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: Bridge clearance deficit: 9.965 m\n",
+    "seconds": 288.38467280000623
+  },
+  {
+    "name": "cape_town",
+    "lat": -33.917,
+    "lon": 18.429,
+    "ok": true,
+    "tiles": [
+      {
+        "tile": [
+          0,
+          0
+        ],
+        "chunks": 94,
+        "walls": 29,
+        "road_vertices": 57725,
+        "deck_vertices": 11764,
+        "deck_max_profile_error": 0.009104705100756227,
+        "engine_meshes": 3,
+        "max_engine_vertices": 57725
+      },
+      {
+        "tile": [
+          -1,
+          0
+        ],
+        "chunks": 64,
+        "walls": 28,
+        "road_vertices": 39650,
+        "deck_vertices": 13178,
+        "deck_max_profile_error": 0.010230092214261965,
+        "engine_meshes": 3,
+        "max_engine_vertices": 39650
+      },
+      {
+        "tile": [
+          0,
+          -1
+        ],
+        "chunks": 140,
+        "walls": 23,
+        "road_vertices": 68735,
+        "deck_vertices": 8694,
+        "deck_max_profile_error": 0.0004910491305878395,
+        "engine_meshes": 4,
+        "max_engine_vertices": 59999
+      },
+      {
+        "tile": [
+          1,
+          0
+        ],
+        "chunks": 13,
+        "walls": 12,
+        "road_vertices": 16907,
+        "deck_vertices": 0,
+        "deck_max_profile_error": 0.0,
+        "engine_meshes": 2,
+        "max_engine_vertices": 16907
+      }
+    ],
+    "connected_junctions": 85,
+    "max_junction_step": 0.0,
+    "checked_seams": 4,
+    "max_seam_gap": 0.0,
+    "max_deck_grade": 0.08000000000000583,
+    "checked_road_clearances": 128,
+    "min_clearance_margin": 0.0,
+    "tunnel_parts": 36,
+    "max_tunnel_join_step": 1.1617139250574837e-08,
+    "covered_tunnel_m": 0.0,
+    "seconds": 26.980119100000593
+  }
+]

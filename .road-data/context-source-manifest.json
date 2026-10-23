@@ -1,0 +1,8 @@
+{
+  "schema": 1,
+  "source": "united-kingdom.osm.pbf",
+  "sha256": "35f646c1eb01d05c5b955b52ab6cdf665daca4f4688b544162bdb5170d940cf4",
+  "url": "https://download.geofabrik.de/europe/united-kingdom.html",
+  "attribution": "\u00a9 OpenStreetMap contributors (ODbL 1.0)",
+  "features": 2030628
+}

@@ -1,0 +1,54 @@
+[
+  {
+    "site": "Underwood",
+    "warm_median_ms": 74.291,
+    "samples_ms": [
+      77.425,
+      73.101,
+      75.522,
+      73.832,
+      73.213,
+      74.751
+    ],
+    "prop_count": 26
+  },
+  {
+    "site": "Ripley",
+    "warm_median_ms": 68.02,
+    "samples_ms": [
+      68.21,
+      69.755,
+      67.566,
+      67.66,
+      68.155,
+      67.885
+    ],
+    "prop_count": 63
+  },
+  {
+    "site": "school area",
+    "warm_median_ms": 61.474,
+    "samples_ms": [
+      60.872,
+      61.676,
+      61.106,
+      61.272,
+      62.051,
+      62.055
+    ],
+    "prop_count": 23
+  },
+  {
+    "site": "M1",
+    "warm_median_ms": 80.391,
+    "samples_ms": [
+      78.7,
+      84.517,
+      81.675,
+      84.491,
+      78.929,
+      79.107
+    ],
+    "prop_count": 0
+  }
+]

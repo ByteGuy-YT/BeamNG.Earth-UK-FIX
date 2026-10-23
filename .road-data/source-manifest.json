@@ -1,0 +1,10 @@
+{
+  "sources": "[{\"file\": \"united-kingdom.osm.pbf\", \"sha256\": \"a600f1a5dd59519ed44556ca652a865633255b4219a4b3fd1c544300c3e75333\"}]",
+  "attribution": "\"\\u00a9 OpenStreetMap contributors (ODbL 1.0)\"",
+  "schema": "1",
+  "ways": 8297378,
+  "source_url": "https://download.geofabrik.de/europe/united-kingdom-latest.osm.pbf",
+  "replication_timestamp": "2026-10-19T20:21:11Z",
+  "downloaded": "2026-10-20",
+  "licence_url": "https://www.openstreetmap.org/copyright"
+}

@@ -11,25 +11,10 @@ backups/
 docs/research/*/
 docs/research/*.jsonl
 
-# editor / OS
-.vscode/
-.idea/
-*.swp
-.DS_Store
-
 # agent worktrees
 .claude/
 tools/gcpatch/build/
 docs/research/streetview/
 docs/research/ortho/
 
-# install.py / tools/package.py output
-.venv/
-.beamng_earth.json
-dist/
-native/earthfast/target/
-build/
 
-# Prepared national OSM index and local validation/download scratch files
-.road-data/
-.work-uk/

@@ -1,0 +1,21 @@
+{
+  "version": 3,
+  "description": "Fallback estimates in metres, not measurements or legal design standards. Explicit mapping takes precedence.",
+  "lane_width": {"motorway": 3.65, "trunk": 3.5, "primary": 3.25, "secondary": 3.0, "tertiary": 2.75, "residential": 2.65, "living_street": 2.5, "unclassified": 2.5, "service": 3.0, "track": 3.0, "unknown": 2.75},
+  "motorway_lanes": 3,
+  "divided_arterial_lanes": 2,
+  "roundabout_single_lane_width": 4.5,
+  "motorway_hard_shoulder": 3.3,
+  "motorway_inner_strip": 0.5,
+  "slip_lane_width": 3.5,
+  "slip_edge_strip": 0.5,
+  "pavement_width": 1.8,
+  "pavement_width_by_class": {"residential": 1.5, "living_street": 1.5, "tertiary": 1.5, "unclassified": 1.5, "service": 1.2},
+  "kerb_height": 0.125,
+  "island_kerb_width": 0.25,
+  "parking_width": 2.0,
+  "single_track_width": 3.0,
+  "tree_clearance": 1.0,
+  "dash_length": 2.0,
+  "dash_gap": 4.0
+}

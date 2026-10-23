@@ -1,0 +1,71 @@
+[
+  {
+    "name": "boston_zakim",
+    "lat": 42.3685,
+    "lon": -71.063,
+    "ok": true,
+    "tiles": [
+      {
+        "tile": [
+          0,
+          0
+        ],
+        "chunks": 50,
+        "walls": 6,
+        "road_vertices": 13657,
+        "deck_vertices": 10436,
+        "deck_max_profile_error": 0.0005281447260454541,
+        "engine_meshes": 3,
+        "max_engine_vertices": 13657
+      },
+      {
+        "tile": [
+          -1,
+          0
+        ],
+        "chunks": 69,
+        "walls": 3,
+        "road_vertices": 29227,
+        "deck_vertices": 57308,
+        "deck_max_profile_error": 0.01947810485262025,
+        "engine_meshes": 3,
+        "max_engine_vertices": 57308
+      },
+      {
+        "tile": [
+          0,
+          -1
+        ],
+        "chunks": 93,
+        "walls": 6,
+        "road_vertices": 52615,
+        "deck_vertices": 17352,
+        "deck_max_profile_error": 0.0007857706334277736,
+        "engine_meshes": 3,
+        "max_engine_vertices": 52615
+      },
+      {
+        "tile": [
+          1,
+          0
+        ],
+        "chunks": 7,
+        "walls": 0,
+        "road_vertices": 355,
+        "deck_vertices": 1064,
+        "deck_max_profile_error": 0.00041975698484364443,
+        "engine_meshes": 2,
+        "max_engine_vertices": 1064
+      }
+    ],
+    "connected_junctions": 49,
+    "max_junction_step": 0.0,
+    "checked_seams": 5,
+    "max_seam_gap": 0.0,
+    "max_deck_grade": 0.08000000000001027,
+    "tunnel_parts": 127,
+    "max_tunnel_join_step": 7.684592742407403e-05,
+    "covered_tunnel_m": 9316.205890131001,
+    "seconds": 24.137187400003313
+  }
+]

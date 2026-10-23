@@ -1,0 +1,424 @@
+[
+  {
+    "name": "a610",
+    "ref": "A610",
+    "ok": false,
+    "metres": 4948,
+    "bridges": 8,
+    "max_joint_gap": 0.42451040258413286,
+    "max_grade": 0.4319547447435474,
+    "joints": [
+      {
+        "id": "238e728e-950a-4579-9164-4f0c520fdf69~osm53535_1000000",
+        "end": 0,
+        "lat": 53.002033707053776,
+        "lon": -1.2902589759640946,
+        "deck": 68.61421317833236,
+        "ground_minus_deck": [
+          -0.25274246753623686,
+          -0.03056379133094822,
+          -0.3262877189896898
+        ]
+      },
+      {
+        "id": "238e728e-950a-4579-9164-4f0c520fdf69~osm53535_1000000",
+        "end": -1,
+        "lat": 53.00205685474335,
+        "lon": -1.2904032224936286,
+        "deck": 68.57072713451689,
+        "ground_minus_deck": [
+          -0.30241669232498225,
+          -0.12906814527384824,
+          -0.16600378868545818
+        ]
+      },
+      {
+        "id": "5a027fb5-fcf5-4ad2-9d34-f63c5ac655fa",
+        "end": 0,
+        "lat": 53.002185183031735,
+        "lon": -1.2903438046360085,
+        "deck": 68.48282530422486,
+        "ground_minus_deck": [
+          -0.27100455682752056,
+          -0.18100708222658568,
+          -0.22347143410476633
+        ]
+      },
+      {
+        "id": "5a027fb5-fcf5-4ad2-9d34-f63c5ac655fa",
+        "end": -1,
+        "lat": 53.0021615130743,
+        "lon": -1.2901997996275818,
+        "deck": 68.52246689337431,
+        "ground_minus_deck": [
+          -0.20089880909793578,
+          -0.06373268800788878,
+          -0.21235546920411252
+        ]
+      },
+      {
+        "id": "295d19a2-9df5-4961-99cc-12a33571d426~osm262310_652897",
+        "end": 0,
+        "lat": 52.99926499938192,
+        "lon": -1.276412797376228,
+        "deck": 70.84957515273513,
+        "ground_minus_deck": [
+          -0.1816195926658679,
+          -0.1699791391090173,
+          -0.1379162378023011
+        ]
+      },
+      {
+        "id": "295d19a2-9df5-4961-99cc-12a33571d426~osm262310_652897",
+        "end": -1,
+        "lat": 53.00039269882423,
+        "lon": -1.281352794599744,
+        "deck": 70.14336744222958,
+        "ground_minus_deck": [
+          -0.2837097827827648,
+          -0.04122757512595854,
+          -0.3606224571178842
+        ]
+      },
+      {
+        "id": "ea8017f4-a449-49c0-842d-436f906860c7~osm321270_678569",
+        "end": 0,
+        "lat": 53.000495100682606,
+        "lon": -1.2813037031107466,
+        "deck": 70.06316255131904,
+        "ground_minus_deck": [
+          -0.09519777410422137,
+          -0.16871132021857704,
+          -0.12237019635607282
+        ]
+      },
+      {
+        "id": "ea8017f4-a449-49c0-842d-436f906860c7~osm321270_678569",
+        "end": -1,
+        "lat": 52.999366300579915,
+        "lon": -1.2763663024913,
+        "deck": 70.73342729095488,
+        "ground_minus_deck": [
+          -0.18201668863869713,
+          -0.3313061004248681,
+          -0.11069887210693707
+        ]
+      },
+      {
+        "id": "ea8017f4-a449-49c0-842d-436f906860c7~osm678569_1000000",
+        "end": 0,
+        "lat": 52.99842280758306,
+        "lon": -1.2722923376261241,
+        "deck": 72.71013744520779,
+        "ground_minus_deck": [
+          -0.38901988836825296,
+          -0.10247815758677348,
+          -0.42451040258413286
+        ]
+      },
+      {
+        "id": "ea8017f4-a449-49c0-842d-436f906860c7~osm678569_1000000",
+        "end": -1,
+        "lat": 52.998390817008314,
+        "lon": -1.2721528600476462,
+        "deck": 72.85112094229508,
+        "ground_minus_deck": [
+          -0.23376595091596641,
+          -0.13887882961870446,
+          -0.25551842478769515
+        ]
+      },
+      {
+        "id": "8d47cbf7-2763-4907-ac5f-f203e0e37a20",
+        "end": 0,
+        "lat": 52.9952274957023,
+        "lon": -1.2629830529849808,
+        "deck": 94.56575875214281,
+        "ground_minus_deck": [
+          -0.14438219233072402,
+          -0.07275499433801258,
+          0.016075270584934742
+        ]
+      },
+      {
+        "id": "8d47cbf7-2763-4907-ac5f-f203e0e37a20",
+        "end": -1,
+        "lat": 52.99528015040848,
+        "lon": -1.2631039716392447,
+        "deck": 94.15324724280345,
+        "ground_minus_deck": [
+          -0.3889156024080478,
+          -0.3892236635806796,
+          -0.2914636289798551
+        ]
+      },
+      {
+        "id": "8d47cbf7-2763-4907-ac5f-f203e0e37a20",
+        "end": 0,
+        "lat": 52.99829223255706,
+        "lon": -1.2722230715934788,
+        "deck": 72.90873257872529,
+        "ground_minus_deck": [
+          -0.04750787586949912,
+          -0.23617387936684509,
+          -0.08139548032232824
+        ]
+      },
+      {
+        "id": "8d47cbf7-2763-4907-ac5f-f203e0e37a20",
+        "end": -1,
+        "lat": 52.99832459763885,
+        "lon": -1.2723622937071817,
+        "deck": 72.77606917728033,
+        "ground_minus_deck": [
+          -0.19171981070547872,
+          -0.23241403305014785,
+          -0.14969440376816578
+        ]
+      },
+      {
+        "id": "b1f46ef9-1faa-427a-9a70-299bbe0a2c78~osm351397_699452",
+        "end": 0,
+        "lat": 52.99536499868271,
+        "lon": -1.2630046218307298,
+        "deck": 93.9136468239666,
+        "ground_minus_deck": [
+          -0.290279058325865,
+          -0.10980282054248391,
+          -0.15745158455916908
+        ]
+      },
+      {
+        "id": "b1f46ef9-1faa-427a-9a70-299bbe0a2c78~osm351397_699452",
+        "end": -1,
+        "lat": 52.99531276362012,
+        "lon": -1.2628832001253383,
+        "deck": 94.30304090537385,
+        "ground_minus_deck": [
+          -0.1216912593695838,
+          -0.02614000958459428,
+          -0.15145297723653073
+        ]
+      }
+    ],
+    "sections": [
+      {
+        "id": "238e728e-950a-4579-9164-4f0c520fdf69~osm0_53535",
+        "length": 146.8911640860936,
+        "sampled_m": 150,
+        "max_grade": 0.0035632308801822887,
+        "lat": 53.001604356507016,
+        "lon": -1.2875753882216783,
+        "z_pair": [
+          69.30032711945074,
+          69.29320065769038
+        ]
+      },
+      {
+        "id": "238e728e-950a-4579-9164-4f0c520fdf69~osm53535_1000000",
+        "length": 163.49829253877343,
+        "sampled_m": 166,
+        "max_grade": 0.03432531858704079,
+        "lat": 53.00203024607163,
+        "lon": -1.2902374080691474,
+        "z_pair": [
+          68.62614226557557,
+          68.57471289684558
+        ]
+      },
+      {
+        "id": "238e728e-950a-4579-9164-4f0c520fdf69~osm53535_1000000",
+        "length": 2421.286933923752,
+        "sampled_m": 70,
+        "max_grade": 0.06667367271880664,
+        "lat": 53.00205685474335,
+        "lon": -1.2904032224936286,
+        "z_pair": [
+          68.42303843621367,
+          68.55638578165129
+        ]
+      },
+      {
+        "id": "5a027fb5-fcf5-4ad2-9d34-f63c5ac655fa",
+        "length": 1347.7862059865145,
+        "sampled_m": 70,
+        "max_grade": 0.10974398353739669,
+        "lat": 53.00218933153858,
+        "lon": -1.2903695072001038,
+        "z_pair": [
+          68.47056111710003,
+          68.27453575672159
+        ]
+      },
+      {
+        "id": "5a027fb5-fcf5-4ad2-9d34-f63c5ac655fa",
+        "length": 306.87673156399745,
+        "sampled_m": 310,
+        "max_grade": 0.036465544111493386,
+        "lat": 53.0021615130743,
+        "lon": -1.2901997996275818,
+        "z_pair": [
+          68.45695027979201,
+          68.529881368015
+        ]
+      },
+      {
+        "id": "295d19a2-9df5-4961-99cc-12a33571d426~osm0_262310",
+        "length": 238.15520280525482,
+        "sampled_m": 242,
+        "max_grade": 0.4319547447435474,
+        "lat": 52.999264492129306,
+        "lon": -1.276410644021029,
+        "z_pair": [
+          70.7249873414283,
+          70.65794675330098
+        ]
+      },
+      {
+        "id": "295d19a2-9df5-4961-99cc-12a33571d426~osm652897_1000000",
+        "length": 315.1471850285722,
+        "sampled_m": 318,
+        "max_grade": 0.030849439379906585,
+        "lat": 53.00039269882423,
+        "lon": -1.281352794599744,
+        "z_pair": [
+          70.09004165698065,
+          70.15174053574046
+        ]
+      },
+      {
+        "id": "ea8017f4-a449-49c0-842d-436f906860c7~osm0_321270",
+        "length": 318.761355463693,
+        "sampled_m": 322,
+        "max_grade": 0.1700320273533912,
+        "lat": 53.00049744349261,
+        "lon": -1.2813143578613098,
+        "z_pair": [
+          70.00523088448031,
+          69.87577607145201
+        ]
+      },
+      {
+        "id": "ea8017f4-a449-49c0-842d-436f906860c7~osm678569_1000000",
+        "length": 292.98272310939376,
+        "sampled_m": 296,
+        "max_grade": 0.17094585656480632,
+        "lat": 52.999366300579915,
+        "lon": -1.2763663024913,
+        "z_pair": [
+          70.38985782747322,
+          70.73174954060283
+        ]
+      },
+      {
+        "id": "ea8017f4-a449-49c0-842d-436f906860c7~osm678569_1000000",
+        "length": 15.914202405592322,
+        "sampled_m": 18,
+        "max_grade": 0.08738231868454704,
+        "lat": 52.998390817008314,
+        "lon": -1.2721528600476462,
+        "z_pair": [
+          72.69489245025478,
+          72.86965708762388
+        ]
+      },
+      {
+        "id": "8d47cbf7-2763-4907-ac5f-f203e0e37a20",
+        "length": 1695.9401364119808,
+        "sampled_m": 766,
+        "max_grade": 0.1133577754503477,
+        "lat": 52.995217293031835,
+        "lon": -1.2629596229632392,
+        "z_pair": [
+          94.70272587922038,
+          94.48279633148802
+        ]
+      },
+      {
+        "id": "8d47cbf7-2763-4907-ac5f-f203e0e37a20",
+        "length": 701.6001620500587,
+        "sampled_m": 704,
+        "max_grade": 0.17830826523699253,
+        "lat": 52.99828706257498,
+        "lon": -1.2722008322203864,
+        "z_pair": [
+          72.94084706315299,
+          72.65552494390896
+        ]
+      },
+      {
+        "id": "8d47cbf7-2763-4907-ac5f-f203e0e37a20",
+        "length": 53.23594307191015,
+        "sampled_m": 56,
+        "max_grade": 0.09684335752676532,
+        "lat": 52.99832459763885,
+        "lon": -1.2723622937071817,
+        "z_pair": [
+          72.53748465630417,
+          72.7311713713577
+        ]
+      },
+      {
+        "id": "b1f46ef9-1faa-427a-9a70-299bbe0a2c78~osm0_351397",
+        "length": 667.9900563399673,
+        "sampled_m": 670,
+        "max_grade": 0.058861959020390486,
+        "lat": 52.99609350511587,
+        "lon": -1.2646699888299193,
+        "z_pair": [
+          88.6777600724254,
+          88.79548399046618
+        ]
+      },
+      {
+        "id": "b1f46ef9-1faa-427a-9a70-299bbe0a2c78~osm351397_699452",
+        "length": 20.127689844204912,
+        "sampled_m": 24,
+        "max_grade": 0.04106980874994548,
+        "lat": 52.9954073988542,
+        "lon": -1.263103181803334,
+        "z_pair": [
+          93.58188796683899,
+          93.66402758433888
+        ]
+      },
+      {
+        "id": "b1f46ef9-1faa-427a-9a70-299bbe0a2c78~osm351397_699452",
+        "length": 631.7186608729526,
+        "sampled_m": 634,
+        "max_grade": 0.08817735673363813,
+        "lat": 52.99531276362012,
+        "lon": -1.2628832001253383,
+        "z_pair": [
+          94.25879024841416,
+          94.43514496188143
+        ]
+      },
+      {
+        "id": "b1f46ef9-1faa-427a-9a70-299bbe0a2c78~osm699452_1000000",
+        "length": 571.4845036797756,
+        "sampled_m": 132,
+        "max_grade": 0.014989560315143535,
+        "lat": 52.993905584154476,
+        "lon": -1.2536804085454767,
+        "z_pair": [
+          116.16708694584146,
+          116.19706606647175
+        ]
+      }
+    ],
+    "seconds": 17.758323499991093
+  },
+  {
+    "name": "m1_j26",
+    "ok": false,
+    "error": "[WinError 5] Access is denied: 'C:\\\\Users\\\\topge\\\\.cache\\\\beamng-earth/dem\\\\aws-terrarium\\\\15\\\\16276'",
+    "trace": "Traceback (most recent call last):\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\dem.py\", line 237, in _load_tile\n    data = self._download(MAPTERHORN, z, x, y)\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\dem.py\", line 140, in _download\n    data = self.fetcher.get(url, kind=kind).body\n           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\netfetch.py\", line 676, in get\n    h, probe = self._admit(url, kind)\n               ~~~~~~~~~~~^^^^^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\netfetch.py\", line 650, in _admit\n    raise Offline(f\"offline: {url}\", url, host_of(url))\nnetfetch.Offline: offline: https://tiles.mapterhorn.com/15/16276/10665.webp\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\tools\\validate_road_corridors.py\", line 84, in <module>\n    try:row=audit(case,args.cache,args.offline)\n            ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\tools\\validate_road_corridors.py\", line 66, in audit\n    z=terrain_surface.heights(fr,elev,xy)\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\terrain_surface.py\", line 67, in heights\n    _,_,z=frame.geodetic_to_enu(la,lo,np.asarray(elev(la,lo),float))\n                                                 ~~~~^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\tools\\validate_road_corridors.py\", line 23, in <lambda>\n    gr=grading.Grader(fr,md,raw);elev=lambda a,b:gr.apply(a,b,raw(a,b),.04)\n                                                 ~~~~~~~~^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\grading.py\", line 719, in apply\n    plans = self.plans(lat, lon, roads_only)\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\grading.py\", line 698, in plans\n    for fid_part, p in self._cell_plans(key):\n                       ~~~~~~~~~~~~~~~~^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\grading.py\", line 265, in _cell_plans\n    return self._plan_cell(key)\n           ~~~~~~~~~~~~~~~^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\grading.py\", line 284, in _plan_cell\n    plans = list(self._base_cell(key,feats))\n                 ~~~~~~~~~~~~~~~^^^^^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\grading.py\", line 238, in _base_cell\n    if any(sp.profile is not None for sp in pspecs):self.uk_vertical.adjust(plans,pspecs)\n                                                    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\ukvertical.py\", line 411, in adjust\n    correction=float(z[be]-self.ground_nodes(structure)[at])\n                           ~~~~~~~~~~~~~~~~~^^^^^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\ukvertical.py\", line 357, in ground_nodes\n    plans=plan_roads(self.frame,parts,self.raw)\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\grading.py\", line 146, in plan_roads\n    zall = np.asarray(elev(la, lo), np.float64)\n                      ~~~~^^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\tools\\validate_road_corridors.py\", line 22, in <lambda>\n    fr=geodesy.EnuFrame(lat,lon);raw=lambda a,b:dd.sample(a,b,15)\n                                                ~~~~~~~~~^^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\dem.py\", line 458, in sample\n    got = self.tiles(keys.values(), progress)\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\dem.py\", line 389, in tiles\n    out[k] = fut.result()\n             ~~~~~~~~~~^^\n  File \"C:\\Users\\topge\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\concurrent\\futures\\_base.py\", line 447, in result\n    return self.__get_result()\n           ~~~~~~~~~~~~~~~~~^^\n  File \"C:\\Users\\topge\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\concurrent\\futures\\_base.py\", line 396, in __get_result\n    raise self._exception\n  File \"C:\\Users\\topge\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\concurrent\\futures\\thread.py\", line 86, in run\n    result = ctx.run(self.task)\n  File \"C:\\Users\\topge\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\concurrent\\futures\\thread.py\", line 73, in run\n    return fn(*args, **kwargs)\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\dem.py\", line 244, in _load_tile\n    a = self._aws_tile(z, x, y)\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\dem.py\", line 228, in _aws_tile\n    data = self._download(AWS, za, x * n + i, y * n + j)\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\dem.py\", line 138, in _download\n    os.makedirs(os.path.dirname(path), exist_ok=True)\n    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen os>\", line 254, in makedirs\nPermissionError: [WinError 5] Access is denied: 'C:\\\\Users\\\\topge\\\\.cache\\\\beamng-earth/dem\\\\aws-terrarium\\\\15\\\\16276'\n"
+  },
+  {
+    "name": "m1_j27_28",
+    "ok": false,
+    "error": "[WinError 5] Access is denied: 'C:\\\\Users\\\\topge\\\\.cache\\\\beamng-earth/dem\\\\aws-terrarium\\\\15\\\\16258'",
+    "trace": "Traceback (most recent call last):\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\dem.py\", line 237, in _load_tile\n    data = self._download(MAPTERHORN, z, x, y)\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\dem.py\", line 140, in _download\n    data = self.fetcher.get(url, kind=kind).body\n           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\netfetch.py\", line 676, in get\n    h, probe = self._admit(url, kind)\n               ~~~~~~~~~~~^^^^^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\netfetch.py\", line 650, in _admit\n    raise Offline(f\"offline: {url}\", url, host_of(url))\nnetfetch.Offline: offline: https://tiles.mapterhorn.com/15/16258/10644.webp\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\tools\\validate_road_corridors.py\", line 84, in <module>\n    try:row=audit(case,args.cache,args.offline)\n            ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\tools\\validate_road_corridors.py\", line 43, in audit\n    solved=gr.bridge_model.parts(fs,(-radius,-radius,radius,radius))\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\roads.py\", line 2446, in parts\n    zs = self._solve(comp, pool, ground)\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\roads.py\", line 2402, in _solve\n    road_z = self._ground(np.array([c[2] for c in cr])) if cr else []\n             ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\roads.py\", line 2309, in _ground\n    return self.frame.geodetic_to_enu(la, lo, np.asarray(self.elev(la, lo), np.float64))[2]\n                                                         ~~~~~~~~~^^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\grading.py\", line 215, in _base_height\n    for fid,p in self._base_cell(key):\n                 ~~~~~~~~~~~~~~~^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\grading.py\", line 238, in _base_cell\n    if any(sp.profile is not None for sp in pspecs):self.uk_vertical.adjust(plans,pspecs)\n                                                    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\ukvertical.py\", line 411, in adjust\n    correction=float(z[be]-self.ground_nodes(structure)[at])\n                           ~~~~~~~~~~~~~~~~~^^^^^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\ukvertical.py\", line 357, in ground_nodes\n    plans=plan_roads(self.frame,parts,self.raw)\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\grading.py\", line 146, in plan_roads\n    zall = np.asarray(elev(la, lo), np.float64)\n                      ~~~~^^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\tools\\validate_road_corridors.py\", line 22, in <lambda>\n    fr=geodesy.EnuFrame(lat,lon);raw=lambda a,b:dd.sample(a,b,15)\n                                                ~~~~~~~~~^^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\dem.py\", line 458, in sample\n    got = self.tiles(keys.values(), progress)\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\dem.py\", line 389, in tiles\n    out[k] = fut.result()\n             ~~~~~~~~~~^^\n  File \"C:\\Users\\topge\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\concurrent\\futures\\_base.py\", line 454, in result\n    return self.__get_result()\n           ~~~~~~~~~~~~~~~~~^^\n  File \"C:\\Users\\topge\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\concurrent\\futures\\_base.py\", line 396, in __get_result\n    raise self._exception\n  File \"C:\\Users\\topge\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\concurrent\\futures\\thread.py\", line 86, in run\n    result = ctx.run(self.task)\n  File \"C:\\Users\\topge\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\concurrent\\futures\\thread.py\", line 73, in run\n    return fn(*args, **kwargs)\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\dem.py\", line 244, in _load_tile\n    a = self._aws_tile(z, x, y)\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\dem.py\", line 228, in _aws_tile\n    data = self._download(AWS, za, x * n + i, y * n + j)\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\dem.py\", line 138, in _download\n    os.makedirs(os.path.dirname(path), exist_ok=True)\n    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen os>\", line 254, in makedirs\nPermissionError: [WinError 5] Access is denied: 'C:\\\\Users\\\\topge\\\\.cache\\\\beamng-earth/dem\\\\aws-terrarium\\\\15\\\\16258'\n"
+  }
+]

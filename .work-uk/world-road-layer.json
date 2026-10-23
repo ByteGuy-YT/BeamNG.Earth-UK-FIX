@@ -1,0 +1,80 @@
+[
+  {
+    "name": "giltbrook",
+    "ok": false,
+    "error": "min() iterable argument is empty",
+    "trace": "Traceback (most recent call last):\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\tools\\validate_world_geometry.py\", line 57, in <module>\n    walks=[];walls=[];ctx=[];chunks=roads.build_tile(fr,tx,ty,fs,elev,walks=walks,bridges=bp,tunnels=tp,walls=walls,deck_context=ctx)\n                                    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\roads.py\", line 3555, in build_tile\n    ground_pavements(frame, walks[walk_start:], elev, vertical)\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\roads.py\", line 3625, in ground_pavements\n    z[supported]=vertical.surface_heights(xy[supported,:2])\n                 ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\ukvertical.py\", line 747, in surface_heights\n    return terrain_surface.heights(self.frame,elevation,np.asarray(xy)[:,:2])\n           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\terrain_surface.py\", line 67, in heights\n    _,_,z=frame.geodetic_to_enu(la,lo,np.asarray(elev(la,lo),float))\n                                                 ~~~~^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\ukvertical.py\", line 746, in elevation\n    return self.interfaces(q,z+lift,lift)\n           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\ukvertical.py\", line 693, in interfaces\n    for structure in self.near(xy,10.):\n                     ~~~~~~~~~^^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\ukvertical.py\", line 250, in near\n    keys=mapcells.cells_for_bbox(float(min(la))-pad,float(min(lo))-pl,float(max(la))+pad,float(max(lo))+pl)\n                                       ~~~^^^^\nValueError: min() iterable argument is empty\n",
+    "seconds": 16.618029199991724
+  },
+  {
+    "name": "j26",
+    "lat": 52.9994,
+    "lon": -1.231,
+    "ok": true,
+    "tiles": [
+      {
+        "tile": [
+          0,
+          0
+        ],
+        "chunks": 127,
+        "walls": 0,
+        "road_vertices": 17584,
+        "deck_vertices": 8855,
+        "deck_max_profile_error": 0.0003036365630890714,
+        "engine_meshes": 2,
+        "max_engine_vertices": 17584
+      },
+      {
+        "tile": [
+          -1,
+          0
+        ],
+        "chunks": 323,
+        "walls": 0,
+        "road_vertices": 64740,
+        "deck_vertices": 30457,
+        "deck_max_profile_error": 0.017168988800861484,
+        "engine_meshes": 3,
+        "max_engine_vertices": 60000
+      },
+      {
+        "tile": [
+          0,
+          -1
+        ],
+        "chunks": 242,
+        "walls": 0,
+        "road_vertices": 42746,
+        "deck_vertices": 24235,
+        "deck_max_profile_error": 0.0003280509167495893,
+        "engine_meshes": 2,
+        "max_engine_vertices": 42746
+      },
+      {
+        "tile": [
+          1,
+          0
+        ],
+        "chunks": 0,
+        "walls": 0,
+        "road_vertices": 0,
+        "deck_vertices": 0,
+        "deck_max_profile_error": 0.0,
+        "engine_meshes": 0,
+        "max_engine_vertices": 0
+      }
+    ],
+    "connected_junctions": 0,
+    "max_junction_step": 0.0,
+    "checked_seams": 1,
+    "max_seam_gap": 0.0,
+    "max_deck_grade": 0.04283256394577177,
+    "checked_road_clearances": 0,
+    "min_clearance_margin": 0.0,
+    "tunnel_parts": 9,
+    "max_tunnel_join_step": 0.0,
+    "covered_tunnel_m": 0.0,
+    "seconds": 65.60654210000939
+  }
+]

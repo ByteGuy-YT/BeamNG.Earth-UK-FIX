@@ -1,0 +1,8 @@
+[
+  {
+    "name": "m1_j27_28",
+    "ok": false,
+    "error": "Both input arrays must be (arrays of) 3-dimensional vectors, but they are 2 and 2 dimensional instead.",
+    "trace": "Traceback (most recent call last):\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\tools\\validate_road_corridors.py\", line 160, in <module>\n    try:row=audit(case,args.cache,args.offline)\n            ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\tools\\validate_road_corridors.py\", line 67, in audit\n    patch=roadmesh.bridge_join(fr,line,sp.width,end,elev,(-np.inf,-np.inf,np.inf,np.inf),vertical=gr.uk_vertical if sp.profile else None)\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\roadmesh.py\", line 265, in bridge_join\n    points,tri,uv=subtract_footprints(points,tri,uv,vertical.protected_mainlines(line,end))\n                  ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\roadmesh.py\", line 304, in subtract_footprints\n    if abs(np.cross(q[1,:2]-q[0,:2],q[2,:2]-q[0,:2]))<1e-10:continue\n           ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\.venv\\Lib\\site-packages\\numpy\\_core\\numeric.py\", line 1680, in cross\n    raise ValueError(\n    ...<2 lines>...\n    )\nValueError: Both input arrays must be (arrays of) 3-dimensional vectors, but they are 2 and 2 dimensional instead.\n"
+  }
+]

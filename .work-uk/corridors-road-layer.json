@@ -1,0 +1,38 @@
+[
+  {
+    "name": "a610",
+    "ok": false,
+    "error": "'Model' object has no attribute 'core_mask'",
+    "trace": "Traceback (most recent call last):\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\tools\\validate_road_corridors.py\", line 138, in <module>\n    try:row=audit(case,args.cache,args.offline)\n            ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\tools\\validate_road_corridors.py\", line 106, in audit\n    z=driveable(q)\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\tools\\validate_road_corridors.py\", line 78, in driveable\n    supported=surface.core_mask(xy,list(owners.values()))\n              ^^^^^^^^^^^^^^^^^\nAttributeError: 'Model' object has no attribute 'core_mask'\n"
+  },
+  {
+    "name": "m1_j26",
+    "ok": false,
+    "error": "'Model' object has no attribute 'core_mask'",
+    "trace": "Traceback (most recent call last):\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\tools\\validate_road_corridors.py\", line 138, in <module>\n    try:row=audit(case,args.cache,args.offline)\n            ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\tools\\validate_road_corridors.py\", line 106, in audit\n    z=driveable(q)\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\tools\\validate_road_corridors.py\", line 78, in driveable\n    supported=surface.core_mask(xy,list(owners.values()))\n              ^^^^^^^^^^^^^^^^^\nAttributeError: 'Model' object has no attribute 'core_mask'\n"
+  },
+  {
+    "name": "m1_j27_28",
+    "ok": false,
+    "error": "'Model' object has no attribute 'core_mask'",
+    "trace": "Traceback (most recent call last):\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\tools\\validate_road_corridors.py\", line 138, in <module>\n    try:row=audit(case,args.cache,args.offline)\n            ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\tools\\validate_road_corridors.py\", line 106, in audit\n    z=driveable(q)\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\tools\\validate_road_corridors.py\", line 78, in driveable\n    supported=ukvertical.core_mask(xy,list(owners.values()))\n              ^^^^^^^^^^^^^^^^^\nAttributeError: 'Model' object has no attribute 'core_mask'\n"
+  },
+  {
+    "name": "m6_birmingham",
+    "ok": false,
+    "error": "'Model' object has no attribute 'core_mask'",
+    "trace": "Traceback (most recent call last):\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\tools\\validate_road_corridors.py\", line 138, in <module>\n    try:row=audit(case,args.cache,args.offline)\n            ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\tools\\validate_road_corridors.py\", line 106, in audit\n    z=driveable(q)\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\tools\\validate_road_corridors.py\", line 78, in driveable\n    supported=ukvertical.core_mask(xy,list(owners.values()))\n              ^^^^^^^^^^^^^^^^^\nAttributeError: 'Model' object has no attribute 'core_mask'\n"
+  },
+  {
+    "name": "a1",
+    "ok": false,
+    "error": "'Model' object has no attribute 'core_mask'",
+    "trace": "Traceback (most recent call last):\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\tools\\validate_road_corridors.py\", line 138, in <module>\n    try:row=audit(case,args.cache,args.offline)\n            ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\tools\\validate_road_corridors.py\", line 106, in audit\n    z=driveable(q)\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\tools\\validate_road_corridors.py\", line 78, in driveable\n    supported=ukvertical.core_mask(xy,list(owners.values()))\n              ^^^^^^^^^^^^^^^^^\nAttributeError: 'Model' object has no attribute 'core_mask'\n"
+  },
+  {
+    "name": "a9",
+    "ok": false,
+    "error": "'Model' object has no attribute 'core_mask'",
+    "trace": "Traceback (most recent call last):\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\tools\\validate_road_corridors.py\", line 138, in <module>\n    try:row=audit(case,args.cache,args.offline)\n            ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\tools\\validate_road_corridors.py\", line 106, in audit\n    z=driveable(q)\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\tools\\validate_road_corridors.py\", line 78, in driveable\n    supported=ukvertical.core_mask(xy,list(owners.values()))\n              ^^^^^^^^^^^^^^^^^\nAttributeError: 'Model' object has no attribute 'core_mask'\n"
+  }
+]

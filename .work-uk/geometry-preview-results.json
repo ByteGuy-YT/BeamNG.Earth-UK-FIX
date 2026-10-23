@@ -1,0 +1,34 @@
+[
+  {
+    "site": "Underwood",
+    "road_vertices": 5925,
+    "road_triangles": 5517,
+    "pavement_runs": 47,
+    "pavement_vertices": 15947,
+    "seconds": 0.575
+  },
+  {
+    "site": "Ripley roundabout",
+    "road_vertices": 6404,
+    "road_triangles": 5820,
+    "pavement_runs": 8,
+    "pavement_vertices": 3878,
+    "seconds": 0.544
+  },
+  {
+    "site": "A610 Langley Mill",
+    "road_vertices": 3852,
+    "road_triangles": 3504,
+    "pavement_runs": 3,
+    "pavement_vertices": 1344,
+    "seconds": 0.355
+  },
+  {
+    "site": "M1 between J26 and J27",
+    "road_vertices": 8090,
+    "road_triangles": 7420,
+    "pavement_runs": 0,
+    "pavement_vertices": 0,
+    "seconds": 0.161
+  }
+]

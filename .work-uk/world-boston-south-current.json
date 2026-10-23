@@ -1,0 +1,71 @@
+[
+  {
+    "name": "boston_i93",
+    "lat": 42.2105,
+    "lon": -71.0,
+    "ok": true,
+    "tiles": [
+      {
+        "tile": [
+          0,
+          0
+        ],
+        "chunks": 70,
+        "walls": 6,
+        "road_vertices": 19116,
+        "deck_vertices": 0,
+        "deck_max_profile_error": 0.0,
+        "engine_meshes": 2,
+        "max_engine_vertices": 19116
+      },
+      {
+        "tile": [
+          -1,
+          0
+        ],
+        "chunks": 17,
+        "walls": 0,
+        "road_vertices": 4396,
+        "deck_vertices": 0,
+        "deck_max_profile_error": 0.0,
+        "engine_meshes": 1,
+        "max_engine_vertices": 4392
+      },
+      {
+        "tile": [
+          0,
+          -1
+        ],
+        "chunks": 83,
+        "walls": 5,
+        "road_vertices": 17240,
+        "deck_vertices": 0,
+        "deck_max_profile_error": 0.0,
+        "engine_meshes": 2,
+        "max_engine_vertices": 17239
+      },
+      {
+        "tile": [
+          1,
+          0
+        ],
+        "chunks": 148,
+        "walls": 9,
+        "road_vertices": 26540,
+        "deck_vertices": 7646,
+        "deck_max_profile_error": 0.020378513682043575,
+        "engine_meshes": 3,
+        "max_engine_vertices": 26540
+      }
+    ],
+    "connected_junctions": 1,
+    "max_junction_step": 0.0,
+    "checked_seams": 0,
+    "max_seam_gap": 0.0,
+    "max_deck_grade": 0.08000000000000047,
+    "tunnel_parts": 4,
+    "max_tunnel_join_step": 0.0,
+    "covered_tunnel_m": 0.0,
+    "seconds": 1.3963733999989927
+  }
+]

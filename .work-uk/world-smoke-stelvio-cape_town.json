@@ -1,0 +1,108 @@
+[
+  {
+    "name": "stelvio",
+    "lat": 46.528,
+    "lon": 10.455,
+    "ok": true,
+    "tiles": [
+      {
+        "tile": [
+          0,
+          0
+        ],
+        "chunks": 13,
+        "walls": 9,
+        "road_vertices": 6658,
+        "deck_vertices": 0,
+        "deck_max_profile_error": 0.0
+      },
+      {
+        "tile": [
+          -1,
+          0
+        ],
+        "chunks": 38,
+        "walls": 13,
+        "road_vertices": 7174,
+        "deck_vertices": 0,
+        "deck_max_profile_error": 0.0
+      },
+      {
+        "tile": [
+          0,
+          -1
+        ],
+        "chunks": 2,
+        "walls": 1,
+        "road_vertices": 388,
+        "deck_vertices": 0,
+        "deck_max_profile_error": 0.0
+      },
+      {
+        "tile": [
+          1,
+          0
+        ],
+        "chunks": 0,
+        "walls": 0,
+        "road_vertices": 0,
+        "deck_vertices": 0,
+        "deck_max_profile_error": 0.0
+      }
+    ],
+    "seconds": 0.8151722000038717
+  },
+  {
+    "name": "cape_town",
+    "lat": -33.917,
+    "lon": 18.429,
+    "ok": true,
+    "tiles": [
+      {
+        "tile": [
+          0,
+          0
+        ],
+        "chunks": 93,
+        "walls": 0,
+        "road_vertices": 15850,
+        "deck_vertices": 11984,
+        "deck_max_profile_error": 0.022514583916150244
+      },
+      {
+        "tile": [
+          -1,
+          0
+        ],
+        "chunks": 56,
+        "walls": 0,
+        "road_vertices": 11498,
+        "deck_vertices": 13134,
+        "deck_max_profile_error": 0.020836912909311778
+      },
+      {
+        "tile": [
+          0,
+          -1
+        ],
+        "chunks": 140,
+        "walls": 0,
+        "road_vertices": 18588,
+        "deck_vertices": 8398,
+        "deck_max_profile_error": 0.020013304475774873
+      },
+      {
+        "tile": [
+          1,
+          0
+        ],
+        "chunks": 13,
+        "walls": 0,
+        "road_vertices": 4006,
+        "deck_vertices": 0,
+        "deck_max_profile_error": 0.0
+      }
+    ],
+    "seconds": 12.05206200000248
+  }
+]

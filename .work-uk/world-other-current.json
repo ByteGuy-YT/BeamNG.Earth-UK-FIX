@@ -1,0 +1,209 @@
+[
+  {
+    "name": "sydney",
+    "lat": -33.8523,
+    "lon": 151.2108,
+    "ok": true,
+    "tiles": [
+      {
+        "tile": [
+          0,
+          0
+        ],
+        "chunks": 29,
+        "walls": 0,
+        "road_vertices": 9558,
+        "deck_vertices": 25180,
+        "deck_max_profile_error": 0.008068141851573785,
+        "engine_meshes": 3,
+        "max_engine_vertices": 25180
+      },
+      {
+        "tile": [
+          -1,
+          0
+        ],
+        "chunks": 11,
+        "walls": 0,
+        "road_vertices": 354,
+        "deck_vertices": 1258,
+        "deck_max_profile_error": 0.0011592119657706235,
+        "engine_meshes": 2,
+        "max_engine_vertices": 1258
+      },
+      {
+        "tile": [
+          0,
+          -1
+        ],
+        "chunks": 17,
+        "walls": 0,
+        "road_vertices": 3028,
+        "deck_vertices": 2844,
+        "deck_max_profile_error": 0.0007844712135920417,
+        "engine_meshes": 3,
+        "max_engine_vertices": 8080
+      },
+      {
+        "tile": [
+          1,
+          0
+        ],
+        "chunks": 3,
+        "walls": 2,
+        "road_vertices": 436,
+        "deck_vertices": 0,
+        "deck_max_profile_error": 0.0,
+        "engine_meshes": 2,
+        "max_engine_vertices": 436
+      }
+    ],
+    "connected_junctions": 4,
+    "max_junction_step": 0.0,
+    "checked_seams": 4,
+    "max_seam_gap": 0.0,
+    "max_deck_grade": 0.0800000000000005,
+    "tunnel_parts": 249,
+    "max_tunnel_join_step": 0.0,
+    "covered_tunnel_m": 13612.404935860277,
+    "seconds": 97.2763716999907
+  },
+  {
+    "name": "tokyo",
+    "lat": 35.663,
+    "lon": 139.77,
+    "ok": true,
+    "tiles": [
+      {
+        "tile": [
+          0,
+          0
+        ],
+        "chunks": 63,
+        "walls": 0,
+        "road_vertices": 7830,
+        "deck_vertices": 0,
+        "deck_max_profile_error": 0.0,
+        "engine_meshes": 1,
+        "max_engine_vertices": 7830
+      },
+      {
+        "tile": [
+          -1,
+          0
+        ],
+        "chunks": 42,
+        "walls": 1,
+        "road_vertices": 7416,
+        "deck_vertices": 0,
+        "deck_max_profile_error": 0.0,
+        "engine_meshes": 2,
+        "max_engine_vertices": 7413
+      },
+      {
+        "tile": [
+          0,
+          -1
+        ],
+        "chunks": 0,
+        "walls": 0,
+        "road_vertices": 0,
+        "deck_vertices": 0,
+        "deck_max_profile_error": 0.0,
+        "engine_meshes": 0,
+        "max_engine_vertices": 0
+      },
+      {
+        "tile": [
+          1,
+          0
+        ],
+        "chunks": 102,
+        "walls": 0,
+        "road_vertices": 11700,
+        "deck_vertices": 864,
+        "deck_max_profile_error": 0.020151674557808086,
+        "engine_meshes": 2,
+        "max_engine_vertices": 11700
+      }
+    ],
+    "connected_junctions": 4,
+    "max_junction_step": 0.0,
+    "checked_seams": 0,
+    "max_seam_gap": 0.0,
+    "max_deck_grade": 0.08000000000000047,
+    "tunnel_parts": 88,
+    "max_tunnel_join_step": 0.0,
+    "covered_tunnel_m": 1742.0303045637866,
+    "seconds": 39.98779970000032
+  },
+  {
+    "name": "cape_town",
+    "lat": -33.917,
+    "lon": 18.429,
+    "ok": true,
+    "tiles": [
+      {
+        "tile": [
+          0,
+          0
+        ],
+        "chunks": 94,
+        "walls": 0,
+        "road_vertices": 15958,
+        "deck_vertices": 12072,
+        "deck_max_profile_error": 0.021018731972592075,
+        "engine_meshes": 2,
+        "max_engine_vertices": 15957
+      },
+      {
+        "tile": [
+          -1,
+          0
+        ],
+        "chunks": 60,
+        "walls": 0,
+        "road_vertices": 11916,
+        "deck_vertices": 13342,
+        "deck_max_profile_error": 0.024641870805487187,
+        "engine_meshes": 2,
+        "max_engine_vertices": 13342
+      },
+      {
+        "tile": [
+          0,
+          -1
+        ],
+        "chunks": 140,
+        "walls": 0,
+        "road_vertices": 18528,
+        "deck_vertices": 8086,
+        "deck_max_profile_error": 0.02194673859524343,
+        "engine_meshes": 2,
+        "max_engine_vertices": 18526
+      },
+      {
+        "tile": [
+          1,
+          0
+        ],
+        "chunks": 13,
+        "walls": 0,
+        "road_vertices": 4006,
+        "deck_vertices": 0,
+        "deck_max_profile_error": 0.0,
+        "engine_meshes": 1,
+        "max_engine_vertices": 4004
+      }
+    ],
+    "connected_junctions": 5,
+    "max_junction_step": 0.0,
+    "checked_seams": 4,
+    "max_seam_gap": 0.0,
+    "max_deck_grade": 0.08000000000000115,
+    "tunnel_parts": 37,
+    "max_tunnel_join_step": 0.0,
+    "covered_tunnel_m": 0.0,
+    "seconds": 5.760130599999684
+  }
+]

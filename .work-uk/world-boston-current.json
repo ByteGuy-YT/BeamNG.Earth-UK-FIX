@@ -1,0 +1,78 @@
+[
+  {
+    "name": "boston_zakim",
+    "lat": 42.3685,
+    "lon": -71.063,
+    "ok": true,
+    "tiles": [
+      {
+        "tile": [
+          0,
+          0
+        ],
+        "chunks": 61,
+        "walls": 5,
+        "road_vertices": 6624,
+        "deck_vertices": 10850,
+        "deck_max_profile_error": 0.020971760408512452,
+        "engine_meshes": 3,
+        "max_engine_vertices": 10850
+      },
+      {
+        "tile": [
+          -1,
+          0
+        ],
+        "chunks": 111,
+        "walls": 5,
+        "road_vertices": 28848,
+        "deck_vertices": 76770,
+        "deck_max_profile_error": 0.024539213049866504,
+        "engine_meshes": 6,
+        "max_engine_vertices": 28844
+      },
+      {
+        "tile": [
+          0,
+          -1
+        ],
+        "chunks": 111,
+        "walls": 5,
+        "road_vertices": 22314,
+        "deck_vertices": 22426,
+        "deck_max_profile_error": 0.014759748699376019,
+        "engine_meshes": 3,
+        "max_engine_vertices": 22426
+      },
+      {
+        "tile": [
+          1,
+          0
+        ],
+        "chunks": 7,
+        "walls": 0,
+        "road_vertices": 304,
+        "deck_vertices": 1064,
+        "deck_max_profile_error": 0.007206022324770522,
+        "engine_meshes": 2,
+        "max_engine_vertices": 1064
+      }
+    ],
+    "connected_junctions": 17,
+    "max_junction_step": 0.0,
+    "checked_seams": 5,
+    "max_seam_gap": 0.0,
+    "max_deck_grade": 0.08000000000000222,
+    "tunnel_parts": 124,
+    "max_tunnel_join_step": 0.0,
+    "covered_tunnel_m": 9644.153515835478,
+    "seconds": 8.616809499988449
+  },
+  {
+    "name": "boston_i93",
+    "ok": false,
+    "error": "Near-vertical deck slope: 0.120",
+    "trace": "Traceback (most recent call last):\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\tools\\validate_world_geometry.py\", line 71, in <module>\n    assert max(grades,default=0.)<.081,f'Near-vertical deck slope: {max(grades):.3f}'\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: Near-vertical deck slope: 0.120\n",
+    "seconds": 1.331699700007448
+  }
+]

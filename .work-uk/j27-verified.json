@@ -1,0 +1,15 @@
+{
+  "source_circular_ways": 13,
+  "centre": [
+    1.3035180293403315,
+    -3.254766685967155
+  ],
+  "live_ring_links": 15,
+  "oneway_clockwise": 15,
+  "wrong_links": [],
+  "head_front_dot_incoming": [
+    1.0000361480372801,
+    0.999972935926512,
+    0.99998003845421
+  ]
+}

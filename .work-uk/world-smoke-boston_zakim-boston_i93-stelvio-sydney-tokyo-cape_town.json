@@ -1,0 +1,274 @@
+[
+  {
+    "name": "boston_zakim",
+    "lat": 42.3685,
+    "lon": -71.063,
+    "ok": true,
+    "tiles": [
+      {
+        "tile": [
+          0,
+          0
+        ],
+        "chunks": 52,
+        "walls": 5,
+        "road_vertices": 6418,
+        "deck_vertices": 10610,
+        "deck_max_profile_error": 0.02411977478263516
+      },
+      {
+        "tile": [
+          -1,
+          0
+        ],
+        "chunks": 111,
+        "walls": 5,
+        "road_vertices": 29012,
+        "deck_vertices": 75448,
+        "deck_max_profile_error": 0.024469014136581535
+      },
+      {
+        "tile": [
+          0,
+          -1
+        ],
+        "chunks": 65,
+        "walls": 5,
+        "road_vertices": 19474,
+        "deck_vertices": 21260,
+        "deck_max_profile_error": 0.02429250839057495
+      },
+      {
+        "tile": [
+          1,
+          0
+        ],
+        "chunks": 7,
+        "walls": 0,
+        "road_vertices": 294,
+        "deck_vertices": 1026,
+        "deck_max_profile_error": 0.007209113848741566
+      }
+    ],
+    "seconds": 5.110740200005239
+  },
+  {
+    "name": "boston_i93",
+    "lat": 42.2105,
+    "lon": -71.0,
+    "ok": true,
+    "tiles": [
+      {
+        "tile": [
+          0,
+          0
+        ],
+        "chunks": 70,
+        "walls": 6,
+        "road_vertices": 19112,
+        "deck_vertices": 0,
+        "deck_max_profile_error": 0.0
+      },
+      {
+        "tile": [
+          -1,
+          0
+        ],
+        "chunks": 17,
+        "walls": 0,
+        "road_vertices": 4396,
+        "deck_vertices": 0,
+        "deck_max_profile_error": 0.0
+      },
+      {
+        "tile": [
+          0,
+          -1
+        ],
+        "chunks": 83,
+        "walls": 5,
+        "road_vertices": 17240,
+        "deck_vertices": 0,
+        "deck_max_profile_error": 0.0
+      },
+      {
+        "tile": [
+          1,
+          0
+        ],
+        "chunks": 148,
+        "walls": 9,
+        "road_vertices": 26524,
+        "deck_vertices": 7590,
+        "deck_max_profile_error": 0.020378513682043575
+      }
+    ],
+    "seconds": 10.936791100000846
+  },
+  {
+    "name": "stelvio",
+    "lat": 46.528,
+    "lon": -10.455,
+    "ok": true,
+    "tiles": [
+      {
+        "tile": [
+          0,
+          0
+        ],
+        "chunks": 0,
+        "walls": 0,
+        "road_vertices": 0,
+        "deck_vertices": 0,
+        "deck_max_profile_error": 0.0
+      },
+      {
+        "tile": [
+          -1,
+          0
+        ],
+        "chunks": 0,
+        "walls": 0,
+        "road_vertices": 0,
+        "deck_vertices": 0,
+        "deck_max_profile_error": 0.0
+      },
+      {
+        "tile": [
+          0,
+          -1
+        ],
+        "chunks": 0,
+        "walls": 0,
+        "road_vertices": 0,
+        "deck_vertices": 0,
+        "deck_max_profile_error": 0.0
+      },
+      {
+        "tile": [
+          1,
+          0
+        ],
+        "chunks": 0,
+        "walls": 0,
+        "road_vertices": 0,
+        "deck_vertices": 0,
+        "deck_max_profile_error": 0.0
+      }
+    ],
+    "seconds": 0.298112399999809
+  },
+  {
+    "name": "sydney",
+    "lat": -33.8523,
+    "lon": 151.2108,
+    "ok": true,
+    "tiles": [
+      {
+        "tile": [
+          0,
+          0
+        ],
+        "chunks": 19,
+        "walls": 0,
+        "road_vertices": 6404,
+        "deck_vertices": 22542,
+        "deck_max_profile_error": 0.001331445025790856
+      },
+      {
+        "tile": [
+          -1,
+          0
+        ],
+        "chunks": 11,
+        "walls": 0,
+        "road_vertices": 346,
+        "deck_vertices": 1226,
+        "deck_max_profile_error": 0.0004985141632189993
+      },
+      {
+        "tile": [
+          0,
+          -1
+        ],
+        "chunks": 7,
+        "walls": 0,
+        "road_vertices": 122,
+        "deck_vertices": 342,
+        "deck_max_profile_error": 0.00039048970531041505
+      },
+      {
+        "tile": [
+          1,
+          0
+        ],
+        "chunks": 3,
+        "walls": 2,
+        "road_vertices": 436,
+        "deck_vertices": 0,
+        "deck_max_profile_error": 0.0
+      }
+    ],
+    "seconds": 16.89091809999809
+  },
+  {
+    "name": "tokyo",
+    "lat": 35.663,
+    "lon": 139.77,
+    "ok": true,
+    "tiles": [
+      {
+        "tile": [
+          0,
+          0
+        ],
+        "chunks": 63,
+        "walls": 0,
+        "road_vertices": 7830,
+        "deck_vertices": 0,
+        "deck_max_profile_error": 0.0
+      },
+      {
+        "tile": [
+          -1,
+          0
+        ],
+        "chunks": 42,
+        "walls": 1,
+        "road_vertices": 7416,
+        "deck_vertices": 0,
+        "deck_max_profile_error": 0.0
+      },
+      {
+        "tile": [
+          0,
+          -1
+        ],
+        "chunks": 0,
+        "walls": 0,
+        "road_vertices": 0,
+        "deck_vertices": 0,
+        "deck_max_profile_error": 0.0
+      },
+      {
+        "tile": [
+          1,
+          0
+        ],
+        "chunks": 102,
+        "walls": 0,
+        "road_vertices": 11692,
+        "deck_vertices": 832,
+        "deck_max_profile_error": 0.009912688577525586
+      }
+    ],
+    "seconds": 28.510550999999396
+  },
+  {
+    "name": "cape_town",
+    "ok": false,
+    "error": "[WinError 5] Access is denied: 'C:/Users/topge/.cache/beamng-earth/dem\\\\mapterhorn\\\\12\\\\2256\\\\2457.webp.24104.tmp' -> 'C:/Users/topge/.cache/beamng-earth/dem\\\\mapterhorn\\\\12\\\\2256\\\\2457.webp'",
+    "trace": "Traceback (most recent call last):\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\.work-uk\\world-smoke.py\", line 20, in <module>\n    walks=[];walls=[];ctx=[];chunks=roads.build_tile(fr,tx,ty,fs,elev,walks=walks,bridges=bp,walls=walls,deck_context=ctx)\n                                    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\roads.py\", line 3048, in build_tile\n    h = np.asarray(elev(lat, lon), np.float64)\n                   ~~~~^^^^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\.work-uk\\world-smoke.py\", line 15, in <lambda>\n    elev=lambda la,lo:gr.apply(la,lo,raw(la,lo),.04)\n                                     ~~~^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\.work-uk\\world-smoke.py\", line 13, in <lambda>\n    raw=lambda la,lo:dd.sample(la,lo,15)\n                     ~~~~~~~~~^^^^^^^^^^\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\dem.py\", line 451, in sample\n    got = self.tiles(keys.values(), progress)\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\dem.py\", line 382, in tiles\n    out[k] = fut.result()\n             ~~~~~~~~~~^^\n  File \"C:\\Users\\topge\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\concurrent\\futures\\_base.py\", line 454, in result\n    return self.__get_result()\n           ~~~~~~~~~~~~~~~~~^^\n  File \"C:\\Users\\topge\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\concurrent\\futures\\_base.py\", line 396, in __get_result\n    raise self._exception\n  File \"C:\\Users\\topge\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\concurrent\\futures\\thread.py\", line 86, in run\n    result = ctx.run(self.task)\n  File \"C:\\Users\\topge\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\concurrent\\futures\\thread.py\", line 73, in run\n    return fn(*args, **kwargs)\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\dem.py\", line 249, in _load_tile\n    a = self._from_ground12(z, x, y)\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\dem.py\", line 326, in _from_ground12\n    anc = self._load_tile(key)      # (in this thread: a pool worker waiting on the pool could deadlock)\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\dem.py\", line 245, in _load_tile\n    a = self._ground12(x, y, a)\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\dem.py\", line 300, in _ground12\n    nb = self._raw12(x + dx, y + dy)\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\dem.py\", line 284, in _raw12\n    data = self._download(MAPTERHORN, GLOBAL_ZOOM, x, y)\n  File \"C:\\Users\\topge\\Downloads\\BeamNG.Earth-kyzofox-1.5.4\\BeamNG.Earth-kyzofox-1.5.4\\server\\dem.py\", line 152, in _download\n    os.replace(tmp, path)\n    ~~~~~~~~~~^^^^^^^^^^^\nPermissionError: [WinError 5] Access is denied: 'C:/Users/topge/.cache/beamng-earth/dem\\\\mapterhorn\\\\12\\\\2256\\\\2457.webp.24104.tmp' -> 'C:/Users/topge/.cache/beamng-earth/dem\\\\mapterhorn\\\\12\\\\2256\\\\2457.webp'\n",
+    "seconds": 6.1931200999970315
+  }
+]

@@ -1,0 +1,26 @@
+{
+  "stationary": {
+    "frames": 2650,
+    "mean_ms": 7.561988830188693,
+    "max_ms": 13.459199999943,
+    "over33": 0,
+    "over50": 0,
+    "over100": 0,
+    "max_damage": 0,
+    "holds_added": 0,
+    "paused_polls": 0,
+    "distance_m": 0.0
+  },
+  "driving": {
+    "frames": 9942,
+    "mean_ms": 9.141632116274447,
+    "max_ms": 782.82730000001,
+    "over33": 33,
+    "over50": 13,
+    "over100": 11,
+    "max_damage": 0,
+    "holds_added": 0,
+    "paused_polls": 0,
+    "distance_m": 1194.830398389976
+  }
+}

@@ -1,0 +1,2036 @@
+[
+  {
+    "fid": "033303a6-2fa4-4231-a644-7d9dca296f59~osm805431_1000000",
+    "source": "r1868063@109",
+    "class": "motorway",
+    "tags": {
+      "highway": "motorway",
+      "lanes": "1",
+      "name": "Leverett Circle Connector",
+      "oneway": "yes"
+    },
+    "lanes": [
+      1,
+      0
+    ],
+    "width": 4.6,
+    "ranges": [
+      [
+        0.0,
+        1.0,
+        "bridge"
+      ]
+    ],
+    "start": [
+      -436.2624274565562,
+      388.99540998990335
+    ],
+    "end": [
+      -170.21721487852628,
+      103.96226483638932
+    ]
+  },
+  {
+    "fid": "08a16534-c64f-421b-9663-cce9e20bcbdd",
+    "source": "r1868063@109",
+    "class": "motorway",
+    "tags": {
+      "highway": "motorway_link",
+      "lanes": "1",
+      "oneway": "yes"
+    },
+    "lanes": [
+      1,
+      0
+    ],
+    "width": 4.5,
+    "ranges": [],
+    "start": [
+      -321.5193264065655,
+      -189.65134182192816
+    ],
+    "end": [
+      -337.5961915427475,
+      -139.94209940526127
+    ]
+  },
+  {
+    "fid": "0c2b8e30-7b81-4f69-8e12-fbe3c7f6345f",
+    "source": "r1345183@165",
+    "class": "motorway",
+    "tags": {
+      "highway": "motorway_link",
+      "lanes": "1",
+      "oneway": "yes"
+    },
+    "lanes": [
+      1,
+      0
+    ],
+    "width": 4.5,
+    "ranges": [],
+    "start": [
+      -128.69304785778368,
+      -260.215812725845
+    ],
+    "end": [
+      -289.07335165772133,
+      -210.34703643965912
+    ]
+  },
+  {
+    "fid": "0e83b1bf-49e9-4507-bfb1-6231086672b5~osm378574_592822",
+    "source": "r1345448@629",
+    "class": "trunk",
+    "tags": {
+      "highway": "trunk",
+      "lanes": "3",
+      "name": "Charles River Dam Road",
+      "oneway": "yes"
+    },
+    "lanes": [
+      3,
+      0
+    ],
+    "width": 11.8,
+    "ranges": [
+      [
+        0.0,
+        1.0,
+        "bridge"
+      ]
+    ],
+    "start": [
+      -518.1653690947761,
+      -141.0308015210161
+    ],
+    "end": [
+      -488.50449592336395,
+      -161.51609000016626
+    ]
+  },
+  {
+    "fid": "0e83b1bf-49e9-4507-bfb1-6231086672b5~osm592822_941919",
+    "source": "r1345448@629",
+    "class": "trunk",
+    "tags": {
+      "highway": "trunk",
+      "lanes": "3",
+      "name": "Charles River Dam Road",
+      "oneway": "yes"
+    },
+    "lanes": [
+      3,
+      0
+    ],
+    "width": 11.8,
+    "ranges": [],
+    "start": [
+      -488.50449592336395,
+      -161.51609000016626
+    ],
+    "end": [
+      -440.3430376476661,
+      -194.92125848962388
+    ]
+  },
+  {
+    "fid": "0e83b1bf-49e9-4507-bfb1-6231086672b5~osm941919_1000000",
+    "source": "r1345448@629",
+    "class": "trunk",
+    "tags": {
+      "highway": "trunk",
+      "lanes": "3",
+      "name": "Charles River Dam Road",
+      "oneway": "yes"
+    },
+    "lanes": [
+      3,
+      0
+    ],
+    "width": 11.8,
+    "ranges": [],
+    "start": [
+      -440.3430376476661,
+      -194.92125848962388
+    ],
+    "end": [
+      -433.7948611685695,
+      -202.16404969247816
+    ]
+  },
+  {
+    "fid": "153a75c7-87a1-4acf-95c7-3869bfc7d5d6~osm0_670537",
+    "source": "r2297231@253",
+    "class": "motorway",
+    "tags": {
+      "highway": "motorway",
+      "lanes": "2",
+      "oneway": "yes"
+    },
+    "lanes": [
+      2,
+      0
+    ],
+    "width": 8.2,
+    "ranges": [
+      [
+        0.0,
+        1.0,
+        "bridge"
+      ]
+    ],
+    "start": [
+      -352.07893848835573,
+      155.33265434660717
+    ],
+    "end": [
+      -543.0808102067753,
+      313.78993425444185
+    ]
+  },
+  {
+    "fid": "16f2fe5b-734b-4a1f-9e8e-0f00f11a5a71",
+    "source": "r1345448@629",
+    "class": "trunk",
+    "tags": {
+      "highway": "trunk_link",
+      "lanes": "2",
+      "oneway": "yes"
+    },
+    "lanes": [
+      2,
+      0
+    ],
+    "width": 7.3,
+    "ranges": [],
+    "start": [
+      -423.23524226456493,
+      -212.96171144481497
+    ],
+    "end": [
+      -429.1074662797385,
+      -196.48812953518177
+    ]
+  },
+  {
+    "fid": "24963a67-da67-43dd-b171-cebcf581b032",
+    "source": "w8647133@30",
+    "class": "trunk",
+    "tags": {
+      "highway": "trunk",
+      "lanes": "2",
+      "name": "Charles River Dam Road",
+      "oneway": "yes"
+    },
+    "lanes": [
+      2,
+      0
+    ],
+    "width": 8.2,
+    "ranges": [],
+    "start": [
+      -433.7948611685695,
+      -202.16404969247816
+    ],
+    "end": [
+      -423.23524226456493,
+      -212.96171144481497
+    ]
+  },
+  {
+    "fid": "25d9abc1-bb5f-4106-8b72-715c44874e58~osm176764_543650",
+    "source": "r2297231@253",
+    "class": "motorway",
+    "tags": {
+      "highway": "motorway",
+      "lanes": "3",
+      "oneway": "yes"
+    },
+    "lanes": [
+      3,
+      0
+    ],
+    "width": 11.8,
+    "ranges": [
+      [
+        0.0,
+        1.0,
+        "tunnel"
+      ]
+    ],
+    "start": [
+      267.9177820131884,
+      491.3141955978591
+    ],
+    "end": [
+      17.453671032223063,
+      286.49874353876197
+    ]
+  },
+  {
+    "fid": "25d9abc1-bb5f-4106-8b72-715c44874e58~osm543650_670852",
+    "source": "r2297231@253",
+    "class": "motorway",
+    "tags": {
+      "highway": "motorway",
+      "lanes": "2",
+      "oneway": "yes"
+    },
+    "lanes": [
+      2,
+      0
+    ],
+    "width": 8.2,
+    "ranges": [],
+    "start": [
+      17.453671032223063,
+      286.49874353876197
+    ],
+    "end": [
+      -78.06024652758032,
+      227.2045920911242
+    ]
+  },
+  {
+    "fid": "25d9abc1-bb5f-4106-8b72-715c44874e58~osm670852_1000000",
+    "source": "r2297231@253",
+    "class": "motorway",
+    "tags": {
+      "highway": "motorway",
+      "lanes": "2",
+      "oneway": "yes"
+    },
+    "lanes": [
+      2,
+      0
+    ],
+    "width": 8.2,
+    "ranges": [
+      [
+        0.0,
+        1.0,
+        "bridge"
+      ]
+    ],
+    "start": [
+      -78.06024652758032,
+      227.2045920911242
+    ],
+    "end": [
+      -352.07893848835573,
+      155.33265434660717
+    ]
+  },
+  {
+    "fid": "29733a05-90f3-4a14-9b60-8063402bf859~osm670363_734709",
+    "source": "w1411359022@2",
+    "class": "motorway",
+    "tags": {
+      "highway": "motorway_link",
+      "lanes": "1",
+      "oneway": "yes"
+    },
+    "lanes": [
+      1,
+      0
+    ],
+    "width": 4.5,
+    "ranges": [],
+    "start": [
+      -11.902388811007597,
+      309.21463722621695
+    ],
+    "end": [
+      -58.04439212445092,
+      299.2065949489861
+    ]
+  },
+  {
+    "fid": "29733a05-90f3-4a14-9b60-8063402bf859~osm734709_895495",
+    "source": "w1411359022@2",
+    "class": "motorway",
+    "tags": {
+      "highway": "motorway_link",
+      "lanes": "2",
+      "oneway": "yes"
+    },
+    "lanes": [
+      2,
+      0
+    ],
+    "width": 8.0,
+    "ranges": [],
+    "start": [
+      -58.04439212445092,
+      299.2065949489861
+    ],
+    "end": [
+      -171.67815738592336,
+      321.8023021593535
+    ]
+  },
+  {
+    "fid": "2d728cbc-f1d6-4228-af38-654d92caa09d~osm0_143277",
+    "source": "w8645079@17",
+    "class": "motorway",
+    "tags": {
+      "highway": "motorway_link",
+      "lanes": "1",
+      "oneway": "yes"
+    },
+    "lanes": [
+      1,
+      0
+    ],
+    "width": 4.5,
+    "ranges": [],
+    "start": [
+      -377.7414907569105,
+      -234.3583989750285
+    ],
+    "end": [
+      -317.8884714487863,
+      -228.7184845185335
+    ]
+  },
+  {
+    "fid": "2d728cbc-f1d6-4228-af38-654d92caa09d~osm143277_1000000",
+    "source": "w8645079@17",
+    "class": "motorway",
+    "tags": {
+      "highway": "motorway_link",
+      "lanes": "2",
+      "oneway": "yes"
+    },
+    "lanes": [
+      2,
+      0
+    ],
+    "width": 8.0,
+    "ranges": [
+      [
+        0.0,
+        1.0,
+        "bridge"
+      ]
+    ],
+    "start": [
+      -317.8884714487863,
+      -228.7184845185335
+    ],
+    "end": [
+      -6.128568296623882,
+      -186.69287236467594
+    ]
+  },
+  {
+    "fid": "3294a011-ee4a-4c98-9c5a-db8d97ae5b78",
+    "source": "w1527986237@1",
+    "class": "motorway",
+    "tags": {
+      "highway": "motorway",
+      "lanes": "2",
+      "oneway": "yes"
+    },
+    "lanes": [
+      2,
+      0
+    ],
+    "width": 8.2,
+    "ranges": [
+      [
+        0.0,
+        1.0,
+        "bridge"
+      ]
+    ],
+    "start": [
+      -6.128568296623882,
+      -186.69287236467594
+    ],
+    "end": [
+      -344.3028543097721,
+      331.6281084105301
+    ]
+  },
+  {
+    "fid": "33f936b7-aa7a-4ea8-8aff-33c63ef5907b~osm0_144832",
+    "source": "r1345183@165",
+    "class": "motorway",
+    "tags": {
+      "highway": "motorway",
+      "lanes": "1",
+      "oneway": "yes"
+    },
+    "lanes": [
+      1,
+      0
+    ],
+    "width": 4.6,
+    "ranges": [],
+    "start": [
+      -377.7414907569105,
+      -234.3583989750285
+    ],
+    "end": [
+      -274.4952020574764,
+      -263.4774157548169
+    ]
+  },
+  {
+    "fid": "33f936b7-aa7a-4ea8-8aff-33c63ef5907b~osm144832_654208",
+    "source": "r1345183@165",
+    "class": "motorway",
+    "tags": {
+      "highway": "motorway",
+      "lanes": "1",
+      "oneway": "yes"
+    },
+    "lanes": [
+      1,
+      0
+    ],
+    "width": 4.6,
+    "ranges": [
+      [
+        0.0,
+        1.0,
+        "tunnel"
+      ]
+    ],
+    "start": [
+      -274.4952020574764,
+      -263.4774157548169
+    ],
+    "end": [
+      5.296572431045661,
+      -86.04292391134527
+    ]
+  },
+  {
+    "fid": "33f936b7-aa7a-4ea8-8aff-33c63ef5907b~osm654208_1000000",
+    "source": "r1345183@165",
+    "class": "motorway",
+    "tags": {
+      "highway": "motorway",
+      "lanes": "1",
+      "oneway": "yes"
+    },
+    "lanes": [
+      1,
+      0
+    ],
+    "width": 4.6,
+    "ranges": [],
+    "start": [
+      5.296572431045661,
+      -86.04292391134527
+    ],
+    "end": [
+      198.4883605974852,
+      -251.12780576773298
+    ]
+  },
+  {
+    "fid": "3cca71f3-8b0f-4f2d-994a-ca987b035d94~osm0_561460",
+    "source": "w8650527@19",
+    "class": "motorway",
+    "tags": {
+      "highway": "motorway_link",
+      "lanes": "1",
+      "oneway": "yes"
+    },
+    "lanes": [
+      1,
+      0
+    ],
+    "width": 4.5,
+    "ranges": [
+      [
+        0.0,
+        1.0,
+        "bridge"
+      ]
+    ],
+    "start": [
+      -482.0814740257783,
+      406.0157463646433
+    ],
+    "end": [
+      -288.3292936780375,
+      257.4350171057956
+    ]
+  },
+  {
+    "fid": "3cca71f3-8b0f-4f2d-994a-ca987b035d94~osm561460_1000000",
+    "source": "w8650527@19",
+    "class": "motorway",
+    "tags": {
+      "highway": "motorway_link",
+      "lanes": "1",
+      "oneway": "yes"
+    },
+    "lanes": [
+      1,
+      0
+    ],
+    "width": 4.5,
+    "ranges": [
+      [
+        0.0,
+        1.0,
+        "bridge"
+      ]
+    ],
+    "start": [
+      -288.3292936780375,
+      257.4350171057956
+    ],
+    "end": [
+      -170.21721487852628,
+      103.96226483638932
+    ]
+  },
+  {
+    "fid": "3f0702f3-6265-45e9-a9ec-d6a1c4b4bfb9",
+    "source": "w94670474@15",
+    "class": "motorway",
+    "tags": {
+      "highway": "motorway_link",
+      "oneway": "yes"
+    },
+    "lanes": null,
+    "width": 6.0,
+    "ranges": [],
+    "start": [
+      20.77306572890508,
+      306.4488340984687
+    ],
+    "end": [
+      36.1594904458056,
+      269.8700898003588
+    ]
+  },
+  {
+    "fid": "4100a950-331d-4166-9760-8d787c3c4ad9~osm0_962594",
+    "source": "r1345183@165",
+    "class": "motorway",
+    "tags": {
+      "highway": "motorway_link",
+      "lanes": "2",
+      "oneway": "yes"
+    },
+    "lanes": [
+      2,
+      0
+    ],
+    "width": 8.0,
+    "ranges": [
+      [
+        0.0,
+        1.0,
+        "tunnel"
+      ]
+    ],
+    "start": [
+      378.6993662930452,
+      -429.9820151016845
+    ],
+    "end": [
+      -103.58535877888458,
+      -256.26176465022604
+    ]
+  },
+  {
+    "fid": "4100a950-331d-4166-9760-8d787c3c4ad9~osm962594_1000000",
+    "source": "r1345183@165",
+    "class": "motorway",
+    "tags": {
+      "highway": "motorway_link",
+      "lanes": "2",
+      "oneway": "yes"
+    },
+    "lanes": [
+      2,
+      0
+    ],
+    "width": 8.0,
+    "ranges": [],
+    "start": [
+      -103.58535877888458,
+      -256.26176465022604
+    ],
+    "end": [
+      -128.69304785778368,
+      -260.215812725845
+    ]
+  },
+  {
+    "fid": "41293703-9046-463e-a269-df2e24d101d0",
+    "source": "w1119606129@11",
+    "class": "trunk",
+    "tags": {
+      "highway": "trunk",
+      "lanes": "2",
+      "name": "Charles River Dam Road",
+      "oneway": "yes"
+    },
+    "lanes": [
+      2,
+      0
+    ],
+    "width": 8.2,
+    "ranges": [],
+    "start": [
+      -423.23524226456493,
+      -212.96171144481497
+    ],
+    "end": [
+      -377.7414907569105,
+      -234.3583989750285
+    ]
+  },
+  {
+    "fid": "4814251e-c996-436b-bec6-507097c4c6ce~osm206960_1000000",
+    "source": "r3324490@94",
+    "class": "motorway",
+    "tags": {
+      "highway": "motorway",
+      "lanes": "2",
+      "oneway": "yes"
+    },
+    "lanes": [
+      2,
+      0
+    ],
+    "width": 11.6,
+    "ranges": [
+      [
+        0.0,
+        1.0,
+        "bridge"
+      ]
+    ],
+    "start": [
+      -889.9793907843061,
+      828.428125569309
+    ],
+    "end": [
+      -263.96381493688995,
+      282.21601391418847
+    ]
+  },
+  {
+    "fid": "5659e1f6-21db-4d0f-a645-f07af98c7a3f",
+    "source": "w8641441@25",
+    "class": "motorway",
+    "tags": {
+      "highway": "motorway_link",
+      "lanes": "1",
+      "oneway": "yes"
+    },
+    "lanes": [
+      1,
+      0
+    ],
+    "width": 4.5,
+    "ranges": [],
+    "start": [
+      63.96676048240055,
+      282.94446255094806
+    ],
+    "end": [
+      36.1594904458056,
+      269.8700898003588
+    ]
+  },
+  {
+    "fid": "57023736-eccb-443b-ba40-658c67dc0302~osm0_280522",
+    "source": "w8644232@21",
+    "class": "motorway",
+    "tags": {
+      "highway": "motorway",
+      "lanes": "2",
+      "oneway": "yes"
+    },
+    "lanes": [
+      2,
+      0
+    ],
+    "width": 7.3,
+    "ranges": [],
+    "start": [
+      -570.0699922687515,
+      -463.50421552398734
+    ],
+    "end": [
+      -474.3695171542869,
+      -286.22713287658325
+    ]
+  },
+  {
+    "fid": "57023736-eccb-443b-ba40-658c67dc0302~osm280522_525337",
+    "source": "w8644232@21",
+    "class": "motorway",
+    "tags": {
+      "highway": "motorway",
+      "lanes": "2",
+      "oneway": "yes"
+    },
+    "lanes": [
+      2,
+      0
+    ],
+    "width": 8.2,
+    "ranges": [
+      [
+        0.0,
+        1.0,
+        "tunnel"
+      ]
+    ],
+    "start": [
+      -474.3695171542869,
+      -286.22713287658325
+    ],
+    "end": [
+      -314.09944383375023,
+      -230.14047090749222
+    ]
+  },
+  {
+    "fid": "57023736-eccb-443b-ba40-658c67dc0302~osm525337_814797",
+    "source": "w8644232@21",
+    "class": "motorway",
+    "tags": {
+      "highway": "motorway",
+      "lanes": "1",
+      "oneway": "yes"
+    },
+    "lanes": [
+      1,
+      0
+    ],
+    "width": 4.6,
+    "ranges": [],
+    "start": [
+      -314.09944383375023,
+      -230.14047090749222
+    ],
+    "end": [
+      -109.26938234647947,
+      -270.65769425561194
+    ]
+  },
+  {
+    "fid": "57023736-eccb-443b-ba40-658c67dc0302~osm814797_1000000",
+    "source": "w8644232@21",
+    "class": "motorway",
+    "tags": {
+      "highway": "motorway",
+      "lanes": "1",
+      "oneway": "yes"
+    },
+    "lanes": [
+      1,
+      0
+    ],
+    "width": 4.6,
+    "ranges": [
+      [
+        0.0,
+        1.0,
+        "bridge"
+      ]
+    ],
+    "start": [
+      -109.26938234647947,
+      -270.65769425561194
+    ],
+    "end": [
+      -6.128568296623882,
+      -186.69287236467594
+    ]
+  },
+  {
+    "fid": "5e3edfc4-dd2f-4b95-9ca6-55bfea60494f",
+    "source": "w533641352@12",
+    "class": "trunk",
+    "tags": {
+      "highway": "trunk",
+      "lanes": "2",
+      "name": "Storrow Drive",
+      "oneway": "yes"
+    },
+    "lanes": [
+      2,
+      0
+    ],
+    "width": 7.3,
+    "ranges": [],
+    "start": [
+      -429.1074662797385,
+      -196.48812953518177
+    ],
+    "end": [
+      -433.7948611685695,
+      -202.16404969247816
+    ]
+  },
+  {
+    "fid": "68f42bf9-e1bc-44a5-8238-c48d9df2c085",
+    "source": "w138749303@10",
+    "class": "motorway",
+    "tags": {
+      "highway": "motorway_link",
+      "lanes": "2",
+      "oneway": "yes"
+    },
+    "lanes": [
+      2,
+      0
+    ],
+    "width": 8.0,
+    "ranges": [],
+    "start": [
+      -321.5193264065655,
+      -189.65134182192816
+    ],
+    "end": [
+      -362.1118051956858,
+      -169.03283602044846
+    ]
+  },
+  {
+    "fid": "6b0c82eb-4fe6-4a53-87d7-35b21369a5bb",
+    "source": "r1868063@109",
+    "class": "motorway",
+    "tags": {
+      "highway": "motorway_link",
+      "lanes": "2",
+      "oneway": "yes"
+    },
+    "lanes": [
+      2,
+      0
+    ],
+    "width": 8.0,
+    "ranges": [],
+    "start": [
+      -174.93726687428205,
+      -236.28809199475296
+    ],
+    "end": [
+      -321.5193264065655,
+      -189.65134182192816
+    ]
+  },
+  {
+    "fid": "716892e5-bd7b-4fd9-9007-81df587bd4b9",
+    "source": "w552280443@4",
+    "class": "motorway",
+    "tags": {
+      "highway": "motorway_link",
+      "lanes": "2",
+      "oneway": "yes"
+    },
+    "lanes": [
+      2,
+      0
+    ],
+    "width": 8.0,
+    "ranges": [],
+    "start": [
+      -369.78038282218904,
+      -162.3898264869995
+    ],
+    "end": [
+      -387.58074321842014,
+      -154.56880268958724
+    ]
+  },
+  {
+    "fid": "72c543b4-f39a-4d04-b08b-fd8d23ea4282~osm478226_1000000",
+    "source": "r2297231@253",
+    "class": "motorway",
+    "tags": {
+      "highway": "motorway",
+      "lanes": "2",
+      "oneway": "yes"
+    },
+    "lanes": [
+      2,
+      0
+    ],
+    "width": 8.2,
+    "ranges": [
+      [
+        0.0,
+        1.0,
+        "bridge"
+      ]
+    ],
+    "start": [
+      -368.47576844664087,
+      365.6865874706584
+    ],
+    "end": [
+      -263.96381493688995,
+      282.21601391418847
+    ]
+  },
+  {
+    "fid": "746183c7-1f84-4c00-8d24-0cbe4fe43c18~osm0_689235",
+    "source": "r2297231@253",
+    "class": "motorway",
+    "tags": {
+      "highway": "motorway",
+      "lanes": "4",
+      "name": "John F. Fitzgerald Expressway",
+      "oneway": "yes"
+    },
+    "lanes": [
+      4,
+      0
+    ],
+    "width": 15.4,
+    "ranges": [
+      [
+        0.0,
+        1.0,
+        "bridge"
+      ]
+    ],
+    "start": [
+      -99.01671756705701,
+      106.26026178444022
+    ],
+    "end": [
+      107.28216346330605,
+      -139.03855380063197
+    ]
+  },
+  {
+    "fid": "7e8abe22-bcec-45dc-95ae-e36a16e6d030",
+    "source": "r3324490@94",
+    "class": "motorway",
+    "tags": {
+      "highway": "motorway_link",
+      "lanes": "1",
+      "oneway": "yes"
+    },
+    "lanes": [
+      1,
+      0
+    ],
+    "width": 4.5,
+    "ranges": [
+      [
+        0.0,
+        1.0,
+        "bridge"
+      ]
+    ],
+    "start": [
+      -1037.8803826802925,
+      1075.258767016846
+    ],
+    "end": [
+      -99.01671756705701,
+      106.26026178444022
+    ]
+  },
+  {
+    "fid": "81919d7e-f69e-4e0f-b9d9-60965e2f51ba",
+    "source": "r1345183@165",
+    "class": "trunk",
+    "tags": {
+      "highway": "trunk",
+      "lanes": "1",
+      "name": "Charles Street",
+      "oneway": "yes"
+    },
+    "lanes": [
+      1,
+      0
+    ],
+    "width": 4.6,
+    "ranges": [],
+    "start": [
+      -555.7030961586572,
+      -457.9957841414522
+    ],
+    "end": [
+      -489.52862911009674,
+      -318.8392266577947
+    ]
+  },
+  {
+    "fid": "89ab8411-578c-489a-8569-70aa46f6687c",
+    "source": "w829909271@1",
+    "class": "motorway",
+    "tags": {
+      "highway": "motorway_link",
+      "lanes": "2",
+      "oneway": "yes"
+    },
+    "lanes": [
+      2,
+      0
+    ],
+    "width": 8.0,
+    "ranges": [],
+    "start": [
+      -362.1118051956858,
+      -169.03283602044846
+    ],
+    "end": [
+      -369.78038282218904,
+      -162.3898264869995
+    ]
+  },
+  {
+    "fid": "9c0788e9-871e-4bba-bdd7-aec9f0ade6dd~osm0_172949",
+    "source": "r1345183@165",
+    "class": "motorway",
+    "tags": {
+      "highway": "motorway",
+      "lanes": "2",
+      "oneway": "yes"
+    },
+    "lanes": [
+      2,
+      0
+    ],
+    "width": 8.2,
+    "ranges": [],
+    "start": [
+      -289.07335165772133,
+      -210.34703643965912
+    ],
+    "end": [
+      -346.7672986514928,
+      -198.0256024859276
+    ]
+  },
+  {
+    "fid": "9c0788e9-871e-4bba-bdd7-aec9f0ade6dd~osm172949_478742",
+    "source": "r1345183@165",
+    "class": "motorway",
+    "tags": {
+      "highway": "motorway",
+      "lanes": "2",
+      "oneway": "yes"
+    },
+    "lanes": [
+      2,
+      0
+    ],
+    "width": 8.2,
+    "ranges": [
+      [
+        0.0,
+        1.0,
+        "tunnel"
+      ]
+    ],
+    "start": [
+      -346.7672986514928,
+      -198.0256024859276
+    ],
+    "end": [
+      -443.39336836500013,
+      -234.38784926049254
+    ]
+  },
+  {
+    "fid": "9c0788e9-871e-4bba-bdd7-aec9f0ade6dd~osm478742_1000000",
+    "source": "r1345183@165",
+    "class": "motorway",
+    "tags": {
+      "highway": "motorway",
+      "lanes": "2",
+      "oneway": "yes"
+    },
+    "lanes": [
+      2,
+      0
+    ],
+    "width": 7.3,
+    "ranges": [],
+    "start": [
+      -443.39336836500013,
+      -234.38784926049254
+    ],
+    "end": [
+      -548.7440767951725,
+      -375.67466965644417
+    ]
+  },
+  {
+    "fid": "9f86dc0d-3ad8-4576-888e-adc5fd507efe",
+    "source": "r1345183@165",
+    "class": "trunk",
+    "tags": {
+      "highway": "trunk",
+      "lanes": "3",
+      "name": "Storrow Drive",
+      "oneway": "yes"
+    },
+    "lanes": [
+      3,
+      0
+    ],
+    "width": 11.8,
+    "ranges": [],
+    "start": [
+      -489.52862911009674,
+      -318.8392266577947
+    ],
+    "end": [
+      -458.91579330625297,
+      -282.72906415558487
+    ]
+  },
+  {
+    "fid": "aa3b6f81-aec7-4ad9-ab95-db1433eb0ec2",
+    "source": "w8694869@26",
+    "class": "trunk",
+    "tags": {
+      "highway": "trunk_link",
+      "lanes": "1",
+      "oneway": "yes"
+    },
+    "lanes": [
+      1,
+      0
+    ],
+    "width": 4.5,
+    "ranges": [],
+    "start": [
+      -403.3970441399335,
+      -166.95337594330903
+    ],
+    "end": [
+      -451.1576414798165,
+      -178.33620455563653
+    ]
+  },
+  {
+    "fid": "b796c2cb-0c6c-4c7a-a176-2711c5aaa950",
+    "source": "w288994036@11",
+    "class": "motorway",
+    "tags": {
+      "highway": "motorway_link",
+      "lanes": "1",
+      "oneway": "yes"
+    },
+    "lanes": [
+      1,
+      0
+    ],
+    "width": 4.5,
+    "ranges": [],
+    "start": [
+      -316.44635440390937,
+      -216.67743630547454
+    ],
+    "end": [
+      -380.8957635577676,
+      -222.52816508148564
+    ]
+  },
+  {
+    "fid": "c371e412-e610-4d3c-9bfd-e2180b99f136",
+    "source": "w8650375@15",
+    "class": "motorway",
+    "tags": {
+      "highway": "motorway_link",
+      "lanes": "2",
+      "oneway": "yes"
+    },
+    "lanes": [
+      2,
+      0
+    ],
+    "width": 8.0,
+    "ranges": [],
+    "start": [
+      -316.44635440390937,
+      -216.67743630547454
+    ],
+    "end": [
+      -362.1118051956858,
+      -169.03283602044846
+    ]
+  },
+  {
+    "fid": "c55bc788-eee7-4c65-beeb-3ce4c0c02da4",
+    "source": "w8636463@22",
+    "class": "motorway",
+    "tags": {
+      "highway": "motorway_link",
+      "lanes": "2",
+      "oneway": "yes"
+    },
+    "lanes": [
+      2,
+      0
+    ],
+    "width": 8.0,
+    "ranges": [],
+    "start": [
+      -128.69304785778368,
+      -260.215812725845
+    ],
+    "end": [
+      -316.44635440390937,
+      -216.67743630547454
+    ]
+  },
+  {
+    "fid": "cc3ce59b-71f0-4c3e-9d68-3033e6fc4da6~osm0_136485",
+    "source": "r1868063@109",
+    "class": "motorway",
+    "tags": {
+      "highway": "motorway",
+      "lanes": "2",
+      "name": "Leverett Circle Connector",
+      "oneway": "yes"
+    },
+    "lanes": [
+      2,
+      0
+    ],
+    "width": 8.2,
+    "ranges": [
+      [
+        0.0,
+        1.0,
+        "bridge"
+      ]
+    ],
+    "start": [
+      -170.21721487852628,
+      103.96226483638932
+    ],
+    "end": [
+      -123.97577928500097,
+      49.24306932523872
+    ]
+  },
+  {
+    "fid": "cc3ce59b-71f0-4c3e-9d68-3033e6fc4da6~osm136485_877251",
+    "source": "r1868063@109",
+    "class": "motorway",
+    "tags": {
+      "highway": "motorway",
+      "lanes": "2",
+      "name": "Leverett Connector",
+      "oneway": "yes"
+    },
+    "lanes": [
+      2,
+      0
+    ],
+    "width": 8.2,
+    "ranges": [
+      [
+        0.0,
+        1.0,
+        "bridge"
+      ]
+    ],
+    "start": [
+      -123.97577928500097,
+      49.24306932523872
+    ],
+    "end": [
+      -111.92991172804909,
+      -247.77511375211617
+    ]
+  },
+  {
+    "fid": "cc3ce59b-71f0-4c3e-9d68-3033e6fc4da6~osm877251_1000000",
+    "source": "r1868063@109",
+    "class": "motorway",
+    "tags": {
+      "highway": "motorway",
+      "lanes": "2",
+      "name": "Leverett Connector",
+      "oneway": "yes"
+    },
+    "lanes": [
+      2,
+      0
+    ],
+    "width": 8.2,
+    "ranges": [],
+    "start": [
+      -111.92991172804909,
+      -247.77511375211617
+    ],
+    "end": [
+      -174.93726687428205,
+      -236.28809199475296
+    ]
+  },
+  {
+    "fid": "ce0fb079-ca0e-4b99-a9d8-6e0b6d836472",
+    "source": "r1345448@629",
+    "class": "trunk",
+    "tags": {
+      "highway": "trunk",
+      "lanes": "2",
+      "name": "Storrow Drive",
+      "oneway": "yes"
+    },
+    "lanes": [
+      2,
+      0
+    ],
+    "width": 7.3,
+    "ranges": [],
+    "start": [
+      -570.0699922687515,
+      -463.50421552398734
+    ],
+    "end": [
+      -489.52862911009674,
+      -318.8392266577947
+    ]
+  },
+  {
+    "fid": "cf5da9be-787f-4308-89be-654e5d462910~osm0_287658",
+    "source": "r1345448@629",
+    "class": "trunk",
+    "tags": {
+      "highway": "trunk",
+      "lanes": "2",
+      "name": "Charles River Dam Road",
+      "oneway": "yes"
+    },
+    "lanes": [
+      2,
+      0
+    ],
+    "width": 8.2,
+    "ranges": [],
+    "start": [
+      -451.1576414798165,
+      -178.33620455563653
+    ],
+    "end": [
+      -484.1711947849187,
+      -155.1404054322159
+    ]
+  },
+  {
+    "fid": "cf5da9be-787f-4308-89be-654e5d462910~osm287658_544422",
+    "source": "r1345448@629",
+    "class": "trunk",
+    "tags": {
+      "highway": "trunk",
+      "lanes": "2",
+      "name": "Charles River Dam Road",
+      "oneway": "yes"
+    },
+    "lanes": [
+      2,
+      0
+    ],
+    "width": 8.2,
+    "ranges": [
+      [
+        0.0,
+        1.0,
+        "bridge"
+      ]
+    ],
+    "start": [
+      -484.1711947849187,
+      -155.1404054322159
+    ],
+    "end": [
+      -513.8321112536624,
+      -134.71063822900123
+    ]
+  },
+  {
+    "fid": "d01a3874-577b-4a77-97ae-cc20d1529618~osm0_266913",
+    "source": "w923387698@8",
+    "class": "motorway",
+    "tags": {
+      "highway": "motorway_link",
+      "lanes": "1",
+      "oneway": "yes"
+    },
+    "lanes": [
+      1,
+      0
+    ],
+    "width": 4.5,
+    "ranges": [],
+    "start": [
+      -186.04884315740426,
+      408.32320727509625
+    ],
+    "end": [
+      -228.36482866502195,
+      271.36205775377573
+    ]
+  },
+  {
+    "fid": "d01a3874-577b-4a77-97ae-cc20d1529618~osm266913_382470",
+    "source": "w923387698@8",
+    "class": "motorway",
+    "tags": {
+      "highway": "motorway_link",
+      "lanes": "1",
+      "oneway": "yes"
+    },
+    "lanes": [
+      1,
+      0
+    ],
+    "width": 4.5,
+    "ranges": [
+      [
+        0.0,
+        1.0,
+        "bridge"
+      ]
+    ],
+    "start": [
+      -228.36482866502195,
+      271.36205775377573
+    ],
+    "end": [
+      -197.91511687879742,
+      217.75396754754382
+    ]
+  },
+  {
+    "fid": "d01a3874-577b-4a77-97ae-cc20d1529618~osm382470_851319",
+    "source": "w923387698@8",
+    "class": "motorway",
+    "tags": {
+      "highway": "motorway_link",
+      "lanes": "1",
+      "oneway": "yes"
+    },
+    "lanes": [
+      1,
+      0
+    ],
+    "width": 4.5,
+    "ranges": [],
+    "start": [
+      -197.91511687879742,
+      217.75396754754382
+    ],
+    "end": [
+      35.31939984914695,
+      260.8614685872672
+    ]
+  },
+  {
+    "fid": "d01a3874-577b-4a77-97ae-cc20d1529618~osm851319_1000000",
+    "source": "w923387698@8",
+    "class": "motorway",
+    "tags": {
+      "highway": "motorway_link",
+      "lanes": "1",
+      "oneway": "yes"
+    },
+    "lanes": [
+      1,
+      0
+    ],
+    "width": 4.5,
+    "ranges": [
+      [
+        0.0,
+        1.0,
+        "tunnel"
+      ]
+    ],
+    "start": [
+      35.31939984914695,
+      260.8614685872672
+    ],
+    "end": [
+      102.30032605726875,
+      307.91581306420335
+    ]
+  },
+  {
+    "fid": "d0c1025c-9121-4ac7-9983-a04882ce42f7~osm233233_592498",
+    "source": "w8652085@18",
+    "class": "motorway",
+    "tags": {
+      "highway": "motorway_link",
+      "lanes": "2",
+      "oneway": "yes"
+    },
+    "lanes": [
+      2,
+      0
+    ],
+    "width": 8.0,
+    "ranges": [
+      [
+        0.0,
+        1.0,
+        "bridge"
+      ]
+    ],
+    "start": [
+      136.33429496812386,
+      -114.7333443521045
+    ],
+    "end": [
+      -243.9717729911855,
+      320.8712557331179
+    ]
+  },
+  {
+    "fid": "d30ff7f1-a244-474f-864c-a254193d939e~osm566608_1000000",
+    "source": "r2297231@253",
+    "class": "motorway",
+    "tags": {
+      "highway": "motorway",
+      "lanes": "2",
+      "oneway": "yes"
+    },
+    "lanes": [
+      2,
+      0
+    ],
+    "width": 8.2,
+    "ranges": [
+      [
+        0.0,
+        1.0,
+        "bridge"
+      ]
+    ],
+    "start": [
+      -557.3066067205482,
+      301.4944353603165
+    ],
+    "end": [
+      -364.46779732879236,
+      145.1472089924202
+    ]
+  },
+  {
+    "fid": "dcd79d34-1c2c-4415-9dc8-04fd8237c418",
+    "source": "w8642124@20",
+    "class": "motorway",
+    "tags": {
+      "highway": "motorway",
+      "lanes": "1",
+      "oneway": "yes"
+    },
+    "lanes": [
+      1,
+      0
+    ],
+    "width": 4.6,
+    "ranges": [],
+    "start": [
+      -174.93726687428205,
+      -236.28809199475296
+    ],
+    "end": [
+      -289.07335165772133,
+      -210.34703643965912
+    ]
+  },
+  {
+    "fid": "dce20a06-7aa4-4b0a-99d4-79484ac2532b~osm0_578078",
+    "source": "w8648443@17",
+    "class": "motorway",
+    "tags": {
+      "highway": "motorway_link",
+      "lanes": "1",
+      "oneway": "yes"
+    },
+    "lanes": [
+      1,
+      0
+    ],
+    "width": 4.5,
+    "ranges": [
+      [
+        0.0,
+        1.0,
+        "bridge"
+      ]
+    ],
+    "start": [
+      -344.3028543097721,
+      331.6281084105301
+    ],
+    "end": [
+      -571.5318966879179,
+      297.2080712445156
+    ]
+  },
+  {
+    "fid": "dce20a06-7aa4-4b0a-99d4-79484ac2532b~osm578078_1000000",
+    "source": "w8648443@17",
+    "class": "motorway",
+    "tags": {
+      "highway": "motorway_link",
+      "lanes": "1",
+      "oneway": "yes"
+    },
+    "lanes": [
+      1,
+      0
+    ],
+    "width": 4.5,
+    "ranges": [
+      [
+        0.0,
+        1.0,
+        "bridge"
+      ]
+    ],
+    "start": [
+      -571.5318966879179,
+      297.2080712445156
+    ],
+    "end": [
+      -364.46779732879236,
+      145.1472089924202
+    ]
+  },
+  {
+    "fid": "ddd9a6a1-d870-4f5a-b6c8-13e4f2963181",
+    "source": "r1345448@629",
+    "class": "trunk",
+    "tags": {
+      "highway": "trunk",
+      "lanes": "2",
+      "name": "Charles River Dam Road",
+      "oneway": "yes"
+    },
+    "lanes": [
+      2,
+      0
+    ],
+    "width": 8.2,
+    "ranges": [],
+    "start": [
+      -429.1074662797385,
+      -196.48812953518177
+    ],
+    "end": [
+      -451.1576414798165,
+      -178.33620455563653
+    ]
+  },
+  {
+    "fid": "df9bdb4e-b68a-4f99-81e3-450cbc98a3b6~osm0_616976",
+    "source": "r1345448@629",
+    "class": "trunk",
+    "tags": {
+      "highway": "trunk",
+      "lanes": "2",
+      "name": "Storrow Drive",
+      "oneway": "yes"
+    },
+    "lanes": [
+      2,
+      0
+    ],
+    "width": 7.3,
+    "ranges": [],
+    "start": [
+      -433.7948611685695,
+      -202.16404969247816
+    ],
+    "end": [
+      -518.4738281275048,
+      -301.8973294779331
+    ]
+  },
+  {
+    "fid": "e416b7e4-b140-4862-82b1-b7022a11411e",
+    "source": "w288994035@21",
+    "class": "trunk",
+    "tags": {
+      "highway": "trunk",
+      "lanes": "2",
+      "name": "Charles River Dam Road",
+      "oneway": "yes"
+    },
+    "lanes": [
+      2,
+      0
+    ],
+    "width": 8.2,
+    "ranges": [],
+    "start": [
+      -380.8957635577676,
+      -222.52816508148564
+    ],
+    "end": [
+      -429.1074662797385,
+      -196.48812953518177
+    ]
+  },
+  {
+    "fid": "e5155cb2-fb68-43c3-8870-241d9ea14246~osm0_456932",
+    "source": "r2297231@253",
+    "class": "motorway",
+    "tags": {
+      "highway": "motorway",
+      "lanes": "2",
+      "oneway": "yes"
+    },
+    "lanes": [
+      2,
+      0
+    ],
+    "width": 8.2,
+    "ranges": [
+      [
+        0.0,
+        1.0,
+        "bridge"
+      ]
+    ],
+    "start": [
+      -364.46779732879236,
+      145.1472089924202
+    ],
+    "end": [
+      -130.5551171978156,
+      158.80184343555865
+    ]
+  },
+  {
+    "fid": "e5155cb2-fb68-43c3-8870-241d9ea14246~osm456932_841818",
+    "source": "r2297231@253",
+    "class": "motorway",
+    "tags": {
+      "highway": "motorway",
+      "lanes": "2",
+      "oneway": "yes"
+    },
+    "lanes": [
+      2,
+      0
+    ],
+    "width": 8.2,
+    "ranges": [],
+    "start": [
+      -130.5551171978156,
+      158.80184343555865
+    ],
+    "end": [
+      45.714262041536024,
+      248.94255366286345
+    ]
+  },
+  {
+    "fid": "e5155cb2-fb68-43c3-8870-241d9ea14246~osm841818_1000000",
+    "source": "r2297231@253",
+    "class": "motorway",
+    "tags": {
+      "highway": "motorway",
+      "lanes": "2",
+      "oneway": "yes"
+    },
+    "lanes": [
+      2,
+      0
+    ],
+    "width": 8.2,
+    "ranges": [
+      [
+        0.0,
+        1.0,
+        "tunnel"
+      ]
+    ],
+    "start": [
+      45.714262041536024,
+      248.94255366286345
+    ],
+    "end": [
+      102.30032605726875,
+      307.91581306420335
+    ]
+  },
+  {
+    "fid": "ec67c36c-55db-404f-ab08-ac6a08980c9d",
+    "source": "r2297231@253",
+    "class": "motorway",
+    "tags": {
+      "highway": "motorway",
+      "lanes": "3",
+      "name": "John F. Fitzgerald Expressway",
+      "oneway": "yes"
+    },
+    "lanes": [
+      3,
+      0
+    ],
+    "width": 11.8,
+    "ranges": [
+      [
+        0.0,
+        1.0,
+        "bridge"
+      ]
+    ],
+    "start": [
+      -263.96381493688995,
+      282.21601391418847
+    ],
+    "end": [
+      -99.01671756705701,
+      106.26026178444022
+    ]
+  },
+  {
+    "fid": "ed487a81-a63b-4821-a522-6e33c1b7fed1",
+    "source": "r1345448@629",
+    "class": "trunk",
+    "tags": {
+      "highway": "trunk_link",
+      "lanes": "2",
+      "oneway": "yes"
+    },
+    "lanes": [
+      2,
+      0
+    ],
+    "width": 7.3,
+    "ranges": [],
+    "start": [
+      -458.91579330625297,
+      -282.72906415558487
+    ],
+    "end": [
+      -423.23524226456493,
+      -212.96171144481497
+    ]
+  },
+  {
+    "fid": "f97ee15c-09f5-4ffa-a7a8-98a550bedcd9~osm0_110636",
+    "source": "w8641441@25",
+    "class": "motorway",
+    "tags": {
+      "highway": "motorway_link",
+      "lanes": "1",
+      "oneway": "yes"
+    },
+    "lanes": [
+      1,
+      0
+    ],
+    "width": 4.5,
+    "ranges": [],
+    "start": [
+      36.1594904458056,
+      269.8700898003588
+    ],
+    "end": [
+      -8.096902166236092,
+      259.0396322371004
+    ]
+  },
+  {
+    "fid": "f97ee15c-09f5-4ffa-a7a8-98a550bedcd9~osm110636_1000000",
+    "source": "w8641441@25",
+    "class": "motorway",
+    "tags": {
+      "highway": "motorway_link",
+      "lanes": "1",
+      "oneway": "yes"
+    },
+    "lanes": [
+      1,
+      0
+    ],
+    "width": 4.5,
+    "ranges": [
+      [
+        0.0,
+        1.0,
+        "bridge"
+      ]
+    ],
+    "start": [
+      -8.096902166236092,
+      259.0396322371004
+    ],
+    "end": [
+      -352.07893848835573,
+      155.33265434660717
+    ]
+  },
+  {
+    "fid": "fb506f27-1123-4591-b17f-a3404c04e2ed",
+    "source": "r1345183@165",
+    "class": "trunk",
+    "tags": {
+      "highway": "trunk",
+      "lanes": "3",
+      "name": "Storrow Drive",
+      "oneway": "yes"
+    },
+    "lanes": [
+      3,
+      0
+    ],
+    "width": 11.0,
+    "ranges": [],
+    "start": [
+      -458.91579330625297,
+      -282.72906415558487
+    ],
+    "end": [
+      -377.7414907569105,
+      -234.3583989750285
+    ]
+  },
+  {
+    "fid": "fe9b7b1c-021d-4d7d-8136-8fdd748cf236~osm397803_1000000",
+    "source": "r2297231@253",
+    "class": "motorway",
+    "tags": {
+      "highway": "motorway",
+      "lanes": "4",
+      "name": "John F. Fitzgerald Expressway",
+      "oneway": "yes"
+    },
+    "lanes": [
+      4,
+      0
+    ],
+    "width": 15.4,
+    "ranges": [
+      [
+        0.0,
+        1.0,
+        "bridge"
+      ]
+    ],
+    "start": [
+      122.73471948393983,
+      -126.1081468283857
+    ],
+    "end": [
+      -331.9787289832894,
+      373.8603216742442
+    ]
+  }
+]

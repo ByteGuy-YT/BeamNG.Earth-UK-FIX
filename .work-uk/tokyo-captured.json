@@ -1,0 +1,9 @@
+[
+  {
+    "name": "tokyo",
+    "ok": false,
+    "error": "Bridge clearance deficit: 12.511 m",
+    "trace": "Traceback (most recent call last):\n  File \"tools/validate_world_geometry.py\", line 106, in <module>\n    assert min(clearance_samples,default=0.)>-.03,f'Bridge clearance deficit: {-min(clearance_samples):.3f} m'\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: Bridge clearance deficit: 12.511 m\n",
+    "seconds": 116.78726949999691
+  }
+]

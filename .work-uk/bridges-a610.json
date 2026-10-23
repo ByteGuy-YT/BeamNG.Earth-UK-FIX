@@ -1,0 +1,2120 @@
+[
+  {
+    "id": "4a4eb243-ee12-4e5e-98f8-5f022e4122f7~osm991046_1000000",
+    "class": "unclassified",
+    "tags": {
+      "bridge": "yes",
+      "highway": "unclassified",
+      "layer": "1",
+      "name": "Boat Lane",
+      "source:name": "Sign on bridge"
+    },
+    "ll": [
+      [
+        -1.3377938060027799,
+        53.041050098654395
+      ],
+      [
+        -1.3377938,
+        53.0410501
+      ],
+      [
+        -1.3375,
+        53.0410944
+      ]
+    ]
+  },
+  {
+    "id": "4f2653ed-0acc-453c-8bd9-481828001498",
+    "class": "trunk",
+    "tags": {
+      "highway": "trunk",
+      "lanes": "2",
+      "ref": "A610",
+      "surface": "asphalt"
+    },
+    "ll": [
+      [
+        -1.3240040465276863,
+        53.02512333885021
+      ],
+      [
+        -1.3240044,
+        53.0251241
+      ],
+      [
+        -1.3240999081479858,
+        53.0253517277527
+      ]
+    ]
+  },
+  {
+    "id": "4f2653ed-0acc-453c-8bd9-481828001498",
+    "class": "trunk",
+    "tags": {
+      "highway": "trunk",
+      "lanes": "2",
+      "ref": "A610",
+      "surface": "asphalt"
+    },
+    "ll": [
+      [
+        -1.3275176084267597,
+        53.02829968070207
+      ],
+      [
+        -1.3275236,
+        53.0283024
+      ],
+      [
+        -1.327914103829576,
+        53.02845814894487
+      ]
+    ]
+  },
+  {
+    "id": "4f2653ed-0acc-453c-8bd9-481828001498",
+    "class": "trunk",
+    "tags": {
+      "highway": "trunk",
+      "lanes": "2",
+      "ref": "A610",
+      "surface": "asphalt"
+    },
+    "ll": [
+      [
+        -1.334009332084604,
+        53.029212349732475
+      ],
+      [
+        -1.3340139,
+        53.029212
+      ],
+      [
+        -1.3345133406608662,
+        53.02915370879147
+      ]
+    ]
+  },
+  {
+    "id": "4f2653ed-0acc-453c-8bd9-481828001498",
+    "class": "trunk",
+    "tags": {
+      "highway": "trunk",
+      "lanes": "2",
+      "ref": "A610",
+      "surface": "asphalt"
+    },
+    "ll": [
+      [
+        -1.3357765028482926,
+        53.02895587531815
+      ],
+      [
+        -1.3357801,
+        53.0289553
+      ],
+      [
+        -1.336337458930148,
+        53.028864030735306
+      ]
+    ]
+  },
+  {
+    "id": "a9827dfb-c594-4fc5-b9c0-72bcf98eced1~osm430466_602044",
+    "class": "primary",
+    "tags": {
+      "bridge": "yes",
+      "highway": "primary",
+      "layer": "1",
+      "lit": "yes",
+      "maxspeed": "30 mph",
+      "name": "Mansfield Road",
+      "ref": "A608",
+      "sidewalk": "right"
+    },
+    "ll": [
+      [
+        -1.3417988001847516,
+        53.01725109993209
+      ],
+      [
+        -1.3420419998722488,
+        53.01716170004696
+      ]
+    ]
+  },
+  {
+    "id": "08bd077a-787d-4c5e-b850-794b3a8f1171",
+    "class": "service",
+    "tags": {
+      "foot": "yes",
+      "highway": "service"
+    },
+    "ll": [
+      [
+        -1.3241542649736657,
+        53.02006528161216
+      ],
+      [
+        -1.3241541,
+        53.0200654
+      ],
+      [
+        -1.3239682,
+        53.0201799
+      ]
+    ]
+  },
+  {
+    "id": "141f8ba8-8355-46b3-9ac8-2934c5f4efa4",
+    "class": "service",
+    "tags": {
+      "highway": "service",
+      "state": "disused"
+    },
+    "ll": [
+      [
+        -1.3252695289774792,
+        53.025314849193805
+      ],
+      [
+        -1.3252699,
+        53.0253149
+      ],
+      [
+        -1.3255912,
+        53.0253036
+      ]
+    ]
+  },
+  {
+    "id": "2eff5c8d-6e90-4071-8e81-30c0d394d94a",
+    "class": "service",
+    "tags": {
+      "highway": "service"
+    },
+    "ll": [
+      [
+        -1.3201174,
+        53.0156001
+      ],
+      [
+        -1.3202865,
+        53.0155442
+      ],
+      [
+        -1.3202866190299685,
+        53.01554415711066
+      ]
+    ]
+  },
+  {
+    "id": "56e2abec-6759-4d4c-91d2-1646acc10138",
+    "class": "service",
+    "tags": {
+      "highway": "service"
+    },
+    "ll": [
+      [
+        -1.3256788472906091,
+        53.01770483740601
+      ],
+      [
+        -1.3256785,
+        53.017705
+      ],
+      [
+        -1.3254821315972154,
+        53.01780533057692
+      ]
+    ]
+  },
+  {
+    "id": "77a6e247-2c26-4226-9d2a-1ef4c9fd6f07",
+    "class": "tertiary",
+    "tags": {
+      "highway": "tertiary",
+      "name": "Milnhay Road"
+    },
+    "ll": [
+      [
+        -1.3277864949962968,
+        53.01413390288851
+      ],
+      [
+        -1.3277869,
+        53.0141333
+      ],
+      [
+        -1.3278383571662633,
+        53.01405358600834
+      ]
+    ]
+  },
+  {
+    "id": "7f1f14bf-404e-47c6-abc0-83406533f102",
+    "class": "primary",
+    "tags": {
+      "highway": "primary",
+      "lit": "yes",
+      "maxspeed": "30 mph",
+      "name": "Station Road",
+      "ref": "A608",
+      "source:maxspeed": "survey"
+    },
+    "ll": [
+      [
+        -1.327160930702984,
+        53.02009689907521
+      ],
+      [
+        -1.3271609,
+        53.0200969
+      ],
+      [
+        -1.3269141,
+        53.0200942
+      ],
+      [
+        -1.3269140462963225,
+        53.02009419883338
+      ]
+    ]
+  },
+  {
+    "id": "88cb5d31-fd51-4824-b492-0b49d3510392",
+    "class": "primary",
+    "tags": {
+      "highway": "primary",
+      "junction": "roundabout",
+      "lit": "yes",
+      "maxspeed": "30 mph",
+      "maxspeed:type": "GB:nsl_restricted",
+      "oneway": "yes",
+      "source:maxspeed": "survey"
+    },
+    "ll": [
+      [
+        -1.319566971199749,
+        53.017669841568406
+      ],
+      [
+        -1.3195671,
+        53.0176698
+      ],
+      [
+        -1.3201851973355196,
+        53.01761880021985
+      ]
+    ]
+  },
+  {
+    "id": "c0b93cfd-2e2d-4c40-919c-b652726c3026~osm59077_315825",
+    "class": "primary",
+    "tags": {
+      "bridge": "yes",
+      "canal_bridge_ref": "28",
+      "highway": "primary",
+      "layer": "1",
+      "lit": "yes",
+      "maxspeed": "30 mph",
+      "name": "Derby Road",
+      "ref": "A608",
+      "source:maxspeed": "survey",
+      "surface": "asphalt"
+    },
+    "ll": [
+      [
+        -1.3244934998390379,
+        53.01966219996577
+      ],
+      [
+        -1.3242137,
+        53.0196027
+      ],
+      [
+        -1.3241782,
+        53.0195952
+      ],
+      [
+        -1.324178199548188,
+        53.01959519989727
+      ]
+    ]
+  },
+  {
+    "id": "c4f0cec9-8c60-4f26-b743-d1f01c306bb1",
+    "class": "service",
+    "tags": {
+      "highway": "service",
+      "source": "survey"
+    },
+    "ll": [
+      [
+        -1.3246540125647055,
+        53.01701589555454
+      ],
+      [
+        -1.3248786997984172,
+        53.01693640007132
+      ]
+    ]
+  },
+  {
+    "id": "e53961ec-8acf-4d57-8f7c-2485d1363164~osm29690_255030",
+    "class": "tertiary",
+    "tags": {
+      "bridge": "yes",
+      "highway": "tertiary",
+      "layer": "1",
+      "lit": "yes",
+      "name": "Cromford Road",
+      "old_ref": "A610"
+    },
+    "ll": [
+      [
+        -1.3337499002343274,
+        53.02657500002517
+      ],
+      [
+        -1.3337499,
+        53.026575
+      ],
+      [
+        -1.3333132,
+        53.0265554
+      ],
+      [
+        -1.3333131992415492,
+        53.02655539999293
+      ]
+    ]
+  },
+  {
+    "id": "e5ec67fa-60db-4b83-8392-d7f28e8a653b",
+    "class": "primary",
+    "tags": {
+      "highway": "primary",
+      "junction": "roundabout",
+      "lit": "yes",
+      "maxspeed": "30 mph",
+      "maxspeed:type": "GB:nsl_restricted",
+      "oneway": "yes",
+      "source:maxspeed": "survey"
+    },
+    "ll": [
+      [
+        -1.3208050795612472,
+        53.01828505151161
+      ],
+      [
+        -1.3208049,
+        53.0182851
+      ],
+      [
+        -1.3201642995275298,
+        53.01834919004259
+      ]
+    ]
+  },
+  {
+    "id": "ff8c8b84-2306-4848-bc19-215baa1b03bf",
+    "class": "tertiary",
+    "tags": {
+      "alt_name": "Aldred's Lane",
+      "highway": "tertiary",
+      "name": "Aldreds Lane",
+      "note": "The street signs do not include the apostrophe",
+      "source": "survey"
+    },
+    "ll": [
+      [
+        -1.3366570838820016,
+        53.016910025284844
+      ],
+      [
+        -1.3366571,
+        53.01691
+      ],
+      [
+        -1.3367554750982467,
+        53.01676303720079
+      ]
+    ]
+  },
+  {
+    "id": "ff8c8b84-2306-4848-bc19-215baa1b03bf",
+    "class": "tertiary",
+    "tags": {
+      "alt_name": "Aldred's Lane",
+      "highway": "tertiary",
+      "name": "Aldreds Lane",
+      "note": "The street signs do not include the apostrophe",
+      "source": "survey"
+    },
+    "ll": [
+      [
+        -1.3372649448305378,
+        53.016092835969246
+      ],
+      [
+        -1.3374141,
+        53.0158798
+      ],
+      [
+        -1.3374141342383878,
+        53.01587974564128
+      ]
+    ]
+  },
+  {
+    "id": "e95c1098-5f4b-4469-ac30-3b822787cbbd",
+    "class": "service",
+    "tags": {
+      "highway": "service"
+    },
+    "ll": [
+      [
+        -1.2993504948485848,
+        53.021913131153795
+      ],
+      [
+        -1.29934,
+        53.0219766
+      ]
+    ]
+  },
+  {
+    "id": "02c2c484-279f-47b3-8457-a6fcf0e4416f",
+    "class": "service",
+    "tags": {
+      "designation": "public_bridleway",
+      "highway": "service",
+      "source": "Bing;GPS",
+      "surface": "gravel"
+    },
+    "ll": [
+      [
+        -1.2948417817330797,
+        53.02277757750911
+      ],
+      [
+        -1.2948418,
+        53.0227776
+      ],
+      [
+        -1.29490726380725,
+        53.02285475734228
+      ]
+    ]
+  },
+  {
+    "id": "4d9bab1c-b55c-4c0e-8ccc-56a575722c25",
+    "class": "secondary",
+    "tags": {
+      "highway": "secondary",
+      "name": "Moorgreen",
+      "ref": "B600"
+    },
+    "ll": [
+      [
+        -1.2821391011481267,
+        53.02861615755228
+      ],
+      [
+        -1.2821393,
+        53.0286163
+      ],
+      [
+        -1.2822646680845915,
+        53.02871179951304
+      ]
+    ]
+  },
+  {
+    "id": "31077f27-3913-4d57-a1e4-6f4dd61a7ed6~osm494274_532372",
+    "class": "secondary",
+    "tags": {
+      "bridge": "yes",
+      "highway": "secondary",
+      "layer": "1",
+      "maxweight:signed": "no",
+      "name": "Long Lane",
+      "ref": "B6009"
+    },
+    "ll": [
+      [
+        -1.2425961981138218,
+        53.01492230062135
+      ],
+      [
+        -1.2425962,
+        53.0149223
+      ],
+      [
+        -1.2436363933614796,
+        53.014567302265604
+      ]
+    ]
+  },
+  {
+    "id": "3bfefb99-8f91-479e-9201-eee5cb496e74~osm29086_33371",
+    "class": "motorway",
+    "tags": {
+      "active_traffic_management": "yes",
+      "bridge": "yes",
+      "carriageway_ref": "A",
+      "enforcement:maxspeed": "yes",
+      "highway": "motorway",
+      "int_ref": "E 13",
+      "lanes": "5",
+      "layer": "1",
+      "lit": "yes",
+      "maxspeed": "70 mph",
+      "maxspeed:type": "GB:motorway",
+      "maxspeed:variable": "signals",
+      "national_highways:area": "7",
+      "oneway": "yes",
+      "operator": "National Highways",
+      "operator:wikidata": "Q5760006",
+      "ref": "M1",
+      "source:maxspeed": "survey",
+      "surface": "asphalt",
+      "turn:lanes": "merge_to_right||||"
+    },
+    "ll": [
+      [
+        -1.2315913976779715,
+        52.995157407096535
+      ],
+      [
+        -1.2314935,
+        52.9954566
+      ],
+      [
+        -1.231493493806798,
+        52.99545662403854
+      ]
+    ]
+  },
+  {
+    "id": "3bfefb99-8f91-479e-9201-eee5cb496e74~osm801247_804639",
+    "class": "motorway",
+    "tags": {
+      "active_traffic_management": "yes",
+      "bridge": "yes",
+      "carriageway_ref": "A",
+      "enforcement:maxspeed": "yes",
+      "highway": "motorway",
+      "int_ref": "E 13",
+      "lanes": "4",
+      "layer": "1",
+      "lit": "yes",
+      "maxspeed": "70 mph",
+      "maxspeed:type": "GB:motorway",
+      "maxspeed:variable": "signals",
+      "national_highways:area": "7",
+      "oneway": "yes",
+      "operator": "National Highways",
+      "operator:wikidata": "Q5760006",
+      "ref": "M1",
+      "source:maxspeed": "survey",
+      "surface": "asphalt"
+    },
+    "ll": [
+      [
+        -1.2565959000905587,
+        53.04696701150573
+      ],
+      [
+        -1.2565978,
+        53.0472084
+      ],
+      [
+        -1.256597800341529,
+        53.047208411435015
+      ]
+    ]
+  },
+  {
+    "id": "3bfefb99-8f91-479e-9201-eee5cb496e74~osm86797_91396",
+    "class": "motorway",
+    "tags": {
+      "active_traffic_management": "yes",
+      "bridge": "yes",
+      "carriageway_ref": "A",
+      "enforcement:maxspeed": "yes",
+      "highway": "motorway",
+      "int_ref": "E 13",
+      "lanes": "4",
+      "layer": "1",
+      "lit": "yes",
+      "maxspeed": "70 mph",
+      "maxspeed:type": "GB:motorway",
+      "maxspeed:variable": "signals",
+      "national_highways:area": "7",
+      "oneway": "yes",
+      "operator": "National Highways",
+      "operator:wikidata": "Q5760006",
+      "ref": "M1",
+      "source:maxspeed": "survey",
+      "surface": "asphalt"
+    },
+    "ll": [
+      [
+        -1.2310855007513464,
+        52.999242206025535
+      ],
+      [
+        -1.231126199019058,
+        52.99956859213319
+      ]
+    ]
+  },
+  {
+    "id": "42c2dfa4-b92d-4a7d-bf99-299977315862~osm196989_200480",
+    "class": "motorway",
+    "tags": {
+      "active_traffic_management": "yes",
+      "bridge": "yes",
+      "carriageway_ref": "B",
+      "enforcement:maxspeed": "yes",
+      "highway": "motorway",
+      "int_ref": "E 13",
+      "lanes": "4",
+      "layer": "1",
+      "lit": "yes",
+      "maxspeed": "70 mph",
+      "maxspeed:type": "GB:motorway",
+      "maxspeed:variable": "signals",
+      "national_highways:area": "7",
+      "oneway": "yes",
+      "operator": "National Highways",
+      "operator:wikidata": "Q5760006",
+      "ref": "M1",
+      "source:maxspeed": "survey",
+      "surface": "asphalt"
+    },
+    "ll": [
+      [
+        -1.2563510998016225,
+        53.04720902405168
+      ],
+      [
+        -1.2563511,
+        53.047209
+      ],
+      [
+        -1.2563463,
+        53.046964
+      ],
+      [
+        -1.2563462991381813,
+        53.046963988894056
+      ]
+    ]
+  },
+  {
+    "id": "42c2dfa4-b92d-4a7d-bf99-299977315862~osm920619_925276",
+    "class": "motorway",
+    "tags": {
+      "active_traffic_management": "yes",
+      "bridge": "yes",
+      "carriageway_ref": "B",
+      "enforcement:maxspeed": "yes",
+      "highway": "motorway",
+      "int_ref": "E 13",
+      "lanes": "5",
+      "layer": "1",
+      "lit": "yes",
+      "maxspeed": "70 mph",
+      "maxspeed:type": "GB:motorway",
+      "maxspeed:variable": "signals",
+      "national_highways:area": "7",
+      "oneway": "yes",
+      "operator": "National Highways",
+      "operator:wikidata": "Q5760006",
+      "ref": "M1",
+      "source:maxspeed": "survey",
+      "surface": "asphalt"
+    },
+    "ll": [
+      [
+        -1.2308755965894564,
+        52.999532471205846
+      ],
+      [
+        -1.2308503,
+        52.9993189
+      ],
+      [
+        -1.2308422012690226,
+        52.99920621765665
+      ]
+    ]
+  },
+  {
+    "id": "42c2dfa4-b92d-4a7d-bf99-299977315862~osm979348_983884",
+    "class": "motorway",
+    "tags": {
+      "active_traffic_management": "yes",
+      "bridge": "yes",
+      "carriageway_ref": "B",
+      "enforcement:maxspeed": "yes",
+      "highway": "motorway",
+      "int_ref": "E 13",
+      "lanes": "5",
+      "layer": "1",
+      "lit": "yes",
+      "maxspeed": "70 mph",
+      "maxspeed:type": "GB:motorway",
+      "maxspeed:variable": "signals",
+      "national_highways:area": "7",
+      "oneway": "yes",
+      "operator": "National Highways",
+      "operator:wikidata": "Q5760006",
+      "ref": "M1",
+      "source:maxspeed": "survey",
+      "surface": "asphalt"
+    },
+    "ll": [
+      [
+        -1.2312365067015307,
+        52.99542797663399
+      ],
+      [
+        -1.2313264987578922,
+        52.99511420433082
+      ]
+    ]
+  },
+  {
+    "id": "84f1ad1b-6d50-4c7f-a538-531ed161552b",
+    "class": "track",
+    "tags": {
+      "highway": "track"
+    },
+    "ll": [
+      [
+        -1.3181868236634737,
+        53.00968005275668
+      ],
+      [
+        -1.3181869,
+        53.00968
+      ],
+      [
+        -1.3183564021453489,
+        53.009558270275335
+      ]
+    ]
+  },
+  {
+    "id": "9f69e05e-abe1-4e9f-8a43-0141441a27f1",
+    "class": "track",
+    "tags": {
+      "highway": "track",
+      "source": "Bing"
+    },
+    "ll": [
+      [
+        -1.3259754054884538,
+        53.00917420619657
+      ],
+      [
+        -1.3259752,
+        53.0091743
+      ],
+      [
+        -1.3257050124498,
+        53.0092800168743
+      ]
+    ]
+  },
+  {
+    "id": "193af92f-a4cc-432a-a47b-b2c40b8a5c31",
+    "class": "unclassified",
+    "tags": {
+      "highway": "unclassified",
+      "name": "Tinsley Road"
+    },
+    "ll": [
+      [
+        -1.3134742804571067,
+        53.01015570729402
+      ],
+      [
+        -1.3129655,
+        53.0103456
+      ],
+      [
+        -1.3129654887694675,
+        53.01034560426554
+      ]
+    ]
+  },
+  {
+    "id": "69464e36-beff-48d6-b1ef-1f7f82ba0480",
+    "class": "track",
+    "tags": {
+      "alt_name": "Hall's Lane",
+      "bicycle": "yes",
+      "designation": "public_bridleway",
+      "foot": "designated",
+      "highway": "track",
+      "horse": "designated",
+      "motor_vehicle": "private",
+      "name": "Halls Lane",
+      "surface": "asphalt",
+      "tracktype": "grade1"
+    },
+    "ll": [
+      [
+        -1.3002720484577939,
+        53.00407901400452
+      ],
+      [
+        -1.3005789,
+        53.0036023
+      ],
+      [
+        -1.3005789214151176,
+        53.00360225940716
+      ]
+    ]
+  },
+  {
+    "id": "7afc82ea-9dfc-45f8-b966-c7eafe4a2c8d",
+    "class": "track",
+    "tags": {
+      "bridge": "yes",
+      "highway": "track",
+      "ref": "24",
+      "surface": "unhewn_cobblestone"
+    },
+    "ll": [
+      [
+        -1.3088172,
+        53.0019288
+      ],
+      [
+        -1.3090073,
+        53.001854
+      ]
+    ]
+  },
+  {
+    "id": "acb021df-73bf-49cf-b4ce-8d9a10fc60e7",
+    "class": "track",
+    "tags": {
+      "highway": "track",
+      "name": "Tinsley Road",
+      "surface": "dirt",
+      "tracktype": "grade2"
+    },
+    "ll": [
+      [
+        -1.3168503731353356,
+        53.01053111353154
+      ],
+      [
+        -1.3168504,
+        53.0105311
+      ],
+      [
+        -1.3170564735628834,
+        53.01047210756812
+      ]
+    ]
+  },
+  {
+    "id": "e2cb85ce-3338-48a6-86a0-b945ee32fe50",
+    "class": "residential",
+    "tags": {
+      "highway": "residential"
+    },
+    "ll": [
+      [
+        -1.3122546627009661,
+        53.00342981079474
+      ],
+      [
+        -1.3121341,
+        53.0035271
+      ],
+      [
+        -1.3121339790906579,
+        53.00352718972458
+      ]
+    ]
+  },
+  {
+    "id": "e2cb85ce-3338-48a6-86a0-b945ee32fe50",
+    "class": "residential",
+    "tags": {
+      "highway": "residential"
+    },
+    "ll": [
+      [
+        -1.3110528447945298,
+        53.00415507915989
+      ],
+      [
+        -1.3108346,
+        53.0042008
+      ],
+      [
+        -1.3108335032482148,
+        53.00420112024018
+      ]
+    ]
+  },
+  {
+    "id": "59e83774-16e8-47ac-8eba-8689e82f5f38",
+    "class": "service",
+    "tags": {
+      "highway": "service",
+      "layer": "1",
+      "service": "parking_aisle"
+    },
+    "ll": [
+      [
+        -1.2845397,
+        53.0032947
+      ],
+      [
+        -1.28363,
+        53.0031229
+      ]
+    ]
+  },
+  {
+    "id": "6b16cb15-a21b-4fe7-8f9a-c1c965daa454",
+    "class": "service",
+    "tags": {
+      "highway": "service",
+      "layer": "1",
+      "service": "parking_aisle"
+    },
+    "ll": [
+      [
+        -1.2845397,
+        53.0032947
+      ],
+      [
+        -1.2846167,
+        53.00316
+      ]
+    ]
+  },
+  {
+    "id": "b53cf99e-2905-49ce-88f9-12559a5f26ef",
+    "class": "service",
+    "tags": {
+      "highway": "service",
+      "layer": "1",
+      "service": "parking_aisle"
+    },
+    "ll": [
+      [
+        -1.2849512,
+        53.0032241
+      ],
+      [
+        -1.2846167,
+        53.00316
+      ],
+      [
+        -1.2836957,
+        53.0029835
+      ],
+      [
+        -1.28363,
+        53.0031229
+      ],
+      [
+        -1.2835673,
+        53.0032561
+      ],
+      [
+        -1.2844662,
+        53.0034233
+      ],
+      [
+        -1.2845397,
+        53.0032947
+      ]
+    ]
+  },
+  {
+    "id": "083c4f68-f3ee-4926-b3b9-73a93c636eab",
+    "class": "track",
+    "tags": {
+      "highway": "track"
+    },
+    "ll": [
+      [
+        -1.2376382223799878,
+        53.00834124565049
+      ],
+      [
+        -1.2367729,
+        53.0087863
+      ]
+    ]
+  },
+  {
+    "id": "77f94dd9-d521-4e89-9e68-fe136c745d8b",
+    "class": "service",
+    "tags": {
+      "bridge": "yes",
+      "highway": "service",
+      "layer": "1"
+    },
+    "ll": [
+      [
+        -1.23477,
+        53.0059009
+      ],
+      [
+        -1.2338023,
+        53.0062313
+      ]
+    ]
+  },
+  {
+    "id": "042ed420-53b2-42f3-9eda-576f3c8ac197",
+    "class": "service",
+    "tags": {
+      "bicycle": "yes",
+      "cycleway": "yes",
+      "designation": "public_bridleway",
+      "foot": "yes",
+      "highway": "service",
+      "horse": "yes",
+      "name": "Dog Kennel Lane",
+      "prow_ref": "Shipley BW 5",
+      "source:prow_ref": "Derbyshire County Council PROW data",
+      "surface": "asphalt"
+    },
+    "ll": [
+      [
+        -1.3428125926905776,
+        52.998184878900275
+      ],
+      [
+        -1.342833,
+        52.9981191
+      ],
+      [
+        -1.3428330808279805,
+        52.99811848873839
+      ]
+    ]
+  },
+  {
+    "id": "3fc37a8f-8d77-4e5b-ac27-c1a0b06daf41~osm652832_675730",
+    "class": "unclassified",
+    "tags": {
+      "bridge": "yes",
+      "highway": "unclassified",
+      "layer": "1",
+      "name": "The Field",
+      "source:name": "Sign"
+    },
+    "ll": [
+      [
+        -1.3382921994104162,
+        52.99908730016974
+      ],
+      [
+        -1.3379386,
+        52.9991891
+      ],
+      [
+        -1.3379385948485032,
+        52.9991891010179
+      ]
+    ]
+  },
+  {
+    "id": "f2b9fb1d-d57e-4ca8-8ab8-4f071a1bd9f7",
+    "class": "track",
+    "tags": {
+      "bridge": "yes",
+      "designation": "public_bridleway",
+      "highway": "track",
+      "layer": "1",
+      "name": "Bell Lane",
+      "source": "GPS",
+      "source:name": "OS_OpenData_Locator",
+      "surface": "gravel",
+      "tracktype": "grade1"
+    },
+    "ll": [
+      [
+        -1.3621424,
+        52.9932769
+      ],
+      [
+        -1.362298,
+        52.9932584
+      ]
+    ]
+  },
+  {
+    "id": "64a9b3a4-d301-4084-b43e-deab5cc1d219",
+    "class": "service",
+    "tags": {
+      "highway": "service",
+      "surface": "asphalt"
+    },
+    "ll": [
+      [
+        -1.3034549207308166,
+        52.9912628730742
+      ],
+      [
+        -1.303566,
+        52.9911186
+      ]
+    ]
+  },
+  {
+    "id": "cf6c63d8-3561-410a-b27a-ce7764b08ddf",
+    "class": "service",
+    "tags": {
+      "highway": "service",
+      "motorcar": "no",
+      "motorcycle": "no"
+    },
+    "ll": [
+      [
+        -1.2990048370143492,
+        52.98953587366578
+      ],
+      [
+        -1.2990045,
+        52.9895355
+      ],
+      [
+        -1.2989063726700234,
+        52.98937434779955
+      ]
+    ]
+  },
+  {
+    "id": "295d19a2-9df5-4961-99cc-12a33571d426~osm262310_652897",
+    "class": "trunk",
+    "tags": {
+      "bridge": "yes",
+      "expressway": "yes",
+      "highway": "trunk",
+      "lanes": "2",
+      "layer": "1",
+      "lit": "yes",
+      "maxspeed": "50 mph",
+      "oneway": "yes",
+      "ref": "A610",
+      "source:maxspeed": "survey",
+      "surface": "asphalt"
+    },
+    "ll": [
+      [
+        -1.2764127973830093,
+        52.99926499938352
+      ],
+      [
+        -1.2764128,
+        52.999265
+      ],
+      [
+        -1.277435,
+        52.9994965
+      ],
+      [
+        -1.2781383,
+        52.9996614
+      ],
+      [
+        -1.2798395,
+        53.0000534
+      ],
+      [
+        -1.2804278,
+        53.0001859
+      ],
+      [
+        -1.2808941,
+        53.0002929
+      ],
+      [
+        -1.281352794657227,
+        53.000392698837565
+      ]
+    ]
+  },
+  {
+    "id": "ea8017f4-a449-49c0-842d-436f906860c7~osm321270_678569",
+    "class": "trunk",
+    "tags": {
+      "bridge": "yes",
+      "expressway": "yes",
+      "highway": "trunk",
+      "lanes": "2",
+      "layer": "1",
+      "lit": "yes",
+      "maxspeed": "50 mph",
+      "oneway": "yes",
+      "ref": "A610",
+      "source:maxspeed": "survey",
+      "surface": "asphalt"
+    },
+    "ll": [
+      [
+        -1.2813037031681218,
+        53.0004951006966
+      ],
+      [
+        -1.2813037,
+        53.0004951
+      ],
+      [
+        -1.2808455,
+        53.0003965
+      ],
+      [
+        -1.2803838,
+        53.0002894
+      ],
+      [
+        -1.2797797,
+        53.0001531
+      ],
+      [
+        -1.2787201,
+        52.999911
+      ],
+      [
+        -1.2779966,
+        52.999743
+      ],
+      [
+        -1.2771767,
+        52.999555
+      ],
+      [
+        -1.27636630249807,
+        52.99936630058167
+      ]
+    ]
+  },
+  {
+    "id": "cdba251d-5eee-4094-bbd7-309910ad0fe1",
+    "class": "residential",
+    "tags": {
+      "highway": "residential",
+      "name": "Hardy Street",
+      "source:name": "NaPTAN"
+    },
+    "ll": [
+      [
+        -1.2597028202061054,
+        53.000211527021385
+      ],
+      [
+        -1.2597028,
+        53.0002115
+      ],
+      [
+        -1.2595557,
+        53.0000359
+      ],
+      [
+        -1.259555689594317,
+        53.00003588947773
+      ]
+    ]
+  },
+  {
+    "id": "d2c9f806-4c42-48de-b0e6-9bedecd78a99",
+    "class": "tertiary",
+    "tags": {
+      "highway": "tertiary",
+      "source": "survey;gps"
+    },
+    "ll": [
+      [
+        -1.2558561,
+        52.9940862
+      ],
+      [
+        -1.2556602,
+        52.9936373
+      ],
+      [
+        -1.255660197837763,
+        52.993637295404895
+      ]
+    ]
+  },
+  {
+    "id": "83493281-acc1-4d29-a40b-0f696e53dc26",
+    "class": "motorway",
+    "tags": {
+      "active_traffic_management": "yes",
+      "carriageway_ref": "B",
+      "enforcement:maxspeed": "yes",
+      "highway": "motorway",
+      "int_ref": "E 13",
+      "lanes": "4",
+      "lit": "yes",
+      "maxspeed": "70 mph",
+      "maxspeed:type": "GB:motorway",
+      "maxspeed:variable": "signals",
+      "national_highways:area": "7",
+      "oneway": "yes",
+      "operator": "National Highways",
+      "operator:wikidata": "Q5760006",
+      "ref": "M1",
+      "source:maxspeed": "survey",
+      "surface": "asphalt"
+    },
+    "ll": [
+      [
+        -1.2338840168219796,
+        52.99044607711805
+      ],
+      [
+        -1.2338851,
+        52.9904446
+      ],
+      [
+        -1.2341357826778356,
+        52.99014417869561
+      ]
+    ]
+  },
+  {
+    "id": "83493281-acc1-4d29-a40b-0f696e53dc26",
+    "class": "motorway",
+    "tags": {
+      "active_traffic_management": "yes",
+      "carriageway_ref": "B",
+      "enforcement:maxspeed": "yes",
+      "highway": "motorway",
+      "int_ref": "E 13",
+      "lanes": "4",
+      "lit": "yes",
+      "maxspeed": "70 mph",
+      "maxspeed:type": "GB:motorway",
+      "maxspeed:variable": "signals",
+      "national_highways:area": "7",
+      "oneway": "yes",
+      "operator": "National Highways",
+      "operator:wikidata": "Q5760006",
+      "ref": "M1",
+      "source:maxspeed": "survey",
+      "surface": "asphalt"
+    },
+    "ll": [
+      [
+        -1.2345972089670563,
+        52.989602632466834
+      ],
+      [
+        -1.2345986,
+        52.989601
+      ],
+      [
+        -1.2348325552528552,
+        52.98934975888133
+      ]
+    ]
+  },
+  {
+    "id": "a559ac96-7c82-49e5-86bc-8394479dcf34",
+    "class": "motorway",
+    "tags": {
+      "active_traffic_management": "yes",
+      "carriageway_ref": "A",
+      "enforcement:maxspeed": "yes",
+      "highway": "motorway",
+      "int_ref": "E 13",
+      "lanes": "4",
+      "lit": "yes",
+      "maxspeed": "70 mph",
+      "maxspeed:type": "GB:motorway",
+      "maxspeed:variable": "signals",
+      "national_highways:area": "7",
+      "oneway": "yes",
+      "operator": "National Highways",
+      "operator:wikidata": "Q5760006",
+      "ref": "M1",
+      "source:maxspeed": "survey",
+      "surface": "asphalt"
+    },
+    "ll": [
+      [
+        -1.2350900649835852,
+        52.98938149464753
+      ],
+      [
+        -1.2348262,
+        52.9896581
+      ],
+      [
+        -1.234825060639109,
+        52.98965943224673
+      ]
+    ]
+  },
+  {
+    "id": "a559ac96-7c82-49e5-86bc-8394479dcf34",
+    "class": "motorway",
+    "tags": {
+      "active_traffic_management": "yes",
+      "carriageway_ref": "A",
+      "enforcement:maxspeed": "yes",
+      "highway": "motorway",
+      "int_ref": "E 13",
+      "lanes": "4",
+      "lit": "yes",
+      "maxspeed": "70 mph",
+      "maxspeed:type": "GB:motorway",
+      "maxspeed:variable": "signals",
+      "national_highways:area": "7",
+      "oneway": "yes",
+      "operator": "National Highways",
+      "operator:wikidata": "Q5760006",
+      "ref": "M1",
+      "source:maxspeed": "survey",
+      "surface": "asphalt"
+    },
+    "ll": [
+      [
+        -1.2343556458580724,
+        52.9902083778109
+      ],
+      [
+        -1.2341079,
+        52.9905142
+      ],
+      [
+        -1.23410704680643,
+        52.990515316781824
+      ]
+    ]
+  },
+  {
+    "id": "013e8763-010e-4814-92c0-abb4d37d7625~osm448011_683998",
+    "class": "tertiary",
+    "tags": {
+      "bridge": "yes",
+      "highway": "tertiary",
+      "lit": "yes",
+      "maxspeed": "20 mph",
+      "name": "Irwin Drive"
+    },
+    "ll": [
+      [
+        -1.2130730000205228,
+        52.994442899963865
+      ],
+      [
+        -1.213073,
+        52.9944429
+      ],
+      [
+        -1.2129439,
+        52.9946229
+      ],
+      [
+        -1.2129438999352147,
+        52.99462290008076
+      ]
+    ]
+  },
+  {
+    "id": "01675029-a468-4a75-986e-47a899417971",
+    "class": "track",
+    "tags": {
+      "bicycle": "yes",
+      "designation": "public_bridleway",
+      "foot": "yes",
+      "highway": "track",
+      "horse": "yes",
+      "prow_ref": "Shipley BW 43",
+      "source:prow_ref": "Derbyshire County Council PROW data"
+    },
+    "ll": [
+      [
+        -1.3397206871448577,
+        52.985234445966995
+      ],
+      [
+        -1.3397208,
+        52.9852347
+      ],
+      [
+        -1.339751472275051,
+        52.98529704040319
+      ]
+    ]
+  },
+  {
+    "id": "350e016e-0c67-4b1a-aa9c-4b87b1693cda~osm671650_687146",
+    "class": "unclassified",
+    "tags": {
+      "bridge": "yes",
+      "highway": "unclassified",
+      "maxspeed": "60 mph",
+      "maxspeed:type": "GB:nsl_single",
+      "name": "Park Hall Lane",
+      "source:maxspeed": "Sign at S",
+      "source:name": "survey"
+    },
+    "ll": [
+      [
+        -1.3668219997954487,
+        52.97808400109624
+      ],
+      [
+        -1.366822,
+        52.978084
+      ],
+      [
+        -1.3668718,
+        52.9778173
+      ],
+      [
+        -1.3668718000231417,
+        52.97781729987583
+      ]
+    ]
+  },
+  {
+    "id": "350e016e-0c67-4b1a-aa9c-4b87b1693cda~osm687146_765570",
+    "class": "unclassified",
+    "tags": {
+      "highway": "unclassified",
+      "maxspeed": "60 mph",
+      "maxspeed:type": "GB:nsl_single",
+      "name": "Park Hall Lane",
+      "source:maxspeed": "Sign at S",
+      "source:name": "survey"
+    },
+    "ll": [
+      [
+        -1.3668718000231417,
+        52.97781729987583
+      ],
+      [
+        -1.3668723180058224,
+        52.977814520615816
+      ]
+    ]
+  },
+  {
+    "id": "497e6904-1460-47f9-be85-449cf04b6ef1",
+    "class": "service",
+    "tags": {
+      "bicycle": "yes",
+      "designation": "public_bridleway",
+      "foot": "yes",
+      "highway": "service",
+      "horse": "yes",
+      "source": "survey"
+    },
+    "ll": [
+      [
+        -1.341373583824082,
+        52.97891236779613
+      ],
+      [
+        -1.34136,
+        52.9789693
+      ],
+      [
+        -1.3413599966286172,
+        52.97896937911512
+      ]
+    ]
+  },
+  {
+    "id": "a3c85fdf-89f6-441d-af0d-6bcec702f8e2",
+    "class": "track",
+    "tags": {
+      "highway": "track"
+    },
+    "ll": [
+      [
+        -1.3412119109855907,
+        52.98023618674594
+      ],
+      [
+        -1.3412121,
+        52.9802362
+      ],
+      [
+        -1.3413987308114181,
+        52.98024438818969
+      ]
+    ]
+  },
+  {
+    "id": "a3c85fdf-89f6-441d-af0d-6bcec702f8e2",
+    "class": "track",
+    "tags": {
+      "highway": "track"
+    },
+    "ll": [
+      [
+        -1.353834567002453,
+        52.97897530756476
+      ],
+      [
+        -1.3538346,
+        52.9789753
+      ],
+      [
+        -1.354088,
+        52.9789188
+      ]
+    ]
+  },
+  {
+    "id": "21fb3101-a848-4b23-a669-1094ce4e694b",
+    "class": "track",
+    "tags": {
+      "foot": "yes",
+      "highway": "track"
+    },
+    "ll": [
+      [
+        -1.3325572500805254,
+        52.97878750939887
+      ],
+      [
+        -1.3325572,
+        52.9787875
+      ],
+      [
+        -1.3324668,
+        52.9787646
+      ]
+    ]
+  },
+  {
+    "id": "387d01c8-a176-4027-86d6-192fee89d698",
+    "class": "primary",
+    "tags": {
+      "highway": "primary",
+      "lit": "yes",
+      "name": "Millership Way",
+      "ref": "A6096",
+      "source:name": "survey",
+      "surface": "asphalt"
+    },
+    "ll": [
+      [
+        -1.2997241084175861,
+        52.97861820536648
+      ],
+      [
+        -1.2992187,
+        52.9787542
+      ],
+      [
+        -1.2992183520319627,
+        52.97875430142566
+      ]
+    ]
+  },
+  {
+    "id": "387d01c8-a176-4027-86d6-192fee89d698",
+    "class": "primary",
+    "tags": {
+      "highway": "primary",
+      "lit": "yes",
+      "name": "Millership Way",
+      "ref": "A6096",
+      "source:name": "survey",
+      "surface": "asphalt"
+    },
+    "ll": [
+      [
+        -1.2987724121255244,
+        52.97888428219224
+      ],
+      [
+        -1.2984158,
+        52.9789861
+      ],
+      [
+        -1.2984155792015433,
+        52.97898617203391
+      ]
+    ]
+  },
+  {
+    "id": "387d01c8-a176-4027-86d6-192fee89d698",
+    "class": "primary",
+    "tags": {
+      "highway": "primary",
+      "lit": "yes",
+      "name": "Millership Way",
+      "ref": "A6096",
+      "source:name": "survey",
+      "surface": "asphalt"
+    },
+    "ll": [
+      [
+        -1.295525153256338,
+        52.97979813656806
+      ],
+      [
+        -1.2955248,
+        52.9797982
+      ],
+      [
+        -1.2950437151180252,
+        52.97986385699365
+      ]
+    ]
+  },
+  {
+    "id": "4aed11a3-f26f-4cb0-8d0b-f5e64f05c6fc",
+    "class": "service",
+    "tags": {
+      "highway": "service"
+    },
+    "ll": [
+      [
+        -1.3176854949569659,
+        52.97872669337529
+      ],
+      [
+        -1.3176415,
+        52.9786689
+      ],
+      [
+        -1.3176414882158827,
+        52.97866888484483
+      ]
+    ]
+  },
+  {
+    "id": "4f86abdc-999e-493c-b50a-c56ec34cf8f3~osm105138_339770",
+    "class": "tertiary",
+    "tags": {
+      "bridge": "yes",
+      "canal_bridge_ref": "20",
+      "highway": "tertiary",
+      "layer": "1",
+      "lit": "yes",
+      "maxspeed": "30 mph",
+      "maxweight": "7.5",
+      "name": "Station Road",
+      "note": "Maxweight applies to goods vehicles",
+      "oneway": "no"
+    },
+    "ll": [
+      [
+        -1.3002674994997332,
+        52.97623310008481
+      ],
+      [
+        -1.299883500312774,
+        52.976298199946974
+      ]
+    ]
+  },
+  {
+    "id": "5710b64f-7c6e-4eae-84f5-10a5c3f2ef75~osm220351_228314",
+    "class": "tertiary",
+    "tags": {
+      "bridge": "yes",
+      "highway": "tertiary",
+      "name": "Newton's Lane",
+      "source:name": "os_locator"
+    },
+    "ll": [
+      [
+        -1.2945193006249467,
+        52.9857622000585
+      ],
+      [
+        -1.2946271983814481,
+        52.9857722998485
+      ]
+    ]
+  },
+  {
+    "id": "5710b64f-7c6e-4eae-84f5-10a5c3f2ef75~osm228314_245502",
+    "class": "tertiary",
+    "tags": {
+      "bridge": "yes",
+      "highway": "tertiary",
+      "lit": "no",
+      "name": "Awsworth Lane",
+      "source:name": "os_locator"
+    },
+    "ll": [
+      [
+        -1.2946271983814481,
+        52.9857722998485
+      ],
+      [
+        -1.2946272,
+        52.9857723
+      ],
+      [
+        -1.294771,
+        52.9857882
+      ],
+      [
+        -1.294858994093849,
+        52.985797999342275
+      ]
+    ]
+  },
+  {
+    "id": "5710b64f-7c6e-4eae-84f5-10a5c3f2ef75~osm469253_535710",
+    "class": "tertiary",
+    "tags": {
+      "bridge": "yes",
+      "highway": "tertiary",
+      "layer": "1",
+      "name": "Awsworth Road",
+      "surface": "asphalt"
+    },
+    "ll": [
+      [
+        -1.2979132039938241,
+        52.985907299277926
+      ],
+      [
+        -1.2987859997715419,
+        52.9857495000413
+      ]
+    ]
+  },
+  {
+    "id": "5710b64f-7c6e-4eae-84f5-10a5c3f2ef75~osm535710_694625",
+    "class": "tertiary",
+    "tags": {
+      "highway": "tertiary",
+      "maxspeed": "60 mph",
+      "maxspeed:type": "GB:nsl_single",
+      "name": "Awsworth Road",
+      "surface": "asphalt"
+    },
+    "ll": [
+      [
+        -1.2987859997715419,
+        52.9857495000413
+      ],
+      [
+        -1.298786,
+        52.9857495
+      ],
+      [
+        -1.2987900348326655,
+        52.98574866003483
+      ]
+    ]
+  },
+  {
+    "id": "5710b64f-7c6e-4eae-84f5-10a5c3f2ef75~osm956628_982562",
+    "class": "tertiary",
+    "tags": {
+      "bridge": "yes",
+      "canal_bridge_ref": "22",
+      "highway": "tertiary",
+      "lanes": "1",
+      "layer": "1",
+      "maxspeed": "30 mph",
+      "name": "Awsworth Road",
+      "sidewalk": "no"
+    },
+    "ll": [
+      [
+        -1.302301698147871,
+        52.98302730063667
+      ],
+      [
+        -1.3023017,
+        52.9830273
+      ],
+      [
+        -1.3023631,
+        52.9830191
+      ],
+      [
+        -1.3026558,
+        52.9830166
+      ],
+      [
+        -1.3026558008084408,
+        52.98301659993709
+      ]
+    ]
+  },
+  {
+    "id": "5966418c-ad80-46f6-ab8c-bfae99f8de7c",
+    "class": "service",
+    "tags": {
+      "access": "private",
+      "highway": "service",
+      "service": "driveway"
+    },
+    "ll": [
+      [
+        -1.2999849199878306,
+        52.98324681019541
+      ],
+      [
+        -1.2999849,
+        52.9832468
+      ],
+      [
+        -1.2998307510648843,
+        52.9831612283473
+      ]
+    ]
+  },
+  {
+    "id": "db0878ae-5937-49b5-8234-8a64389ee6c0~osm781533_878103",
+    "class": "tertiary",
+    "tags": {
+      "bridge": "yes",
+      "highway": "tertiary",
+      "layer": "1",
+      "lit": "yes",
+      "maxspeed": "30 mph",
+      "name": "Station Street",
+      "oneway": "no",
+      "source": "survey"
+    },
+    "ll": [
+      [
+        -1.2967466998964872,
+        52.97735470004721
+      ],
+      [
+        -1.296499600721419,
+        52.97746739967097
+      ]
+    ]
+  },
+  {
+    "id": "93e3e4a8-14bd-4223-9ddf-d3d83fb4b6e3~osm454272_735562",
+    "class": "tertiary",
+    "tags": {
+      "bridge": "yes",
+      "highway": "tertiary",
+      "layer": "1",
+      "lit": "yes",
+      "maxspeed": "30 mph",
+      "name": "Coronation Road",
+      "source:name": "survey"
+    },
+    "ll": [
+      [
+        -1.295304399498735,
+        52.9784491002509
+      ],
+      [
+        -1.2952107,
+        52.978496
+      ],
+      [
+        -1.2951104,
+        52.9785418
+      ],
+      [
+        -1.2949414,
+        52.9785933
+      ],
+      [
+        -1.294424901201549,
+        52.97867919980017
+      ]
+    ]
+  },
+  {
+    "id": "ee02b27e-0bae-4235-97da-a79785a95c83",
+    "class": "track",
+    "tags": {
+      "bicycle": "designated",
+      "designation": "public_bridleway",
+      "foot": "designated",
+      "highway": "track",
+      "horse": "designated",
+      "name": "Robinettes Lane",
+      "source": "GPS",
+      "source:name": "survey"
+    },
+    "ll": [
+      [
+        -1.2532600127944848,
+        52.975453600086304
+      ],
+      [
+        -1.25326,
+        52.9754536
+      ],
+      [
+        -1.2520864,
+        52.9754271
+      ],
+      [
+        -1.2520863813991114,
+        52.975427099462614
+      ]
+    ]
+  },
+  {
+    "id": "595f2618-d125-4017-8c1f-0b2257cd97d8",
+    "class": "track",
+    "tags": {
+      "designation": "public_bridleway",
+      "highway": "track"
+    },
+    "ll": [
+      [
+        -1.2482014,
+        52.9802527
+      ],
+      [
+        -1.2491553992396018,
+        52.980680499659016
+      ]
+    ]
+  },
+  {
+    "id": "eeb8cdd3-52a5-4da4-90b0-ced5b27369a6",
+    "class": "track",
+    "tags": {
+      "bridge": "yes",
+      "designation": "public_footpath",
+      "highway": "track",
+      "layer": "1",
+      "source": "survey; Bing",
+      "surface": "asphalt",
+      "tracktype": "grade1"
+    },
+    "ll": [
+      [
+        -1.2447081,
+        52.9825473
+      ],
+      [
+        -1.2455283,
+        52.9830997
+      ]
+    ]
+  }
+]

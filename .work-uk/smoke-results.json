@@ -1,0 +1,79 @@
+[
+  {
+    "site": "winnats",
+    "features": 73,
+    "mapped_tag_matches": 70,
+    "chunks": 2,
+    "pavement_runs": 0,
+    "ai_nodes": 188,
+    "ai_edges": 187,
+    "roundabout_segments": 0,
+    "seconds": 0.25
+  },
+  {
+    "site": "bakewell",
+    "features": 343,
+    "mapped_tag_matches": 338,
+    "chunks": 265,
+    "pavement_runs": 71,
+    "ai_nodes": 1047,
+    "ai_edges": 1066,
+    "roundabout_segments": 3,
+    "seconds": 0.292
+  },
+  {
+    "site": "m1",
+    "features": 143,
+    "mapped_tag_matches": 141,
+    "chunks": 12,
+    "pavement_runs": 0,
+    "ai_nodes": 526,
+    "ai_edges": 527,
+    "roundabout_segments": 0,
+    "seconds": 0.105
+  },
+  {
+    "site": "baslow",
+    "features": 243,
+    "mapped_tag_matches": 239,
+    "chunks": 65,
+    "pavement_runs": 10,
+    "ai_nodes": 892,
+    "ai_edges": 911,
+    "roundabout_segments": 12,
+    "seconds": 0.153
+  },
+  {
+    "site": "cardiff",
+    "features": 2265,
+    "mapped_tag_matches": 2090,
+    "chunks": 87,
+    "pavement_runs": 16,
+    "ai_nodes": 2569,
+    "ai_edges": 2684,
+    "roundabout_segments": 8,
+    "seconds": 1.207
+  },
+  {
+    "site": "edinburgh",
+    "features": 1807,
+    "mapped_tag_matches": 1700,
+    "chunks": 121,
+    "pavement_runs": 25,
+    "ai_nodes": 2464,
+    "ai_edges": 2530,
+    "roundabout_segments": 26,
+    "seconds": 0.725
+  },
+  {
+    "site": "belfast",
+    "features": 1443,
+    "mapped_tag_matches": 1398,
+    "chunks": 126,
+    "pavement_runs": 16,
+    "ai_nodes": 2051,
+    "ai_edges": 2145,
+    "roundabout_segments": 4,
+    "seconds": 0.573
+  }
+]

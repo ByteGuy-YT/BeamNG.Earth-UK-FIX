@@ -1,0 +1,67 @@
+[
+  {
+    "name": "london",
+    "lat": 51.4927,
+    "lon": -0.1204,
+    "ok": true,
+    "tiles": [
+      {
+        "tile": [
+          0,
+          0
+        ],
+        "chunks": 244,
+        "walls": 1,
+        "road_vertices": 8674,
+        "deck_vertices": 0,
+        "deck_max_profile_error": 0.0,
+        "engine_meshes": 2,
+        "max_engine_vertices": 8674
+      },
+      {
+        "tile": [
+          -1,
+          0
+        ],
+        "chunks": 256,
+        "walls": 12,
+        "road_vertices": 5952,
+        "deck_vertices": 4818,
+        "deck_max_profile_error": 0.021966274505345496,
+        "engine_meshes": 3,
+        "max_engine_vertices": 5952
+      },
+      {
+        "tile": [
+          0,
+          -1
+        ],
+        "chunks": 296,
+        "walls": 1,
+        "road_vertices": 11295,
+        "deck_vertices": 0,
+        "deck_max_profile_error": 0.0,
+        "engine_meshes": 2,
+        "max_engine_vertices": 11294
+      },
+      {
+        "tile": [
+          1,
+          0
+        ],
+        "chunks": 210,
+        "walls": 0,
+        "road_vertices": 7996,
+        "deck_vertices": 0,
+        "deck_max_profile_error": 0.0,
+        "engine_meshes": 1,
+        "max_engine_vertices": 7996
+      }
+    ],
+    "connected_junctions": 4,
+    "max_junction_step": 0.0,
+    "checked_seams": 0,
+    "max_seam_gap": 0.0,
+    "seconds": 81.27810199999658
+  }
+]
