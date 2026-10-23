@@ -185,10 +185,37 @@ def junction_controls(arms, k, link_ok=None, ring=None):
     navgraph.py, so the AI's signals and stop signs are where the props stand. ring: the fids of roundabout rings
     (islands.ring_fids): a junction on a ring (two of its arms) has give-way signs on incoming external arms.
     The AI graph handles their priority, without installing stop controllers on the ring."""
-    if ring and sum(1 for a in arms if a[0] in ring) >= 2:
-        return [(a, G_YIELD) for a in arms if a[0] not in ring and not _outbound(a)]
     major = [a for a in arms if a[1].cls in MAJOR]
     minor = [a for a in arms if a[1].cls in MINOR]
+    if any(a[1].profile is not None for a in arms):
+        # British unsigned priority junctions: no random all-way stops or invented traffic lights.
+        mapped = []
+        for a in arms:
+            p = a[1].profile
+            if p is None or _outbound(a):
+                continue
+            what = p.controls[0 if a[4] else 1] or p.control
+            if what in {"traffic_signals", "stop", "give_way"}:
+                mapped.append((a, {"traffic_signals": G_SIGNAL, "stop": G_STOP, "give_way": G_YIELD}[what]))
+        if mapped:
+            if any(what == G_SIGNAL for _, what in mapped):
+                # A mapped central signal node represents the controlled junction,
+                # including incoming arms whose individual ways carry no signal tag.
+                return [(a, G_SIGNAL) for a in arms if not _outbound(a)
+                        and not (link_ok is not None and len(a)>=6 and a[5]<LINK_M and link_ok(a))]
+            return mapped
+        if any(a[1].profile is not None and a[1].profile.mini_ends[0 if a[4] else 1] for a in arms):
+            return [(a, G_YIELD) for a in arms if not _outbound(a)]
+        if ring and sum(1 for a in arms if a[0] in ring) >= 2:
+            return [(a, G_YIELD) for a in arms if a[0] not in ring and not _outbound(a)]
+        if major:
+            return [(a, G_YIELD) for a in minor if not _outbound(a)]
+        if len(arms) == 3:
+            stem = min(arms, key=lambda a: max(-float(a[2] @ b[2]) for b in arms if b is not a))
+            return [(stem, G_YIELD)] if not _outbound(stem) else []
+        return []
+    if ring and sum(1 for a in arms if a[0] in ring) >= 2:
+        return [(a, G_YIELD) for a in arms if a[0] not in ring and not _outbound(a)]
     if _is_signalled(arms):
         # one head per way in: none on a one-way arm leaving it, none on a short link to the next signalled
         # junction (a divided road crossing a street is two junctions 20 m apart: the user's report 2026-10-14,
@@ -218,6 +245,8 @@ def _link_check(junctions):
             where[(a[0], a[4])] = arms
     def link_ok(a):
         other = where.get((a[0], not a[4]))
+        if other and any(x[1].profile is not None for x in other):
+            return any(x[1].profile is not None and 'traffic_signals' in x[1].profile.controls for x in other)
         return other is not None and len(other) >= 3 and all(x[1].urban for x in other) and _is_signalled(other)
     return link_ok
 
@@ -246,6 +275,19 @@ def _seg_dist_min(p, line):
     return float(np.hypot(*(a + t[:, None] * d - p).T).min())
 
 
+def control_transform(arm, arms, left_hand=False, lines=()):
+    """One placement used by both static props and the live traffic-signal objects."""
+    fid, spec, u, c, *_ = arm
+    inc = -u
+    side = np.array([inc[1], -inc[0]]) * (-1 if left_hand else 1)
+    wide = max(a[1].width for a in arms)/2
+    setback = spec.profile.control_setbacks[0 if arm[4] else 1] if spec.profile is not None and len(arm)>4 else 0.
+    q = _off_carriageways(c[:2], u, side, max(wide+2.5, setback), spec.width/2+1., lines)
+    if q is None:
+        return None
+    return q, _yaw(side[0], side[1])
+
+
 def junction_props(roads, box, curb_h=0.15, left_hand=False):
     """Signals at urban junctions of two or more major roads (every arm), stop signs at urban junctions
     of minor roads (the minor arms meeting a major road; the stem of a T; half the four-way ones, hashed).
@@ -260,7 +302,8 @@ def junction_props(roads, box, curb_h=0.15, left_hand=False):
     lines = [(spec.width / 2, np.asarray(pts, np.float64)[:, :2]) for _, spec, pts, _ in roads if len(pts) >= 2]
     for k, arms in junctions.items():
         on_ring = sum(1 for a in arms if a[0] in ring) >= 2
-        if len(arms) < 3 or (not on_ring and not all(a[1].urban for a in arms)):
+        mapped = any(a[1].profile is not None and (any(a[1].profile.controls) or any(a[1].profile.mini_ends)) for a in arms)
+        if len(arms)<2 or (len(arms)<3 and not mapped) or (not on_ring and not mapped and not all(a[1].urban for a in arms)):
             continue
         p = arms[0][3]
         if not (x0 <= p[0] < x1 and y0 <= p[1] < y1):
@@ -270,15 +313,20 @@ def junction_props(roads, box, curb_h=0.15, left_hand=False):
         if not put:
             continue
         wide = max(a[1].width for a in arms) / 2
-        for (fid, spec, u, c, *_), what in put:
+        for arm, what in put:
+            fid, spec, u, c, *_ = arm
             # the approach comes in along -u; its right is (-u_y, u_x)... rotated: right of travel (-u)
             inc = -u
             right = np.array([inc[1], -inc[0]]) * (-1 if left_hand else 1)     # the kerb side of the approach
-            q = _off_carriageways(c[:2], u, right, wide + 2.5, spec.width / 2 + 1.0, near)
-            if q is None or not (x0 - 20 <= q[0] < x1 + 20 and y0 - 20 <= q[1] < y1 + 20):
+            transform = control_transform(arm, arms, left_hand, near)
+            if transform is None:
                 continue
-            rows.append([what, round(float(q[0]), 2), round(float(q[1]), 2), round(float(c[2] + curb_h), 2),
-                         round(_yaw(right[0], right[1]), 1), 1.0, 9.4 if what == G_SIGNAL else 3.0, 0.0])
+            q, yaw = transform
+            if not (x0 - 20 <= q[0] < x1 + 20 and y0 - 20 <= q[1] < y1 + 20):
+                continue
+            group = ('uksignal' if what == G_SIGNAL else 'uk'+what) if spec.profile is not None else what
+            rows.append([group, round(float(q[0]), 2), round(float(q[1]), 2), round(float(c[2] + curb_h), 2),
+                         round(yaw, 1), 1.0, 3.72 if group == 'uksignal' else 9.4 if what == G_SIGNAL else 3.0, 0.0])
     return rows
 
 
@@ -298,11 +346,24 @@ def speed_signs(roads, speeds, box, left_hand=False, mph_signs=True):
     side of the traffic leaving that end, facing it."""
     x0, y0, x1, y1 = box
     rows = []
+    ends={}
+    for fid,sp,line,_ in roads:
+        if len(line)<2:
+            continue
+        for at_start,p,q in ((True,line[0],line[1]),(False,line[-1],line[-2])):
+            u=q[:2]-p[:2];u=u/max(np.linalg.norm(u),1e-9)
+            ends.setdefault(tuple(np.round(p[:2]).astype(int)),[]).append((fid,sp,at_start,u,speeds.get(fid)))
     for fid, spec, line, _ in roads:
         mph_v = speeds.get(fid)
-        if mph_v is None or spec.cls not in SIGN_CLASSES or spec.oneway or len(line) < 2:
+        if mph_v is None or spec.cls not in SIGN_CLASSES or (spec.oneway and spec.profile is None) or len(line) < 2:
             continue
-        if mph_signs:
+        if spec.profile is not None:
+            # Don't post an advisory fallback as a legal limit, or use US rectangular signs in Britain.
+            if spec.profile.speed_mph is None and spec.kmh is None:
+                continue
+            n = int(round(mph_v))
+            group = 'uknsl' if spec.profile.national_speed else f"ukspeed{n}" if n in (20, 30, 40, 50, 60, 70) else None
+        elif mph_signs:
             n = int(round(mph_v / 5.0)) * 5
             group = f"speed{n}" if n in SIGN_MPH else None
         else:
@@ -314,6 +375,18 @@ def speed_signs(roads, speeds, box, left_hand=False, mph_signs=True):
         if L < SIGN_MIN_M:
             continue
         for s0, sgn in ((SIGN_IN_M, 1.0), (L - SIGN_IN_M, -1.0)):
+            if spec.profile is not None and spec.oneway and (spec.dir > 0) != (sgn > 0):
+                continue
+            if spec.profile is not None:
+                p0,q0=(line[0],line[1]) if sgn>0 else (line[-1],line[-2])
+                u=q0[:2]-p0[:2];u=u/max(np.linalg.norm(u),1e-9)
+                # A source split along the same-speed road does not create another
+                # legal-limit entry. Compare the continuation arriving at this end.
+                continuation=[v for v in ends.get(tuple(np.round(p0[:2]).astype(int)),())
+                              if v[0]!=fid and u@v[3]<-.7 and
+                              (not v[1].oneway or (v[1].dir>0)!=v[2])]
+                if continuation and all(v[4] is not None and abs(v[4]-mph_v)<.5 for v in continuation):
+                    continue
             p, d = _at(line, np.array([s0]))
             f = d[0] * sgn                                  # the travel direction leaving that end
             side = np.array([f[1], -f[0]]) * (-1 if left_hand else 1)
@@ -445,7 +518,7 @@ def place(roads, walks, box, curb_h=0.15, wires=None, town=False, left_hand=Fals
                     rows.append([group, round(float(q[0]), 2), round(float(q[1]), 2), round(float(p[2] + curb_h), 2),
                                  round(yaw_fn(out), 1), 1.0, height, 0.0])
         rule = LAMP_SPACING.get(spec.cls)
-        if town and spec.cls in TOWN_POLE_CLASSES:
+        if town and spec.profile is None and spec.cls in TOWN_POLE_CLASSES:
             # towns and suburbs: wooden utility poles along one side, wired, a cobra-head lamp on every other
             pole_side = 1 if _h01(fid, "side") < 0.5 else -1
             if side == pole_side:
@@ -472,8 +545,9 @@ def place(roads, walks, box, curb_h=0.15, wires=None, town=False, left_hand=Fals
             if both or side == lamp_side:
                 lit.add(fid)
                 phase = _h01(fid, "phase") * spacing + (spacing / 2 if (both and side < 0) else 0.0)
-                put(G_LAMP, spacing, phase, LAMP_CURB_M, 9.0, lambda out: _yaw(-out[0], -out[1]))
-        if spec.urban and spec.cls in STREET_TREE_CLASSES and _h01(fid, "trees") < STREET_TREE_SHARE:
+                put(G_LAMP, spacing, phase, LAMP_CURB_M, 6.5 if spec.profile is not None and spec.cls not in ('primary','trunk','motorway') else 9.0,
+                    lambda out: _yaw(-out[0], -out[1]))
+        if spec.profile is None and spec.urban and spec.cls in STREET_TREE_CLASSES and _h01(fid, "trees") < STREET_TREE_SHARE:
             # street trees in pits along the curb (the photos' dense streets have rows of them; the canopy
             # model has few there): small broadleaves, both sides, clear of the junctions
             for p, out in _stations(run, line, STREET_TREE_SPACING, _h01(fid, side, "tph") * STREET_TREE_SPACING,
@@ -484,11 +558,11 @@ def place(roads, walks, box, curb_h=0.15, wires=None, town=False, left_hand=Fals
                     rows.append([G_STREET_TREE, round(float(q[0]), 2), round(float(q[1]), 2), round(float(p[2] + curb_h), 2),
                                  round(_h01(q[0], q[1], "ty") * 360.0, 1), 1.0, round(h, 1),
                                  round(_h01(fid, q[0], "tr"), 3)])
-        if spec.urban:
+        if spec.urban and spec.profile is None:
             # fire hydrants at the curb (US practice ~90-150 m apart), alternating sides
             put(G_HYDRANT, HYDRANT_SPACING, _h01(fid, "hyd") * HYDRANT_SPACING + (HYDRANT_SPACING / 2 if side < 0 else 0),
                 0.45, 0.9, lambda out: _h01(fid, "hy") * 360.0)
-        if spec.urban and spec.cls in MAJOR:
+        if spec.urban and spec.cls in MAJOR and (spec.profile is None or w >= 3.0):
             # benches at the back of the sidewalk facing the street, bins at the curb
             put(G_BENCH, BENCH_SPACING, _h01(fid, side, "bench") * BENCH_SPACING, w - 0.45, 0.9,
                 lambda out: _yaw(-out[0], -out[1]) + BENCH_YAW)
@@ -497,7 +571,7 @@ def place(roads, walks, box, curb_h=0.15, wires=None, town=False, left_hand=Fals
     if speeds:
         rows.extend(speed_signs(roads, speeds, box, left_hand, mph))
     for fid, spec, line, _ in roads:
-        if spec.urban or fid in lit or spec.cls not in POLE_CLASSES or len(line) < 2:
+        if spec.profile is not None or spec.urban or fid in lit or spec.cls not in POLE_CLASSES or len(line) < 2:
             continue
         side = 1 if _h01(fid, "pside") < 0.5 else -1
         phase = _h01(fid, "pphase") * POLE_SPACING

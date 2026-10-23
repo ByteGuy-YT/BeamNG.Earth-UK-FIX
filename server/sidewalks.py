@@ -36,8 +36,9 @@ CROSS_SLOPE = 0.015     # sidewalk cross slope, rising away from the road
 CURB_REPEAT_M = 9.0     # m of curb per texture width (3 joints of 3 m)
 SLAB_REPEAT_M = 45.0    # m of sidewalk per texture width (4096 px, a 205 px strip ~ 2.25 m)
 MATERIALS = ("curbs", "sidewalk1", "tactile_indicator",  # West Coast USA (art/shapes/roads), loaded by the mod
-             "bne_sidewalk_brick")                       # red brick pavers (buildings.materials.json)
+             "bne_sidewalk_brick", "uk_pavement")
 BRICK = 3
+UK_ASPHALT = 4
 BRICK_REPEAT_M = 1.2        # m per repeat of the brick paver texture
 
 # curbs sheet (1024 x 512, 8 bands of 64 px; Collada v up, so band 0 is v in [7/8, 1]):
@@ -90,19 +91,17 @@ def profile(h=CURB_H, w=2.5, hr=None):
     RAMP_RUN)."""
     hr = h if hr is None else hr
     f = hr / h if h > 0 else 0.0
-    # a band narrower than RAMP_RUN (a median's 0.3-0.6 m, an island's 1.2 m) ends its ramp inside it: past its outer
-    # edge the profile folded back over itself, and the folded collision caught wheels ("the median eats tires",
-    # GitHub #55; a truck held on an island band in Bodø, 2026-10-20)
-    rr = max(CURB_W + NARROW_EDGE_M, min(RAMP_RUN, w - NARROW_EDGE_M))
-    zr = h + rr * CROSS_SLOPE
-    xp = CURB_W + min(PAD_W, (rr - CURB_W) / 2)
-    zp = hr + (zr - hr) * (xp - CURB_W) / (rr - CURB_W)    # on the ramp's slope, PAD_W past the curb top
+    # Narrow pavements and island bands used to turn back on themselves: the fixed
+    # 1.8 m ramp point lay beyond their outer edge. Keep every section monotonic.
+    curb_w = min(CURB_W, w * .75)
+    ramp_run = min(RAMP_RUN, w)
+    pad_w = min(PAD_W, max(0., ramp_run - curb_w))
+    zr = h + ramp_run * CROSS_SLOPE
+    zp = hr + (zr - hr) * pad_w / max(ramp_run - curb_w, 1e-9)
     top = h + w * CROSS_SLOPE
-    return np.array([[0.0, -SINK], [BATTER * f, hr - NOSE * f], [NOSE_W * f, hr], [CURB_W, hr],
-                     [xp, zp], [rr, zr], [w, top], [w + BACK_RUN * (top + SINK), -SINK]])
-
-
-NARROW_EDGE_M = 0.05    # m a narrow band's ramp end stays inside its outer edge (profile)
+    return np.array([[0.0, -SINK], [min(BATTER, curb_w / 3) * f, hr - NOSE * f],
+                     [min(NOSE_W, curb_w / 2) * f, hr], [curb_w, hr],
+                     [curb_w + pad_w, zp], [ramp_run, zr], [w, top], [w + BACK_RUN * (top + SINK), -SINK]])
 
 
 # strips: (from profile point, to point, material index, v at from, v at to); material 1 on the
@@ -215,17 +214,17 @@ class Builder:
             rep = CURB_REPEAT_M if mat == 0 else SLAB_REPEAT_M
             P = np.concatenate([ring[:, a], ring[:, b]])
             UV = np.concatenate([np.stack([s / rep, np.full(k, va)], 1), np.stack([s / rep, np.full(k, vb)], 1)])
-            if mat == 1 and slab == BRICK:      # brick pavers: a tileable texture in world metres
+            if mat == 1 and slab in (BRICK,UK_ASPHALT):
                 UV = np.concatenate([np.stack([s / BRICK_REPEAT_M, prof[:, a, 0] / BRICK_REPEAT_M], 1),
                                      np.stack([s / BRICK_REPEAT_M, prof[:, b, 0] / BRICK_REPEAT_M], 1)])
-                mat = BRICK
+                mat = slab
             mats = np.full(k - 1, mat)
             if tactile is not None and a == 3:  # the ramp's slope: a tactile pad where lowered
                 mats[tactile] = 2
                 UV = UV.copy()
                 tu = s / TACTILE_REPEAT_M
-                UV[:k, 0] = np.where(np.concatenate((tactile, tactile[-1:])), tu, UV[:k, 0])
-                UV[k:, 0] = np.where(np.concatenate((tactile, tactile[-1:])), tu, UV[k:, 0])
+                UV[:k, 0] = np.where(np.r_[tactile, tactile[-1:]], tu, UV[:k, 0])
+                UV[k:, 0] = np.where(np.r_[tactile, tactile[-1:]], tu, UV[k:, 0])
             base = self._add(P, UV)
             i = np.arange(k - 1)
             A, A1, B1, B = base + i, base + i + 1, base + k + i + 1, base + k + i
@@ -249,7 +248,7 @@ class Builder:
             return
         if self.col is not None:
             self.col.add_run(curb, toward_out, w, h, caps, ramps)
-        s = np.concatenate(([0.0], np.cumsum(np.hypot(*np.diff(curb[:, :2], axis=0).T))))
+        s = np.r_[0.0, np.cumsum(np.hypot(*np.diff(curb[:, :2], axis=0).T))]
         if ramps:
             s2 = refine(s, ramps)
             curb = np.stack([np.interp(s2, s, curb[:, c]) for c in range(3)], axis=1)
@@ -282,7 +281,7 @@ class Builder:
             self.T.append(base + _orient(fan - base, P, t))
             self.M.append(np.full(len(fan), 0))
 
-    def add_corner(self, arc, inward, outer, h=CURB_H, ramps=()):
+    def add_corner(self, arc, inward, outer, h=CURB_H, ramps=(), slab=1):
         """A corner piece: the curb along the polyline arc (k, 3) (a curb return, with the straight
         runs and tapers of curb extensions; inward: unit vectors toward the sidewalk), the slab from
         the curb top to the outer corner points [(x, y, z) ...] (from the second sidewalk's end round
@@ -292,7 +291,7 @@ class Builder:
         inward = np.asarray(inward, np.float64)
         if self.col is not None:
             self.col.add_corner(arc, inward, outer, h, ramps)
-        s = np.concatenate(([0.0], np.cumsum(np.hypot(*np.diff(arc[:, :2], axis=0).T))))
+        s = np.r_[0.0, np.cumsum(np.hypot(*np.diff(arc[:, :2], axis=0).T))]
         if ramps:
             s2 = refine(s, ramps)
             arc = np.stack([np.interp(s2, s, arc[:, c]) for c in range(3)], axis=1)
@@ -325,7 +324,7 @@ class Builder:
             order = np.arange(m) if area > 0 else np.arange(m)[::-1]
             fan = order[buildings.triangulate(xy[order])]
         self.T.append(base + _orient(fan, poly, np.array([0.0, 0.0, 1.0])))
-        self.M.append(np.full(len(fan), 1))
+        self.M.append(np.full(len(fan), slab))
         c = poly[:, :2].mean(axis=0)
         drop = h + SINK + 2.5 * CROSS_SLOPE
         for a, b in zip(out[:-1], out[1:]):                 # back faces down to the ground, sloping out (BACK_RUN)

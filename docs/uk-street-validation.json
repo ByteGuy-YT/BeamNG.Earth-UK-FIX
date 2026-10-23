@@ -1,0 +1,340 @@
+{
+  "date": "2026-10-21",
+  "python_tests_passed": 387,
+  "lua_stub_assertions_passed": 65,
+  "live_game_test": "Unavailable: local BeamNG endpoint refused connection",
+  "data": {
+    "metadata": {
+      "schema": 1,
+      "source": "united-kingdom.osm.pbf",
+      "sha256": "35f646c1eb01d05c5b955b52ab6cdf665daca4f4688b544162bdb5170d940cf4",
+      "url": "https://download.geofabrik.de/europe/united-kingdom.html",
+      "attribution": "\u00a9 OpenStreetMap contributors (ODbL 1.0)",
+      "features": 728054
+    },
+    "bytes": 311975936,
+    "counts": {
+      "bus_stop": 289600,
+      "canopy": 20261,
+      "fuel": 8518,
+      "fuel_pump": 281,
+      "give_way": 163322,
+      "mini_roundabout": 15700,
+      "post_box": 90403,
+      "school": 30375,
+      "sign": 13699,
+      "speed_camera": 3491,
+      "stop": 7342,
+      "traffic_signals": 85062
+    },
+    "cameras_with_enforcement_from": 450
+  },
+  "asset_triangle_counts": {
+    "signal": 120,
+    "camera": 48,
+    "postbox": 24,
+    "giveway": 13,
+    "stop": 20,
+    "nsl": 36,
+    "keep_left": 36,
+    "roundabout": 13,
+    "school": 13,
+    "bus_stop": 14
+  },
+  "performance": {
+    "method": "Warmed median of six cached road-tile builds after two warmups. Same cached cells and native kernels before and after; flat elevation isolates generation cost, not game rendering or physics.",
+    "before": [
+      {
+        "site": "Underwood",
+        "warm_median_ms": 75.884,
+        "samples_ms": [
+          73.952,
+          74.714,
+          75.6,
+          79.985,
+          76.169,
+          76.719
+        ],
+        "prop_count": 26
+      },
+      {
+        "site": "Ripley",
+        "warm_median_ms": 69.273,
+        "samples_ms": [
+          72.465,
+          65.899,
+          74.434,
+          66.508,
+          72.038,
+          66.368
+        ],
+        "prop_count": 17
+      },
+      {
+        "site": "school area",
+        "warm_median_ms": 60.949,
+        "samples_ms": [
+          61.368,
+          61.018,
+          61.385,
+          60.879,
+          60.778,
+          60.115
+        ],
+        "prop_count": 21
+      },
+      {
+        "site": "M1",
+        "warm_median_ms": 66.64,
+        "samples_ms": [
+          65.285,
+          71.134,
+          66.446,
+          66.496,
+          80.353,
+          66.784
+        ],
+        "prop_count": 0
+      }
+    ],
+    "after": [
+      {
+        "site": "Underwood",
+        "warm_median_ms": 74.748,
+        "samples_ms": [
+          73.654,
+          73.869,
+          74.108,
+          75.389,
+          75.536,
+          76.274
+        ],
+        "prop_count": 26
+      },
+      {
+        "site": "Ripley",
+        "warm_median_ms": 67.544,
+        "samples_ms": [
+          67.619,
+          67.767,
+          66.629,
+          67.469,
+          67.33,
+          67.918
+        ],
+        "prop_count": 16
+      },
+      {
+        "site": "school area",
+        "warm_median_ms": 61.033,
+        "samples_ms": [
+          61.352,
+          60.624,
+          61.077,
+          60.988,
+          61.329,
+          60.761
+        ],
+        "prop_count": 23
+      },
+      {
+        "site": "M1",
+        "warm_median_ms": 64.575,
+        "samples_ms": [
+          64.336,
+          70.256,
+          64.814,
+          63.772,
+          66.165,
+          63.498
+        ],
+        "prop_count": 0
+      }
+    ],
+    "fps": "Not measured"
+  },
+  "source_smoke_checks": [
+    {
+      "site": "Underwood",
+      "tile_ms": [
+        128.14460000026884,
+        75.54440000058094,
+        74.27700000062032,
+        74.29540000066481
+      ],
+      "props": {
+        "streetlight": 18,
+        "ukgiveway": 8
+      },
+      "signal_junctions": 0,
+      "cameras_in_graph": 0,
+      "records": 0,
+      "fuel_pump_assets": 0,
+      "buildings": 182,
+      "special": []
+    },
+    {
+      "site": "Ripley fuel",
+      "tile_ms": [
+        239.01479999949515,
+        67.37100000009377,
+        66.8307999994795,
+        66.40499999957683
+      ],
+      "props": {
+        "streetlight": 3,
+        "ukgiveway": 11,
+        "ukpostbox": 1,
+        "ukspeed60": 1
+      },
+      "signal_junctions": 5,
+      "cameras_in_graph": 1,
+      "records": 3,
+      "fuel_pump_assets": 0,
+      "buildings": 50,
+      "special": [
+        [
+          "",
+          "fuel",
+          4.798173904418945,
+          12
+        ]
+      ]
+    },
+    {
+      "site": "Ripley school",
+      "tile_ms": [
+        83.59329999984766,
+        61.80259999928239,
+        62.170899999728135,
+        62.13150000075984
+      ],
+      "props": {
+        "streetlight": 19,
+        "ukbus_stop": 1,
+        "ukgiveway": 2,
+        "ukpostbox": 1
+      },
+      "signal_junctions": 5,
+      "cameras_in_graph": 1,
+      "records": 5,
+      "fuel_pump_assets": 0,
+      "buildings": 149,
+      "special": [
+        [
+          "school",
+          "school",
+          4.6777729988098145,
+          32
+        ],
+        [
+          "school",
+          "school",
+          2.5,
+          4
+        ]
+      ]
+    },
+    {
+      "site": "M1",
+      "tile_ms": [
+        76.31499999934022,
+        65.12240000029124,
+        65.04750000021886,
+        72.17930000024353
+      ],
+      "props": {},
+      "signal_junctions": 0,
+      "cameras_in_graph": 0,
+      "records": 0,
+      "fuel_pump_assets": 0,
+      "buildings": 0,
+      "special": []
+    },
+    {
+      "site": "Shell canopy",
+      "tile_ms": [
+        99.84690000055707,
+        30.972900000051595,
+        30.62619999946037,
+        30.186199999661767
+      ],
+      "props": {
+        "streetlight": 10,
+        "ukbus_stop": 2
+      },
+      "signal_junctions": 2,
+      "cameras_in_graph": 0,
+      "records": 4,
+      "fuel_pump_assets": 3,
+      "buildings": 22,
+      "special": [
+        [
+          "",
+          "fuel",
+          6.2,
+          6
+        ],
+        [
+          "",
+          "fuel",
+          2.5,
+          4
+        ],
+        [
+          "roof",
+          "fuel",
+          5.453185081481934,
+          4
+        ]
+      ]
+    },
+    {
+      "site": "Nethergreen forecourt",
+      "tile_ms": [
+        288.68099999999686,
+        146.03170000009413,
+        146.27939999991213,
+        147.5347999994483
+      ],
+      "props": {
+        "streetlight": 8,
+        "ukbus_stop": 2,
+        "ukgiveway": 4,
+        "uksignal": 8
+      },
+      "signal_junctions": 6,
+      "cameras_in_graph": 1,
+      "records": 14,
+      "fuel_pump_assets": 6,
+      "buildings": 28,
+      "special": [
+        [
+          "retail",
+          "fuel",
+          2.409334659576416,
+          4
+        ],
+        [
+          "roof",
+          "fuel",
+          3.6,
+          4
+        ],
+        [
+          "roof",
+          "fuel",
+          3.2,
+          4
+        ]
+      ]
+    }
+  ],
+  "size_checks": "Source smoke checks compare each building ring, height, floor count and roof before/after decoration; emitted meshes checked finite. Unit cases also check canopy bounds and open collision.",
+  "stock_asset": "/levels/italy/art/shapes/buildings/italy_petrolstation_pump_a.DAE",
+  "limits": [
+    "Mapped camera direction and legal limit required for enforcement; unknown/conditional records remain visual-only.",
+    "Basic two-phase signals; complete surveyed programmes and protected turn phases not reconstructed.",
+    "Building use and facades are contextual approximations; dimensions are retained."
+  ]
+}

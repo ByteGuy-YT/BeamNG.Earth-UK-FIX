@@ -33,7 +33,6 @@ import threading
 from collections import OrderedDict
 
 import netfetch
-import staging
 
 log = logging.getLogger("earthd.mapdata")
 
@@ -131,7 +130,7 @@ class RemoteFile:
         tmp = f"{path}.{os.getpid()}.{threading.get_ident()}.tmp"
         with open(tmp, "wb") as f:
             f.write(b)
-        staging.replace_cached(tmp, path)
+        os.replace(tmp, path)
 
     def _block_from_cache(self, i):
         b = _mem_get((self._key, i))

@@ -66,8 +66,9 @@ import mapgeom
 import maprasters
 import netfetch
 import overture
+import osm_enrich
+import roadcontext
 import rangeread
-import staging
 
 log = logging.getLogger("earthd.mapdata")
 
@@ -75,7 +76,7 @@ LAYER_THREADS = 4               # layers of a cell built at once (each fetches t
 VERSION = 2                     # pipeline version: bump when what a cell's layers contain changes
 # per layer, on top of VERSION (a layer's own change without re-fetching the others): roads 2 adds
 # the "oneway" rule (Overture access_restrictions by heading)
-LAYER_VERSIONS = {"roads": 2}
+LAYER_VERSIONS = {"roads": 3}      # all source references for local OSM tag enrichment
                                 # (2: clipped polygon pieces `own`ed by their cell, exact cell edges,
                                 # the exact no-area test of clipped rings)
 VECTOR_LAYERS = ("roads", "connectors", "buildings", "water", "land_use", "infrastructure", "building_parts")
@@ -104,6 +105,8 @@ CANOPY = {
 }
 # Short overlay wordings per provenance id (credits.py can take them when the map data is shown)
 CREDIT_LINES = {
+    "osm-roads": "Road attributes: © OpenStreetMap contributors",
+    "ons-uk": "UK boundaries: Contains OS data © Crown copyright and database right 2026. Contains National Statistics data © Crown copyright and database right 2026",
     "overture": overture.ATTRIBUTION,
     "esa-worldcover": "© ESA WorldCover project 2021 / Contains modified Copernicus Sentinel data (2021) "
                       "processed by ESA WorldCover consortium",
@@ -138,17 +141,8 @@ def digest_arrays(arrays):
     return h.hexdigest()
 
 
-# The layer files' arrays uncompressed (<cache>/mapdata-mirror/...: one .npy each and a marker), memory-mapped read-only:
-# every server process decompressed and kept its own copy of the cells it read (each one's largest allocation after
-# the walls, ~90-160 MB, 2026-10-20); a mirrored layer is decompressed once per machine and its pages shared, dropped
-# instead of swapped under memory pressure. At most MIRROR_MB on disk (the least recently read go first); the vector
-# layers' `en` (the cell frame's metres, Features.localize) is kept with them.
-MIRROR_MB = 2048
-MIRROR_SMALL = 65536    # bytes: an array this small is read into memory (no mapping)
-MEM_MB = 192        # decoded cell layers kept in memory per process (a road tile reads its ~4 cells, each read by
-                    # its neighbours too: ~8 ms of decompression and a coordinate transform each time, 2026-10-15).
-                    # A road tile's layers of Baltimore's 4 cells are ~124 MB by _nbytes (the infrastructure 65):
-                    # at 64 every tile decoded them again, 446 loads for 36 tiles (7.5 s of 87 on a Steam Deck)
+MEM_MB = 64         # decoded cell layers kept in memory per process (a road tile reads its ~4 cells, each read by
+                    # its neighbours too: ~8 ms of decompression and a coordinate transform each time, 2026-10-15)
 
 
 def _nbytes(arrays):
@@ -220,6 +214,7 @@ class MapData:
         self.release = release
         self.raw_dir = os.path.join(cache_dir, "mapdata", "raw")
         self.overture = overture.Reader(self.raw_dir, self.fetcher, release, threads)
+        self.osm = osm_enrich.Enricher(cache_dir)
         self.rasters = maprasters.Rasters(self.raw_dir, self.fetcher)
         self._locks = {}
         self._lock = threading.Lock()
@@ -231,10 +226,14 @@ class MapData:
     def close(self):
         self.pool.shutdown(wait=False)
         self.overture.close()
+        self.osm.close()
 
     def versions(self):
-        return {"pipeline": VERSION, "overture": self.release, "worldcover": maprasters.WORLDCOVER_RELEASE,
-                "canopy": maprasters.CHM_RELEASE}
+        out = {"pipeline": VERSION, "overture": self.release, "worldcover": maprasters.WORLDCOVER_RELEASE,
+               "canopy": maprasters.CHM_RELEASE}
+        if self.osm.signature:
+            out["osm"] = self.osm.signature
+        return out
 
     def path(self, key, layer):
         source, release = _source(layer, self.release)
@@ -309,7 +308,7 @@ class MapData:
         os.makedirs(os.path.dirname(path), exist_ok=True)
         tmp = f"{path}.{os.getpid()}.{threading.get_ident()}.tmp.npz"
         np.savez_compressed(tmp, **arrays)
-        staging.replace_cached(tmp, path)
+        os.replace(tmp, path)
 
     def _build(self, key, layer, kind):
         """(content arrays, provenance record or None) of one layer, from the sources."""
@@ -340,120 +339,16 @@ class MapData:
             raise ValueError(f"unknown map layer {layer!r}; choose from {', '.join(ALL_LAYERS)}")
         key = _key(key)
         path = self.path(key, layer)
-        arrays = self._mirror_load(path)
-        if arrays is not None:
-            return arrays, True
         arrays = self._load(path)
         if arrays is not None:
-            return self._mirrored(key, layer, path, arrays), True
+            return arrays, True
         with self._key_lock(key, layer):
             arrays = self._load(path)           # another thread built it meanwhile
             if arrays is not None:
-                return self._mirrored(key, layer, path, arrays), True
+                return arrays, True
             arrays = self._build(key, layer, kind)
             self._store(path, arrays)
-            return self._mirrored(key, layer, path, arrays), False
-
-    # --- the uncompressed mirror (MIRROR_MB) ---------------------------------------------------
-    def _mirror_dir(self, path):
-        rel = os.path.relpath(path, os.path.join(self.cache_dir, "mapdata"))
-        return os.path.join(self.cache_dir, "mapdata-mirror", rel[:-4])
-
-    @staticmethod
-    def _stamp(path):
-        st = os.stat(path)
-        return f"{st.st_size} {st.st_mtime_ns}"
-
-    def _mirror_load(self, path):
-        """The mirrored arrays of a layer file (the large ones memory-mapped), or None (none, or not of this file)."""
-        if MIRROR_MB <= 0:
-            return None
-        d = self._mirror_dir(path)
-        try:
-            with open(os.path.join(d, "ok")) as fh:
-                stamp, names = fh.readline().rstrip("\n"), fh.read().split("\n")
-            if stamp != self._stamp(path):
-                return None
-            out = {}
-            for n in names:
-                if not n:
-                    continue
-                f = os.path.join(d, n + ".npy")
-                big = os.path.getsize(f) > MIRROR_SMALL
-                a = np.load(f, mmap_mode="r" if big else None, allow_pickle=False)
-                out[n] = np.asarray(a)          # (a plain view of the mapping: np.memmap's Python hooks ran on every slice)
-            os.utime(os.path.join(d, "ok"))         # (read: the last to go)
-            return out
-        except (OSError, ValueError, EOFError):
-            return None
-
-    def _mirrored(self, key, layer, path, arrays):
-        """arrays written to the mirror and read back from it (memory-mapped), or as they are when it cannot be."""
-        if MIRROR_MB <= 0 or "provenance" not in arrays:
-            return arrays
-        d = self._mirror_dir(path)
-        full = dict(arrays)
-        try:
-            if layer in VECTOR_LAYERS and "lonlat" in full and "en.local" not in full:
-                f = mapgeom.Features.from_arrays(layer, {k: v for k, v in full.items() if k != "provenance"}, "")
-                lat_c, lon_c = key.center()
-                full["en.local"] = f.localize(geodesy.EnuFrame(lat_c, lon_c, 0.0)).en
-            stamp = self._stamp(path)
-            tmp = f"{d}.{os.getpid()}.{threading.get_ident()}.tmp"
-            os.makedirs(tmp, exist_ok=True)
-            size = 0
-            for n, a in full.items():
-                np.save(os.path.join(tmp, n + ".npy"), np.asarray(a), allow_pickle=False)
-                size += np.asarray(a).nbytes
-            with open(os.path.join(tmp, "ok"), "w") as fh:
-                fh.write(stamp + "\n" + "\n".join(full) + "\n")
-            try:
-                if os.path.isdir(d):            # (stale: another file's; or another process's, the same)
-                    import shutil
-                    shutil.rmtree(d, ignore_errors=True)
-                os.rename(tmp, d)
-            except OSError:
-                import shutil
-                shutil.rmtree(tmp, ignore_errors=True)
-            self._mirror_note(size)
-        except (OSError, ValueError) as e:
-            log.debug("mapdata mirror %s: %s", d, e)
-            return arrays
-        got = self._mirror_load(path)
-        return got if got is not None else arrays
-
-    _mirror_written = 0
-    _mirror_lock = threading.Lock()
-
-    def _mirror_note(self, nbytes):
-        """Count what this process wrote; every MIRROR_MB / 8 of it, the mirror cut back to MIRROR_MB."""
-        with MapData._mirror_lock:
-            MapData._mirror_written += nbytes
-            if MapData._mirror_written < MIRROR_MB * 1e6 / 8:
-                return
-            MapData._mirror_written = 0
-        self._mirror_prune()
-
-    def _mirror_prune(self):
-        root = os.path.join(self.cache_dir, "mapdata-mirror")
-        entries, total = [], 0
-        for dirpath, dirnames, filenames in os.walk(root):
-            if "ok" in filenames:
-                try:
-                    n = sum(os.path.getsize(os.path.join(dirpath, f)) for f in filenames)
-                    entries.append((os.path.getmtime(os.path.join(dirpath, "ok")), n, dirpath))
-                    total += n
-                except OSError:
-                    pass
-                dirnames[:] = []
-        if total <= MIRROR_MB * 1e6:
-            return
-        import shutil
-        for _, n, dpath in sorted(entries):
-            shutil.rmtree(dpath, ignore_errors=True)
-            total -= n
-            if total <= 0.8 * MIRROR_MB * 1e6:
-                break
+            return arrays, False
 
     # --- cells -----------------------------------------------------------------------------------
     def cell(self, key, layers=LAYERS, kind="demand"):
@@ -493,19 +388,17 @@ class MapData:
                 arrays, hit, dt = results[layer]
                 arrays = dict(arrays)
                 prov = json.loads(str(arrays.pop("provenance")))
-                en = arrays.pop("en.local", None)     # (the mirror's: this frame's, Features.localize)
                 if layer in VECTOR_LAYERS:
                     f = mapgeom.Features.from_arrays(layer, arrays, "")
-                    if en is not None and len(en) == len(f.lonlat):
-                        f.en = en
-                        cd.layers[layer] = f
-                    else:
-                        cd.layers[layer] = f.localize(frame)
+                    if layer == "roads":
+                        f = self.osm.apply(f)
+                    cd.layers[layer] = f.localize(frame)
                 elif "missing" in arrays:
                     cd.layers[layer] = None
                 else:
                     cd.layers[layer] = _raster_from(arrays)
-                self._remember((str(key), layer), (cd.layers[layer], prov, _nbytes(arrays)))
+                size = _nbytes(cd.layers[layer].to_arrays("")) if layer == "roads" else _nbytes(arrays)
+                self._remember((str(key), layer), (cd.layers[layer], prov, size))
             if prov:
                 pid = prov["id"]
                 if pid in provs:            # roads + connectors: one transportation record
@@ -519,6 +412,18 @@ class MapData:
                     provs[pid] = prov
             cd.stats[layer] = {"s": dt, "hit": hit}
         cd.provenance = [provs[k] for k in sorted(provs)]
+        roads = cd.layers.get("roads")
+        if roads is not None and any(roadcontext.feature_region(roads, i) for i in range(len(roads))):
+            cd.provenance.append({"id": "ons-uk", "name": "ONS Countries December 2024 UK BGC", "release": "2024-12",
+                                  "attribution": CREDIT_LINES["ons-uk"], "licence": "Open Government Licence v3.0",
+                                  "url": "https://www.ons.gov.uk/methodology/geography/geographicalproducts/digitalboundaries"})
+        if roads is not None and "osm_match" in roads.attrs and np.any(roads.attrs["osm_match"] == "matched"):
+            cd.provenance.append({"id": "osm-roads", "name": "OpenStreetMap road attributes (local index)",
+                                  "release": self.osm.signature, "attribution": CREDIT_LINES["osm-roads"],
+                                  "licence": "ODbL 1.0", "url": "https://www.openstreetmap.org/copyright",
+                                  "sources": self.osm.metadata.get("sources", "[]"),
+                                  "supplemental": self.osm.metadata.get('supplemental','{}')})
+        cd.provenance.sort(key=lambda p: p["id"])
         return cd
 
     def _remember(self, k, entry):

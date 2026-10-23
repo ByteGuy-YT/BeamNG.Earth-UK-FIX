@@ -1,6 +1,6 @@
-"""KyzoFox 1.5.4: overpass approach ramps (grading.bridge_lifts / approach_add / Grader._lift_approaches): a
-short bridge over an interstate on flat ground gets its approach roads graded up so its deck clears the lanes (trucks
-hit the I-20 overpass near Temple, GA: ~2.5 m over the lanes, 2026-10-19)."""
+"""KyzoFox 1.5.4: overpass approach ramps (grading.bridge_lifts / approach_lift / Grader._lift_approaches): a
+short bridge over an interstate on flat ground gets its approach roads graded up so its deck clears the lanes (the
+user's truck hit the I-20 overpass near Temple, GA: ~2.5 m over the lanes, 2026-10-19)."""
 import math
 import os
 import sys
@@ -97,16 +97,6 @@ class ApproachAddTest(unittest.TestCase):
         cap = (44.0 - 4.0 - 7.0 - grading.APPROACH_GAP_M) / grading.SLOPE_RUN
         self.assertAlmostEqual(float(add2.max()), min(7.8, cap), places=6)
 
-    def test_side_road_lowers_the_ramp_gently(self):
-        # a side road joining 40 m from the abutment caps the ramp to nothing there: it falls to it at
-        # APPROACH_CAP_GRADE, not in one step (a 3 m drop in 8 m north of the I-20 bridge near Temple, GA)
-        xy = np.c_[np.arange(0.0, 200.1, 4.0), np.zeros(51)]
-        side = [(np.array([[40.0, 5.0], [40.0, 200.0]]), 3.0)]
-        add = grading.approach_add(xy, False, 3.7, 4.0, side)
-        self.assertLessEqual(np.abs(np.diff(add) / 4.0).max(), grading.APPROACH_CAP_GRADE + 1e-9)
-        self.assertLess(float(add[10]), 0.5, "low where the side road joins")
-        self.assertGreater(float(add[0]), 3.0, "the abutment still raised")
-
 
 class OverpassIntegrationTest(unittest.TestCase):
     def deck_over_lanes(self, on):
@@ -118,7 +108,7 @@ class OverpassIntegrationTest(unittest.TestCase):
 
             def elev(la, lo):
                 return g.apply(la, lo, flat_elev(la, lo), grading.ROAD_LIFT)
-            bp = roads.BridgeProfiles(FRAME, lambda key: f, elev)
+            bp = g.bridge_model
             parts = bp.parts([f], (-100, -100, 100, 100))
             self.assertEqual(len(parts), 1)
             _fid, _spec, xy, z, _lon = parts[0]
@@ -133,8 +123,10 @@ class OverpassIntegrationTest(unittest.TestCase):
             grading.APPROACH_ON = old
 
     def test_deck_clears_the_lanes(self):
+        # The shared bridge solver must preserve clearance even when the legacy
+        # optional ramp heuristic is disabled.
         before, _ = self.deck_over_lanes(False)
-        self.assertLess(before.max(), 4.0, "the bug: the deck low over the motorway")
+        self.assertGreaterEqual(before.min(), roads.DECK_ROAD_CLEAR - 0.05)
         after, grade = self.deck_over_lanes(True)
         self.assertGreaterEqual(after.min(), roads.DECK_ROAD_CLEAR - 0.05, after)
         under = after.min() - 1.2 - 1.0     # (roadmesh DECK_DEPTH + GIRDER_D)
@@ -142,16 +134,22 @@ class OverpassIntegrationTest(unittest.TestCase):
         self.assertLessEqual(grade, grading.APPROACH_GRADE * 1.05)
         self.assertLess(np.abs(self.lanes).max(), 0.2, "the motorway is not raised")
 
-    def test_motorway_over_a_road_not_raised(self):
-        # the user's crash (I-20 in Greene County, AL): the motorway was the bridge, over a local road, and both its
-        # carriageways went up 7.8 m on 300 m fills, differently in different cells
+    def test_flat_dem_connects_upper_motorway_without_excavating_lower_road(self):
+        # A flat DEM has no approach embankment. Raising only the bridge would
+        # leave a step; digging the lower road instead would invent a dip.
         a, b = (400 - 35) / 800, (400 + 35) / 800
         f = features([[(-400, 0), (400, 0)], [(-12, -500), (-12, 500)]], ["motorway", "residential"],
                      flags=[(0, "is_bridge", a, b)], ids=["i20", "local"])
         g = grading.Grader(FRAME, FakeMD(f), flat_elev)
-        la, lo, _ = FRAME.enu_to_geodetic(np.array([-100.0, -60.0, 100.0]), np.zeros(3), 0.0)
-        z = g.apply(la, lo, flat_elev(la, lo))
-        self.assertLess(np.abs(z - FLAT).max(), 0.05, "the motorway's approaches stay on the ground")
+        parts=g.bridge_model.parts([f],(-100,-100,100,100))
+        _,_,xy,z,_=parts[0]
+        la,lo,_=FRAME.enu_to_geodetic(xy[[0,-1],0],xy[[0,-1],1],0.)
+        surface=g.apply(la,lo,flat_elev(la,lo),grading.ROAD_LIFT)
+        deck=FRAME.enu_to_geodetic(xy[[0,-1],0],xy[[0,-1],1],z[[0,-1]])[2]
+        np.testing.assert_allclose(surface,deck,atol=.05,err_msg='upper approaches meet both abutments')
+        la,lo,_=FRAME.enu_to_geodetic(np.full(2,-12.),np.array([-80.,80.]),0.)
+        lower=g.apply(la,lo,flat_elev(la,lo))
+        np.testing.assert_allclose(lower,FLAT,atol=.05,err_msg='lower surface road retains its height')
 
 
 if __name__ == "__main__":

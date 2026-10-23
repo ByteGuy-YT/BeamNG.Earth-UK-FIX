@@ -207,8 +207,7 @@
       {},
       {}
     ],
-    "translucent": false,
-    "castShadows": false
+    "translucent": false
   },
   "bne_bld_stucco": {
     "name": "bne_bld_stucco",
@@ -336,8 +335,7 @@
       {},
       {}
     ],
-    "translucent": false,
-    "castShadows": false
+    "translucent": false
   },
   "bne_bld_stone": {
     "name": "bne_bld_stone",

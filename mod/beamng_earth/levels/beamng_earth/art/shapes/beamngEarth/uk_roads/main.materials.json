@@ -1,0 +1,173 @@
+{
+  "uk_line_dashed": {
+    "name": "uk_line_dashed",
+    "mapTo": "uk_line_dashed",
+    "class": "Material",
+    "version": 1.5,
+    "doubleSided": true,
+    "castShadows": false,
+    "Stages": [
+      {
+        "baseColorMap": "/levels/beamng_earth/art/shapes/beamngEarth/uk_roads/dash.png",
+        "roughnessFactor": 0.9,
+        "metallicFactor": 0
+      },
+      {},
+      {},
+      {}
+    ],
+    "translucent": true,
+    "translucentBlendOp": "LerpAlpha",
+    "translucentZWrite": false
+  },
+  "uk_line_giveway": {
+    "name": "uk_line_giveway",
+    "mapTo": "uk_line_giveway",
+    "class": "Material",
+    "version": 1.5,
+    "doubleSided": true,
+    "castShadows": false,
+    "Stages": [
+      {
+        "baseColorMap": "/levels/beamng_earth/art/shapes/beamngEarth/uk_roads/giveway.png",
+        "roughnessFactor": 0.9,
+        "metallicFactor": 0
+      },
+      {},
+      {},
+      {}
+    ],
+    "translucent": true,
+    "translucentBlendOp": "LerpAlpha",
+    "translucentZWrite": false
+  },
+  "uk_line_zebra": {
+    "name": "uk_line_zebra",
+    "mapTo": "uk_line_zebra",
+    "class": "Material",
+    "version": 1.5,
+    "doubleSided": true,
+    "castShadows": false,
+    "Stages": [
+      {
+        "baseColorMap": "/levels/beamng_earth/art/shapes/beamngEarth/uk_roads/zebra.png",
+        "roughnessFactor": 0.9,
+        "metallicFactor": 0
+      },
+      {},
+      {},
+      {}
+    ],
+    "translucent": true,
+    "translucentBlendOp": "LerpAlpha",
+    "translucentZWrite": false
+  },
+  "uk_speed_20": {
+    "name": "uk_speed_20",
+    "mapTo": "uk_speed_20",
+    "class": "Material",
+    "version": 1.5,
+    "doubleSided": true,
+    "castShadows": true,
+    "Stages": [
+      {
+        "baseColorMap": "/levels/beamng_earth/art/shapes/beamngEarth/uk_roads/speed20.png",
+        "roughnessFactor": 0.9,
+        "metallicFactor": 0
+      },
+      {},
+      {},
+      {}
+    ]
+  },
+  "uk_speed_30": {
+    "name": "uk_speed_30",
+    "mapTo": "uk_speed_30",
+    "class": "Material",
+    "version": 1.5,
+    "doubleSided": true,
+    "castShadows": true,
+    "Stages": [
+      {
+        "baseColorMap": "/levels/beamng_earth/art/shapes/beamngEarth/uk_roads/speed30.png",
+        "roughnessFactor": 0.9,
+        "metallicFactor": 0
+      },
+      {},
+      {},
+      {}
+    ]
+  },
+  "uk_speed_40": {
+    "name": "uk_speed_40",
+    "mapTo": "uk_speed_40",
+    "class": "Material",
+    "version": 1.5,
+    "doubleSided": true,
+    "castShadows": true,
+    "Stages": [
+      {
+        "baseColorMap": "/levels/beamng_earth/art/shapes/beamngEarth/uk_roads/speed40.png",
+        "roughnessFactor": 0.9,
+        "metallicFactor": 0
+      },
+      {},
+      {},
+      {}
+    ]
+  },
+  "uk_speed_50": {
+    "name": "uk_speed_50",
+    "mapTo": "uk_speed_50",
+    "class": "Material",
+    "version": 1.5,
+    "doubleSided": true,
+    "castShadows": true,
+    "Stages": [
+      {
+        "baseColorMap": "/levels/beamng_earth/art/shapes/beamngEarth/uk_roads/speed50.png",
+        "roughnessFactor": 0.9,
+        "metallicFactor": 0
+      },
+      {},
+      {},
+      {}
+    ]
+  },
+  "uk_speed_60": {
+    "name": "uk_speed_60",
+    "mapTo": "uk_speed_60",
+    "class": "Material",
+    "version": 1.5,
+    "doubleSided": true,
+    "castShadows": true,
+    "Stages": [
+      {
+        "baseColorMap": "/levels/beamng_earth/art/shapes/beamngEarth/uk_roads/speed60.png",
+        "roughnessFactor": 0.9,
+        "metallicFactor": 0
+      },
+      {},
+      {},
+      {}
+    ]
+  },
+  "uk_speed_70": {
+    "name": "uk_speed_70",
+    "mapTo": "uk_speed_70",
+    "class": "Material",
+    "version": 1.5,
+    "doubleSided": true,
+    "castShadows": true,
+    "Stages": [
+      {
+        "baseColorMap": "/levels/beamng_earth/art/shapes/beamngEarth/uk_roads/speed70.png",
+        "roughnessFactor": 0.9,
+        "metallicFactor": 0
+      },
+      {},
+      {},
+      {}
+    ]
+  }
+}

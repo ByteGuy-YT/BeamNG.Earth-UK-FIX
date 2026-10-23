@@ -469,7 +469,8 @@ LOD_TOP_SIZE = 2.0          # px: the size of the one (or the last, coarsest) de
 
 
 def encode(positions, tris, normals=None, uvs=None, material="bngEarthDae", uvs2=None,
-           tangent_uvs=None, object_name="tile", tri_materials=None, colors=None, collision_only=False, lods=None):
+           tangent_uvs=None, object_name="tile", tri_materials=None, colors=None, collision_only=False, lods=None,
+           mesh_parts=None):
     """Shape bytes for one static mesh, laid out exactly as the engine writes a compiled
     Collada file with the same geometry.
 
@@ -494,26 +495,19 @@ def encode(positions, tris, normals=None, uvs=None, material="bngEarthDae", uvs2
         object_name = "Colmesh"
         lods = None
     materials = [material] if isinstance(material, str) else list(material)
-    if tri_materials is not None and len(materials) > 1:
-        # only the materials a level uses: the engine makes a material instance for every material a shape lists
-        # when it loads it (MatInstance::init / processMaterial were most of a new shape's load, ~0.4 ms each here;
-        # the buildings listed all 15 of theirs, a far tile used a few)
-        used = np.zeros(len(materials), bool)
-        used[np.unique(np.asarray(tri_materials, np.int64))] = True
-        for _size, d in (lods or []):
-            if d.get("tri_materials") is not None:
-                used[np.unique(np.asarray(d["tri_materials"], np.int64))] = True
-        if not used.all():
-            new = np.cumsum(used) - 1
-            materials = [m for m, u in zip(materials, used) if u]
-            tri_materials = new[np.asarray(tri_materials, np.int64)]
-            lods = [(size, dict(d, tri_materials=new[np.asarray(d["tri_materials"], np.int64)])
-                     if d.get("tri_materials") is not None else d) for size, d in (lods or [])] or None
     nmat = len(materials)
     P = np.asarray(positions, np.float64).reshape(-1, 3)
     T, TM = _sorted_tris(tris, tri_materials, nmat)
     body0, lo, hi, ntri = _mesh_data(P, T, TM, nmat, normals, uvs, uvs2, tangent_uvs, colors)
     levels = [(None, body0, ntri)]
+    if mesh_parts and (lods or collision_only):
+        raise CdaeError('mesh_parts requires one visible detail level')
+    for part in mesh_parts or ():
+        Pp=np.asarray(part['positions'],np.float64).reshape(-1,3)
+        Tp,TMp=_sorted_tris(part['tris'],part.get('tri_materials'),nmat)
+        bp,lop,hip,ntp=_mesh_data(Pp,Tp,TMp,nmat,None,part.get('uvs'),None,None,None)
+        lo,hi=np.minimum(lo,lop),np.maximum(hi,hip)
+        levels.append((None,bp,ntp))
     for size, d in (lods or []):
         Pl = np.asarray(d["positions"], np.float64).reshape(-1, 3)
         Tl, TMl = _sorted_tris(d["tris"], d.get("tri_materials"), nmat)
@@ -521,7 +515,7 @@ def encode(positions, tris, normals=None, uvs=None, material="bngEarthDae", uvs2
         lo, hi = np.minimum(lo, lol), np.maximum(hi, hil)
         levels.append((float(size), bl, ntl))
     # each level is drawn from the next coarser level's size up: the finest from lods[0]'s size, the last from 2 px
-    sizes = [float(lv[0]) for lv in levels[1:]] + [LOD_TOP_SIZE]
+    sizes = [LOD_TOP_SIZE] if mesh_parts else [float(lv[0]) for lv in levels[1:]] + [LOD_TOP_SIZE]
 
     center = ((lo + hi) * np.float32(0.5)).astype(np.float32)
     half = ((hi - lo) * np.float32(0.5)).astype(np.float32)
@@ -536,6 +530,10 @@ def encode(positions, tris, normals=None, uvs=None, material="bngEarthDae", uvs2
         names = [object_name, "detail2", "Collision-1"]
         details = (_vec(struct.pack("<3i3fi2i2IfI", 1, 0, 0, 2.0, -1.0, -1.0, 0, 0, 0, 0, 0, 0.0, 0)
                         + struct.pack("<3i3fi2i2IfI", 2, 0, 1, -1.0, -1.0, -1.0, ntri, 0, 0, 0, 0, 0.0, 0), 2, 52))
+    elif mesh_parts:
+        names=[object_name if k==0 else f'{object_name}_{k}' for k in range(len(levels))]+['detail2']
+        details=_vec(struct.pack('<3i3fi2i2IfI',len(levels),0,0,LOD_TOP_SIZE,-1.,-1.,
+                                 sum(lv[2] for lv in levels),0,0,0,0,0.,0),1,52)
     else:
         names = [object_name] + [f"detail{int(sz)}" for sz in sizes]
         # detail: name, subShape, objectDetail, size, avgError, maxError, polyCount,
@@ -547,19 +545,20 @@ def encode(positions, tris, normals=None, uvs=None, material="bngEarthDae", uvs2
         # node: name, parent, firstObject, firstChild, nextSibling
         "nodes": _vec(struct.pack("<5i", 0, -1, 0, -1, -1), 1, 20),
         # object: name, numMeshes, startMeshIndex, node, nextSibling, firstDecal
-        "objects": _vec(struct.pack("<6i", 0, nmesh, 0, 0, -1, -1), 1, 24),
+        "objects": (_vec(b''.join(struct.pack('<6i',k,1,k,0,-1,-1) for k in range(nmesh)),nmesh,24)
+                    if mesh_parts else _vec(struct.pack("<6i", 0, nmesh, 0, 0, -1, -1), 1, 24)),
         "subShapeFirstNode": _vec(struct.pack("<i", 0), 1, 4),
         "subShapeFirstObject": _vec(struct.pack("<i", 0), 1, 4),
         "subShapeNumNodes": _vec(struct.pack("<i", 1), 1, 4),
-        "subShapeNumObjects": _vec(struct.pack("<i", 1), 1, 4),
+        "subShapeNumObjects": _vec(struct.pack("<i", nmesh if mesh_parts else 1), 1, 4),
         "defaultRotations": _vec(struct.pack("<4h", 0, 0, 0, 0x7FFF), 1, 8),     # identity Quat16
         "defaultTranslations": _vec(struct.pack("<3f", 0, 0, 0), 1, 12),
         # object state: visibility, frame, matFrame
-        "objectStates": _vec(struct.pack("<fii", 1.0, 0, 0), 1, 12),
+        "objectStates": _vec(struct.pack("<fii", 1.0, 0, 0)*(nmesh if mesh_parts else 1),nmesh if mesh_parts else 1,12),
         "details": details,
     }
     out = bytearray()
-    for v in (LOD_TOP_SIZE, len(levels) - 1 if not collision_only else 0, radius, radius, centre, bounds):
+    for v in (LOD_TOP_SIZE, len(levels) - 1 if not collision_only and not mesh_parts else 0, radius, radius, centre, bounds):
         _pack(out, v)       # smallestVisibleSize/DL, radius, tubeRadius
     for name in SHAPE_VECTORS:
         n, size, data = shape_vecs.get(name, _empty(SHAPE_VECTOR_ELEM[name]))
@@ -578,7 +577,8 @@ def encode(positions, tris, normals=None, uvs=None, material="bngEarthDae", uvs2
         for v in (name, MAT_S_WRAP | MAT_T_WRAP, 0, 0xFFFFFFFF, 0xFFFFFFFF, 1.0, 1.0):
             _pack(out, v)
 
-    header = packb({"info": INFO, "compression": False, "bodysize": len(out), "objectNames": [object_name]})
+    header = packb({"info": INFO, "compression": False, "bodysize": len(out),
+                    "objectNames": names[:nmesh] if mesh_parts else [object_name]})
     return struct.pack("<II", VERSION_WORD, len(header)) + header + bytes(out)
 
 
@@ -599,7 +599,7 @@ def write(path, positions, tris, **kw):
     tmp = staging.tmp_for(path)
     with open(tmp, "wb") as f:
         f.write(data)
-    staging.replace(tmp, path)
+    os.replace(tmp, path)
     return len(data)
 
 

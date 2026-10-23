@@ -161,7 +161,7 @@ end]], r[1], r[2], r[3], r[4], r[5], r[6], r[7], r[8], r[9], t[1], t[2], t[3], p
   if not ok2 then log('W', 'beamngEarth', 'recovery point update skipped: ' .. tostring(err2)) end
 end
 
--- (from KyzoFox's 1.5.4, PR #64) trailers stay hitched through a rebase. moveVehicles moves the truck and its trailer with two
+-- KyzoFox 1.5.4: trailers stay hitched through a rebase. moveVehicles moves the truck and its trailer with two
 -- requests; the physics can apply them a step apart, the coupler between them then stretched by the whole rebase
 -- distance for that step and broke (the user, 2026-10-19 between Canton, GA and Tuscaloosa, AL: the trailer came off at
 -- every "Loading n/222", tyres screeching). The fifth wheel does not latch again by itself until its kingpin has been

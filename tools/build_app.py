@@ -141,6 +141,8 @@ def pyinstaller(work, ico, onefile, ver=None, boot=None):
            "--add-data", f"{os.path.join(ROOT, 'VERSION')}{SEP}.",
            "--add-data", f"{os.path.join(server, 'bridges_us.npz')}{SEP}.",     # (bridgetypes.DB_PATH: beside the modules)
            "--add-data", f"{os.path.join(server, 'bridges_wd.npz')}{SEP}."]     # (bridgetypes.WD_PATH)
+    cmd += ["--add-data", f"{os.path.join(server, 'data')}{SEP}data",
+            "--add-data", f"{os.path.join(server, 'uk_roads.json')}{SEP}."]
     cmd += ["--onefile"] if onefile else ["--onedir"]
     if IS_WIN:
         vf, mf = version_files(work, ver)

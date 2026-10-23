@@ -1,0 +1,13 @@
+{
+  "bounds": [
+    42.355,
+    -71.082,
+    42.383,
+    -71.045
+  ],
+  "url": "https://overpass-api.de/api/interpreter",
+  "query": "[out:xml][timeout:90];way[\"highway\"](42.355,-71.082,42.383,-71.045);(._;>;);out body;",
+  "sha256": "e01a236703178b4f432cf8a0497b66b0d0223c797a81a066b484d250e19b33aa",
+  "licence": "ODbL 1.0",
+  "attribution": "\u00a9 OpenStreetMap contributors"
+}

@@ -49,11 +49,11 @@ local settings = require('beamngEarth/settings') -- the pause-menu page's values
 local credits = require('beamngEarth/credits') -- the on-screen data credits (docs/DEVTOOLS.md)
 local statusbar = require('beamngEarth/statusbar') -- the slim bar at the top: street, place, loading, fps
 local places = require('beamngEarth/places') -- saved and recent places (the settings page)
-local levelinfo = require('beamngEarth/levelinfo') -- the level select's spawn points: the places, Random
 local banner = require('beamngEarth/banner') -- the connection banner (docs/DEVTOOLS.md)
 local hudapps = require('beamngEarth/hudapps') -- the same three as BeamNG UI apps (the ".Earth" app layout)
 local edgeguard = require('beamngEarth/edgeguard') -- never fall off the last block (docs/ROADMAP.md)
 local drophold = require('beamngEarth/drophold') -- a car dropped far away waits for its ground
+local roadguard = require('beamngEarth/roadguard') -- (KyzoFox fast) the game waits for the road ahead to load
 local groundcover = require('beamngEarth/groundcover') -- grass on the surface layers (docs/ROADMAP.md v1.5)
 local roads = require('beamngEarth/roads') -- DecalRoads from the server's road tiles (docs/ROADMAP.md v1.6)
 local sea = require('beamngEarth/sea') -- the sea's WaterBlock tiles (server seatiles.py)
@@ -83,8 +83,7 @@ local FLOOR_HIT_M = 0.8        -- m the static collision found under floorZ + 2 
 local PRE_LIFT = 5             -- m above groundZ + 1 to hold the vehicle until it is placed
 local LOADING_AFTER_TELEPORT_S = 3 -- governor loading mode (8 ms budget) this long after a teleport
 local SLOW_SPEED, SLOW_S = 1, 3    -- ... and while the player is below 1 m/s for over 3 s
-local DEFAULT_LAT, DEFAULT_LON = 36.596718, -118.169991 -- Whitney Portal Road under Mt Whitney (the summit, 36.5785,
-                                                         -- -118.2923, was a start on a 20 % slope 3 km from any road)
+local DEFAULT_LAT, DEFAULT_LON = 36.5785, -118.2923 -- near Mt Whitney / Lone Pine, CA
 -- The server cannot move the block when it is not connected, has not said hello, or does not answer
 -- terrain requests: one unanswered for STUCK_S, or a terrain_error within ERROR_HOLD_S. Only then
 -- does the edge guard run.
@@ -193,25 +192,10 @@ end
 
 local teleportTo -- defined with M.teleport (the level start's own teleport is one too)
 
--- the level start's teleport: to the place picked in the level select (levelinfo.lua: a saved place, or a random
--- road from the server), else to the window's lat/lon (the default start until it is changed)
-local RANDOM_WAIT_S = 15 -- s for the server's random place (an older server never answers: the default start)
-local function defaultStart()
+-- the level start's teleport: to the window's lat/lon (the default start until it is changed)
+local function startTeleport()
   local lat, lon = ui.getLatLon(DEFAULT_LAT, DEFAULT_LON)
   return teleportTo(lat, lon, nil, 'start')
-end
-local function startTeleport()
-  local choice = levelinfo.chosen()
-  local id = levelinfo.placeId(choice)
-  local p = id and places.find(id)
-  if p then return teleportTo(p.lat, p.lon, p.name, 'start') end
-  if choice == levelinfo.RANDOM and net.isConnected() then
-    st.randomStart = { id = nextId(), t0 = st.clock }
-    net.send({ type = 'random_place', id = st.randomStart.id })
-    setStatus('Picking a random place...')
-    return true
-  end
-  return defaultStart()
 end
 
 -- cx, cy: where the anchor's first terrain should be centred in the NEW frame
@@ -489,7 +473,7 @@ local function commitRebase(msg, purpose)
   local couplings = {}
   if not isIdentity(xf) then
     holdMotionBlur()
-    couplings = rebase.couplings()      -- (re-hitched after phase 2: rebase.recoupleStart)
+    couplings = rebase.couplings()      -- (KyzoFox fast: re-hitched after phase 2, rebase.recoupleStart)
     moved, playerId = rebase.moveVehicles(xf, geodesy)
   end
   local m = playerId and moved[playerId]
@@ -632,7 +616,6 @@ local function onMessage(msg)
       roads.clear()
       roadsSession = msg.sessionId
     end
-    roads.prewarm(msg.prewarm)  -- the materials of the server's shapes set up now, not at their first tile
     st.serverNote, st.serverNoteDetail = nil, nil
     -- a new server session: its own gravity message follows the first pose (none with --gravity off)
     local w = rawget(_G, 'beamngEarth_weather')
@@ -678,7 +661,6 @@ local function onMessage(msg)
     -- per imagery source: its credit and its area (the world map credits what its view shows)
     serverCreditsByArea = type(msg.imageryCredits) == 'table' and msg.imageryCredits or nil
     serverOtherCredits = type(msg.otherCredits) == 'string' and msg.otherCredits or nil
-    pcall(places.syncLevel)     -- the level select's place pictures (the server makes the missing ones)
     if st.anchor then
       -- A (re)started server knows nothing of our anchor: re-register the SAME geodetic origin under
       -- a new anchorId. The transform is then the identity, so nothing in the world moves (a shift
@@ -737,6 +719,8 @@ local function onMessage(msg)
     roads.onTile(msg, st.anchorId)
   elseif t == 'roads_drop' then
     roads.onDrop(msg)
+  elseif t == 'roads_empty' then
+    roads.onEmpty(msg)
   elseif t == 'far_tile' then
     farfield.onTile(msg)
   elseif t == 'far_swap' then
@@ -781,16 +765,6 @@ local function onMessage(msg)
     roads.onFarDrop(msg)
   elseif t == 'where_result' then
     statusbar.onResult(msg)
-  elseif t == 'place_previews_ready' then      -- the level select's place pictures are there (levelinfo.lua)
-    pcall(places.syncLevel)
-  elseif t == 'random_place_result' then
-    local r = st.randomStart
-    if r and msg.id == r.id then
-      st.randomStart = nil
-      local lat, lon = tonumber(msg.lat), tonumber(msg.lon)
-      if lat and lon and not st.anchor then teleportTo(lat, lon, msg.name, 'start')
-      elseif not st.anchor then defaultStart() end
-    end
   elseif t == 'route_result' then
     if msg.id then routeResults[msg.id] = { points = msg.points or {}, dist = msg.dist, dur = msg.dur, error = msg.error } end
   elseif t == 'geocode_result' then
@@ -852,18 +826,6 @@ local function cameraState()
   local okV, fov = pcall(cam.getFovDeg)
   return { x = x, y = y, z = z, fx = fx, fy = fy, fz = fz, fovDeg = (okV and type(fov) == 'number') and fov or 60,
     h = screenHeight() }
-end
-
--- The camera's {x, y} when it is more than VIEW_AWAY_M from the car (a free camera, a far chase camera): what is drawn
--- follows it (trees here; the server's far field, tree and far building tiles from the pose's cam), what the car drives
--- on stays round the car. nil otherwise.
-M.VIEW_AWAY_M = 50
-function M.viewAway()
-  local c, p = st.cam, st.player
-  if not c or not p or not c.x or not p.x then return nil end
-  local dx, dy = c.x - p.x, c.y - p.y
-  if dx * dx + dy * dy <= M.VIEW_AWAY_M * M.VIEW_AWAY_M then return nil end
-  return { x = c.x, y = c.y }
 end
 
 local function updatePlayer(dt)
@@ -1186,6 +1148,56 @@ local function updateGuard()
   end
 end
 
+-- KyzoFox 1.5.4: the road guard (roadguard.lua): the game's own pause while the road ahead of a driving car is
+-- not loaded yet (a bridge deck missing or not solid: falls at highway speed), resumed once it is.
+local roadGuard = roadguard.new()
+local roadGuardFailed = false
+local roadGuardMsgAt = -math.huge
+M.roadGuardState = function() return roadGuard end
+local function updateRoadGuard()
+  if roadGuardFailed then return end
+  local stg = rawget(_G, 'beamngEarth_settings')
+  roadguard.enabled = not (stg and stg.get and stg.get('roadGuard') == false)
+  local p = st.pending
+  local ok, err = pcall(function()
+    -- only with a healthy server and a settled world: a teleport / rebase coming, a car being placed: it gives way
+    local live = st.inOurLevel and serverHealthy() and st.anchorId ~= nil and not st.placeFrames and roads.enabled
+      and not (p and p.ready)
+    if not live then
+      if roadGuard.pausedByUs then roadguard.release(roadGuard, st.clock) end
+      return
+    end
+    local veh = getPlayerVehicle(0)
+    local car = nil
+    if veh then
+      local pos, vel = veh:getPosition(), veh:getVelocity()
+      car = { x = pos.x, y = pos.y, vx = vel.x, vy = vel.y }
+    end
+    local aid = st.anchorId
+    local act = roadguard.step(roadGuard, car, st.paused or simPaused(), st.clock,
+      function(x, y) return roads.squareState(aid, x, y) end)
+    if act == 'pause' then
+      simPause(true)
+      log('I', 'beamngEarth', 'road guard: waiting for the road ahead (' .. tostring(roadGuard.last) .. ')')
+    elseif act == 'resume' then
+      if simPaused() then simPause(false) end
+      log('I', 'beamngEarth', 'road guard: road ahead ready, resumed')
+    end
+    if roadGuard.pausedByUs and st.clock - roadGuardMsgAt > 1 then
+      roadGuardMsgAt = st.clock
+      if guihooks and guihooks.trigger then
+        guihooks.trigger('Message', { ttl = 1.5, category = 'beamngEarth_roadGuard', icon = 'hourglass_empty',
+          msg = 'BeamNG.Earth: waiting for the road ahead to load...' })
+      end
+    end
+  end)
+  if not ok then
+    roadGuardFailed = true
+    pcall(roadguard.release, roadGuard, st.clock)
+    log('E', 'beamngEarth', 'road guard turned off: ' .. tostring(err))
+  end
+end
+
 local function updateBanner(dt)
   local i = bannerInfo
   i.net, i.session = net.state(), st.sessionId ~= nil
@@ -1358,16 +1370,6 @@ end
 local function onUpdate(dtReal, dtSim)
   dtReal = dtReal or 0
   local frameMs0 = frameTimer and frameTimer:stopAndReset() or dtReal * 1000
-  if not st.inOurLevel and not st.active then
-    -- Other levels and the menus: nothing but the connection to the world server, kept open (on Linux the
-    -- launcher's sign that the game still runs, launcher.game_connected; its messages only store what the
-    -- server is). The user, 2026-10-20: the mod should be effectively off when not playing the BeamNG.Earth map.
-    for _, msg in ipairs(net.update(dtReal)) do
-      local ok, err = pcall(onMessage, msg)
-      if not ok then log('E', 'beamngEarth', 'message ' .. tostring(msg.type) .. ' failed: ' .. tostring(err)) end
-    end
-    return
-  end
   if frameMs0 > M.HITCH_MS and st.inOurLevel then pcall(noteHitch, frameMs0) end
   prevMarks, marks = marks, prevMarks
   for k in pairs(marks) do marks[k] = nil end
@@ -1404,10 +1406,6 @@ local function onUpdate(dtReal, dtSim)
     if #cf.f >= 3 then st.commitFrames = nil end
   end
   st.clock = st.clock + dtReal
-  if st.randomStart and st.clock - st.randomStart.t0 > RANDOM_WAIT_S then    -- no random place came: the default
-    st.randomStart = nil
-    if not st.anchor then defaultStart() end
-  end
   -- the governor's frame opens first: its clock is the wall time since the last onUpdate (hptimer)
   gov:setLoading(st.placeFrames ~= nil or st.clock < st.loadingUntil or st.slowFor > SLOW_S)
   gov:beginFrame(farfield.hasWork() or roads.hasWork())
@@ -1434,7 +1432,7 @@ local function onUpdate(dtReal, dtSim)
       return -- positions are in neither frame for decisions this frame
     end
   end
-  if st.recouple then                   -- a rebase's trailers hitched again over a few seconds (rebase.lua)
+  if st.recouple then
     local okR, plan = pcall(rebase.recoupleTick, st.recouple, st.clock)
     st.recouple = okR and plan or nil
   end
@@ -1456,12 +1454,13 @@ local function onUpdate(dtReal, dtSim)
     -- the roads before the far tiles: they share the governor's budget and the first to ask gets it; after a
     -- teleport the far field's hundreds of tiles took it frame after frame and the road meshes under the car
     -- came after it had passed (Brasov, Sinaia 2026-10-15: the car drove bare ground)
-    roads.update(gov, st.anchorId, st.player, M.viewAway())
+    roads.setHold(dropHold.active or (roadGuard.pausedByUs and simPaused()))
+    roads.update(gov, st.anchorId, st.player)
     t = mark('roads', t)
     farfield.update(gov, (gov.w1 or dtReal * 1000) / 1000, st.cam, st.player)
     t = mark('far', t)
     sea.update(st.anchorId, st.player)
-    trees.update(st.anchorId, st.player, M.viewAway())
+    trees.update(st.anchorId, st.player)
     t = mark('sea+trees', t)
     local pb = nil
     if st.block then
@@ -1475,6 +1474,7 @@ local function onUpdate(dtReal, dtSim)
     t = mark('navgraph', t)
     updateSky(dtReal)
     updateGuard()
+    updateRoadGuard()
     t = mark('sky', t)
   end
   drawUi(dtReal)
@@ -1524,14 +1524,11 @@ local function onLevelStart()
   -- the window opens by itself only in our level; elsewhere use beamngEarth_core.toggleUI(). With
   -- the pause-menu settings page it is a compact HUD, hidden unless the settings show it.
   ui.visible = st.inOurLevel and not settings.hudHiddenAtStart()
-  groundcover.enginePatch(st.inOurLevel)
   if not st.inOurLevel then return end
   -- the player's traffic / parked cars choice, before freeroam spawns them on a map without our roads yet
   navgraph.takeChoice(rawget(_G, 'freeroam_freeroam') and freeroam_freeroam.spawningOptionsHelper)
 
   activateWorld()
-  -- the connected server's shape materials (its hello came at the main menu, before this level's objects)
-  if lastHello and lastHello.prewarm then roads.prewarm(lastHello.prewarm) end
   -- Something to stand on until the first anchor arrives (our level has no GroundPlane).
   local ok, err = terrain.loadFlat()
   if ok then
@@ -1581,7 +1578,6 @@ local function onClientEndMission()
   farfield.clear()
   horizon.restoreSky() -- M1h: the level's sky planet radius (its LevelInfo goes with the level)
   groundcover.reset() -- its objects go with the level
-  groundcover.enginePatch(false)
   roads.reset()
   sea.reset()
   trees.reset()
@@ -1594,31 +1590,11 @@ end
 
 local function onExtensionLoaded()
   log('I', 'beamngEarth', 'beamngEarth_core loaded')
-  groundcover.enginePatch(false)    -- a flag a crashed game left: stock until our level starts
-  -- the level select's spawn points: the saved places (levelinfo.lua), from the main menu on
-  pcall(places.list)
-  pcall(places.syncLevel)
   -- loaded while a level is already running (e.g. extensions.reload from the console)
   if scenetree.MissionGroup and getCurrentLevelIdentifier() then onLevelStart() end
 end
 
--- The places file changed on disk (the player edited it, or our own save): read it again, so the level select's spawn
--- points follow (levelinfo.lua writes only when they changed).
-local function onFilesChanged(files)
-  for _, f in pairs(type(files) == 'table' and files or {}) do
-    local name = type(f) == 'table' and f.filename or nil
-    if type(name) == 'string' and name:lower() == places.FILE:lower() then
-      local ok, err = pcall(places.load)
-      if not ok then log('W', 'beamngEarth', 'places: reload failed: ' .. tostring(err)) end
-      pcall(places.syncLevel)
-      return
-    end
-  end
-end
-M.onFilesChanged = onFilesChanged
-
 local function onExtensionUnloaded()
-  groundcover.enginePatch(false)
   net.close()
   farfield.clear()
   roads.clear()

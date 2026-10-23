@@ -146,4 +146,4 @@ def place(src, dst):
         os.link(src, tmp)
     except OSError:
         shutil.copyfile(src, tmp)
-    staging.replace(tmp, dst)
+    os.replace(tmp, dst)

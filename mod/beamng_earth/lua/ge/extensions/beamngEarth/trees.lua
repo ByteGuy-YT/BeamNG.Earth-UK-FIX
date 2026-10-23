@@ -7,21 +7,20 @@
 -- hundred per frame (~19 us each, 2026-10-13 probe).
 local M = {}
 
-M.PER_FRAME = 250       -- items made or removed per frame at most
+M.PER_FRAME = 100       -- smaller Forest batches reduce deferred engine spikes
 M.ROWS_PER_FRAME = 12000 -- rows of changing tiles looked at per frame at most (Lua time: 30000 averaged 2.5 ms)
+M.UPDATE_MS = 3         -- wall time, in addition to item/row limits; resume large tiles next update
 -- 2026-10-14: was { 300, 1 }, { 550, 0.5 }, { 900, 0.25 }, { 1e9, 0.12 }; the engine already draws far trees as
 -- billboards (their LODs), so our extra thinning made far forest sparse. Columbia: 48k -> 78k items, no frame cost seen.
 M.RINGS = { { 300, 1.0 }, { 700, 0.6 }, { 1500, 0.35 }, { 1e9, 0.2 } }   -- tile distance (m): the rank shown below
--- ... and at most this many items a tile (the lowest ranks: the hashed ranks thin it evenly). Dense forest has 10-20k
--- a tile: Bodø's 145 tiles made 1.66 M items (GitHub #66: 28 fps standing on a Steam Deck, 23 ms of each frame waiting
--- on the GPU, and the engine's tick hitched at every tile change while driving: 19.8 fps over a drive, 38.4 with trees
--- off; 2026-10-20). Cities and farmland stay under it (Columbia: ~540 a tile).
-M.TILE_CAP = { { 300, 6000 }, { 700, 2400 }, { 1500, 900 }, { 1e9, 400 } }
 -- small props only near the player (2026-10-14, Fells Point at street level: ~10 ms a frame for the Forest
 -- with a door on every house out to 300 m): the tile distance (m) beyond which a group is not shown
 -- rocks only over the fine ground (farfield.NEAR_RADII: L0 within 400 m): beyond it the coarser tiles round off the
 -- ridges and a rock placed on the real ground floated over the drawn one (Stelvio pass, the user's report 2026-10-17)
 M.GROUP_MAX_M = { shrub = 250, desert_shrub = 250, rock = 400, desert_rock = 400, door = 120, hydrant = 200, bin = 200, bench = 200, polelamp = 400,
+  uksignal = 400, ukcamera = 400, ukgiveway = 300, ukstop = 300, uknsl = 300, ukkeep_left = 250,
+  ukroundabout = 300, ukschool = 300, ukbus_stop = 200, ukpostbox = 150, ukfuelpump = 200,
+  ukspeed20 = 300, ukspeed30 = 300, ukspeed40 = 300, ukspeed50 = 300, ukspeed60 = 300, ukspeed70 = 300,
   stop = 300, giveway = 300, signal = 500, fence = 150, wallsign_logistics = 800, wallsign_rentabox = 800, wallsign_lemon = 800, wallsign_turboburger = 500,
   speed30 = 300, speed40 = 300, speed50 = 300, speed60 = 300, speed70 = 300,
   speedk40 = 300, speedk60 = 300, speedk80 = 300, speedk100 = 300 }
@@ -39,13 +38,29 @@ M.FOREST_NAME = 'bngEarthForest'      -- a prefix: small Forests from a pool ('b
 M.SOLID_M = 200       -- (was 300 + 100: up to ~20k solid trees in a forest, and every terrain block move rebuilt all their
                       -- collision, a ~30 ms physics frame; 200 + 50 is still 5 s ahead at 100 mph, 2026-10-15)
 M.SOLID_HYST_M = 50
+M.SOLID_LEAD_S = 8         -- collision rebuild interval plus time to prepare the next items
+M.SOLID_CHECK_M = 20       -- recheck item distances as the car advances, not just whole-tile bands
+
+-- Actual item distance, with a capsule along the car's predicted motion.
+-- Selecting an entire 256 m tile by its closest corner made thousands of
+-- distant trees collide. Keep the same near radius and a driving lead while
+-- excluding objects outside it; rendering and tree density are unchanged.
+function M.solidAt(x, y, player, wasSolid, extra)
+  local dx, dy = x - player.x, y - player.y
+  local ax, ay = (player.vx or 0) * M.SOLID_LEAD_S, (player.vy or 0) * M.SOLID_LEAD_S
+  local length2 = ax * ax + ay * ay
+  local t = length2 > 1 and math.max(0, math.min(1, (dx * ax + dy * ay) / length2)) or 0
+  dx, dy = dx - t * ax, dy - t * ay
+  local r = M.SOLID_M + (wasSolid and M.SOLID_HYST_M or 0) + (extra or 0)
+  return dx * dx + dy * dy <= r * r
+end
 M.NO_COLLIDE = { shrub = true, desert_shrub = true, door = true, wallsign_logistics = true, wallsign_rentabox = true,
   wallsign_lemon = true, wallsign_turboburger = true }
 -- The 100 mph stutter (2026-10-15 probes): a frame that adds or removes Forest items costs the engine's tick ~0.5 us
 -- for every item in the level of each SHAPE touched (whatever its item type or Forest), so a frame making 300 items of
 -- ~20 shapes among ~130k items cost ~100 ms. A frame touches shapes whose items add up to SHAPE_ITEMS_PER_FRAME at most
 -- (at least one shape), and bushes (half of all items, one shape alone 34k) show near the player only.
-M.SHAPE_ITEMS_PER_FRAME = 4000
+M.SHAPE_ITEMS_PER_FRAME = 2000
 -- The engine tells shapes apart by their path, so a tile's items use one of SHAPE_VARIANTS spellings of each shape's
 -- path ('dir/./name', 'dir/././name', ...: the same file, a shape of its own), which splits the big populations (one
 -- beech ~7.7k items: a frame touching it cost ~4-9 ms). A variant's first items cost one ~12 ms frame (its load).
@@ -128,6 +143,17 @@ M.CATALOG = {
     { '/art/shapes/common/building_architect_modules/doors/R_HS_B_DR_03_100x210', 2.2 },
   },
   signal = { { '/art/shapes/objects/s_trafficlight_boom_sn', 9.4 } },
+  uksignal = { { '/levels/beamng_earth/art/shapes/beamngEarth/uk_street/signal', 3.72 } },
+  ukcamera = { { '/levels/beamng_earth/art/shapes/beamngEarth/uk_street/camera', 3.75 } },
+  ukgiveway = { { '/levels/beamng_earth/art/shapes/beamngEarth/uk_street/giveway', 2.85 } },
+  ukstop = { { '/levels/beamng_earth/art/shapes/beamngEarth/uk_street/stop', 2.85 } },
+  uknsl = { { '/levels/beamng_earth/art/shapes/beamngEarth/uk_street/nsl', 2.85 } },
+  ukkeep_left = { { '/levels/beamng_earth/art/shapes/beamngEarth/uk_street/keep_left', 2.85 } },
+  ukroundabout = { { '/levels/beamng_earth/art/shapes/beamngEarth/uk_street/roundabout', 2.85 } },
+  ukschool = { { '/levels/beamng_earth/art/shapes/beamngEarth/uk_street/school', 2.85 } },
+  ukbus_stop = { { '/levels/beamng_earth/art/shapes/beamngEarth/uk_street/bus_stop', 2.85 } },
+  ukpostbox = { { '/levels/beamng_earth/art/shapes/beamngEarth/uk_street/postbox', 1.25 } },
+  ukfuelpump = { { IT .. 'buildings/italy_petrolstation_pump_a', 2.2 } },
   stop = { { '/levels/east_coast_usa/art/shapes/signs_usa/sign_stop', 3.0 } },
   giveway = { { '/art/shapes/garage_and_dealership/Clutter/italy_traf_sign_give_way', 3.0 } },
   -- a low wooden yard fence, 5.4 m along its x (server buildings._front_fence)
@@ -139,6 +165,12 @@ M.CATALOG = {
   speed30 = { { UT .. 'ut_roadsigns/ut_30_speed_limit', 2.6 } }, speed40 = { { UT .. 'ut_roadsigns/ut_40_speed_limit', 2.6 } },
   speed50 = { { UT .. 'ut_roadsigns/ut_50_speed_limit', 2.6 } }, speed60 = { { UT .. 'ut_roadsigns/ut_60_speed_limit', 2.6 } },
   speed70 = { { UT .. 'ut_roadsigns/ut_70_speed_limit', 2.6 } },
+  ukspeed20 = { { '/levels/beamng_earth/art/shapes/beamngEarth/uk_roads/speed20', 2.6 } },
+  ukspeed30 = { { '/levels/beamng_earth/art/shapes/beamngEarth/uk_roads/speed30', 2.6 } },
+  ukspeed40 = { { '/levels/beamng_earth/art/shapes/beamngEarth/uk_roads/speed40', 2.6 } },
+  ukspeed50 = { { '/levels/beamng_earth/art/shapes/beamngEarth/uk_roads/speed50', 2.6 } },
+  ukspeed60 = { { '/levels/beamng_earth/art/shapes/beamngEarth/uk_roads/speed60', 2.6 } },
+  ukspeed70 = { { '/levels/beamng_earth/art/shapes/beamngEarth/uk_roads/speed70', 2.6 } },
   -- ... and the round km/h signs (furniture.SIGN_KMH, outside the mph countries: Driver Training's)
   speedk40 = { { '/levels/driver_training/art/shapes/race/sign_speed40kph', 2.47 } },
   speedk60 = { { '/levels/driver_training/art/shapes/race/sign_speed60kph', 2.47 } },
@@ -157,6 +189,8 @@ M.CATALOG = {
   },
 }
 local MATERIALS = {
+  '/levels/beamng_earth/art/shapes/beamngEarth/uk_street', IT .. 'buildings',
+  '/levels/beamng_earth/art/shapes/beamngEarth/uk_roads',
   ECA .. 'trees/trees_oak', ECA .. 'trees/trees_beech', ECA .. 'trees/trees_aspen', ECA .. 'trees/trees_douglasfir',
   ECA .. 'trees/ECA_coast_bush', ECA .. 'trees/common', ECA .. 'trees', ECA .. 'rocks',
   WCA .. 'trees/trees_conifer', WCA .. 'trees/trees_oak', WCA .. 'trees/trees_eucalyptus', WCA .. 'trees/trees_palm',
@@ -237,7 +271,8 @@ local function itemType(shape, solid)
     if not d then return nil end
     d:setField('shapeFile', 0, shape .. '.dae')
     d:setField('collidable', 0, solid and '1' or '0')
-    d:setField('windScale', 0, '0.4'); d:setField('branchAmp', 0, '0.1'); d:setField('detailAmp', 0, '0.2')
+    local rigid = shape:find('/uk_roads/', 1, true) ~= nil
+    d:setField('windScale', 0, rigid and '0' or '0.4'); d:setField('branchAmp', 0, rigid and '0' or '0.1'); d:setField('detailAmp', 0, rigid and '0' or '0.2')
     d:registerObject(name)
     if Sim and Sim.getDataBlockSet then Sim.getDataBlockSet():addObject(d) end
   end
@@ -372,27 +407,6 @@ local function threshold(d)
   return 0
 end
 
--- The rank tile t shows below at distance d: threshold(d), lowered to keep it within M.TILE_CAP (the cap-th lowest
--- of its rows' ranks: exact whatever share of the area's items the server sent, vegetation.TILE_ROWS_MAX).
-local function tileThreshold(d, t)
-  local want = threshold(d)
-  local rows = t.rows or {}
-  for _, r in ipairs(M.TILE_CAP) do
-    if d <= r[1] then
-      if #rows <= r[2] then return want end
-      if not t.ranks then
-        local rk = {}
-        for i, row in ipairs(rows) do rk[i] = row[8] or 0 end
-        table.sort(rk)
-        t.ranks = rk
-      end
-      return math.min(want, t.ranks[r[2] + 1])
-    end
-  end
-  return want
-end
-M.tileThreshold = tileThreshold
-
 -- M.suppress(group, x, y) -> true hides that item (set by navgraph.lua); M.refresh() re-runs every tile's rows
 -- after it changes.
 M.suppress = nil
@@ -484,13 +498,12 @@ end
 -- ms whatever the count (2026-10-15, 100 mph forest drive: tick 3.5 -> 1.65 ms a frame on average, 50 -> 54 fps)
 M.EVERY_N = 3
 local frameN = 0
--- view: the camera's {x, y} when it is away from the car (core: VIEW_AWAY_M), else nil: what is shown follows what the
--- player looks at, the colliding items stay round the car (the user, 2026-10-20: "the LODs still all follow the car").
-function M.update(anchorId, player, view)
+function M.update(anchorId, player)
   if not next(tiles) then return end
   if not setup() then return end
   frameN = frameN + 1
   if frameN % M.EVERY_N ~= 0 then return end
+  local elapsed = stopwatch.new()
   local budget = M.PER_FRAME * M.EVERY_N
   M.lastShapeItems = touchedItems        -- the previous frame's (diagnostics)
   touched, touchedItems = {}, 0
@@ -501,7 +514,7 @@ function M.update(anchorId, player, view)
       local fd = f and f:getData()
       local left = false
       for i, it in pairs(t.made) do
-        if budget <= 0 then return end
+        if budget <= 0 or elapsed() >= M.UPDATE_MS then return end
         local sh = t.madeShape[i]
         if not sh or allow(sh) then
           if fd then removeItem(fd, it, sh) end
@@ -516,17 +529,13 @@ function M.update(anchorId, player, view)
     end
   end
   if not player then return end
-  -- nearest tiles first (to the camera when it is away: view); [3] the distance to the car (the colliding items)
+  -- nearest tiles first
   local order = {}
-  local function boxDist(p, t)
-    local dx = math.max(math.abs(p.x - t.cx) - 128, 0)
-    local dy = math.max(math.abs(p.y - t.cy) - 128, 0)
-    return math.sqrt(dx * dx + dy * dy)
-  end
   for key, t in pairs(tiles) do
     if t.anchor ~= anchorId or t.drop then goto continue end     -- still being emptied
-    local dCar = boxDist(player, t)
-    order[#order + 1] = { key, view and math.min(boxDist(view, t), dCar) or dCar, dCar }
+    local dx = math.max(math.abs(player.x - t.cx) - 128, 0)
+    local dy = math.max(math.abs(player.y - t.cy) - 128, 0)
+    order[#order + 1] = { key, math.sqrt(dx * dx + dy * dy) }
     ::continue::
   end
   table.sort(order, function(a, b) return a[2] < b[2] end)
@@ -542,24 +551,31 @@ function M.update(anchorId, player, view)
     local t = tiles[o[1]]
     local fd = nil                          -- the tile's Forest data, made when it first needs an item
     local function data() fd = fd or forest(t):getData(); return fd end
-    local want = tileThreshold(o[2], t)
+    local want = threshold(o[2])
     local band = groupBand(t, o[2])
-    local near = o[3] <= M.SOLID_M or (t.near and o[3] <= M.SOLID_M + M.SOLID_HYST_M) or false
-    if want ~= t.shown or band ~= t.band or near ~= t.near or t.pending then
+    local near = M.solidAt(t.cx, t.cy, player, t.near, 182)
+    local pose = t.solidPose
+    local moved = not pose or (player.x-pose.x)^2+(player.y-pose.y)^2 >= M.SOLID_CHECK_M^2
+      or ((player.vx or 0)-(pose.vx or 0))^2+((player.vy or 0)-(pose.vy or 0))^2 >= 25
+    if want ~= t.shown or band ~= t.band or near ~= t.near or ((near or t.near) and moved) or t.pending then
       t.pending = false
       if rowsScanned > M.ROWS_PER_FRAME then finish(); return end
       rowsScanned = rowsScanned + #t.rows
-      for i, row in ipairs(t.rows) do
+      if t.scanWant ~= want or t.scanBand ~= band then t.cursor = nil end
+      t.scanWant, t.scanBand = want, band
+      for i = t.cursor or 1, #t.rows do
+        if elapsed() >= M.UPDATE_MS then t.cursor = i; t.pending = true; finish(); return end
+        local row = t.rows[i]
         local r = row[8] or 0
         local g = (t.groups or GROUPS)[(row[1] or 0) + 1]
         local cap = g and M.GROUP_MAX_M[g]
         if cap and o[2] > cap then r = 2 end     -- this group is not shown this far out
         -- an item something else stands in for (navgraph.lua's switchable signal heads)
         if g and M.suppress and M.suppress(g, row[2], row[3]) then r = 2 end
-        local solid = near and not M.NO_COLLIDE[g or '']
+        local solid = near and not M.NO_COLLIDE[g or ''] and M.solidAt(row[2], row[3], player, t.solid[i])
         if r < want and (not t.made[i] or (t.solid[i] == true) ~= solid) then
           local sh, sc = shapeOf(t, i, row)
-          if budget <= 0 then t.pending = true; finish(); return end
+          if budget <= 0 then t.cursor = i; t.pending = true; finish(); return end
           if allow(sh) then
             if t.made[i] then removeItem(data(), t.made[i], t.madeShape[i]); budget = budget - 1 end  -- solid <-> not
             t.made[i] = makeItem(data(), row, sh, sc, solid)
@@ -569,7 +585,7 @@ function M.update(anchorId, player, view)
             budget = budget - 1
           else t.pending = true end                -- another frame (this one's shapes are full)
         elseif r >= want and t.made[i] then
-          if budget <= 0 then t.pending = true; finish(); return end
+          if budget <= 0 then t.cursor = i; t.pending = true; finish(); return end
           if allow(t.madeShape[i] or '') then
             removeItem(data(), t.made[i], t.madeShape[i])
             t.made[i], t.solid[i], t.madeShape[i] = nil, nil, nil
@@ -580,6 +596,8 @@ function M.update(anchorId, player, view)
       t.shown = want
       t.band = band
       t.near = near
+      t.cursor = nil
+      t.solidPose = { x = player.x, y = player.y, vx = player.vx, vy = player.vy }
     end
   end
   finish()
@@ -593,7 +611,7 @@ function M.clear()
     for i, it in pairs(t.made) do if fd then removeItem(fd, it, t.madeShape[i]) end end
     releaseForest(t)
   end
-  tiles, frameN = {}, 0
+  tiles = {}
 end
 
 -- Level end: the level deletes its objects itself.

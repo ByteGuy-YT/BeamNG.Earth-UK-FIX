@@ -1,0 +1,25 @@
+{
+  "tests": 271,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "ok": true,
+  "patterns": [
+    "test_roads.py",
+    "test_roadmesh.py",
+    "test_world_geometry.py",
+    "test_approaches.py",
+    "test_grading.py",
+    "test_uk_geometry_regressions.py",
+    "test_uk_round2.py",
+    "test_motorway_round3.py",
+    "test_navgraph.py",
+    "test_parking.py",
+    "test_mapdata.py",
+    "test_tunnels.py",
+    "test_cdae.py",
+    "test_blockworker.py",
+    "test_road_interfaces.py"
+  ],
+  "seconds": 21.550257700000657
+}

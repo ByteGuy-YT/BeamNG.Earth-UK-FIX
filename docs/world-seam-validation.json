@@ -1,0 +1,23 @@
+[
+  {
+    "name": "boston",
+    "seams": 10,
+    "max_gap": 0.0,
+    "seconds": 115.23560679999355,
+    "ok": true
+  },
+  {
+    "name": "j26",
+    "seams": 2,
+    "max_gap": 0.0,
+    "seconds": 56.173576400004094,
+    "ok": true
+  },
+  {
+    "name": "sydney",
+    "seams": 8,
+    "max_gap": 0.0,
+    "seconds": 78.55309280000802,
+    "ok": true
+  }
+]

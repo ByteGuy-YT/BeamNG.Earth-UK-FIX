@@ -124,46 +124,18 @@ def _seg_dist(p, line):
     return np.hypot(*(p[:, None, :] - q).transpose(2, 0, 1)).min(axis=1)
 
 
-_BOXES = {}                     # id(roads list) -> (that list, its boxes (n, 4))
-
-
-def _boxes(roads):
-    """(n, 4) x0 y0 x1 y1 of each road's line, made once per roads list (find() asks ~70 times a tile)."""
-    got = _BOXES.get(id(roads))
-    if got is not None and got[0] is roads:
-        return got[1]
-    # every line at once (min / max over each line's run of points: four numpy calls per road took ~0.5 % a tile)
-    import mapgeom
-    lines = [ln for _, _, ln, _ in roads]
-    b = np.empty((len(lines), 4))
-    if lines:
-        n = np.array([len(ln) for ln in lines], np.int64)
-        allp = np.concatenate([np.asarray(ln, np.float64)[:, :2] for ln in lines])
-        a = np.concatenate(([0], np.cumsum(n)[:-1]))
-        b[:, 0] = mapgeom._reduce(np.minimum, allp[:, 0], a, a + n)
-        b[:, 1] = mapgeom._reduce(np.minimum, allp[:, 1], a, a + n)
-        b[:, 2] = mapgeom._reduce(np.maximum, allp[:, 0], a, a + n)
-        b[:, 3] = mapgeom._reduce(np.maximum, allp[:, 1], a, a + n)
-    if len(_BOXES) >= 16:
-        _BOXES.clear()
-    _BOXES[id(roads)] = (roads, b)      # (the list kept: its id cannot be another list's meanwhile)
-    return b
-
-
 def _on_carriageway(pts, roads, near, margin=0.3, half=None, skip=()):
     """The fid of a road with any point (m, 2) on its carriageway (centreline distance < width / 2 -
     margin), among the roads within `near` (centre (2,), radius), or None. half: {fid: half width}
     overrides; skip: fids not checked."""
     c, r = near
     half = half or {}
-    b = _boxes(roads)
-    near_i = np.flatnonzero((b[:, 2] >= c[0] - r) & (b[:, 3] >= c[1] - r) & (b[:, 0] <= c[0] + r)
-                            & (b[:, 1] <= c[1] + r))
-    for i in near_i:
-        fid, spec, line, lon = roads[i]
+    for fid, spec, line, lon in roads:
         if fid in skip:
             continue
         xy = line[:, :2]
+        if (xy.max(0) < c - r).any() or (xy.min(0) > c + r).any():
+            continue
         h = half.get(fid, spec.width / 2) - margin
         if _ef is not None:             # the Rust test (the same distances)
             if _ef.any_within(np.ascontiguousarray(pts, np.float64)[:, :2], np.ascontiguousarray(xy, np.float64), h):
@@ -224,12 +196,12 @@ def _across(roads, bi, bj, cr, X, walk_w, debug=None):
     if _branch_len(roads[ri][2], vi, si) < ti + 1.0 or _branch_len(roads[rj][2], vj, sj) < tj + 1.0:
         return None
     curb2 = np.vstack([a1, a2])
-    keep = np.concatenate(([True], np.hypot(*np.diff(curb2, axis=0).T) > 0.05))
+    keep = np.r_[True, np.hypot(*np.diff(curb2, axis=0).T) > 0.05]
     curb2 = curb2[keep]
     if len(curb2) < 2:
         return None
     zi, zj = _z_along(roads[ri][2], vi, si, ti), _z_along(roads[rj][2], vj, sj, tj)
-    s = np.concatenate(([0.0], np.cumsum(np.hypot(*np.diff(curb2, axis=0).T))))
+    s = np.r_[0.0, np.cumsum(np.hypot(*np.diff(curb2, axis=0).T))]
     z = zi + (zj - zi) * s / max(s[-1], 1e-9)
     curb = np.c_[curb2, z]
     g = np.gradient(curb2, axis=0)
@@ -239,6 +211,12 @@ def _across(roads, bi, bj, cr, X, walk_w, debug=None):
     nrm[flip] = -nrm[flip]
     wki = spi.walk if walk_w is None else walk_w
     wkj = spj.walk if walk_w is None else walk_w
+    if getattr(spi, "profile", None) is not None:
+        wki = spi.profile.walk_left if si > 0 else spi.profile.walk_right
+    if getattr(spj, "profile", None) is not None:
+        wkj = spj.profile.walk_left if -sj > 0 else spj.profile.walk_right
+    if wki <= 0 or wkj <= 0:
+        return None
     wkc = max(wki, wkj)
     ni, nj, nc = _left(ui), _left(uj), _left(uc)
     Oi = _line_x(Pi + ni * (wi + wki), ui, Pi - nc * (wc + wkc), uc)
@@ -261,10 +239,11 @@ def _across(roads, bi, bj, cr, X, walk_w, debug=None):
     for C, arc in ((C1, a1), (C2, a2)):
         if C is not None and len(arc) > 1:
             fills.append(np.vstack([np.r_[C, zo]] + [np.r_[q, zo] for q in arc]))
-    return {"arc": curb, "inward": nrm, "outer": outer, "fill": None, "fills": fills, "ramps": []}, ti, tj
+    return {"arc": curb, "inward": nrm, "outer": outer, "fill": None, "fills": fills, "ramps": [],
+            "uk": getattr(spi, "profile", None) is not None}, ti, tj
 
 
-def find(roads, has_walk, walk_w, parking_m=0.0, has_parking=lambda spec: False, debug=None):
+def find(roads, has_walk, walk_w, parking_m=0.0, has_parking=lambda spec: False, debug=None, left_hand=False):
     """Corners, cuts and crosswalks of the junctions among `roads` [(fid, spec, pts (k, 3), lon)].
     has_walk(spec) -> bool; walk_w: sidewalk width. Returns
         corners: [dict(arc (n, 3) curb points, inward (n, 2) unit vectors toward the sidewalk,
@@ -307,7 +286,7 @@ def find(roads, has_walk, walk_w, parking_m=0.0, has_parking=lambda spec: False,
     connector = {}                              # {node a, node b} -> the road joining them (merged)
     for ri, (fid, spec, pts, lon) in enumerate(roads):
         seg = np.hypot(*np.diff(pts[:, :2], axis=0).T)
-        s_at = np.concatenate(([0.0], np.cumsum(seg)))
+        s_at = np.r_[0.0, np.cumsum(seg)]
         on = [(vi, node_of[(ri, vi)]) for vi in range(len(pts)) if (ri, vi) in node_of]
         for (v0, a), (v1, b) in zip(on[:-1], on[1:]):
             L = s_at[v1] - s_at[v0]
@@ -429,6 +408,12 @@ def find(roads, has_walk, walk_w, parking_m=0.0, has_parking=lambda spec: False,
                     continue
                 wki = spi.walk if walk_w is None else walk_w
                 wkj = spj.walk if walk_w is None else walk_w
+                if getattr(spi, "profile", None) is not None:
+                    wki = spi.profile.walk_left if li > 0 else spi.profile.walk_right
+                if getattr(spj, "profile", None) is not None:
+                    wkj = spj.profile.walk_left if -lj > 0 else spj.profile.walk_right
+                if wki <= 0 or wkj <= 0:
+                    continue
                 O = _line_x(Pi + ni * (wi + wki), ui, Pj - nj * (wj + wkj), uj)
                 if O is None:
                     continue
@@ -478,11 +463,12 @@ def find(roads, has_walk, walk_w, parking_m=0.0, has_parking=lambda spec: False,
                     if debug is not None:
                         debug.append(('on carriageway', hit[:8], hit in internal, roads[ri][0][:8], roads[rj][0][:8], round(theta), X.round(1).tolist()))
                     continue
-                corner = {"arc": curb, "inward": nrm, "outer": outer, "fill": fill, "ramps": []}
+                corner = {"arc": curb, "inward": nrm, "outer": outer, "fill": fill, "ramps": [],
+                          "uk": getattr(spi, "profile", None) is not None}
                 corners.append(corner)
                 cuts.setdefault((roads[ri][0], li), []).append((Pi.copy(), ui, ci))
                 cuts.setdefault((roads[rj][0], -lj), []).append((Pj.copy(), uj, cj))
-                seg = np.concatenate(([0.0], np.cumsum(np.hypot(*np.diff(curb2, axis=0).T))))
+                seg = np.r_[0.0, np.cumsum(np.hypot(*np.diff(curb2, axis=0).T))]
                 # arc length along the curb of a point t m along each branch (for the crosswalk's ramp)
                 side_t[(i, "L")] = (ti, corner, ("dec", seg[len(pre) - 1] if pi_ else None, ti + bi), bi)
                 side_t[(j, "R")] = (tj, corner, ("inc", seg[len(pre) + k - 1] if pj_ else None, tj), bj)
@@ -493,6 +479,10 @@ def find(roads, has_walk, walk_w, parking_m=0.0, has_parking=lambda spec: False,
             if (i, "L") in side_t and (i, "R") in side_t:
                 ai, ri, vi, si, ui, li, Pi = branches[i]
                 spec = roads[ri][1]
+                if getattr(spec, "profile", None) is not None:
+                    # Pavement corners are geometric; a crossing/stop line needs mapped evidence.
+                    # Do not invent zebra crossings at every British village junction.
+                    continue
                 w = spec.width / 2
                 dw = w - (parking_m if has_parking(spec) else 0.0)     # curb to curb at the bulbs
                 t = max(side_t[(i, "L")][0], side_t[(i, "R")][0]) + CW_GAP + CROSSWALK["w"] / 2
@@ -518,7 +508,8 @@ def find(roads, has_walk, walk_w, parking_m=0.0, has_parking=lambda spec: False,
                 if _branch_len(roads[ri][2], vi, si) > ts + 2.0:
                     cs = Pi + ui * ts
                     zs = _z_along(roads[ri][2], vi, si, ts)
-                    stops.append({"a": np.r_[cs + nl * 0.2, zs], "b": np.r_[cs + nl * (dw - 0.3), zs], "w": STOP_LINE["w"]})
+                    hand = -1 if left_hand else 1
+                    stops.append({"a": np.r_[cs + hand * nl * 0.2, zs], "b": np.r_[cs + hand * nl * (dw - 0.3), zs], "w": STOP_LINE["w"]})
                 t0, t1 = t - CROSSWALK["w"] / 2, t + CROSSWALK["w"] / 2
                 for key, side in (((i, "L"), li), ((i, "R"), -li)):
                     tt, corner, (how, s0, tref), bulb = side_t[key]
@@ -542,7 +533,7 @@ def apply_cuts(line, cuts, near=40.0):
         return [(pts, (False, False))]
     # densify to 0.5 m so a cut lands within the resolution, then exact ends
     seg = np.hypot(*np.diff(pts[:, :2], axis=0).T)
-    s = np.concatenate(([0.0], np.cumsum(seg)))
+    s = np.r_[0.0, np.cumsum(seg)]
     if s[-1] <= 0:
         return []
     t = np.linspace(0.0, s[-1], max(2, int(s[-1] / 0.5) + 1))
@@ -588,7 +579,7 @@ def ramp_ranges(run, ramps):
     if not ramps:
         return []
     seg = np.hypot(*np.diff(run[:, :2], axis=0).T)
-    s = np.concatenate(([0.0], np.cumsum(seg)))
+    s = np.r_[0.0, np.cumsum(seg)]
     out = []
     for X, u, t0, t1 in ramps:
         along = (run[:, :2] - X) @ u

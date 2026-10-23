@@ -46,6 +46,10 @@ def curb_spots(roads, walks, box, left_hand=False, directions=None):
         if furniture._h01(fid, "park") >= STREET_SHARE:
             continue
         side = wk["side"]
+        if spec.profile is not None:
+            parking_width = spec.profile.parking_left if side > 0 else spec.profile.parking_right
+            if parking_width < 1.8:
+                continue                      # unknown parking is not permission to park in a traffic lane
         if spec.width < BOTH_SIDES_M and side != (1 if furniture._h01(fid, "parkside") < 0.5 else -1):
             continue
         run = np.asarray(wk["pts"], np.float64)
@@ -206,12 +210,68 @@ def tile_lot_spots(frame, tx, ty, md, elev, items=None, existing=None):
             drop |= pa.contains_points(pts)
         existing = [r for r, d in zip(existing, drop) if not (d and len(r) > 4 and r[4] == 1)]
     if not rings:
+        rings = context_rings(frame, box)
+    else:
+        # Prefer mapped OSM lots where present; do not put two independent grids
+        # of parking spaces on overlapping versions of the same polygon.
+        extra = context_rings(frame, box)
+        if extra:
+            rings = extra
+    if not rings:
         return existing
 
     def z_at(x, y):
         la, lo, _ = frame.enu_to_geodetic(x, y, 0.0)
         return elev(la, lo)
     return existing + lot_spots(rings, box, z_at, blockers)
+
+
+def context_rings(frame, box):
+    import ukcontext
+    out=[]
+    for _,_,tags,ll in ukcontext.near(frame,box,kinds=('parking',)):
+        if len(ll)<4 or tags.get('surface') in ('gravel','grass','ground','unpaved','dirt'):
+            continue
+        x,y,_=frame.geodetic_to_enu(ll[:,1],ll[:,0],0.)
+        out.append(np.c_[x,y])
+    return out
+
+
+def render_lots(mesh, frame, box, md, elev, origin, spots, lines, blockers):
+    """Visible tarmac and bay paint, batched into the existing road tile mesh."""
+    import plazas, roadmesh, roads, ukcontext
+    rings=context_rings(frame,box)
+    if not rings:
+        try:
+            fs=[md.cell(k,layers=('infrastructure',),kind='demand').layers.get('infrastructure')
+                for k in roads.cells_of_tile(frame,int(box[0]/roads.TILE),int(box[1]/roads.TILE),margin=0.)]
+            rings=lot_rings(frame,fs)
+        except Exception:
+            rings=[]
+    if rings:
+        ll=[]
+        for xy in rings:
+            la,lo,_=frame.enu_to_geodetic(xy[:,0],xy[:,1],0.);ll.append(np.c_[lo,la])
+        paved=plazas.mesh(frame,box,ll,elev,origin,material='road_asphalt_2lane',lift=.02,terrain=True)
+        mesh=plazas.merge(mesh,paved)
+    chunks=[]
+    paths=[Path(b) for b in blockers if len(b)>=3]
+    for r in spots or ():
+        if len(r)<5 or r[4]!=1 or len(chunks)>=900:continue
+        p=np.array(r[:2]);a=math.radians(r[3]);u=np.array([math.cos(a),math.sin(a)]);v=np.array([-u[1],u[0]])
+        corners=np.array([p-u*2.5-v*1.2,p+u*2.5-v*1.2,p+u*2.5+v*1.2,p-u*2.5+v*1.2])
+        if any(pa.contains_points(corners).any() for pa in paths):continue
+        # A bay must not overlap a mapped aisle or through-road.
+        clear=True
+        for xy,hw,*_ in lines or ():
+            xy=np.asarray(xy);d=np.diff(xy[:,:2],axis=0);l2=np.maximum((d*d).sum(1),1e-9)
+            t=np.clip(((p-xy[:-1,:2])*d).sum(1)/l2,0,1)
+            if np.linalg.norm(p-xy[:-1,:2]-t[:,None]*d,axis=1).min()<hw+1.1:clear=False;break
+        if not clear:continue
+        for i,j in ((0,1),(1,2),(2,3)):
+            chunks.append({'n':np.c_[corners[[i,j]],np.zeros(2)].tolist(),'w':.09,'m':'line_white','tl':8.,'p':3})
+    if chunks:mesh=plazas.merge(mesh,roadmesh.build(frame,chunks,elev,origin,lift=.026))
+    return mesh
 
 
 AISLE_END_M = 6.0           # stalls kept this far from an aisle's ends (its junctions)

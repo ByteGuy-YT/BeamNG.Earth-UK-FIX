@@ -23,6 +23,26 @@ SKIP_EXT = {".pyc", ".pyo", ".log", ".swp"}
 EXECUTABLE = {"run_server.sh", "install.py", "start.py"}
 
 
+FILES += ["Play UK roads.bat", "docs/UK_ROADS.md", "docs/UK_ROAD_SCREENSHOT_FIXES.md",
+          "docs/uk-road-geometry-preview.png", "docs/uk-road-validation.json"]
+FILES += ["docs/UK_STREET_DETAILS.md", "docs/uk-street-assets-preview.png", "docs/uk-street-validation.json"]
+FILES += ["docs/UK_ROUND2_FIXES.md", "docs/uk-round2-validation.json", "docs/uk-round2-performance.json"]
+TOOLS += ["tools/prepare_uk_roads.py", "tools/inspect_uk_roads.py", "tools/make_uk_road_assets.py"]
+TOOLS += ["tools/prepare_uk_context.py", "tools/make_uk_street_assets.py"]
+TOOLS += ["tools/validate_uk_round2.py"]
+FILES += ["docs/UK_MOTORWAY_FIXES.md", "docs/uk-motorway-validation.json",
+          "docs/uk-motorway-live-validation.json", "docs/uk-motorway-live.png"]
+TOOLS += ["tools/validate_uk_motorways.py"]
+FILES += ["docs/WORLD_GEOMETRY_REPAIR.md", "docs/world-geometry-validation.json",
+          "docs/world-seam-validation.json", "docs/world-focused-tests.json",
+          "docs/world-boston-lane-data.json", "docs/world-boston-road-source.json",
+          "docs/world-boston-collision.json", "docs/world-m1-corridor-validation.json",
+          "docs/world-boston-lanes.png", "docs/world-m1-profile.png",
+          "docs/world-vauxhall-walk.png", "docs/world-stelvio.png",
+          ".road-data/osm-extra.sqlite", ".road-data/osm-extra.osm", ".road-data/osm-extra.source.json"]
+TOOLS += ["tools/validate_world_geometry.py", "tools/validate_world_seams.py", "tools/prepare_road_attributes.py"]
+
+
 def version():
     with open(os.path.join(ROOT, "VERSION"), encoding="utf-8") as f:
         return f.read().strip()

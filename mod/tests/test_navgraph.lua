@@ -49,4 +49,13 @@ T.check(math.abs(N.boxMoved({ -708, -452, 196, 452 }, { -1092, -452, -188, 452 }
   'the block moved 384 m: measured between the boxes\' centres')
 T.check(N.boxMoved(nil, { 0, 0, 1, 1 }) == 0 and N.boxMoved({}, { 0, 0, 1, 1 }) == 0, 'no box yet: not moved')
 T.check(384 >= N.RECLIP_M and 128 < N.RECLIP_M, 'a 384 m move re-clips the graph, one step of 128 m does not')
+local pose = { nil,nil,nil,nil,nil,nil,nil,10,20,30,90,'uksignal' }
+local head = { x=10,y=20,z=30,yaw=90,kind='uksignal' }
+T.check(N.sameHeadTransform(head,pose),'unchanged signal transform can reuse the head')
+pose[11]=270
+T.check(not N.sameHeadTransform(head,pose),'same position but opposite facing rebuilds the head')
+pose[11]=450
+T.check(N.sameHeadTransform(head,pose),'equivalent wrapped yaw can reuse the head')
+pose[12]='signal'
+T.check(not N.sameHeadTransform(head,pose),'different signal model rebuilds the head')
 T.done('test_navgraph')

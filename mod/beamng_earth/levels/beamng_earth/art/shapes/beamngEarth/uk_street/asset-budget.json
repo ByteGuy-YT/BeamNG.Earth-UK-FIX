@@ -1,0 +1,12 @@
+{
+  "signal": 120,
+  "camera": 48,
+  "postbox": 24,
+  "giveway": 13,
+  "stop": 20,
+  "nsl": 36,
+  "keep_left": 36,
+  "roundabout": 13,
+  "school": 13,
+  "bus_stop": 14
+}

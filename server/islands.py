@@ -10,6 +10,7 @@ a curbed island along it (a sidewalk run of ISLAND_BAND_M inward) and the inside
 planting). Pure.
 """
 import math
+from itertools import chain
 
 import numpy as np
 
@@ -89,10 +90,12 @@ def _graph(roads_list):
     return edges, adj
 
 
-def _cycles(edges, adj, max_edges=MAX_EDGES, max_loop=MAX_LOOP_M):
+def _cycles(edges, adj, max_edges=MAX_EDGES, max_loop=MAX_LOOP_M, allowed=None):
     """Each short cycle of the road graph once: [(edge index, traversed from its start)]."""
     seen = set()
     for k0, (_, _, _, a0, b0, L0) in enumerate(edges):
+        if allowed is not None and k0 not in allowed:
+            continue
         if a0 == b0:                                    # a closed road: a loop by itself
             cycles = [[(k0, True)]]
         else:
@@ -103,6 +106,8 @@ def _cycles(edges, adj, max_edges=MAX_EDGES, max_loop=MAX_LOOP_M):
                 if len(path) > max_edges or L > max_loop:
                     continue
                 for k in adj.get(n, []):
+                    if allowed is not None and k not in allowed:
+                        continue
                     if any(k == q for q, _ in path):
                         continue
                     _, _, _, a, b, Lk = edges[k]
@@ -138,14 +143,23 @@ def ring_directions(roads_list, left_hand=False):
     both decide the same. Mapped one-way directions take precedence; missing directions follow the ring's mapped
     circulation, or the driving side when none is mapped. Sorting makes inference independent of cell/load order."""
     edges, adj = _graph(sorted(roads_list, key=lambda r: r[0]))
-    out = {}
-    for cyc in _cycles(edges, adj, RING_MAX_EDGES, RING_MAX_LOOP_M):
+    out = {fid: (spec.dir or 1) for fid, spec, pts, _ in roads_list
+           if getattr(spec, "profile", None) is not None and spec.profile.junction == "roundabout"}
+    circular={k for k,(_,sp,*_) in enumerate(edges) if getattr(sp,'profile',None) is not None and sp.profile.junction=='circular'}
+    seen=set()
+    for cyc in chain(_cycles(edges, adj, RING_MAX_EDGES, RING_MAX_LOOP_M),
+                     _cycles(edges,adj,128,4000.,allowed=circular) if circular else ()):
+        signature=frozenset(k for k,_ in cyc)
+        if signature in seen:continue
+        seen.add(signature)
+        mapped_circular=all(k in circular for k,_ in cyc)
+        if mapped_circular and any(edges[k][1].profile.explicit_two_way for k,_ in cyc):continue
         L = sum(edges[k][5] for k, _ in cyc)
         parts = [edges[k][2] if fwd else edges[k][2][::-1] for k, fwd in cyc]
         poly = np.concatenate([p[:-1, :2] for p in parts])
         signed_area = _area(poly) if len(poly) >= 3 else 0.0
         area = abs(signed_area)
-        if L > RING_MAX_LOOP_M or not (MIN_AREA_M2 <= area <= RING_MAX_AREA_M2):
+        if L > (4000. if mapped_circular else RING_MAX_LOOP_M) or not (MIN_AREA_M2 <= area <= (500000. if mapped_circular else RING_MAX_AREA_M2)):
             continue
         rnd = 4 * math.pi * area / (L * L)
         ow = [(k, fwd) for k, fwd in cyc if getattr(edges[k][1], "oneway", False) and getattr(edges[k][1], "dir", 0)]
@@ -153,7 +167,7 @@ def ring_directions(roads_list, left_hand=False):
         if along and not (all(along) or not any(along)):
             continue                                                 # one-ways against each other: not a ring
         oneway_ok = along and sum(edges[k][5] for k, _ in ow) >= RING_ONEWAY_SHARE * L
-        if rnd >= RING_ROUND_ANY or (rnd >= RING_ROUND and oneway_ok):
+        if mapped_circular or rnd >= RING_ROUND_ANY or (rnd >= RING_ROUND and oneway_ok):
             # A through road makes this a connected road loop, not a roundabout with a central island.
             members = {k for k, _ in cyc}
             if any(_crosses(poly, e[2]) for j, e in enumerate(edges) if j not in members):
@@ -175,16 +189,24 @@ def find(roads_list, is_oneway=lambda spec: bool(getattr(spec, "oneway", False))
     structures: building centres (x, y); a loop round one is a block, not an island."""
     edges, adj = _graph(roads_list)
     found = []
-    for cyc in _cycles(edges, adj):
+    tagged = {k for k, (_, sp, *_rest) in enumerate(edges) if getattr(sp, "profile", None) is not None and sp.profile.junction in ("roundabout","circular")}
+    cycles = chain(_cycles(edges, adj), _cycles(edges, adj, 128, 4000., allowed=tagged))
+    seen = set()
+    for cyc in cycles:
         key = {k for k, _ in cyc}
+        if frozenset(key) in seen:
+            continue
+        seen.add(frozenset(key))
         L = sum(edges[k][5] for k, _ in cyc)
         ow = sum(edges[k][5] for k, _ in cyc if is_oneway(edges[k][1]))
-        if L > MAX_LOOP_M or ow < ONEWAY_SHARE * L:
+        mapped = all(getattr(edges[k][1], "profile", None) is not None and
+                     edges[k][1].profile.junction in ("roundabout","circular") for k, _ in cyc)
+        if L > (4000. if mapped else MAX_LOOP_M) or ow < ONEWAY_SHARE * L:
             continue
         parts = [edges[k][2] if fwd else edges[k][2][::-1] for k, fwd in cyc]
         poly = np.concatenate([p[:-1, :2] for p in parts])
         area = _area(poly)
-        if not (MIN_AREA_M2 <= abs(area) <= MAX_AREA_M2):
+        if not (MIN_AREA_M2 <= abs(area) <= (500000. if mapped else MAX_AREA_M2)):
             continue
         if any(_inside(poly, c) for c in structures):
             continue                                # a building inside: a city block, not an island

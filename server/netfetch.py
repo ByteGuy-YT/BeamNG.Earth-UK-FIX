@@ -98,8 +98,6 @@ class HostPolicy:
     redirect_limited: bool = False          # a 3xx means "rate limited" (tile hosts never redirect)
     binary: bool = False                    # a 200 with an HTML page is an error page
     referer: bool = False                   # send PROJECT_URL as Referer (hosts that ask for one)
-    optional: bool = False                  # the world builds without it (gravity, weather, search, routing,
-                                            # updates): left out of the player's "Degraded" status (GitHub #23)
 
 
 TILE_HOST = dict(redirect_limited=True, binary=True)
@@ -140,10 +138,10 @@ POLICIES = {
                                    allow_prefetch=True, offline_ok=True, miss_ttl=None, **TILE_HOST),
     # 20 variables a request = 2 Open-Meteo calls: 500 requests = 1,000 calls a day, hard
     "api.open-meteo.com": HostPolicy(rate=0.1, burst=2.0, max_conc=1, daily_budget=500, daily_hard=500,
-                                     cache_ttl=900.0, miss_ttl=None, max_wait=15.0, timeout=10.0, optional=True),
+                                     cache_ttl=900.0, miss_ttl=None, max_wait=15.0, timeout=10.0),
     # the EGM2008 coefficients (74 MB once; gravity.py resumes and checks the SHA-256 itself)
     "downloads.sourceforge.net": HostPolicy(rate=1.0, burst=1.0, max_conc=1, daily_budget=None,
-                                            offline_ok=True, miss_ttl=None, max_attempts=1, timeout=30.0, optional=True),
+                                            offline_ok=True, miss_ttl=None, max_attempts=1, timeout=30.0),
     # map data (mapdata.py; §3.3 / §5.2 "Overture / WorldCover / CHM S3, Azure": 20/s, 40, 4 at once):
     # range reads of immutable release files, kept forever; the STAC index is small JSON on CloudFront
     "stac.overturemaps.org": HostPolicy(rate=5.0, burst=10.0, max_conc=2, daily_budget=5000,
@@ -162,15 +160,15 @@ POLICIES = {
     # Photon (komoot's OpenStreetMap geocoder, made for search-as-you-type; geocode.py): the map's search box,
     # debounced and cached; a modest rate, a daily cap (fair use of a free public service)
     "photon.komoot.io": HostPolicy(rate=2.0, burst=4.0, max_conc=1, daily_budget=2000, daily_hard=3000,
-                                   cache_ttl=7 * DAY, miss_ttl=None, max_wait=5.0, timeout=8.0, max_attempts=1, optional=True),
+                                   cache_ttl=7 * DAY, miss_ttl=None, max_wait=5.0, timeout=8.0, max_attempts=1),
     # OSRM on OpenStreetMap by FOSSGIS (routing.py): one request per GPS destination or re-route; their fair use:
     # ~1 request a second at most, no bulk
     "routing.openstreetmap.de": HostPolicy(rate=0.5, burst=2.0, max_conc=1, daily_budget=300, daily_hard=500,
-                                           cache_ttl=DAY, miss_ttl=None, max_wait=10.0, timeout=20.0, max_attempts=1, optional=True),
+                                           cache_ttl=DAY, miss_ttl=None, max_wait=10.0, timeout=20.0, max_attempts=1),
     # the update check (updates.py): the project's VERSION file on GitHub, a few times a day at most
     "raw.githubusercontent.com": HostPolicy(rate=0.1, burst=1.0, max_conc=1, daily_budget=24, daily_hard=48,
                                             cache_ttl=6 * 3600, miss_ttl=None, max_wait=5.0, timeout=8.0,
-                                            max_attempts=1, optional=True),
+                                            max_attempts=1),
     # never at runtime (OSM Overpass, OSMF vector tiles, Protomaps builds): §3.3
     "overpass-api.de": HostPolicy(denied=True, daily_hard=0),
     "vector.openstreetmap.org": HostPolicy(denied=True, daily_hard=0),
@@ -557,12 +555,11 @@ class Fetcher:
             hosts = {h for c in self._chains.values() for h in c}
         return bool(hosts) and all(self.host(h).breaker.is_open() for h in hosts)
 
-    def unavailable_hosts(self, optional=True):
-        """Hosts whose breaker is open (or half-open), sorted; optional=False leaves out the hosts the world
-        builds without (HostPolicy.optional)."""
+    def unavailable_hosts(self):
+        """Hosts whose breaker is open (or half-open), sorted."""
         with self._lock:
             hosts = list(self._hosts.values())
-        return sorted(h.name for h in hosts if h.breaker.is_open() and (optional or not h.policy.optional))
+        return sorted(h.name for h in hosts if h.breaker.is_open())
 
     def available(self, host):
         return not self.offline_flag and not self.host(host).breaker.is_open()

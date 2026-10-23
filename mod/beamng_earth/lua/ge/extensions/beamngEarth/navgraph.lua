@@ -87,7 +87,8 @@ function M.toNodes(g, b, edgeM, leftHand)
     if keep[a] and keep[bb] and a ~= bb then
       local A, B = node(a), node(bb)
       if not A.links[bb] then
-        local edge = { drivability = e[7], oneWay = e[3] == 1, lanes = M.lanes(e[4], e[5], leftHand),
+        local oneWay = e[3] == 1
+        local edge = { drivability = e[7], oneWay = oneWay, lanes = M.lanes(oneWay and math.max(1,e[4]) or e[4], oneWay and 0 or e[5], leftHand),
           speedLimit = e[6], inNode = a, outNode = bb, inPos = A.pos, outPos = B.pos,
           inRadius = e[8], outRadius = e[8] }
         A.links[bb] = edge
@@ -104,6 +105,7 @@ function M.onMessage(msg, currentAnchor)
   local ok, g = pcall(jsonDecode, readFile(msg.path) or '')
   if not ok or type(g) ~= 'table' or type(g.nodes) ~= 'table' or type(g.edges) ~= 'table' then return false end
   graph = { anchor = msg.anchorId, serial = msg.serial, nodes = g.nodes, edges = g.edges,
+            cameras = type(g.cameras) == 'table' and g.cameras or {},
             signals = type(g.signals) == 'table' and g.signals or {}, rules = type(g.rules) == 'table' and g.rules or nil }
   dirty = true
   return true
@@ -119,6 +121,7 @@ M.SIGNAL_TYPE = 'lightsBasic'
 M.SIGNAL_SHAPE = '/art/shapes/objects/s_trafficlight_boom_sn.dae'
 local heads = {}        -- instance name -> {id, x, y}: the heads in the scene (kept across applies)
 local seenHeads = {}
+local ukMaterialsReady = false
 
 local function clearHeads(keep)
   for name, h in pairs(heads) do
@@ -132,22 +135,34 @@ end
 
 -- A head for instance inst at a's prop transform: the one already standing there is kept (it is linked by
 -- the instance's name, which stays the same: setupSignals finds it again), so a new graph costs only the new ones.
+function M.sameHeadTransform(h, a)
+  return h and math.abs(h.x - a[8]) < 0.05 and math.abs(h.y - a[9]) < 0.05 and math.abs((h.z or 0) - a[10]) < 0.05
+    and math.abs(((h.yaw or 0) - (a[11] or 0) + 180) % 360 - 180) < 0.05 and h.kind == (a[12] or 'signal')
+end
+
 local function makeHead(inst, a)
   if not a[8] or not inst.createSignalObject then return end
   seenHeads[inst.name] = true
   local h = heads[inst.name]
-  if h and math.abs(h.x - a[8]) < 0.05 and math.abs(h.y - a[9]) < 0.05 and scenetree.findObjectById(h.id) then return end
+  local yaw = (a[11] or 0) % 360
+  local kind = a[12] or 'signal'
+  if M.sameHeadTransform(h,a) and scenetree.findObjectById(h.id) then return end
   if h then
     local old = scenetree.findObjectById(h.id)
     if old then old:delete() end
   end
-  local o = inst:createSignalObject(M.SIGNAL_SHAPE, vec3(a[8], a[9], a[10]), quat(0, 0, 0, 1))
+  local shape = a[12] == 'uksignal' and '/levels/beamng_earth/art/shapes/beamngEarth/uk_street/signal.dae' or M.SIGNAL_SHAPE
+  if a[12] == 'uksignal' and not ukMaterialsReady then
+    loadJsonMaterialsFile('/levels/beamng_earth/art/shapes/beamngEarth/uk_street/main.materials.json')
+    ukMaterialsReady = true
+  end
+  local o = inst:createSignalObject(shape, vec3(a[8], a[9], a[10]), quat(0, 0, 0, 1))
   if not o then return end
   local m = MatrixF(true)
   m:setFromEuler(vec3(0, 0, -math.rad(a[11] or 0)))     -- as trees.lua turns the static boom (negated: clockwise)
   m:setPosition(vec3(a[8], a[9], a[10]))
   o:setTransform(m)
-  heads[inst.name] = { id = o:getID(), x = a[8], y = a[9] }
+  heads[inst.name] = { id = o:getID(), x = a[8], y = a[9], z = a[10], yaw = yaw, kind = kind }
 end
 
 local function signalData(nodes)
@@ -213,6 +228,7 @@ local function apply(b)
     M.SIGNAL_TYPE = r.redYellow and 'lightsBasicEU' or 'lightsBasic'
   end
   local nodes, nn, ne = M.toNodes(graph, b, M.EDGE_M, M.rules.rightHandDrive)
+  require('beamngEarth/cameras').sync(graph.cameras, b, graph.anchor)
   local ts = signalsSystem()
   -- before the reset: its onNavgraphReloaded would place the old instances on the new graph (research §2.8)
   if ts then pcall(ts.resetSignals) end
@@ -287,7 +303,7 @@ local function applySignals(nodes)
     local grid = {}
     for _, h in pairs(heads) do grid[math.floor(h.x / 4) .. ',' .. math.floor(h.y / 4)] = true end
     trees.suppress = function(g, x, y)
-      if g ~= 'signal' then return false end
+      if g ~= 'signal' and g ~= 'uksignal' then return false end
       local cx, cy = math.floor(x / 4), math.floor(y / 4)
       for dx = -1, 1 do for dy = -1, 1 do if grid[(cx + dx) .. ',' .. (cy + dy)] then return true end end end
       return false
@@ -408,6 +424,7 @@ end
 -- back on the new place's graph once it is in.
 local heldActive = nil
 function M.onTeleport()
+  require('beamngEarth/cameras').clear()
   respawnAll = true
   local gt = gameplay_traffic
   if gt and gt.getState() == 'on' and not heldActive then
@@ -486,6 +503,7 @@ function M.status()
 end
 
 function M.reset()
+  require('beamngEarth/cameras').clear()
   heads = {}            -- (the level took them with it)
   graph, applied, dirty, lastApply, persistent, ours, foreign = nil, nil, false, -math.huge, nil, false, false
   started, respawnAll, lastGuard, heldActive = false, false, -math.huge, nil

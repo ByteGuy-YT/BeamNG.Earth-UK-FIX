@@ -91,6 +91,7 @@ SHORT = {
 # that ask for credit): the map data's datasets (the cells' provenance), land cover, canopy, sea depth, bridge types,
 # airports, gravity. id -> short name.
 FEATURES = {
+    "map:ONS UK": "ONS UK country boundaries",
     "map:Overture": "Overture Maps", "map:OpenStreetMap": "OpenStreetMap", "map:Microsoft ML Buildings": "Microsoft",
     "map:TomTom": "TomTom", "map:Esri Community Maps": "Esri", "map:Google Open Buildings": "Google",
     "map:USGS Lidar": "USGS Lidar", "map:doi:10.5281/zenodo.8174931": "Shi et al. (East Asia buildings)",
@@ -177,6 +178,12 @@ def feature_ids(conn):
     md = getattr(s, "mapdata", None)
     roads = getattr(conn, "roads", None)
     roads_on = md is not None and roads is not None and getattr(roads, "aid", None) == conn.active and roads.sent
+    if roads_on:
+        import roadcontext
+        if roadcontext.region_at(lat, lon):
+            ids.add("map:ONS UK")
+            if getattr(getattr(md, "osm", None), "signature", None):
+                ids.add("map:OpenStreetMap")
     veg = getattr(conn, "veg", None)
     veg_on = getattr(s, "veg", None) is not None and veg is not None and getattr(veg, "aid", None) == conn.active \
         and veg.sent

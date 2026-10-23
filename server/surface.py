@@ -245,31 +245,28 @@ def paint_roads(idx, lat, lon, feats_list, square, urban_fn=None, widths=None, e
     draws = {k: ImageDraw.Draw(im) for k, im in layers.items()}
     lawn = Image.new("L", (w, h), 0)            # divided roads' medians (under the roads: they paint over it)
     lawn_draw = ImageDraw.Draw(lawn)
-    verge = Image.new("L", (w, h), 0)           # a bare strip beside roads without sidewalks (VERGE_M)
-    verge_draw = ImageDraw.Draw(verge)
     seen = set()
 
     def line(x, y, spec, aisle):
         width, kind = spec.width, spec.kind
         if aisle:
             width += 2 * AISLE_STALLS_M         # the stalls either side (parking.aisle_spots): no grass under cars
-        walks = roadsmod.has_sidewalks(spec)
-        if walks:
+        if roadsmod.has_sidewalks(spec):
             width += 2 * (spec.walk + square)   # the sidewalks (+ a sample: tufts at the outer edge): grass grew up
                                                 # through them (ground cover is the terrain's: Lauterbrunnen, Baltimore
                                                 # 2026-10-15)
-        # rounded up to an odd number of samples: a 9 m road was painted 8 m wide (round(4.5) = 4), and an even width
-        # sits half a sample off the line (PIL), its one edge a metre short
-        px = max(1, int(math.ceil(width / square - 1e-9)))
-        px += 1 - px % 2
+        # GroundCover blades extend beyond their terrain sample and the engine
+        # interpolates neighbouring layer weights. Cover the road edge cells too,
+        # including motorways without pavements, rather than round the mask inward.
+        width += 2 * (square + .6)
+        px = max(1, int(math.ceil(width / square)))
         c, r = to_px(x, y)
-        vx = 0 if walks else 2 * int(math.ceil(VERGE_M / square))     # (even: the verge stays odd, centred)
-        if c.max() < -px - vx or c.min() > w + px + vx or r.max() < -px - vx or r.min() > h + px + vx:
+        if c.max() < -px or c.min() > w + px or r.max() < -px or r.min() > h + px:
             return
-        pts = list(zip(c.tolist(), r.tolist()))
-        draws[kind].line(pts, fill=255, width=px, joint="curve")
-        if vx:
-            verge_draw.line(pts, fill=255, width=px + vx, joint="curve")
+        draws[kind].line(list(zip(c.tolist(), r.tolist())), fill=255, width=px, joint="curve")
+        for cx, cy in ((c[0], r[0]), (c[-1], r[-1])):
+            radius = px / 2
+            draws[kind].ellipse((cx - radius, cy - radius, cx + radius, cy + radius), fill=255)
 
     for feats in feats_list:
         if feats is None or len(feats) == 0:
@@ -299,20 +296,12 @@ def paint_roads(idx, lat, lon, feats_list, square, urban_fn=None, widths=None, e
         line(np.asarray(lo), np.asarray(la), spec, False)
     out = idx.copy()
     out[np.asarray(lawn) > 0] = LAWN
-    v = np.asarray(verge) > 0
-    out[v & np.isin(out, VERGE_FROM)] = VERGE
     for k in ROAD_ORDER:
         m = np.asarray(layers[k]) > 0
         out[m] = ROAD_MATERIAL[k]
     return out
 
 
-# A road without sidewalks gets a verge of VERGE_M a side painted bare where the ground would carry grass or shrubs:
-# the ground cover goes by the 2 m layer samples, and tufts stood on the asphalt along its edges in many places (the
-# user, 2026-10-20: "grass on the road")
-VERGE_M = 2.0
-VERGE_FROM = (GRASS, LAWN, DUSTY)
-VERGE = DIRT
 AISLE_STALLS_M = 5.5        # a parking aisle's stall rows (parking.LOT_SPOT_D_M), painted with it
 PARKING_CLASSES = {"parking"}     # Overture infrastructure (transit) polygons drawn as asphalt: no grass on a lot
 # Squares and pedestrian areas (Overture land_use subtype "pedestrian": Mexico City's Zocalo read as bare dirt,
@@ -326,7 +315,17 @@ def paint_lots(idx, lat, lon, feats_list):
     photos: the grass layer's ground cover grew on lots). Pure."""
     # (grey paving: the cobble layer's setts drew big squares and promenades pink, Harbor Point 2026-10-15)
     idx = _paint(idx, lat, lon, feats_list, _plazas, ASPHALT)
-    return _paint(idx, lat, lon, feats_list, _parking, ASPHALT)
+    idx = _paint(idx, lat, lon, feats_list, _parking, ASPHALT)
+    import roadcontext,ukcontext
+    if not np.size(lat) or not roadcontext.region_at(float(np.mean(lat)),float(np.mean(lon))):return idx
+    records=ukcontext.features((float(np.min(lon)),float(np.min(lat)),float(np.max(lon)),float(np.max(lat))),('parking',))
+    if not records:return idx
+    to_px=grid_affine(lat,lon);im=Image.new('L',(idx.shape[1],idx.shape[0]),0);draw=ImageDraw.Draw(im)
+    for _,_,tags,ll in records:
+        if len(ll)<4 or tags.get('surface') in ('grass','gravel','dirt','ground','unpaved'):continue
+        c,r=to_px(ll[:,0],ll[:,1]);draw.polygon(list(zip(c.tolist(),r.tolist())),fill=255)
+    out=idx.copy();out[np.asarray(im)>0]=ASPHALT
+    return out
 
 
 def _parking(feats):
@@ -382,7 +381,7 @@ def write_masks(idx, out_dir, stem):
         path = os.path.join(out_dir, name)
         tmp = staging.tmp_for(path)
         Image.fromarray(np.where(idx == i, 255, 0).astype(np.uint8), "L").save(tmp, format="PNG", compress_level=1)
-        staging.replace(tmp, path)
+        os.replace(tmp, path)
     return names
 
 
@@ -445,13 +444,13 @@ def photo_lawns(out_dir, ter_name, mask_names_, rgb):
     tmp = staging.tmp_for(path)
     with open(tmp, "wb") as f:
         f.write(data)
-    staging.replace(tmp, path)
+    os.replace(tmp, path)
     north = lay[::-1]
     for i in (LAWN, DIRT, SNOW, LOOSE):
         p = os.path.join(out_dir, mask_names_[i])
         tmp = staging.tmp_for(p)
         Image.fromarray(np.where(north == i, 255, 0).astype(np.uint8), "L").save(tmp, format="PNG", compress_level=1)
-        staging.replace(tmp, p)
+        os.replace(tmp, p)
     return k
 
 

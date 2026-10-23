@@ -1,0 +1,217 @@
+{
+  "date": "2026-10-21",
+  "scope": "UK generator screenshot follow-up",
+  "automated_checks": {
+    "passed": 318,
+    "new_screenshot_regressions": 19
+  },
+  "source": "Cached Overture road cells enriched by the prepared local UK OSM index",
+  "elevation": "Cached zoom-15 DEM, Grader.apply with ROAD_LIFT, then BridgeProfiles",
+  "units": {
+    "length": "m",
+    "width": "m",
+    "grade": "rise/run, absolute maximum sampled along deck",
+    "step": "m, deck endpoint minus graded ground, rounded to 0.001 m"
+  },
+  "limitations": [
+    "Generated-model checks, not surveyed dimensions.",
+    "No in-game drive or visual test: local BeamNG endpoint unavailable.",
+    "Horizontal preview uses flat terrain and tests neither grade nor clearance."
+  ],
+  "areas": [
+    {
+      "area": "M1 J26",
+      "anchor_latitude": 52.9994,
+      "anchor_longitude": -1.2311,
+      "bridges": [
+        {
+          "id": "3bfefb99-8f91-479e-9201-eee5cb496e74~osm29086_33371",
+          "class": "motorway",
+          "length": 33.94,
+          "width": 22.05,
+          "grade": 0.059,
+          "step": [
+            0.0,
+            -0.0
+          ]
+        },
+        {
+          "id": "3bfefb99-8f91-479e-9201-eee5cb496e74~osm86797_91396",
+          "class": "motorway",
+          "length": 36.42,
+          "width": 18.4,
+          "grade": 0.041,
+          "step": [
+            0.0,
+            -0.0
+          ]
+        },
+        {
+          "id": "42c2dfa4-b92d-4a7d-bf99-299977315862~osm920619_925276",
+          "class": "motorway",
+          "length": 36.38,
+          "width": 22.05,
+          "grade": 0.029,
+          "step": [
+            -0.0,
+            0.0
+          ]
+        },
+        {
+          "id": "42c2dfa4-b92d-4a7d-bf99-299977315862~osm979348_983884",
+          "class": "motorway",
+          "length": 35.44,
+          "width": 22.05,
+          "grade": 0.056,
+          "step": [
+            -0.0,
+            0.0
+          ]
+        },
+        {
+          "id": "83493281-acc1-4d29-a40b-0f696e53dc26~osm337373_367398",
+          "class": "motorway",
+          "length": 37.63,
+          "width": 18.4,
+          "grade": 0.002,
+          "step": [
+            -0.0,
+            0.0
+          ]
+        },
+        {
+          "id": "a559ac96-7c82-49e5-86bc-8394479dcf34~osm682813_717018",
+          "class": "motorway",
+          "length": 38.03,
+          "width": 18.4,
+          "grade": 0.003,
+          "step": [
+            0.0,
+            -0.0
+          ]
+        }
+      ]
+    },
+    {
+      "area": "M1 between J26 and J27",
+      "anchor_latitude": 53.0471,
+      "anchor_longitude": -1.2565,
+      "bridges": [
+        {
+          "id": "3bfefb99-8f91-479e-9201-eee5cb496e74~osm801247_804639",
+          "class": "motorway",
+          "length": 26.87,
+          "width": 18.4,
+          "grade": 0.001,
+          "step": [
+            -0.0,
+            0.0
+          ]
+        },
+        {
+          "id": "42c2dfa4-b92d-4a7d-bf99-299977315862~osm196989_200480",
+          "class": "motorway",
+          "length": 27.27,
+          "width": 18.4,
+          "grade": 0.004,
+          "step": [
+            0.0,
+            -0.0
+          ]
+        }
+      ]
+    },
+    {
+      "area": "A610 railway crossing",
+      "anchor_latitude": 52.9998,
+      "anchor_longitude": -1.279,
+      "bridges": [
+        {
+          "id": "295d19a2-9df5-4961-99cc-12a33571d426~osm262310_652897",
+          "class": "trunk",
+          "length": 354.62,
+          "width": 7.0,
+          "grade": 0.014,
+          "step": [
+            -0.0,
+            0.0
+          ]
+        },
+        {
+          "id": "ea8017f4-a449-49c0-842d-436f906860c7~osm321270_678569",
+          "class": "trunk",
+          "length": 354.5,
+          "width": 7.0,
+          "grade": 0.014,
+          "step": [
+            0.0,
+            -0.0
+          ]
+        }
+      ]
+    },
+    {
+      "area": "M1 J27 A608",
+      "anchor_latitude": 53.0634,
+      "anchor_longitude": -1.2691,
+      "bridges": [
+        {
+          "id": "5cfebf63-25c2-4993-9545-0f1a9fdab174~osm369383_624015",
+          "class": "primary",
+          "length": 49.62,
+          "width": 6.5,
+          "grade": 0.001,
+          "step": [
+            -0.0,
+            0.0
+          ]
+        },
+        {
+          "id": "f17bf231-86b8-4904-a697-65e7683cb6e1~osm340093_586546",
+          "class": "primary",
+          "length": 45.86,
+          "width": 6.5,
+          "grade": 0.029,
+          "step": [
+            0.0,
+            -0.0
+          ]
+        }
+      ]
+    }
+  ],
+  "horizontal_preview": [
+    {
+      "site": "Underwood",
+      "road_vertices": 5925,
+      "road_triangles": 5517,
+      "pavement_runs": 47,
+      "pavement_vertices": 15947,
+      "seconds": 0.575
+    },
+    {
+      "site": "Ripley roundabout",
+      "road_vertices": 6404,
+      "road_triangles": 5820,
+      "pavement_runs": 8,
+      "pavement_vertices": 3878,
+      "seconds": 0.544
+    },
+    {
+      "site": "A610 Langley Mill",
+      "road_vertices": 3852,
+      "road_triangles": 3504,
+      "pavement_runs": 3,
+      "pavement_vertices": 1344,
+      "seconds": 0.355
+    },
+    {
+      "site": "M1 between J26 and J27",
+      "road_vertices": 8090,
+      "road_triangles": 7420,
+      "pavement_runs": 0,
+      "pavement_vertices": 0,
+      "seconds": 0.161
+    }
+  ]
+}

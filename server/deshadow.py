@@ -67,7 +67,6 @@ import numpy as np
 import fast
 
 import pacer
-import staging
 from PIL import Image
 
 import cache as cachemod
@@ -707,7 +706,7 @@ def _atomic_write(path, write):
     tmp = f"{path}.{threading.get_ident()}.tmp"
     with open(tmp, "wb") as f:
         write(f)
-    staging.replace_cached(tmp, path)
+    os.replace(tmp, path)
 
 
 class Deshadow:

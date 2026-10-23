@@ -52,6 +52,13 @@ def road_mph(feats, i, spec, mph=True, at=0.5):
                 value = float(speed.value[r])
                 if math.isfinite(value) and value > 0:
                     return value / 1.609344
+    if spec.profile is not None:
+        if spec.profile.speed_mph is not None:
+            return spec.profile.speed_mph
+        # Conservative driving targets where no legal limit is mapped. Not posted as a guessed sign.
+        return {"motorway": 70., "trunk": 60., "primary": 50., "secondary": 40.,
+                "tertiary": 35., "residential": 20., "living_street": 10.,
+                "service": 10., "unclassified": 30.}.get(spec.cls, 25.)
     v = DRIVE[spec.cls][1]
     if not mph and spec.cls in KMH_DEFAULT:
         v = KMH_DEFAULT[spec.cls] / 1.609344
@@ -110,13 +117,15 @@ def driving_width(spec):
     """The width of a road's driving lanes: the drawn carriageway (spec.width) less its parking lanes and edge
     strips (roads.carriageway adds them), i.e. the class's driving width capped by the drawn one; a four-lane
     urban arterial is all lanes."""
+    if spec.profile is not None:
+        return spec.profile.drive
+    if spec.lanes is not None:
+        return spec.width-sum(spec.edges)
     if spec.urban and not spec.oneway and spec.cls in roads.URBAN_ARTERIAL:
         return float(spec.width)
     w = roads.STYLE.get(spec.cls, roads.STYLE["unknown"])[0]
     if spec.oneway and spec.cls in roads.ONEWAY_STYLE:
         w = roads.ONEWAY_STYLE[spec.cls]
-    if roads.rural_motorway(spec):
-        w = roads.MOTORWAY_RURAL_M      # two lanes between the shoulders
     return float(min(spec.width, w))
 
 
@@ -148,7 +157,7 @@ def _deck_z(decks, fid, x, y):
 
 
 def build(frame, feats_list, elev, centre, urban_fn=None, window=WINDOW_M, decks=None, widths=None, left_hand=False,
-          mph=True):
+          mph=True, tunnel_floors=None, road_floors=None):
     """{"nodes": {name: [x, y, z, radius]}, "edges": [[in, out, oneway, lanes_out, lanes_in, speed m/s,
     drivability, radius]]} of the drivable roads in the square of half size `window` around centre (x, y) of
     the anchor frame. feats_list: the "roads" mapgeom.Features of the cells around (duplicates across cells
@@ -163,12 +172,14 @@ def build(frame, feats_list, elev, centre, urban_fn=None, window=WINDOW_M, decks
     approaches = {}         # (connector, fid, end) -> (graph node next to it, traffic comes in)
     pending = {}            # name -> (x, y) of nodes whose z is still to sample
     node_fid = {}           # name -> the feature it was made on (its deck, if any)
+    profiles = {}
     for feats in feats_list:
         if feats is None or len(feats) == 0:
             continue
         rspecs = roads.road_specs(feats, urban_fn, widths, left_hand)      # the roads the road tiles (and their props) see
         bspecs = roads.bridge_specs(feats)
-        specs = [sp if sp is not None else bs for sp, bs in zip(rspecs, bspecs)]
+        tspecs = roads.tunnel_specs(feats) if tunnel_floors else [None]*len(feats)
+        specs = [sp or bs or ts for sp, bs, ts in zip(rspecs, bspecs, tspecs)]
         rules = feats.rules
         sub = rules.get("subclass")
         con = rules.get("connectors")
@@ -178,7 +189,11 @@ def build(frame, feats_list, elev, centre, urban_fn=None, window=WINDOW_M, decks
             fid = str(feats.ids[i])
             if spec is None or fid in seen:
                 continue
+            # Keep bridge portions of mapped rings in the same circulation set.
+            # Their central island can be large or oval (motorway interchanges),
+            # so geometric roundness is not a condition for an explicit roundabout.
             seen.add(fid)
+            profiles[fid] = spec.profile
             parts = feats.parts(i)
             if not parts or not parts[0]:
                 continue
@@ -190,8 +205,7 @@ def build(frame, feats_list, elev, centre, urban_fn=None, window=WINDOW_M, decks
             if (p[:, 0].max() < cx - window - 200 or p[:, 0].min() > cx + window + 200 or
                     p[:, 1].max() < cy - window - 200 or p[:, 1].min() > cy + window + 200):
                 continue
-            if rspecs[i] is not None:
-                ring_cands.append((fid, rspecs[i], np.column_stack([p, np.zeros(len(p))]), None))
+            ring_cands.append((fid, spec, np.column_stack([p, np.zeros(len(p))]), None))
             seg = np.hypot(*np.diff(p, axis=0).T)
             s = np.concatenate([[0.0], np.cumsum(seg)])
             L = float(s[-1])
@@ -260,9 +274,24 @@ def build(frame, feats_list, elev, centre, urban_fn=None, window=WINDOW_M, decks
                 for r in ow.rows(i):
                     if ow.start[r] <= mid <= ow.end[r]:
                         direction = int(ow.value[r])
+            if spec.profile is not None:
+                direction = int(spec.dir)       # aligned OSM mapping takes precedence over older inferred headings
+            elif spec.lanes is not None:direction=int(spec.dir)
             if direction == 0 and spec.oneway and spec.dir:     # a divided road's carriageway (roads.dual_carriageways)
                 direction = int(spec.dir)
             lo, li = _lanes(w, direction != 0)
+            if spec.profile is not None:
+                lo, li = spec.profile.forward, spec.profile.backward
+                if direction < 0:
+                    lo, li = li, lo
+                if spec.profile.offset and not spec.profile.mainline:
+                    # Offset the driving graph inside the total surface, excluding hard shoulders/parking.
+                    xy = roads.offset_polyline(np.column_stack([xy, np.zeros(len(xy))]), spec.profile.offset)[:, :2]
+            elif spec.lanes is not None:
+                lo,li=spec.lanes
+                if direction<0:lo,li=li,lo
+                offset=(spec.edges[1]-spec.edges[0])/2
+                if offset:xy=roads.offset_polyline(np.c_[xy,np.zeros(len(xy))],offset)[:,:2]
             profile = _speed_profile(xy, w, direction != 0)
             # this road's approaches at its two ends (the graph node next to the junction, whether traffic comes in)
             for end in (0, -1):
@@ -275,7 +304,7 @@ def build(frame, feats_list, elev, centre, urban_fn=None, window=WINDOW_M, decks
                 a, b = names[j], names[j + 1]
                 if a == b:
                     continue
-                if tunnels and any(t0 <= (full[j] + full[j + 1]) / (2 * L) <= t1 for t0, t1 in tunnels):
+                if tunnels and not (tunnel_floors and fid in tunnel_floors) and any(t0 <= (full[j] + full[j + 1]) / (2 * L) <= t1 for t0, t1 in tunnels):
                     continue                # no ground over a tunnel: its stretch is left out
                 if direction < 0:
                     a, b = b, a
@@ -293,11 +322,17 @@ def build(frame, feats_list, elev, centre, urban_fn=None, window=WINDOW_M, decks
     ring_nodes = {nm for fid, e in zip(edge_fids, edges) if fid in ring for nm in e[:2]}
     for fid, e in zip(edge_fids, edges):
         if fid in ring:
-            if not e[2]:             # a mapped one-way takes precedence over inferred circulation
+            if not e[2]:
                 if ring[fid] < 0:
                     e[0], e[1] = e[1], e[0]
                 e[2] = 1
-                e[3], e[4] = _lanes(e[7] * 2, True)
+                if profiles.get(fid) is None:
+                    e[3], e[4] = _lanes(e[7] * 2, True)
+                else:
+                    e[3], e[4] = max(e[3], e[4]), 0
+            # A one-way edge may never retain reverse lane characters: the
+            # stock spawner uses lane signs, separately from the route oneWay flag.
+            e[3],e[4]=max(1,e[3]+e[4]),0
             e[5], e[6] = min(e[5], round(RING_MS, 2)), 1.0
         elif any(nm in ring_nodes for nm in e[:2]):
             # Yield through the stock AI's priority mechanism, not action 4 (which it ignores).
@@ -312,18 +347,49 @@ def build(frame, feats_list, elev, centre, urban_fn=None, window=WINDOW_M, decks
         Y = np.array([pending[nm][1] for nm in used])
         la, lo, _ = frame.enu_to_geodetic(X, Y, 0.0)
         Z = np.asarray(elev(la, lo), np.float64).copy()
+        if road_floors is not None:
+            grouped={}
+            for k,nm in enumerate(used):grouped.setdefault(node_fid.get(nm),[]).append(k)
+            for fid,ids in grouped.items():
+                xy=np.c_[X[ids],Y[ids]];owner=road_floors.floor_plan(fid,xy)
+                if owner is not None:Z[ids]=road_floors.road_heights(xy,owner)
         if decks:
             for k, nm in enumerate(used):
                 dz = _deck_z(decks, node_fid.get(nm), X[k], Y[k])
                 if dz is not None:
                     Z[k] = dz
+        if tunnel_floors:
+            for k,nm in enumerate(used):
+                tz=_deck_z(tunnel_floors,node_fid.get(nm),X[k],Y[k])
+                if tz is not None:Z[k]=tz
         radius = {}
         for e in edges:
             for nm in e[:2]:
                 radius[nm] = max(radius.get(nm, 0.0), e[7])
         for nm, x, y, z in zip(used, X, Y, Z):
             nodes[nm] = [round(float(x), 2), round(float(y), 2), round(float(z), 2), radius[nm]]
+    # Give-way at ordinary UK priority junctions uses the same engine mechanism as ring entries.
+    import furniture
+    edge_pairs = {frozenset(e[:2]): e for e in edges}
+    for name, arms in prop_arms.items():
+        farms = [(a[0], a[1], a[2], a[3], a[4] == 0, a[5]) for a in arms]
+        for arm, what in furniture.junction_controls(farms, None, ring=set(ring)):
+            if what != furniture.G_YIELD or arm[1].profile is None:
+                continue
+            nb, incoming = approaches.get((name, arm[0], 0 if arm[4] else -1), (None, False))
+            if incoming and nb:
+                e = edge_pairs.get(frozenset((name, nb)))
+                if e is not None:
+                    e[6] = min(e[6], ENTRY_DRIVABILITY)
     signals = _signals(prop_arms, approaches, nodes, left_hand, set(ring))
+    # A pole's base is at its own location, not at the junction centre on a hill.
+    samples = [(a, slot, a[slot-2], a[slot-1]) for j in signals for a in j['app'] for slot in (3, 9)]
+    if samples:
+        la, lo, _ = frame.enu_to_geodetic(np.array([r[2] for r in samples]), np.array([r[3] for r in samples]), 0.)
+        z = frame.geodetic_to_enu(la, lo, elev(la, lo))[2]
+        for (a, slot, _, _), h in zip(samples, z):
+            a[slot] = round(float(h) + (a[12] if slot == 9 and len(a)>12 else 0.), 3)
+    _mini_roundabouts(nodes, edges, prop_arms, approaches)
     # one edge per node pair (two segments joining the same connectors: keep the first)
     uniq, pairs = [], set()
     for e in edges:
@@ -331,7 +397,15 @@ def build(frame, feats_list, elev, centre, urban_fn=None, window=WINDOW_M, decks
         if k not in pairs:
             pairs.add(k)
             uniq.append(e)
-    return {"nodes": nodes, "edges": uniq, "signals": signals}
+    import ukcontext
+    box=(cx-window,cy-window,cx+window,cy+window)
+    cameras=ukcontext.cameras(frame,ukcontext.near(frame,box,kinds=('speed_camera',)),ring_cands,box,surface_centres=False)
+    if cameras:
+        xy=np.array([c['point'][:2] for c in cameras]);la,lo,_=frame.enu_to_geodetic(xy[:,0],xy[:,1],0.)
+        z=frame.geodetic_to_enu(la,lo,elev(la,lo))[2]
+        for camera,height in zip(cameras,z):
+            camera['pos'][2]=camera['point'][2]=float(height)
+    return {"nodes": nodes, "edges": uniq, "signals": signals, "cameras": cameras}
 
 
 STOP_BACK_M = 2.0           # the stop point: this far before the junction's widest road edge
@@ -339,6 +413,62 @@ STOP_BACK_M = 2.0           # the stop point: this far before the junction's wid
 # apart: Fells Point): no stop or signal on it. A car that had stopped at the first node met the next one's stop
 # line behind it and waited forever (in game 2026-10-14, a queue of four at an all-way stop).
 SHORT_APPROACH_M = 15.0
+
+
+def _mini_roundabouts(nodes, edges, arms, approaches):
+    """Expand mapped UK mini-roundabout points into small clockwise routable rings.
+
+    Keep the existing asphalt intersection: a mini-roundabout has a traversable painted
+    centre, not a raised island. Arcs keep traffic off the centre rather than cutting chords.
+    """
+    edge_index = {}
+    for e in edges:
+        for node in e[:2]:
+            edge_index.setdefault(node, []).append(e)
+    for junction, aa in sorted(arms.items()):
+        if junction not in nodes or len(aa) < 3:
+            continue
+        if not any(a[1].profile is not None and a[1].profile.mini_ends[0 if a[4] == 0 else 1] for a in aa):
+            continue
+        centre = np.array(nodes[junction][:3])
+        branches = []
+        for a in aa:
+            nb, incoming = approaches.get((junction, a[0], a[4]), (None, False))
+            if nb in nodes:
+                branches.append((math.atan2(a[2][1], a[2][0]), a[0], a[4], nb))
+        branches.sort(reverse=True)
+        branches = list({b[3]: b for b in branches}.values())
+        branches.sort(reverse=True)
+        if len(branches) < 3:
+            continue
+        distance = min(math.hypot(nodes[b[3]][0] - centre[0], nodes[b[3]][1] - centre[1]) for b in branches)
+        radius = min(3., distance * .4)
+        if radius < 1.2:
+            continue
+        ring = []
+        for k, (angle, fid, end, nb) in enumerate(branches):
+            nm = f"m{junction}_{k}"
+            q = centre + np.array([radius * math.cos(angle), radius * math.sin(angle), 0.])
+            nodes[nm] = [round(float(v), 2) for v in q] + [1.2]
+            ring.append((nm, angle))
+            for e in edge_index.get(junction, ()):
+                if nb in e[:2]:
+                    e[0 if e[0] == junction else 1] = nm
+                    e[5], e[6] = min(e[5], 4.2), min(e[6], ENTRY_DRIVABILITY)
+        for k, (start, angle) in enumerate(ring):
+            end, finish = ring[(k + 1) % len(ring)]
+            sweep = (angle - finish) % (2 * math.pi)
+            count = max(1, int(math.ceil(sweep / (math.pi / 6))))
+            prev = start
+            for j in range(1, count + 1):
+                nm = end if j == count else f"m{junction}_{k}a{j}"
+                if nm != end:
+                    t = angle - sweep * j / count
+                    q = centre + np.array([radius * math.cos(t), radius * math.sin(t), 0.])
+                    nodes[nm] = [round(float(v), 2) for v in q] + [1.2]
+                edges.append([prev, nm, 1, 1, 0, 4.2, 1., 1.2])
+                prev = nm
+        nodes.pop(junction)
 
 
 def _signals(arms, approaches, nodes, left_hand=False, ring=None):
@@ -354,7 +484,8 @@ def _signals(arms, approaches, nodes, left_hand=False, ring=None):
              for name, a in arms.items()}
     link_ok = furniture._link_check(farms)
     for name, a in arms.items():
-        if name not in nodes or len(a) < 3 or not all(x[1].urban for x in a):
+        mapped = any(x[1].profile is not None and (any(x[1].profile.controls) or x[1].profile.control) for x in a)
+        if name not in nodes or len(a)<2 or (len(a)<3 and not mapped) or (not mapped and not all(x[1].urban for x in a)):
             continue
         put = [(arm, what) for arm, what in furniture.junction_controls(farms[name], None, link_ok, ring=ring)
                if what != furniture.G_YIELD]    # give-way uses edge priority; a stop controller would force a stop
@@ -376,14 +507,24 @@ def _signals(arms, approaches, nodes, left_hand=False, ring=None):
                 continue            # from another connector a few metres away (a road vertex there is no reason)
             inc = -u
             right = np.array([inc[1], -inc[0]]) * (-1 if left_hand else 1)     # the side traffic keeps to
-            q = np.array([jx, jy]) + u * (wide + STOP_BACK_M) + right * (spec.width / 4)
+            setback = spec.profile.control_setbacks[0 if arm[4] else 1] if spec.profile is not None else 0.
+            q = np.array([jx, jy]) + u * max(wide + STOP_BACK_M, setback) + right * (spec.width / 4)
             phase = 0 if abs(float(u @ axis)) > 0.7 else 1
             # the head's prop where furniture.junction_props stands it (the switchable stock boom replaces it)
-            pp = np.array([jx, jy]) + u * (wide + 2.5) + right * (spec.width / 2 + 1.0)
+            if spec.profile is not None:
+                nearby = [(x[1].width/2, np.array([x[3][:2], x[3][:2]+x[2]*80.])) for x in a]
+                transform = furniture.control_transform(arm, farms[name], left_hand, nearby)
+                if transform is None:
+                    continue
+                pp, yaw = transform
+            else:
+                pp = np.array([jx,jy])+u*(wide+2.5)+right*(spec.width/2+1.)
+                yaw = furniture._yaw(right[0],right[1])
             app.append([nb, round(float(q[0]), 2), round(float(q[1]), 2), round(jz, 2),
                         round(float(inc[0]), 4), round(float(inc[1]), 4), phase,
                         round(float(pp[0]), 2), round(float(pp[1]), 2), round(jz + 0.15, 2),
-                        round(furniture._yaw(right[0], right[1]), 1)])
+                        round(yaw, 1), 'uksignal' if spec.profile is not None else 'signal',
+                        .125 if spec.profile is not None and max(spec.profile.walk_left,spec.profile.walk_right)>0 else 0.])
         if app:
             out.append({"j": name, "kind": kind, "app": app})
     return out
@@ -412,6 +553,9 @@ def road_rules(country):
 
 def country_near(db, lat, lon):
     """The country of the airport nearest (lat, lon) in airports.AirportDB db, or None."""
+    import roadcontext
+    if roadcontext.region_at(float(lat), float(lon)):
+        return "GB"
     if db is None or not getattr(db, "runways", None):
         return None
     import airports
@@ -433,7 +577,7 @@ def write(out_dir, vfs_dir, aid, serial, graph):
     tmp = staging.tmp_for(path)
     with open(tmp, "w") as f:
         f.write(json.dumps(graph, separators=(",", ":")))    # the C encoder (json.dump streams in Python)
-    staging.replace(tmp, path)
+    os.replace(tmp, path)
     return f"{vfs_dir}/{name}"
 
 

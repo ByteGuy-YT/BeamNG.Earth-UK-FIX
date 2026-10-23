@@ -1,0 +1,403 @@
+{
+  "uk_metal": {
+    "name": "uk_metal",
+    "mapTo": "uk_metal",
+    "class": "Material",
+    "version": 1.5,
+    "doubleSided": true,
+    "Stages": [
+      {
+        "baseColorFactor": [
+          0.52,
+          0.55,
+          0.56,
+          1
+        ],
+        "roughnessFactor": 0.8
+      },
+      {},
+      {},
+      {}
+    ]
+  },
+  "uk_black": {
+    "name": "uk_black",
+    "mapTo": "uk_black",
+    "class": "Material",
+    "version": 1.5,
+    "doubleSided": true,
+    "Stages": [
+      {
+        "baseColorFactor": [
+          0.025,
+          0.028,
+          0.03,
+          1
+        ],
+        "roughnessFactor": 0.8
+      },
+      {},
+      {},
+      {}
+    ]
+  },
+  "uk_white": {
+    "name": "uk_white",
+    "mapTo": "uk_white",
+    "class": "Material",
+    "version": 1.5,
+    "doubleSided": true,
+    "Stages": [
+      {
+        "baseColorFactor": [
+          0.9,
+          0.9,
+          0.86,
+          1
+        ],
+        "roughnessFactor": 0.8
+      },
+      {},
+      {},
+      {}
+    ]
+  },
+  "uk_yellow": {
+    "name": "uk_yellow",
+    "mapTo": "uk_yellow",
+    "class": "Material",
+    "version": 1.5,
+    "doubleSided": true,
+    "Stages": [
+      {
+        "baseColorFactor": [
+          0.95,
+          0.72,
+          0.04,
+          1
+        ],
+        "roughnessFactor": 0.8
+      },
+      {},
+      {},
+      {}
+    ]
+  },
+  "uk_post_red": {
+    "name": "uk_post_red",
+    "mapTo": "uk_post_red",
+    "class": "Material",
+    "version": 1.5,
+    "doubleSided": true,
+    "Stages": [
+      {
+        "baseColorFactor": [
+          0.58,
+          0.025,
+          0.035,
+          1
+        ],
+        "roughnessFactor": 0.8
+      },
+      {},
+      {},
+      {}
+    ]
+  },
+  "uk_signal_lenses": {
+    "name": "uk_signal_lenses",
+    "mapTo": "uk_signal_lenses",
+    "class": "Material",
+    "version": 1.5,
+    "doubleSided": true,
+    "Stages": [
+      {
+        "baseColorFactor": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "roughnessFactor": 0.8,
+        "baseColorMap": "/levels/beamng_earth/art/shapes/beamngEarth/uk_street/lenses.png",
+        "colorPaletteMap": "/levels/beamng_earth/art/shapes/beamngEarth/uk_street/palette.png",
+        "instanceDiffuse": true,
+        "instanceEmissive": true,
+        "emissive": true,
+        "emissiveFactor": [
+          1,
+          1,
+          1
+        ],
+        "emissiveIntensityNits": 1800
+      },
+      {},
+      {},
+      {}
+    ]
+  },
+  "uk_giveway": {
+    "name": "uk_giveway",
+    "mapTo": "uk_giveway",
+    "class": "Material",
+    "version": 1.5,
+    "doubleSided": true,
+    "Stages": [
+      {
+        "baseColorFactor": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "roughnessFactor": 0.8,
+        "baseColorMap": "/levels/beamng_earth/art/shapes/beamngEarth/uk_street/giveway.png"
+      },
+      {},
+      {},
+      {}
+    ]
+  },
+  "uk_stop": {
+    "name": "uk_stop",
+    "mapTo": "uk_stop",
+    "class": "Material",
+    "version": 1.5,
+    "doubleSided": true,
+    "Stages": [
+      {
+        "baseColorFactor": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "roughnessFactor": 0.8,
+        "baseColorMap": "/levels/beamng_earth/art/shapes/beamngEarth/uk_street/stop.png"
+      },
+      {},
+      {},
+      {}
+    ]
+  },
+  "uk_nsl": {
+    "name": "uk_nsl",
+    "mapTo": "uk_nsl",
+    "class": "Material",
+    "version": 1.5,
+    "doubleSided": true,
+    "Stages": [
+      {
+        "baseColorFactor": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "roughnessFactor": 0.8,
+        "baseColorMap": "/levels/beamng_earth/art/shapes/beamngEarth/uk_street/nsl.png"
+      },
+      {},
+      {},
+      {}
+    ]
+  },
+  "uk_keep_left": {
+    "name": "uk_keep_left",
+    "mapTo": "uk_keep_left",
+    "class": "Material",
+    "version": 1.5,
+    "doubleSided": true,
+    "Stages": [
+      {
+        "baseColorFactor": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "roughnessFactor": 0.8,
+        "baseColorMap": "/levels/beamng_earth/art/shapes/beamngEarth/uk_street/keep_left.png"
+      },
+      {},
+      {},
+      {}
+    ]
+  },
+  "uk_roundabout": {
+    "name": "uk_roundabout",
+    "mapTo": "uk_roundabout",
+    "class": "Material",
+    "version": 1.5,
+    "doubleSided": true,
+    "Stages": [
+      {
+        "baseColorFactor": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "roughnessFactor": 0.8,
+        "baseColorMap": "/levels/beamng_earth/art/shapes/beamngEarth/uk_street/roundabout.png"
+      },
+      {},
+      {},
+      {}
+    ]
+  },
+  "uk_school": {
+    "name": "uk_school",
+    "mapTo": "uk_school",
+    "class": "Material",
+    "version": 1.5,
+    "doubleSided": true,
+    "Stages": [
+      {
+        "baseColorFactor": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "roughnessFactor": 0.8,
+        "baseColorMap": "/levels/beamng_earth/art/shapes/beamngEarth/uk_street/school.png"
+      },
+      {},
+      {},
+      {}
+    ]
+  },
+  "uk_bus_stop": {
+    "name": "uk_bus_stop",
+    "mapTo": "uk_bus_stop",
+    "class": "Material",
+    "version": 1.5,
+    "doubleSided": true,
+    "Stages": [
+      {
+        "baseColorFactor": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "roughnessFactor": 0.8,
+        "baseColorMap": "/levels/beamng_earth/art/shapes/beamngEarth/uk_street/bus_stop.png"
+      },
+      {},
+      {},
+      {}
+    ]
+  },
+  "uk_school_facade": {
+    "name": "uk_school_facade",
+    "mapTo": "uk_school_facade",
+    "class": "Material",
+    "version": 1.5,
+    "doubleSided": true,
+    "Stages": [
+      {
+        "baseColorFactor": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "roughnessFactor": 0.8,
+        "baseColorMap": "/levels/beamng_earth/art/shapes/beamngEarth/uk_street/school_facade.png"
+      },
+      {},
+      {},
+      {}
+    ]
+  },
+  "uk_fuel_facade": {
+    "name": "uk_fuel_facade",
+    "mapTo": "uk_fuel_facade",
+    "class": "Material",
+    "version": 1.5,
+    "doubleSided": true,
+    "Stages": [
+      {
+        "baseColorFactor": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "roughnessFactor": 0.8,
+        "baseColorMap": "/levels/beamng_earth/art/shapes/beamngEarth/uk_street/fuel_facade.png"
+      },
+      {},
+      {},
+      {}
+    ]
+  },
+  "uk_supermarket_facade": {
+    "name": "uk_supermarket_facade",
+    "mapTo": "uk_supermarket_facade",
+    "class": "Material",
+    "version": 1.5,
+    "doubleSided": true,
+    "Stages": [
+      {
+        "baseColorFactor": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "roughnessFactor": 0.8,
+        "baseColorMap": "/levels/beamng_earth/art/shapes/beamngEarth/uk_street/supermarket_facade.png"
+      },
+      {},
+      {},
+      {}
+    ]
+  },
+  "uk_morrisons_facade": {
+    "name": "uk_morrisons_facade",
+    "mapTo": "uk_morrisons_facade",
+    "class": "Material",
+    "version": 1.5,
+    "doubleSided": true,
+    "Stages": [
+      {
+        "baseColorFactor": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "roughnessFactor": 0.8,
+        "baseColorMap": "/levels/beamng_earth/art/shapes/beamngEarth/uk_street/morrisons_facade.png"
+      },
+      {},
+      {},
+      {}
+    ]
+  },
+  "uk_pavement": {
+    "name": "uk_pavement",
+    "mapTo": "uk_pavement",
+    "class": "Material",
+    "version": 1.5,
+    "doubleSided": true,
+    "Stages": [
+      {
+        "baseColorFactor": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "roughnessFactor": 0.8,
+        "baseColorMap": "/levels/beamng_earth/art/shapes/beamngEarth/uk_street/pavement.png"
+      },
+      {},
+      {},
+      {}
+    ]
+  }
+}

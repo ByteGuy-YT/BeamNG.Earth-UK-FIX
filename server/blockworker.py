@@ -8,7 +8,7 @@ street widths, height chunks and land-cover reader over the same disk caches. Al
 so a block built here is the one the server would build (the far tiles, graded in the server process, agree
 with it).
 
-init(...) runs once in the process (ProcessPoolExecutor initializer); build(...), base_entry(...), base_photo(...) and
+init(...) runs once in the process (ProcessPoolExecutor initializer); build(...), base_entry(...) and
 far_geometry(...) (the far-tile workers, the same state) are its jobs. warm_q (a multiprocessing queue) carries the road cells to plan ahead of the player: (anchor id, lat,
 lon, [mapcells.CellKey]), the latest list replacing the earlier one.
 """
@@ -39,8 +39,6 @@ _s = None       # this process's state (init)
 
 class _State:
     def __init__(self, cache_dir, offline, roads, grading, road_widths, surface, airports=False, sea=False):
-        self.cache_dir = cache_dir
-        self.imagery = None         # (its settings, imagery.Imagery from the disk alone): far_tile's textures
         net = netfetch.Fetcher(offline=offline)
         self.dem = demmod.Dem(os.path.join(cache_dir, "dem"), fetcher=net)
         # runways graded in (--airports on): the copy the server loaded, never refreshed here
@@ -51,8 +49,7 @@ class _State:
         self.md = md if roads else None
         self.grading = bool(grading) and self.md is not None
         self.widths = (roadwidthmod.RoadWidths(
-            lambda key: md.cell(key, layers=("buildings",), kind="demand").layers.get("buildings"),
-            roadwidthmod.store_dir(cache_dir, md)).get
+            lambda key: md.cell(key, layers=("buildings",), kind="demand").layers.get("buildings")).get
             if road_widths and self.md is not None else None)
         self.surface = surfacemod.Surface(md) if surface else None
         self.graders = {}           # anchor id -> grading.Grader
@@ -70,8 +67,11 @@ class _State:
                 frame = geodesy.EnuFrame(lat, lon)
                 self.chunks[aid] = heightmap.ChunkCache()
                 self.graders[aid] = (gradingmod.Grader(
-                    frame, self.md, lambda la, lo: self.dem.sample(la, lo, gradingmod.PROFILE_ZOOM), self.widths)
+                    frame, self.md, lambda la, lo: self.dem.sample(la, lo, gradingmod.PROFILE_ZOOM), self.widths,
+                    structure_elev=lambda la,lo:ground(frame,la,lo,self.dem.sample(la,lo,gradingmod.PROFILE_ZOOM)))
                     if self.grading else None)
+                if self.graders[aid] is not None:
+                    self.graders[aid].bridge_model.wet=self.sea.depth if self.sea is not None else None
                 for old in sorted(self.chunks)[:-ANCHORS_KEPT]:
                     del self.chunks[old], self.graders[old]
             return self.graders[aid], self.chunks[aid]
@@ -94,32 +94,6 @@ def load_airports(cache_dir, dem):
     return airportgrade.AirportGrader(db, dem)
 
 
-def _rss_mb():
-    try:
-        with open("/proc/self/statm") as f:
-            return int(f.read().split()[1]) * os.sysconf("SC_PAGE_SIZE") / 1e6
-    except (OSError, ValueError):
-        return 0.0
-
-
-def _trace_memory(every_s=60.0, top=10):
-    """BNGE_TRACEMALLOC: log this worker's resident size, what Python and numpy hold of it and its top allocation
-    sites every every_s (the rest is native: DuckDB, the allocator's free lists)."""
-    import tracemalloc
-    tracemalloc.start(1)
-
-    def loop():
-        log = logging.getLogger("earthd.worker")
-        while True:
-            time.sleep(every_s)
-            snap = tracemalloc.take_snapshot()
-            total = sum(st.size for st in snap.statistics("filename"))
-            log.info("memory pid %d: rss %.0f MB, traced %.0f MB; top: %s", os.getpid(), _rss_mb(), total / 1e6,
-                     "; ".join(f"{os.path.basename(st.traceback[0].filename)}:{st.traceback[0].lineno} "
-                               f"{st.size / 1e6:.0f} MB" for st in snap.statistics("lineno")[:top]))
-    threading.Thread(target=loop, daemon=True, name="trace-mem").start()
-
-
 def init(cache_dir, offline, roads, grading, road_widths, surface, warm_q, log_level=logging.INFO, airports=False,
          sea=False, nice=0):
     """nice: this worker's niceness on top of the server's (earthd NICE_*): the terrain blocks' workers keep the
@@ -133,12 +107,6 @@ def init(cache_dir, offline, roads, grading, road_widths, surface, warm_q, log_l
         except OSError:
             pass
     logging.basicConfig(level=log_level, format="%(asctime)s %(levelname)s %(name)s: %(message)s")
-    import budget
-    budget.apply()              # (this process's caches: smaller on a small machine)
-    if os.environ.get("BNGE_TRACEMALLOC"):      # debug: this worker's memory (earthd's trace_mem)
-        _trace_memory()
-    import sampler
-    sampler.maybe_start(f".{os.getpid()}")      # BNGE_SAMPLE: this worker's own sampling profile (debugging)
     _s = _State(cache_dir, offline, roads, grading, road_widths, surface, airports, sea)
     threading.Thread(target=_watch_parent, args=(os.getppid(),), daemon=True, name="parent-watch").start()
     threading.Thread(target=_read_warm, args=(warm_q,), daemon=True, name="warm-read").start()
@@ -147,8 +115,16 @@ def init(cache_dir, offline, roads, grading, road_widths, surface, warm_q, log_l
 
 def _watch_parent(ppid):
     """Exit with the server: a killed server (SIGTERM) left its block processes running."""
-    while os.getppid() == ppid:
-        time.sleep(PARENT_POLL_S)
+    # On Windows getppid() keeps the original PID after that process exits.
+    # Spawn supplies a real parent-process handle; wait on its lifetime rather
+    # than polling the unchanged number (or a subsequently reused PID).
+    import multiprocessing
+    parent = multiprocessing.parent_process()
+    if parent is not None:
+        parent.join()
+    else:
+        while os.getppid() == ppid:
+            time.sleep(PARENT_POLL_S)
     os._exit(0)
 
 
@@ -263,55 +239,8 @@ def build(aid, lat, lon, hm_zoom, q, cx, cy, size, out_dir, name, ter_name=None)
     return info
 
 
-def _bridges(aid, frame, elev):
-    """The anchor's roads.BridgeProfiles (deck heights of whole bridge chains), made once per anchor in this process."""
-    import roads as roadsmod
-    with _s.lock:
-        bridges = _s.bridges.get(aid)
-        if bridges is None:
-            bridges = _s.bridges[aid] = roadsmod.BridgeProfiles(
-                frame, lambda key: _s.md.cell(key, layers=("roads",), kind="demand").layers.get("roads"), elev)
-            sea = getattr(_s, "sea", None)
-            bridges.wet = sea.depth if sea is not None else None        # (decks clear the water: roads.water_clear)
-            bridges.infra_fn = lambda key: _s.md.cell(key, layers=("infrastructure",), kind="demand").layers.get(
-                "infrastructure")                                       # (bridge:structure tags: bridgetypes)
-            for old in sorted(_s.bridges)[:-ANCHORS_KEPT]:
-                del _s.bridges[old]
-    return bridges
-
-
-def navgraph(aid, lat, lon, zoom, x, y, out_dir, vfs_dir, serial, left_hand, mph, rules):
-    """earthd.Server.build_navgraph here (a road-tile process): the AI road graph around (x, y) written to out_dir;
-    returns (vfs path, nodes, edges). The bridges' deck heights are this process's (the road tiles' own); in the
-    server they were built a second time, in its interpreter (13 s of its CPU in a 4-minute drive, 2026-10-20)."""
-    import navgraph as navgraphmod
-    import mapcells
-    g, _ = _s.anchor(aid, lat, lon)
-    frame = geodesy.EnuFrame(lat, lon)
-    w = navgraphmod.WINDOW_M + 200.0
-    la, lo, _ = frame.enu_to_geodetic(np.array([x - w, x + w]), np.array([y - w, y + w]), 0.0)
-    keys = mapcells.cells_for_bbox(float(la.min()), float(lo.min()), float(la.max()), float(lo.max()))
-    feats = [_s.md.cell(k, layers=("roads",), kind="demand").layers.get("roads") for k in keys]
-
-    def elev(la_, lo_):         # the physics ground, lifted under roads (as the road tiles')
-        z = ground(frame, la_, lo_, _s.dem.sample(la_, lo_, zoom))
-        return g.apply(la_, lo_, z, gradingmod.ROAD_LIFT) if g is not None else z
-    decks = {}
-    try:
-        for fid, _spec, xy, z, _lon in _bridges(aid, frame, elev).parts(feats, (x - w, y - w, x + w, y + w)):
-            decks.setdefault(fid, []).append((np.asarray(xy, np.float64)[:, :2], np.asarray(z, np.float64)))
-    except Exception as e:          # no decks: the graph follows the ground under bridges
-        log.debug("navgraph decks: %s: %s", type(e).__name__, e)
-    urban = _s.surface.urban if _s.surface is not None else None
-    graph = navgraphmod.build(frame, feats, elev, (x, y), urban, decks=decks, widths=_s.widths, left_hand=left_hand,
-                              mph=mph)
-    graph["rules"] = rules
-    path = navgraphmod.write(out_dir, vfs_dir, aid, serial, graph)
-    return path, len(graph["nodes"]), len(graph["edges"])
-
-
 def roads_tile(aid, lat, lon, zoom, tx, ty, out_dir, vfs_dir, sidewalks, lift, buildings=False, left_hand=False,
-               mph=True, q=None):
+               mph=True):
     """earthd.Server.build_roads_tile here (road-tile pool): the anchor's road tile (tx, ty) built and
     written; returns roads.write_tile's (vfs path, chunks). In the server's process its Python made up
     ~80 % of the main process's busy threads (in-game profile 2026-10-13): the block photos and far
@@ -321,13 +250,35 @@ def roads_tile(aid, lat, lon, zoom, tx, ty, out_dir, vfs_dir, sidewalks, lift, b
     import roads as roadsmod
     g, _ = _s.anchor(aid, lat, lon)
     frame = geodesy.EnuFrame(lat, lon)
+    # KyzoFox 1.5.4: the roads never wait for the buildings' map data. A road tile whose building layers are not
+    # downloaded yet is built now without its buildings (they are fetched meanwhile) and marked partial: the server
+    # builds it again, with them, once the player is far enough from it (roads.Tracker.PARTIAL_*). Its buildings,
+    # parts, infrastructure and water came first, on demand: a fast car's next road tile (and its bridge deck) waited
+    # 15-19 s on their downloads (the user's log, 2026-10-20).
+    partial = False
+    if buildings and _s.md is not None:
+        missing = _bld_missing(roadsmod.cells_of_tile(frame, tx, ty, margin=0.0))
+        if missing:
+            _fetch_later(missing)
+            buildings, partial = False, True
     cells = [_s.md.cell(k, layers=("roads",), kind="demand").layers.get("roads")
              for k in roadsmod.cells_of_tile(frame, tx, ty)]
 
     def elev(la, lo):           # the physics ground (lifted under roads: grading.ROAD_LIFT)
         z = ground(frame, la, lo, _s.dem.sample(la, lo, zoom))
         return g.apply(la, lo, z, gradingmod.ROAD_LIFT) if g is not None else z
-    bridges = _bridges(aid, frame, elev)
+    with _s.lock:
+        bridges = _s.bridges.get(aid)
+        if bridges is None:
+            bridges = _s.bridges[aid] = g.bridge_model if g is not None else roadsmod.BridgeProfiles(
+                frame, lambda key: _s.md.cell(key, layers=("roads",), kind="demand").layers.get("roads"), elev)
+            sea = getattr(_s, "sea", None)
+            bridges.wet = sea.depth if sea is not None else None        # (decks clear the water: roads.water_clear)
+            bridges.vertical = g.uk_vertical if g is not None else None
+            bridges.infra_fn = lambda key: _s.md.cell(key, layers=("infrastructure",), kind="demand").layers.get(
+                "infrastructure")                                       # (bridge:structure tags: bridgetypes)
+            for old in sorted(_s.bridges)[:-ANCHORS_KEPT]:
+                del _s.bridges[old]
     tunnels = tunnel_profiles(aid, frame, elev, g)
     walks = []
     urban = _s.surface.urban if _s.surface is not None else None
@@ -359,16 +310,18 @@ def roads_tile(aid, lat, lon, zoom, tx, ty, out_dir, vfs_dir, sidewalks, lift, b
         park = parkingmod.clear_of(park, props, drives)
         park = parkingmod.tile_lot_spots(frame, tx, ty, _s.md, elev, items, park)
         buildingsmod.brick_walks(walks, items, lat, lon)
-    box = roadsmod.tile_bbox(tx, ty)
-    cell_fn = lambda key: _s.md.cell(key, layers=("roads",), kind="demand").layers.get("roads")   # noqa: E731
-
-    def drawn(la, lo):          # the block's ground: raised over the low arches as the terrain is (_make_heightmap)
-        return roadsmod.block_arch_raise(tunnels, cell_fn, frame, la, lo, elev(la, lo),
-                                         (box[0] - 8, box[1] - 8, box[2] + 8, box[3] + 8))
-    mesh = roadmeshmod.build(frame, chunks, elev, (x0, y0, 0.0), lift, clip=box, follow=True, q=q, drawn=drawn)
+    solid_chunks=[c for c in chunks if c.get('box3d')]
+    mesh = roadmeshmod.build(frame, [c for c in chunks if not c.get('box3d')], elev, (x0, y0, 0.0), lift,
+                            vertical=getattr(bridges,'vertical',None),deck_context=ctx)
     mesh = _with_plazas(mesh, frame, tx, ty, elev, (x0, y0, 0.0), getattr(_s, "surface", None))
+    if buildings:
+        mesh = parkingmod.render_lots(mesh, frame, roadsmod.tile_bbox(tx,ty), _s.md, elev, (x0,y0,0.),
+                                      park, lines, [s.ring+np.array([x0,y0]) for s,*_ in (items or ())])
     dmesh = roadmeshmod.deck(chunks, (x0, y0, 0.0), bridges.piers_in(roadsmod.tile_bbox(tx, ty)), ctx,
                               bridges.beams_in(roadsmod.tile_bbox(tx, ty)))
+    if solid_chunks:
+        import plazas
+        dmesh=plazas.merge(dmesh,roadmeshmod.build(frame,solid_chunks,elev,(x0,y0,0.)))
     tmesh = roadmeshmod.tunnel(chunks, (x0, y0, 0.0), rwalls)
     bld = None
     if buildings:
@@ -376,8 +329,45 @@ def roads_tile(aid, lat, lon, zoom, tx, ty, out_dir, vfs_dir, sidewalks, lift, b
         bld = buildingsmod.road_tile(frame, tx, ty, _s.md,
                                      lambda la, lo: ground(frame, la, lo, _s.dem.sample(la, lo, zoom)), None, None,
                                      items)
-    return roadsmod.write_tile(out_dir, vfs_dir, aid, tx, ty, chunks, walks if sidewalks else None, mesh, dmesh,
-                               bld, props, wires, park, tunnel_mesh=tmesh)
+    res = roadsmod.write_tile(out_dir, vfs_dir, aid, tx, ty, chunks, walks if sidewalks else None, mesh, dmesh,
+                              bld, props, wires, park, tunnel_mesh=tmesh)
+    return (res[0], res[1], True) if partial and res is not None else res
+
+
+BLD_LAYERS = ("buildings", "building_parts", "infrastructure", "water")    # (buildings.road_tile_items' besides roads)
+_later = {"pool": None, "busy": set(), "lock": threading.Lock()}
+
+
+def _bld_missing(keys):
+    """[(cell key, (layers not downloaded yet))] of the building layers of these cells (a file test each)."""
+    out = []
+    for k in keys:
+        todo = tuple(ly for ly in BLD_LAYERS if not _s.md.has(k, ly))
+        if todo:
+            out.append((k, todo))
+    return out
+
+
+def _fetch_later(missing):
+    """Download these cells' layers in the background (this process's own threads; each once at a time)."""
+    from concurrent.futures import ThreadPoolExecutor
+    with _later["lock"]:
+        if _later["pool"] is None:
+            _later["pool"] = ThreadPoolExecutor(2, thread_name_prefix="bld-data")
+        todo = [(k, ly) for k, ly in missing if (str(k), ly) not in _later["busy"]]
+        for k, ly in todo:
+            _later["busy"].add((str(k), ly))
+
+    def get(k, ly):
+        try:
+            _s.md.cell(k, layers=ly, kind="demand")
+        except Exception as e:      # tried again when the tile is
+            log.debug("building data %s %s: %s: %s", k, ly, type(e).__name__, e)
+        finally:
+            with _later["lock"]:
+                _later["busy"].discard((str(k), ly))
+    for k, ly in todo:
+        _later["pool"].submit(get, k, ly)
 
 
 def _with_plazas(mesh, frame, tx, ty, elev, origin, surface):
@@ -391,7 +381,7 @@ def _with_plazas(mesh, frame, tx, ty, elev, origin, surface):
         box = roadsmod.tile_bbox(tx, ty)
         la, lo, _ = frame.enu_to_geodetic(np.array([box[0], box[2]]), np.array([box[1], box[3]]), np.zeros(2))
         rings = plazas.polygons(surface.lots(la, lo))
-        return plazas.merge(mesh, plazas.mesh(frame, box, rings, elev, origin)) if rings else mesh
+        return plazas.merge(mesh, plazas.mesh(frame, box, rings, elev, origin,terrain=True)) if rings else mesh
     except Exception:                   # no plazas rather than no road tile
         log.exception("plazas of tile %s_%s", tx, ty)
         return mesh
@@ -453,13 +443,14 @@ def tunnel_profiles(aid, frame, elev, g=None):
             _s.tunnels = {}
         t = _s.tunnels.get(aid)
         if t is None:
-            t = _s.tunnels[aid] = roadsmod.TunnelProfiles(
+            t = _s.tunnels[aid] = g.tunnel_model if g is not None else roadsmod.TunnelProfiles(
                 frame, lambda key: _s.md.cell(key, layers=("roads",), kind="demand").layers.get("roads"), elev)
             sea = getattr(_s, "sea", None)
             t.wet = sea.depth if sea is not None else None
-            t.raw = lambda la, lo: ground(frame, la, lo, _s.dem.sample(la, lo, gradingmod.PROFILE_ZOOM))  # noqa: E731
-            if g is not None:
-                t.ends = lambda la, lo: g.apply(la, lo, t.raw(la, lo), gradingmod.ROAD_LIFT, roads_only=True)    # noqa: E731
+            if g is None:
+                t.raw = lambda la, lo: ground(frame, la, lo, _s.dem.sample(la, lo, gradingmod.PROFILE_ZOOM))  # noqa: E731
+            # A grader's model already has its non-recursive surface-road
+            # portal sampler. Do not create a second set of floor heights.
             for old in sorted(_s.tunnels)[:-ANCHORS_KEPT]:
                 del _s.tunnels[old]
         return t
@@ -490,94 +481,6 @@ def far_geometry(aid, lat, lon, tile, zoom, q, ref_zoom, with_sink, layout):
     src = gradingmod.GradedDem(base, g) if (g is not None and tile.level <= 0) else base
     return farfield.build_tile(frame, src, tile, zoom, q, ref_zoom, with_sink=with_sink,
                                layout=layout)
-
-
-WORKER_IMAGERY_TILES = 96      # decoded imagery tiles a far-tile worker keeps (imagery.MEM_TILES: 512, the server's)
-
-
-def _imagery(tex):
-    """This process's imagery.Imagery for the server's chain settings (tex: chain, tone, leaf_on, season_mode): the
-    imagery tiles on disk alone (strict: a missing tile fails the render)."""
-    import imagery as imagerymod
-    key = (tuple(tex["chain"]), tex["tone"], tex["leaf_on"], tex["season_mode"])
-    if _s.imagery is None or _s.imagery[0] != key:
-        im = imagerymod.Imagery(os.path.join(_s.cache_dir, "imagery"), key[0], fetch_workers=1,
-                                mem_tiles=WORKER_IMAGERY_TILES, tone=key[1], fetcher=netfetch.Fetcher(offline=True),
-                                leaf_on=key[2], season_mode=key[3])
-        im.strict = True
-        _s.imagery = (key, im)
-    return _s.imagery[1]
-
-
-def base_photo(lat, lon, x0, y0, size, px, tex, buildings, rock_zoom, path, cache):
-    """earthd.Server.write_base here, for a server without its imagery analyses (a small machine): the block's base
-    photo from the imagery tiles on disk, its building footprints filled and its cliffs as rock, written to path
-    (PNG) and packed into the game's terrain texture cache (cache: terraincache.base_entry's arguments but the rgb).
-    Returns (rgb, sources used, lazy tiles still to come), or None when an imagery tile it needs is not on disk (the
-    server renders it, fetching what is missing). In the server process it ran 2 s alone but 8-11 s next to the
-    rest of the world's threads on a Steam Deck (one interpreter lock), and the next block waited for it."""
-    import imagery as imagerymod
-    import rockface as rockfacemod
-    import staging
-    from PIL import Image
-    import buildings as buildingsmod
-    im = _imagery(tex)
-    frame = geodesy.EnuFrame(lat, lon)
-    pending = set()
-    try:
-        rgb, used = im.render(frame, x0, y0, size, px, pending)
-    except imagerymod.ImageryError:
-        return None
-    rgb = np.asarray(rgb, np.uint8)
-    if buildings and _s.md is not None:
-        try:
-            mask = buildingsmod.photo_mask(frame, x0, y0, size, px, _s.md)
-            if mask is not None:
-                rgb = buildingsmod.fill_photo(rgb, mask, size, px)
-        except Exception as e:      # the photo stays as it is
-            log.info("base photo: building mask: %s", e)
-    try:            # (earthd.Server.write_base)
-        n = 65
-        xs = x0 + np.arange(n) * (size / (n - 1))
-        ys = y0 + np.arange(n) * (size / (n - 1))
-        _, U = heightmap.surface(frame, lambda la, lo: _s.dem.sample(la, lo, rock_zoom), xs, ys)
-        rgb = rockfacemod.rock(rgb, frame, x0, y0, size, U, x0, y0, size / (n - 1))
-    except Exception as e:
-        log.debug("base photo: rock faces: %s", e)
-    tmp = staging.tmp_for(path)
-    Image.fromarray(rgb, "RGB").save(tmp, format="PNG", compress_level=1)
-    staging.replace(tmp, path)
-    user_dir, base_vfs, ao_vfs, ao_value = cache
-    terraincache.base_entry(user_dir, base_vfs, ao_vfs, rgb, ao_value)
-    return rgb, used, pending
-
-
-def far_tile(aid, lat, lon, tile, zoom, q, ref_zoom, with_sink, layout, tex):
-    """far_geometry and the tile's texture here, written to tex["path"] (the server without its imagery analyses:
-    de-shadow and colour match off, a small machine). The texture from the imagery tiles on disk alone, the server's
-    chain (Imagery.strict): (Built, (texture bytes, sources used)), or (Built, None) when a tile it needs is not on
-    disk (the server renders it, fetching what is missing). On a Steam Deck the textures were most of the server
-    process's own CPU, one interpreter for every thread (55 s of a drive), and the far field waited on it."""
-    import imagery as imagerymod
-    import rockface as rockfacemod
-    geometry = getattr(far_geometry, "__wrapped__", far_geometry)        # (its CPU counted once, here)
-    built = geometry(aid, lat, lon, tile, zoom, q, ref_zoom, with_sink, layout)
-    im = _imagery(tex)
-    frame = geodesy.EnuFrame(lat, lon)
-    x0, y0, _, _ = tile.bbox
-    px = tex["px"]
-    sq = imagerymod.gutter_square(x0, y0, tile.size, px)
-    try:
-        rgb, used = im.render(frame, *sq, px)
-    except imagerymod.ImageryError:
-        return built, None
-    if built.grid is not None:          # (earthd.Server.rock_faces)
-        try:
-            g = np.asarray(built.grid)
-            rgb = rockfacemod.rock(rgb, frame, *sq, g, x0, y0, tile.size / (g.shape[1] - 1))
-        except Exception as e:
-            log.debug("rock faces of %s: %s", tile.key, e)
-    return built, (imagerymod.write_dds(tex["path"], rgb), used)
 
 
 # --- CPU accounting ---------------------------------------------------------------------------------------------------
@@ -612,6 +515,3 @@ roads_tile = _accounted(roads_tile)
 far_buildings_tile = _accounted(far_buildings_tile)
 base_entry = _accounted(base_entry)
 far_geometry = _accounted(far_geometry)
-far_tile = _accounted(far_tile)
-base_photo = _accounted(base_photo)
-navgraph = _accounted(navgraph)

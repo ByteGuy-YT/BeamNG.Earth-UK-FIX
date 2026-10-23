@@ -30,12 +30,13 @@ import fast
 from polygon import Path
 
 import mapcells
-import pacer
 import staging
+import roadcontext
+import roadprofile
 
 log = logging.getLogger("earthd.vegetation")
 
-VERSION = 13
+VERSION = 14                 # UK mapped car parks exclude scatter and roadside edge bushes
 TREE_MIN_M = 3.0
 CROWN_SPACING = 0.5          # tops kept this many crown radii apart (0.8 looked sparse: the user, 2026-10-13)
 BUSH_MIN_M = 1.0
@@ -59,14 +60,6 @@ SCATTER_CELL_M = 6.0        # the hashed scatter's grid (one candidate per cell)
 SCATTER_P = {10: (0.30, 0.0), 20: (0.10, 0.04), 30: (0.01, 0.003), 60: (0.0, 0.08), 100: (0.02, 0.02)}
 UNDERSTORY = 10
 BUILT_NEAR_M = 60.0         # bare ground with built-up land this far around gets no scatter (squares, lots)
-# Rocks on bare ground lie on slopes, outcrops and fans, not on flat playas, salt pans and dry lake beds (the
-# Bonneville Salt Flats had a rock every ~75 m2, the user 2026-10-20; photos: a bare white crust for miles). A bare
-# cell's rock is kept with the share of the ground's slope between these (the DEM ROCK_SLOPE_D m either side, at
-# ROCK_SLOPE_ZOOM: coarse tiles, few downloads); without a DEM, as before.
-ROCK_SLOPE = (0.02, 0.10)
-BARREN_NEAR_M = 20.0        # m: a canopy top on bare ground or snow needs vegetated land this near (_build)
-ROCK_SLOPE_D = 40.0
-ROCK_SLOPE_ZOOM = 12
 # Forest edges along roads in humid country (Columbia's photos: a wall of shrubs, saplings and vines from the
 # ground up, where ours showed bare trunks over grass): a denser band of bigger bushes within EDGE_M of a road.
 EDGE_M = 7.0
@@ -197,7 +190,6 @@ def _conifer_share(lat, lon):
 class Vegetation:
     def __init__(self, md, cache_dir=None):
         self.md = md
-        self.dem = None                 # (set by the server: rocks on bare ground by slope, ROCK_SLOPE)
         self.dir = os.path.join(cache_dir, "vegetation", f"v{VERSION}") if cache_dir else None
         self._mem = OrderedDict()
         self._lock = threading.Lock()
@@ -246,7 +238,6 @@ class Vegetation:
 
     def _warm_loop(self):
         while True:
-            pacer.hold()                # (a teleport's first block first)
             with self._warm_cv:
                 while not self._warm:
                     self._warm_cv.wait()
@@ -266,7 +257,10 @@ class Vegetation:
 
     def _path(self, x, y):
         rel = getattr(self.md, "release", "x")
-        return os.path.join(self.dir, str(rel), str(x), f"{y}.npz") if self.dir else None
+        # Index/config updates must not reuse trees generated with another road corridor.
+        sig = getattr(getattr(self.md, "osm", None), "signature", None) or "no-osm"
+        cfg = hashlib.sha256(repr(roadprofile.config()).encode()).hexdigest()[:12]
+        return os.path.join(self.dir, str(rel), sig, cfg, str(x), f"{y}.npz") if self.dir else None
 
     def _load(self, x, y):
         p = self._path(x, y)
@@ -280,7 +274,7 @@ class Vegetation:
             tmp = f"{p}.{os.getpid()}.{threading.get_ident()}.tmp"
             with open(tmp, "wb") as fh:
                 np.savez_compressed(fh, **{n: getattr(items, n) for n in fields})
-            staging.replace_cached(tmp, p)
+            os.replace(tmp, p)
         return items
 
     # --- the build ------------------------------------------------------------------------------
@@ -313,14 +307,16 @@ class Vegetation:
             for dx in (-1, 0, 1):
                 kk = (mapcells.ZOOM, x + dx, y + dy)
                 try:
-                    c2 = cd if (dx, dy) == (0, 0) else self.md.cell(kk, layers=("buildings", "roads", "water"))
+                    c2 = cd if (dx, dy) == (0, 0) else self.md.cell(kk, layers=("buildings", "roads", "water", "landcover"))
                 except Exception as e:          # a neighbour not at hand: its features unmasked
                     log.debug("vegetation: neighbour %s: %s", kk, e)
                     continue
                 _mask_polys(c2.layers.get("buildings"), blocked, chm, 1.0)
                 _mask_polys(c2.layers.get("water"), blocked, chm, 0.0, kind=3)
-                _mask_roads(c2.layers.get("roads"), road, chm)
-                _mask_roads(c2.layers.get("roads"), curb, chm, push, clear=TREE_PIT_M)
+                lc2 = c2.layers.get("landcover")
+                urban = (lambda la, lo, raster=lc2: raster.sample(lo, la) == 50) if lc2 is not None else None
+                _mask_roads(c2.layers.get("roads"), road, chm, urban_fn=urban)
+                _mask_roads(c2.layers.get("roads"), curb, chm, push, clear=TREE_PIT_M, urban_fn=urban)
         # smoothed heights (3 x 3 mean), then the local maxima by height band
         p = np.pad(h, 1, mode="edge")
         hs = sum(p[a:a + n_r, b:b + n_c] for a in range(3) for b in range(3)) / 9.0
@@ -335,6 +331,8 @@ class Vegetation:
         # street trees: a top over a road corridor (its crown overhangs the street) moves just out of it,
         # onto the verge / sidewalk by the curb, unless that lands on a building, water or another road
         on_road = tops & road
+        if roadcontext.region_at(*getattr(cd, "center", ((lat0 + lat1) / 2, (lon0 + lon1) / 2))):
+            on_road[:] = False      # canopy crowns over a road do not locate trunks on the pavement
         tops &= ~road
         rj_, ri_ = np.nonzero(on_road)
         if len(rj_):
@@ -358,22 +356,6 @@ class Vegetation:
         # the landcover class at each top (rocks / bushes scatter below)
         lcls = lc.sample(tlon, tlat) if lc is not None else np.zeros(len(tlon), np.uint8)
         is_tree &= lcls != WC["water"]
-        # canopy heights on bare ground or permanent snow with no vegetated land around: the canopy map misreading
-        # bright ground (the Bonneville Salt Flats had ~19k "trees" up to 21 m tall on bare salt, 2026-10-20). By
-        # its definition bare land has under 10 % plant cover; an edge tree, or one by an oasis, has some within
-        # BARREN_NEAR_M and stays
-        barren = np.flatnonzero((lcls == WC["bare"]) | (lcls == WC["snow"])) if lc is not None else []
-        if len(barren):
-            k = max(0.05, float(np.cos(np.radians(tlat[barren[0]]))))
-            dm = BARREN_NEAR_M / k
-            near = np.zeros(len(barren), bool)
-            for ox, oy in ((dm, 0.0), (-dm, 0.0), (0.0, dm), (0.0, -dm)):
-                lo2, la2 = _to4326(mx[ii[barren]] + ox, my[jj[barren]] + oy)
-                near |= ~np.isin(lc.sample(lo2, la2), (WC["bare"], WC["snow"], WC["water"]))
-            keep = np.ones(len(jj), bool)
-            keep[barren[~near]] = False
-            jj, ii, th, tlon, tlat, lcls, is_tree = jj[keep], ii[keep], th[keep], tlon[keep], tlat[keep], lcls[keep], \
-                is_tree[keep]
         # hashed choices keyed on the global pixel (z17 Web-Mercator index: the CHM grid)
         gx = np.floor((mx[ii] + 20037508.342789244) / chm.dx).astype(np.int64)
         gy = np.floor((20037508.342789244 - my[jj]) / chm.dy).astype(np.int64)
@@ -396,10 +378,14 @@ class Vegetation:
                 _mask_polys(lu, paved, chm, 0.0, select=lu.attrs["subtype"].astype(str) == "pedestrian")
             if inf is not None and len(inf) and inf.attrs.get("class") is not None:
                 _mask_polys(inf, paved, chm, 0.0, select=inf.attrs["class"].astype(str) == "parking")
+            import ukcontext
+            for _,_,tags,ll in ukcontext.features(tuple(cd.bounds),('parking',)):
+                if len(ll)>=4 and tags.get('surface') not in ('gravel','grass','ground','unpaved','dirt'):
+                    _mask_rings([ll],paved,chm,0.)
         except Exception as e:                  # not at hand: scattered as before
             log.debug("vegetation: land use of %s: %s", (x, y), e)
         scatter = self._scatter(cd, lc, blocked | paved, chm, hs)
-        edge = self._edge(cd, lc, blocked, road, chm, hs)
+        edge = self._edge(cd, lc, blocked | paved, road, chm, hs)
         return _concat(_concat(tree, scatter), edge)
 
     def _edge(self, cd, lc, blocked, road, chm, hs):
@@ -443,21 +429,6 @@ class Vegetation:
                      _hash01(GI, GJ, 26).astype(np.float32), (_hash01(GI, GJ, 27) * 360.0).astype(np.float32),
                      (0.8 + 0.4 * _hash01(GI, GJ, 28)).astype(np.float32))
 
-    def _slope(self, px, py):
-        """The ground's slope (rise over run) at Web Mercator points (px, py), from the DEM ROCK_SLOPE_D m either side
-        in x and y; None when the DEM cannot say."""
-        k = np.cos(np.radians(_to4326(px[:1], py[:1])[1][0]))       # Web Mercator m per ground m (one cell)
-        d = ROCK_SLOPE_D / max(k, 0.05)
-        x = np.concatenate([px + d, px - d, px, px])
-        y = np.concatenate([py, py, py + d, py - d])
-        lon, lat = _to4326(x, y)
-        try:
-            z = np.asarray(self.dem.sample(lat, lon, ROCK_SLOPE_ZOOM), np.float64).reshape(4, len(px))
-        except Exception as e:          # (offline, no tile): rocks as without a DEM
-            log.debug("vegetation: no slope: %s", e)
-            return None
-        return np.hypot(z[0] - z[1], z[2] - z[3]) / (2 * ROCK_SLOPE_D)
-
     def _scatter(self, cd, lc, blocked, chm, hs):
         """Bushes and rocks on a hashed SCATTER_CELL_M grid over shrubland, grass and bare ground."""
         if lc is None:
@@ -498,14 +469,6 @@ class Vegetation:
                 near += lc.sample(lo2, la2) == WC["built"]
             free[bare[near >= 2]] = False
         rock = free & (u < pr)
-        bare_rock = np.flatnonzero(rock & (cls == WC["bare"]))
-        if len(bare_rock) and self.dem is not None:
-            slope = self._slope(px[bare_rock], py[bare_rock])
-            if slope is not None:
-                lo_s, hi_s = ROCK_SLOPE
-                keep = _hash01(GI[bare_rock], GJ[bare_rock], 19) < np.clip((slope - lo_s) / (hi_s - lo_s), 0.0, 1.0)
-                rock[bare_rock[~keep]] = False
-                free[bare_rock[~keep]] = False     # (nor a bush there: bare ground stays bare)
         bush = free & ~rock & (u < pr + pb)
         sel = rock | bush
         n = int(sel.sum())
@@ -589,25 +552,25 @@ def _mask_polys(f, mask, chm, grow_m, kind=3, select=None):
     g = grow_m / chm.dx
     for i in np.flatnonzero((f.kind == kind) & (True if select is None else select)):
         for part in f.parts(i):
-            rings = []
-            for ring in part:
-                x, y = _to3857(ring[:, 0], ring[:, 1])
-                rings.append(np.stack(_grid(chm, x, y), -1))
-            allp = np.concatenate(rings)
-            c0, r0 = int(np.floor(allp[:, 0].min() - g)), int(np.floor(allp[:, 1].min() - g))
-            c1, r1 = int(np.ceil(allp[:, 0].max() + g)) + 1, int(np.ceil(allp[:, 1].max() + g)) + 1
-            c0, r0, c1, r1 = max(c0, 0), max(r0, 0), min(c1, n_c), min(r1, n_r)
-            if c1 <= c0 or r1 <= r0:
-                continue
-            gc, gr = np.meshgrid(np.arange(c0, c1) + 0.5, np.arange(r0, r1) + 0.5)
-            pts = np.stack([gc.ravel(), gr.ravel()], -1)
-            inside = np.zeros(len(pts), bool)
-            for r in rings:
-                inside ^= Path(r).contains_points(pts)
-            mask[r0:r1, c0:c1] |= inside.reshape(r1 - r0, c1 - c0)
+            _mask_rings(part,mask,chm,grow_m)
 
 
-def _mask_roads(f, mask, chm, push=None, clear=ROAD_CLEAR_M):
+def _mask_rings(part,mask,chm,grow_m):
+    n_r,n_c=mask.shape;g=grow_m/chm.dx;rings=[]
+    for ring in part:
+        x,y=_to3857(ring[:,0],ring[:,1]);rings.append(np.stack(_grid(chm,x,y),-1))
+    allp=np.concatenate(rings)
+    c0,r0=int(np.floor(allp[:,0].min()-g)),int(np.floor(allp[:,1].min()-g))
+    c1,r1=int(np.ceil(allp[:,0].max()+g))+1,int(np.ceil(allp[:,1].max()+g))+1
+    c0,r0,c1,r1=max(c0,0),max(r0,0),min(c1,n_c),min(r1,n_r)
+    if c1<=c0 or r1<=r0:return
+    gc,gr=np.meshgrid(np.arange(c0,c1)+.5,np.arange(r0,r1)+.5)
+    pts=np.stack([gc.ravel(),gr.ravel()],-1);inside=np.zeros(len(pts),bool)
+    for r in rings:inside^=Path(r).contains_points(pts)
+    mask[r0:r1,c0:c1]|=inside.reshape(r1-r0,c1-c0)
+
+
+def _mask_roads(f, mask, chm, push=None, clear=ROAD_CLEAR_M, urban_fn=None):
     """Mark road corridors (half width by class + clear) on the CHM-grid mask (footpaths left out). push (optional, (3, rows,
     cols) float32: dx, dy in px and the distance to the nearest road, inf where none) gets, per corridor
     pixel, the move that takes it just out of its nearest road's corridor (street trees: vegetation._build)."""
@@ -615,12 +578,25 @@ def _mask_roads(f, mask, chm, push=None, clear=ROAD_CLEAR_M):
         return
     n_r, n_c = mask.shape
     cls = f.attrs.get("class", np.full(len(f.kind), "", object))
+    import roads
+    specs = roads.road_specs(f, urban_fn) if hasattr(f, "coord_off") else None
     rust = fast._ef is not None and hasattr(fast._ef, "road_corridors")
     segs, hws = [], []                  # (Rust) every segment in order: one call at the end
     for i in np.flatnonzero(f.kind == 2):
-        if str(cls[i]) in PATH_CLASSES:
+        uk = roadcontext.feature_region(f, i) if specs is not None else None
+        if str(cls[i]) in PATH_CLASSES and not uk:
             continue
         hw_m = ROAD_HALF_WIDTH_M.get(str(cls[i]), ROAD_HALF_DEFAULT_M) + clear
+        if uk:
+            spec = specs[i]
+            if spec is not None:
+                hw_m = spec.width / 2 + max(spec.profile.walk_left, spec.profile.walk_right) + max(clear, roadprofile.config()["tree_clearance"])
+            elif str(cls[i]) in PATH_CLASSES:
+                hw_m = 1. + clear
+            else:
+                continue                         # bridge/tunnel-only surfaces do not block ground vegetation
+            # Reserve for canopy-grid quantisation and the final random position jitter.
+            hw_m += chm.dx * .75 * max(math.cos(math.radians(float(f.lonlat[0, 1]))), .05)
         for part in f.parts(i):
             for ring in part:
                 # ground metres to Web-Mercator pixels (a 3857 metre is 1 / cos(lat) of a ground metre)
@@ -667,9 +643,6 @@ def _mask_roads(f, mask, chm, push=None, clear=ROAD_CLEAR_M):
 
 # --- tiles for the mod --------------------------------------------------------------------------------
 TILE = 256.0                # m, as the road tiles (roads.tile_bbox)
-TILE_ROWS_MAX = 6000        # items a tile sends at most, the lowest ranks: the most the mod shows of one (trees.lua
-                            # TILE_CAP). Dense forest has 10-20k a tile: Bodø's 145 tiles held 1.66 M rows in the game's
-                            # Lua (394 MB of heap, 1.25 s garbage collection pauses on a Steam Deck; GitHub #66)
 SEND_M = 1280.0             # tiles this close to the player (Chebyshev) are sent ...
 DROP_M = 1536.0             # ... and dropped beyond this
 BUILD_PER_POSE = 8
@@ -708,9 +681,6 @@ def tile_items(frame, tx, ty, veg, cell_ready, elev, sea=None, as_json=False):
         it, e, n = it.take(dry), e[dry], n[dry]
     if len(it) == 0:
         return []
-    if len(it) > TILE_ROWS_MAX:         # dense forest: the lowest ranks only (the mod shows no more of a tile)
-        keep = np.sort(np.argpartition(it.rank, TILE_ROWS_MAX - 1)[:TILE_ROWS_MAX])
-        it, e, n = it.take(keep), e[keep], n[keep]
     zg = np.asarray(elev(it.lat, it.lon), np.float64)
     _, _, z = frame.geodetic_to_enu(it.lat, it.lon, zg)
     z = _sink_rocks(frame, it, e, n, np.asarray(z, np.float64), elev)
@@ -767,7 +737,7 @@ def write_tile(out_dir, vfs_dir, aid, tx, ty, rows):
             f.write(json.dumps({"groups": list(GROUPS), "items": []}, separators=(",", ":"))[:-3] + rows + "}")
         else:
             f.write(json.dumps({"groups": list(GROUPS), "items": rows}, separators=(",", ":")))  # the C encoder
-    staging.replace(tmp, path)
+    os.replace(tmp, path)
     return f"{vfs_dir}/{name}", rows.n if isinstance(rows, JsonRows) else len(rows)
 
 
@@ -793,9 +763,7 @@ class Tracker:
         if self.pool is not None:
             self.pool.shutdown(wait=False, cancel_futures=True)
 
-    def on_pose(self, conn, aid, x, y, loop, build, view=None):
-        """As roads.Tracker.on_pose: the tiles within send_m of the car (x, y) and of the camera when it is away
-        (view), the car's first; dropped beyond drop_m of both."""
+    def on_pose(self, conn, aid, x, y, loop, build):
         import roads as roadsmod
         if aid != self.aid:
             for f in self.futs.values():
@@ -804,14 +772,10 @@ class Tracker:
         if self.pool is None:
             from concurrent.futures import ThreadPoolExecutor
             self.pool = ThreadPoolExecutor(self.per_pose, thread_name_prefix=f"{self.kind}-tile")
-        spots = [(x, y)] + ([tuple(view)] if view else [])
-        skip = {k for p in spots for k in roadsmod.tiles_near(*p, self.skip_m)} if self.skip_m else ()
-        car = set(roadsmod.tiles_near(x, y, self.send_m))
-        seen = set(roadsmod.tiles_near(*view, self.send_m)) - car if view else set()
-        want = [k for k in car | seen if k not in self.sent and k not in self.building and k not in skip]
-        car_key = roadsmod.view_key(conn, aid, x, y)
-        cam_key = roadsmod.view_key(conn, aid, *view) if seen else None
-        want.sort(key=lambda k: (1, cam_key(k)) if k in seen else (0, car_key(k)))
+        skip = set(roadsmod.tiles_near(x, y, self.skip_m)) if self.skip_m else ()
+        want = [k for k in roadsmod.tiles_near(x, y, self.send_m)
+                if k not in self.sent and k not in self.building and k not in skip]
+        want.sort(key=roadsmod.view_key(conn, aid, x, y))
         # at most per_pose in flight: each waits in a thread of the loop's shared executor, and a teleport's
         # hundreds (one per pose, uncapped) held every thread while the road tiles under the car waited for one
         # (Sinaia 2026-10-15: bare ground for minutes)
@@ -819,7 +783,7 @@ class Tracker:
             self.building.add((tx, ty))
             fut = self.futs[(tx, ty)] = loop.run_in_executor(self.pool, build, aid, tx, ty)
             fut.add_done_callback(lambda f, k=(tx, ty), a=aid: self._built(conn, a, k, f))
-        for k in [k for k in self.sent if all(roadsmod.tile_distance(k[0], k[1], *p) > self.drop_m for p in spots)]:
+        for k in [k for k in self.sent if roadsmod.tile_distance(k[0], k[1], x, y) > self.drop_m]:
             self.sent.discard(k)
             conn.send({"type": f"{self.kind}_drop", "anchorId": aid, "key": f"{k[0]}_{k[1]}"})
 

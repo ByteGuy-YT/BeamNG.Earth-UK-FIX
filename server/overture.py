@@ -37,7 +37,6 @@ import numpy as np
 import mapgeom as mg
 import netfetch
 import rangeread
-import staging
 
 log = logging.getLogger("earthd.mapdata")
 
@@ -183,7 +182,7 @@ class StacIndex:
         tmp = f"{path}.{os.getpid()}.{threading.get_ident()}.tmp"
         with open(tmp, "wb") as f:
             f.write(body)
-        staging.replace_cached(tmp, path)
+        os.replace(tmp, path)
         return data
 
     def _dir(self, theme, typ):
@@ -456,6 +455,8 @@ class Reader:
               SELECT * EXCLUDE (version) FROM s
               QUALIFY row_number() OVER (PARTITION BY id ORDER BY version DESC, wkb) = 1)""")
         names = ["id", "wkb", "cx", "cy"] + [c for k in ("text", "float", "bool") for c in spec.get(k, ())]
+        if layer == "roads":
+            names.append("sources")
         rows = con.execute(f"SELECT {', '.join(names)} FROM t ORDER BY fi").fetchall()
         at = {c: i for i, c in enumerate(names)}
         ids = mg.text_column([r[at["id"]] for r in rows])
@@ -485,6 +486,9 @@ class Reader:
         for c in spec.get("bool", ()):
             feats.attrs[c] = mg.bool_column([r[at[c]] for r in sel])
         if layer == "roads":
+            feats.attrs["source_refs"] = mg.text_column([
+                json.dumps([{"dataset": s.get("dataset"), "record_id": s.get("record_id")}
+                            for s in (r[at["sources"]] or [])], sort_keys=True) for r in sel])
             self._road_rules(con, feats, keep, fmap)
         sources = {}
         for ds, lic, n in con.execute("""SELECT s.dataset, s.license, count(*) FROM
@@ -549,6 +553,7 @@ def empty(layer):
     for c in spec.get("bool", ()):
         f.attrs[c] = mg.bool_column([])
     if layer == "roads":
+        f.attrs["source_refs"] = mg.text_column([])
         for name, (_, _, kind) in spec["rules"].items():
             f.rules[name] = mg.rule_table([], kind)
         f.rules["flags"] = mg.rule_table([], "text")

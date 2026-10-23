@@ -1,0 +1,151 @@
+{
+  "date": "2026-10-21",
+  "kind": "CPU road-tile generation, flat elevation; NOT FPS",
+  "method": "6 measured warm repeats after 2 warmups per site, previous source snapshot then current source, same machine, road/context data and current width configuration. No running-game renderer or physics included.",
+  "engine_frame_times_measured": false,
+  "limits": [
+    "Single local run; small changes may be measurement noise.",
+    "Geometry and detail content differ between versions.",
+    "Actual DEM grading and cold neighbouring-profile preparation cost is reported separately in uk-round2-validation.json."
+  ],
+  "streaming_changes": {
+    "driving_target_ms": [
+      4,
+      2
+    ],
+    "engine_free_ms": [
+      5,
+      2
+    ],
+    "forest_items_per_active_batch": [
+      750,
+      300
+    ],
+    "shape_population_budget": [
+      4000,
+      2000
+    ]
+  },
+  "sites": [
+    {
+      "site": "Underwood",
+      "before": {
+        "site": "Underwood",
+        "warm_median_ms": 75.6,
+        "samples_ms": [
+          79.194,
+          75.917,
+          77.168,
+          74.142,
+          75.282,
+          75.057
+        ],
+        "prop_count": 26
+      },
+      "after": {
+        "site": "Underwood",
+        "warm_median_ms": 74.291,
+        "samples_ms": [
+          77.425,
+          73.101,
+          75.522,
+          73.832,
+          73.213,
+          74.751
+        ],
+        "prop_count": 26
+      },
+      "generation_change_percent": -1.73
+    },
+    {
+      "site": "Ripley",
+      "before": {
+        "site": "Ripley",
+        "warm_median_ms": 73.589,
+        "samples_ms": [
+          74.53,
+          74.298,
+          75.185,
+          68.85,
+          70.155,
+          72.88
+        ],
+        "prop_count": 16
+      },
+      "after": {
+        "site": "Ripley",
+        "warm_median_ms": 68.02,
+        "samples_ms": [
+          68.21,
+          69.755,
+          67.566,
+          67.66,
+          68.155,
+          67.885
+        ],
+        "prop_count": 63
+      },
+      "generation_change_percent": -7.57
+    },
+    {
+      "site": "school area",
+      "before": {
+        "site": "school area",
+        "warm_median_ms": 62.536,
+        "samples_ms": [
+          62.732,
+          61.844,
+          61.172,
+          62.34,
+          65.291,
+          64.956
+        ],
+        "prop_count": 23
+      },
+      "after": {
+        "site": "school area",
+        "warm_median_ms": 61.474,
+        "samples_ms": [
+          60.872,
+          61.676,
+          61.106,
+          61.272,
+          62.051,
+          62.055
+        ],
+        "prop_count": 23
+      },
+      "generation_change_percent": -1.7
+    },
+    {
+      "site": "M1",
+      "before": {
+        "site": "M1",
+        "warm_median_ms": 66.077,
+        "samples_ms": [
+          66.838,
+          72.211,
+          66.068,
+          65.871,
+          66.002,
+          66.087
+        ],
+        "prop_count": 0
+      },
+      "after": {
+        "site": "M1",
+        "warm_median_ms": 80.391,
+        "samples_ms": [
+          78.7,
+          84.517,
+          81.675,
+          84.491,
+          78.929,
+          79.107
+        ],
+        "prop_count": 0
+      },
+      "generation_change_percent": 21.66
+    }
+  ]
+}

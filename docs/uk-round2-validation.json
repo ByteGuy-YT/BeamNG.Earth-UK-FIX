@@ -1,0 +1,326 @@
+[
+  {
+    "site": "J26 Nottingham Road",
+    "seconds": 17.5,
+    "tile_ms": [
+      9194.12,
+      128.03,
+      120.66
+    ],
+    "bridges": [
+      {
+        "id": "3bfefb99-8f91-479e-9201-eee5cb496e74~osm29086_33371",
+        "class": "motorway",
+        "length_m": 33.94,
+        "maximum_grade": 0.0149,
+        "endpoint_difference_m": [
+          -0.027,
+          0.042
+        ],
+        "minimum_surface_to_terrain_m": 2.8
+      },
+      {
+        "id": "3bfefb99-8f91-479e-9201-eee5cb496e74~osm86797_91396",
+        "class": "motorway",
+        "length_m": 36.42,
+        "maximum_grade": 0.0106,
+        "endpoint_difference_m": [
+          0.019,
+          -0.016
+        ],
+        "minimum_surface_to_terrain_m": 2.8
+      },
+      {
+        "id": "42c2dfa4-b92d-4a7d-bf99-299977315862~osm920619_925276",
+        "class": "motorway",
+        "length_m": 36.38,
+        "maximum_grade": 0.0097,
+        "endpoint_difference_m": [
+          -0.025,
+          0.027
+        ],
+        "minimum_surface_to_terrain_m": 2.799
+      },
+      {
+        "id": "42c2dfa4-b92d-4a7d-bf99-299977315862~osm979348_983884",
+        "class": "motorway",
+        "length_m": 35.44,
+        "maximum_grade": 0.0149,
+        "endpoint_difference_m": [
+          0.037,
+          -0.025
+        ],
+        "minimum_surface_to_terrain_m": 2.8
+      }
+    ],
+    "mesh_triangles": 7000,
+    "roadside_solids": 41,
+    "cameras": [
+      {
+        "id": "n8890591993",
+        "limit": null,
+        "width": 7.0,
+        "motorway": false
+      },
+      {
+        "id": "n9084062509",
+        "limit": null,
+        "width": 6.0,
+        "motorway": false
+      },
+      {
+        "id": "n9084169937",
+        "limit": null,
+        "width": 7.0,
+        "motorway": false
+      },
+      {
+        "id": "n9091155452",
+        "limit": null,
+        "width": 10.5,
+        "motorway": false
+      }
+    ],
+    "roundabout_edges_sampled": 0,
+    "roundabout_reverse_lanes": 0,
+    "maximum_nearby_major_ground_road_grade": 0.0499,
+    "maximum_nearby_slip_road_grade": 0.0219
+  },
+  {
+    "site": "M1 Kennel Lane",
+    "seconds": 21.21,
+    "tile_ms": [
+      17499.89,
+      190.14,
+      170.36
+    ],
+    "bridges": [
+      {
+        "id": "3bfefb99-8f91-479e-9201-eee5cb496e74~osm801247_804639",
+        "class": "motorway",
+        "length_m": 26.87,
+        "maximum_grade": 0.0132,
+        "endpoint_difference_m": [
+          -0.033,
+          0.032
+        ],
+        "minimum_surface_to_terrain_m": 3.192
+      },
+      {
+        "id": "42c2dfa4-b92d-4a7d-bf99-299977315862~osm196989_200480",
+        "class": "motorway",
+        "length_m": 27.27,
+        "maximum_grade": 0.0132,
+        "endpoint_difference_m": [
+          0.032,
+          -0.03
+        ],
+        "minimum_surface_to_terrain_m": 2.8
+      }
+    ],
+    "mesh_triangles": 7646,
+    "roadside_solids": 20,
+    "cameras": [],
+    "roundabout_edges_sampled": 0,
+    "roundabout_reverse_lanes": 0,
+    "maximum_nearby_major_ground_road_grade": 0.0325,
+    "maximum_nearby_slip_road_grade": null
+  },
+  {
+    "site": "J27",
+    "seconds": 10.92,
+    "tile_ms": [
+      390.26,
+      88.08,
+      83.17
+    ],
+    "bridges": [
+      {
+        "id": "5cfebf63-25c2-4993-9545-0f1a9fdab174~osm369383_624015",
+        "class": "primary",
+        "length_m": 49.62,
+        "maximum_grade": 0.0188,
+        "endpoint_difference_m": [
+          -0.026,
+          0.026
+        ],
+        "minimum_surface_to_terrain_m": 2.8
+      },
+      {
+        "id": "f17bf231-86b8-4904-a697-65e7683cb6e1~osm340093_586546",
+        "class": "primary",
+        "length_m": 45.86,
+        "maximum_grade": 0.018,
+        "endpoint_difference_m": [
+          0.026,
+          -0.025
+        ],
+        "minimum_surface_to_terrain_m": 6.559
+      }
+    ],
+    "mesh_triangles": 14622,
+    "roadside_solids": 1,
+    "cameras": [],
+    "roundabout_edges_sampled": 59,
+    "roundabout_reverse_lanes": 0,
+    "maximum_nearby_major_ground_road_grade": 0.0502,
+    "maximum_nearby_slip_road_grade": 0.0464
+  },
+  {
+    "site": "A610 path subway",
+    "seconds": 11.11,
+    "tile_ms": [
+      114.33,
+      51.25,
+      48.95
+    ],
+    "bridges": [
+      {
+        "id": "295d19a2-9df5-4961-99cc-12a33571d426~osm262310_652897",
+        "class": "trunk",
+        "length_m": 354.62,
+        "maximum_grade": 0.0258,
+        "endpoint_difference_m": [
+          -0.0,
+          -0.011
+        ],
+        "minimum_surface_to_terrain_m": 2.8
+      },
+      {
+        "id": "8d47cbf7-2763-4907-ac5f-f203e0e37a20",
+        "class": "trunk",
+        "length_m": 10.01,
+        "maximum_grade": 0.0412,
+        "endpoint_difference_m": [
+          -0.059,
+          0.061
+        ]
+      },
+      {
+        "id": "8d47cbf7-2763-4907-ac5f-f203e0e37a20",
+        "class": "trunk",
+        "length_m": 10.02,
+        "maximum_grade": 0.0132,
+        "endpoint_difference_m": [
+          -0.017,
+          0.019
+        ]
+      },
+      {
+        "id": "b1f46ef9-1faa-427a-9a70-299bbe0a2c78~osm351397_699452",
+        "class": "trunk",
+        "length_m": 10.01,
+        "maximum_grade": 0.0412,
+        "endpoint_difference_m": [
+          0.039,
+          -0.058
+        ]
+      },
+      {
+        "id": "ea8017f4-a449-49c0-842d-436f906860c7~osm321270_678569",
+        "class": "trunk",
+        "length_m": 354.5,
+        "maximum_grade": 0.0257,
+        "endpoint_difference_m": [
+          -0.01,
+          -0.0
+        ],
+        "minimum_surface_to_terrain_m": 2.8
+      },
+      {
+        "id": "ea8017f4-a449-49c0-842d-436f906860c7~osm678569_1000000",
+        "class": "trunk",
+        "length_m": 10.02,
+        "maximum_grade": 0.0132,
+        "endpoint_difference_m": [
+          0.016,
+          -0.019
+        ]
+      },
+      {
+        "id": "fede8711-04da-49f0-aa6e-6fa59bbf6f8d",
+        "class": "trunk",
+        "length_m": 10.02,
+        "maximum_grade": 0.0132,
+        "endpoint_difference_m": [
+          0.018,
+          -0.019
+        ]
+      }
+    ],
+    "mesh_triangles": 7476,
+    "roadside_solids": 33,
+    "cameras": [],
+    "roundabout_edges_sampled": 0,
+    "roundabout_reverse_lanes": 0,
+    "maximum_nearby_major_ground_road_grade": 0.0558,
+    "maximum_nearby_slip_road_grade": 0.0792,
+    "mapped_subways": 1,
+    "synthetic_short_decks": 3
+  },
+  {
+    "site": "M1 camera gantry",
+    "seconds": 15.29,
+    "tile_ms": [
+      11155.11,
+      155.8,
+      114.56
+    ],
+    "bridges": [
+      {
+        "id": "31077f27-3913-4d57-a1e4-6f4dd61a7ed6~osm494274_532372",
+        "class": "secondary",
+        "length_m": 80.22,
+        "maximum_grade": 0.0088,
+        "endpoint_difference_m": [
+          0.009,
+          -0.013
+        ],
+        "minimum_surface_to_terrain_m": 2.8
+      }
+    ],
+    "mesh_triangles": 7498,
+    "roadside_solids": 32,
+    "cameras": [
+      {
+        "id": "n6453088821",
+        "limit": 31.2928,
+        "width": 14.6,
+        "motorway": true
+      },
+      {
+        "id": "n6453088822",
+        "limit": 31.2928,
+        "width": 14.6,
+        "motorway": true
+      }
+    ],
+    "roundabout_edges_sampled": 0,
+    "roundabout_reverse_lanes": 0,
+    "maximum_nearby_major_ground_road_grade": 0.0498,
+    "maximum_nearby_slip_road_grade": null
+  },
+  {
+    "site": "Eastwood Morrisons",
+    "seconds": 8.63,
+    "tile_ms": [
+      2961.74,
+      34.98,
+      33.73
+    ],
+    "bridges": [],
+    "mesh_triangles": 5076,
+    "roadside_solids": 0,
+    "cameras": [],
+    "roundabout_edges_sampled": 0,
+    "roundabout_reverse_lanes": 0,
+    "maximum_nearby_major_ground_road_grade": 0.0025,
+    "maximum_nearby_slip_road_grade": 0.082,
+    "morrisons_buildings": 2,
+    "parking_surface_materials": [
+      "road_asphalt_2lane",
+      "line_white"
+    ],
+    "parking_bay_candidates": 518
+  }
+]

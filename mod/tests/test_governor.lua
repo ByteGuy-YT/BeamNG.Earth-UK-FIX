@@ -1,6 +1,10 @@
 -- luajit mod/tests/test_governor.lua  (main-thread frame governor, V1_2_DESIGN 5.4, 5.7)
 local T = dofile((arg[0]:match('^(.*)[/\\]') or '.') .. '/testlib.lua')
 local governor = require('beamngEarth/governor')
+-- Driving defaults leave room for deferred engine work; users retain an 8 ms override.
+T.check(governor.DEFAULT_TARGET_MS == 2 and governor.MAX_TARGET_MS == 8 and governor.ENGINE_FREE_MS == 2,
+  'driving budgets: 2 ms default, 8 ms override, 2 ms engine tick free')
+governor.DEFAULT_TARGET_MS, governor.MAX_TARGET_MS, governor.ENGINE_FREE_MS = 2.0, 4.0, 2.0
 
 -- A fake wall clock: frames advance it by their base time, units by their cost.
 local now = 0

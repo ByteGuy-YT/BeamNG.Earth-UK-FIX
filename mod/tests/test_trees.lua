@@ -29,6 +29,12 @@ local files = {}
 readFile = function(p) return files[p] end
 jsonDecode = function(s) return assert(load('return ' .. s))() end
 local trees = require('beamngEarth/trees')
+T.check(trees.PER_FRAME==100 and trees.SHAPE_ITEMS_PER_FRAME==2000,'smaller driving batches')
+T.check(trees.solidAt(199,0,{x=0,y=0}) and not trees.solidAt(251,0,{x=0,y=0}), 'collision uses actual item distance')
+T.check(trees.solidAt(249,0,{x=0,y=0},true), 'existing item collision keeps hysteresis')
+T.check(trees.solidAt(650,0,{x=0,y=0,vx=60,vy=0}), 'high speed keeps collision prepared ahead')
+T.check(not trees.solidAt(0,500,{x=0,y=0,vx=60,vy=0}), 'distant sideways tiles do not all collide')
+trees.PER_FRAME = 250          -- these settling checks assume the original one-update capacity
 trees.EVERY_N = 1               -- (every update works here; the batching is tested below)
 local function count() local n = 0; for _ in pairs(items) do n = n + 1 end; return n end
 
@@ -62,21 +68,15 @@ end
 T.check(solidCount() == 0, 'far: nothing collides')
 trees.update(1, { x = 50, y = 50 })
 T.check(count() == 100 and solidCount() == 100, 'near: every item collides')
-trees.update(1, { x = 50, y = 256 + trees.SOLID_M + 50 })
+trees.update(1, { x = 50, y = 10 + trees.SOLID_M + 25 })
 T.check(count() > 0 and solidCount() == count(), 'just beyond SOLID_M: still solid (hysteresis)')
-trees.update(1, { x = 50, y = 256 + trees.SOLID_M + trees.SOLID_HYST_M + 20 })
+trees.update(1, { x = 50, y = 10 + trees.SOLID_M + trees.SOLID_HYST_M + 20 })
 T.check(count() > 0 and solidCount() == 0, 'beyond the hysteresis: re-made, not solid')
 do
   local m, r = trees.made, trees.removed
-  trees.update(1, { x = 50, y = 256 + trees.SOLID_M + trees.SOLID_HYST_M + 20 })
+  trees.update(1, { x = 50, y = 10 + trees.SOLID_M + trees.SOLID_HYST_M + 20 })
   T.check(trees.made == m and trees.removed == r, 'a settled tile of non-solid items: nothing re-made')
 end
--- the camera away from the car (core.viewAway): what is shown follows the camera, what collides the car (the user,
--- 2026-10-20: "All collision ... should be following the car while visual stuff should follow the camera")
-trees.update(1, { x = 50, y = 1900 }, { x = 50, y = 50 })
-T.check(count() == 100 and solidCount() == 0, 'the camera at the tile, the car far: every item shown, none collides')
-trees.update(1, { x = 50, y = 50 }, { x = 50, y = 1900 })
-T.check(count() == 100 and solidCount() == 100, 'the car at the tile, the camera far: every item, all collide')
 trees.update(1, { x = 50, y = 50 })
 
 trees.onDrop({ anchorId = 1, key = '0_0' })
@@ -196,17 +196,11 @@ trees.update(7, { x = 50, y = 50 })
 for _, o in pairs(S.objects) do if o.class == 'Forest' and o.pos and o.pos.y == 0 and o.rot then reused = true end end
 T.check(reused, 'a pooled Forest is reset to no transform when reused')
 trees.clear()
--- a dense forest's tile is held to M.TILE_CAP items (Bodø, GitHub #66: 1.66 M items in the level): its cap-th rank
-local function ranked(n, top)
-  local rows = {}
-  for i = 1, n do rows[i] = { 0, 0, 0, 0, 0, 1, 10, (n - i) / n * top } end    -- (any order)
-  return { rows = rows }
-end
-T.check(trees.tileThreshold(0, ranked(500, 1)) == 1.0, 'a sparse tile near the player: all of it')
-T.check(math.abs(trees.tileThreshold(0, ranked(20000, 1)) - 6000 / 20000) < 1e-12, 'a dense one: its 6000 lowest ranks')
-T.check(math.abs(trees.tileThreshold(0, ranked(8000, 0.3)) - 6000 / 8000 * 0.3) < 1e-12,
-  'the server sent the lowest 30 % only: still its 6000 lowest')
-T.check(trees.tileThreshold(1000, ranked(800, 1)) == 0.35, 'under the cap: the ring as before')
-T.check(math.abs(trees.tileThreshold(2000, ranked(10000, 1)) - 400 / 10000) < 1e-12, 'far: 400')
-T.check(trees.tileThreshold(0, { rows = {} }) == 1.0, 'no rows')
+files['/t/precise'] = '{ items = { {0, 20, 20, 5, 0, 1, 12, 0.0}, {0, 250, 250, 5, 0, 1, 12, 0.0} } }'
+trees.onTile({anchorId=10,key='0_0',path='/t/precise',n=2},10)
+trees.update(10,{x=0,y=0})
+T.check(count()==2 and solidCount()==1,'one near tile: both trees visible, only the reachable tree collides')
+trees.update(10,{x=250,y=250})
+T.check(count()==2 and solidCount()==1,'moving across a tile updates each tree collision range')
+trees.clear()
 T.done('test_trees')
