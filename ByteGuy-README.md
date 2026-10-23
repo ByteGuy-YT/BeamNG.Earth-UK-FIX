@@ -1,6 +1,8 @@
 ByteGuy's fork of KyzoFox's fork of TecnaGamer's BeamNG.Earth.
 
-IMPORTANT - NEEDS MY DATAPACKS TO WORK - EXCRACT TO CORRECT FOLDERS (too large for git)
+IMPORTANT - NEEDS MY DATAPACKS TO WORK - EXCRACT TO CORRECT FOLDERS (too large for git) (Needed for UK data)
+
+LINK TO DATA: https://drive.google.com/drive/folders/1-8bwrL-kxyNG9NFdTO6uAXb4zHNS8haB?usp=sharing
 
 Major improvements to road and terrain generation, with a particular focus on making UK roads more realistic - many fixes apply globally too
 
