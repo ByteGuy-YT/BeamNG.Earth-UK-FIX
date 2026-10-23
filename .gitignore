@@ -29,3 +29,7 @@ docs/research/ortho/
 dist/
 native/earthfast/target/
 build/
+
+# Prepared national OSM index and local validation/download scratch files
+.road-data/
+.work-uk/

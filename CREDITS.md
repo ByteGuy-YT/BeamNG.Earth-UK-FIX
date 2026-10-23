@@ -12,6 +12,22 @@ only, nothing redistributed. Licence notes marked *(verify)* must be re-checked 
 
 ## Map data (downloaded at runtime by the companion server and cached on the player's disk)
 
+UK road interpretation (2026-10-20): offline OpenStreetMap road attributes from Geofabrik UK extracts,
+© OpenStreetMap contributors, ODbL 1.0 (<https://www.openstreetmap.org/copyright>). The prepared index records
+the input extract SHA-256 hashes; Overture remains the geometry/topology source. UK rule selection uses ONS
+Countries (December 2024) Boundaries UK BGC (20 m), under Open Government Licence v3.0:
+UK boundaries: Contains OS data © Crown copyright and database right 2026. Contains National Statistics data © Crown copyright and database right 2026
+
+Road attributes: © OpenStreetMap contributors
+
+Regional lane/road attributes (2026-10-22): the supplemental Boston extract in
+`.road-data/osm-extra.osm` and its derived SQLite index are © OpenStreetMap contributors,
+ODbL 1.0 (<https://www.openstreetmap.org/copyright>), prepared through Overpass.
+The source query, bounds and SHA-256 are in `.road-data/osm-extra.source.json`.
+
+Source: <https://www.ons.gov.uk/methodology/geography/geographicalproducts/digitalboundaries>.
+New UK paint textures and circular mph sign meshes/textures are original project assets.
+
 | Data | Provider | Used for | Licence / terms | Attribution | Status |
 |---|---|---|---|---|---|
 | Natural Earth v5.1.2: 1:50m country and state / province boundary lines, 1:110m country label points, 1:10m populated places (scalerank <= 8) | Natural Earth (naturalearthdata.com; GeoJSON from github.com/nvkelso/natural-earth-vector) | the world map's Layers: borders and place names (shipped with the mod, `ui/.../maplayers.js`, ~0.7 MB) | public domain | "Made with Natural Earth" (not required) | in use |
